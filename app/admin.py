@@ -70,6 +70,13 @@ class AgenteAdmin(admin.ModelAdmin):
 class ApiAdmin(admin.ModelAdmin):
 	list_display = ('id','host','url','metodo','header')
 
+@admin.register(DBlaster)
+class DBlasterAdmin(admin.ModelAdmin):
+	list_display = ('id_d_blaster','dtmf','cliente','uid','fh_inicio','destino','lestado')
+
+@admin.register(DLlamadas)
+class DLlamadasAdmin(admin.ModelAdmin):
+	list_display = ('cliente','uid','destino','audio','derivacion','dtmf','despedida','flagfin')
 
 
 	
