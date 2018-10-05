@@ -162,7 +162,7 @@ class DBlaster(models.Model):
     cid = models.CharField(max_length=45, blank=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'd_blaster'
 
 
@@ -200,7 +200,7 @@ class DLlamadas(models.Model):
     cid = models.CharField(max_length=45, blank=True)
     
     class Meta:
-        managed = False
+        managed = True
         db_table = 'd_llamadas'
 
 
