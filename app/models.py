@@ -153,6 +153,7 @@ class DBlaster(models.Model):
     respuesta = models.IntegerField(blank=True, null=True)
     dtmf = models.IntegerField(blank=True, null=True)
     despedida = models.IntegerField(blank=True, null=True)
+    tipo = models.IntegerField(blank=True, null=True)
     oc7_1 = models.IntegerField(db_column='OC7_1', blank=True, null=True)  # Field name made lowercase.
     oc7_2 = models.IntegerField(db_column='OC7_2', blank=True, null=True)  # Field name made lowercase.
     oc7_3 = models.CharField(db_column='OC7_3', max_length=10, blank=True)  # Field name made lowercase.
