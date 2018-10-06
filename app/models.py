@@ -143,21 +143,24 @@ class DBlaster(models.Model):
     uid = models.CharField(db_column='UID', max_length=45, blank=True)  # Field name made lowercase.
     fh_inicio = models.DateTimeField(db_column='FH_inicio', blank=True, null=True)  # Field name made lowercase.
     destino = models.CharField(max_length=20, blank=True)
+    parametro_1 = models.CharField('Deuda',max_length=20, blank=True)
+    parametro_2 = models.CharField('Nombres',max_length=20, blank=True)
+    parametro_3 = models.CharField('Fecha Promesa',max_length=20, blank=True)
     audio = models.CharField(max_length=200, blank=True)
     audio2 = models.CharField(max_length=200, blank=True)
     derivacion = models.CharField(max_length=200, blank=True)
     lestado = models.IntegerField(db_column='lEstado', blank=True, null=True)  # Field name made lowercase.
-    respuesta = models.IntegerField()
-    dtmf = models.IntegerField()
-    despedida = models.IntegerField()
+    respuesta = models.IntegerField(blank=True, null=True)
+    dtmf = models.IntegerField(blank=True, null=True)
+    despedida = models.IntegerField(blank=True, null=True)
     oc7_1 = models.IntegerField(db_column='OC7_1', blank=True, null=True)  # Field name made lowercase.
-    oc7_2 = models.IntegerField(db_column='OC7_2')  # Field name made lowercase.
+    oc7_2 = models.IntegerField(db_column='OC7_2', blank=True, null=True)  # Field name made lowercase.
     oc7_3 = models.CharField(db_column='OC7_3', max_length=10, blank=True)  # Field name made lowercase.
     tduracion_ini = models.DateTimeField(db_column='tDuracion_ini', blank=True, null=True)  # Field name made lowercase.
     tduracion_fin = models.DateTimeField(db_column='tDuracion_fin', blank=True, null=True)  # Field name made lowercase.
-    tduracion = models.IntegerField(db_column='tDuracion')  # Field name made lowercase.
+    tduracion = models.IntegerField(db_column='tDuracion', blank=True, null=True)  # Field name made lowercase.
     #tipo = models.ForeignKey('PlataformaServicios', db_column='tipo', blank=True, null=True)
-    evento = models.ForeignKey('Campania', db_column='evento', blank=True, null=True)
+    campania = models.ForeignKey('Campania', db_column='evento', blank=True, null=True)
     vclient = models.IntegerField(null=True)
     cid = models.CharField(max_length=45, blank=True)
 

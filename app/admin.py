@@ -22,8 +22,14 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(Campania)
 class CampaniaAdmin(admin.ModelAdmin):
-	list_display = ('id','fecha','nombre','estado')
+	list_display = ('id','archivo','fecha','nombre','estado','base')
 	list_editable = ('estado',)
+
+
+
+	def base(self, obj):
+
+		return 'http://localhost:8000/admin/app/base/?campania__id__exact='+str(obj.id)
 
 	def save_model(self, request, obj, form, change):
 		
@@ -42,9 +48,10 @@ class CampaniaAdmin(admin.ModelAdmin):
 			deuda = df['deuda'][i]
 			telefono_1 = df['telefono'][i]
 
+			#Base(campania_id=obj.id,nombres=nombres,telefono_1=telefono_1,deuda=deuda).save()
 
+			DBlaster(dtmf=1,fh_inicio=datetime.datetime.today(),destino=telefono_1,campania_id=obj.id,lestado=0,parametro_1=deuda,parametro_2=nombres,parametro_3=fecha_promesa).save()
 
-			Base(campania_id=obj.id,nombres=nombres,telefono_1=telefono_1,deuda=deuda).save()
 
 
 		
@@ -56,10 +63,7 @@ class EstadocampaniaAdmin(admin.ModelAdmin):
 class EstadoAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 	
-@admin.register(Base)
-class BaseAdmin(admin.ModelAdmin):
-	list_display = ('id','nombres','telefono_1','deuda','fecha_promesa')
-	list_filter=('campania',)
+
 
 @admin.register(Agente)
 class AgenteAdmin(admin.ModelAdmin):
@@ -73,6 +77,8 @@ class ApiAdmin(admin.ModelAdmin):
 @admin.register(DBlaster)
 class DBlasterAdmin(admin.ModelAdmin):
 	list_display = ('id_d_blaster','dtmf','cliente','uid','fh_inicio','destino','lestado')
+	list_filter =('campania','campania__estado')
+
 
 @admin.register(DLlamadas)
 class DLlamadasAdmin(admin.ModelAdmin):
