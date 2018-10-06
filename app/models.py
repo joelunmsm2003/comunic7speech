@@ -139,7 +139,7 @@ class Agente(models.Model):
 
 class DBlaster(models.Model):
     id_d_blaster = models.AutoField(primary_key=True,)
-    cliente = models.CharField(max_length=45, blank=True)
+    cliente = models.ForeignKey('Cliente', db_column='cliente', blank=True, null=True)
     uid = models.CharField(db_column='UID', max_length=45, blank=True)  # Field name made lowercase.
     fh_inicio = models.DateTimeField(db_column='FH_inicio', blank=True, null=True)  # Field name made lowercase.
     destino = models.CharField(max_length=20, blank=True)
