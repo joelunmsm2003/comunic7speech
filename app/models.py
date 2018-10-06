@@ -138,7 +138,7 @@ class Agente(models.Model):
         verbose_name = 'Agente'
 
 class DBlaster(models.Model):
-    id_d_blaster = models.IntegerField(primary_key=True)
+    id_d_blaster = models.AutoField(primary_key=True,)
     cliente = models.CharField(max_length=45, blank=True)
     uid = models.CharField(db_column='UID', max_length=45, blank=True)  # Field name made lowercase.
     fh_inicio = models.DateTimeField(db_column='FH_inicio', blank=True, null=True)  # Field name made lowercase.
