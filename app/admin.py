@@ -50,7 +50,7 @@ class CampaniaAdmin(admin.ModelAdmin):
 
 			#Base(campania_id=obj.id,nombres=nombres,telefono_1=telefono_1,deuda=deuda).save()
 
-			DBlaster(oc7_2=0,cliente_id=1,dtmf=1,fh_inicio=datetime.datetime.today(),destino=telefono_1,campania_id=obj.id,lestado=0,parametro_1=deuda,parametro_2=nombres,parametro_3=fecha_promesa).save()
+			DBlaster(tipo=3,oc7_2=0,cliente_id=1,dtmf=1,fh_inicio=datetime.datetime.today(),destino=telefono_1,campania_id=obj.id,lestado=0,parametro_1=deuda,parametro_2=nombres,parametro_3=fecha_promesa).save()
 
 
 
