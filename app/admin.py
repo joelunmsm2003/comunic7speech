@@ -137,8 +137,35 @@ class ListFilter(admin.SimpleListFilter):
 
 @admin.register(DLlamadas)
 class DLlamadasAdmin(admin.ModelAdmin):
-	list_display = ('cliente','uid','destino','audio','derivacion','dtmf','despedida','respuesta01','respuesta02')
+	list_display = ('cliente','destino','audio','dtmf','despedida','respuesta01','respuesta02','respuesta')
 	list_filter = (ListFilter,)
+
+	def respuesta(self, obj):
+
+		if obj.respuesta01==1 and obj.respuesta02==0:
+
+			return 'Dijo Si'
+
+		if obj.respuesta01==2 and obj.respuesta02==0:
+
+			return 'Dijo No'
+
+		if obj.respuesta01==1 and obj.respuesta02==1:
+
+			return 'Escucho Gracias'
+
+		if obj.respuesta01==2 and obj.respuesta02==2:
+
+			return 'Disculpa'
+
+		if obj.respuesta01==3 and obj.respuesta02==0:
+
+			return 'No entiendo'
+
+		if obj.respuesta01==0 and obj.respuesta02==0:
+
+			return 'Corta rapido < 2 Seg'
+
 
 
 
