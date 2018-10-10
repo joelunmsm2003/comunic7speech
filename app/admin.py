@@ -22,14 +22,11 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(Campania)
 class CampaniaAdmin(admin.ModelAdmin):
-	list_display = ('id','archivo','fecha','nombre','estado','base')
+	list_display = ('id','archivo','fecha','nombre','estado')
 	list_editable = ('estado',)
 
 
 
-	def base(self, obj):
-
-		return 'http://localhost:8000/admin/app/base/?campania__id__exact='+str(obj.id)
 
 	def save_model(self, request, obj, form, change):
 		
@@ -80,11 +77,73 @@ class DBlasterAdmin(admin.ModelAdmin):
 	list_filter =('campania','campania__estado')
 
 
+class ListFilter(admin.SimpleListFilter):
+	# Human-readable title which will be displayed in the
+	# right admin sidebar just above the filter options.
+	title ='Resultado de llamada'
+
+	# Parameter for the filter that will be used in the URL query.
+	parameter_name = 'resultado'
+
+
+
+	def lookups(self, request, model_admin):
+		"""
+		Returns a list of tuples. The first element in each
+		tuple is the coded value for the option that will
+		appear in the URL query. The second element is the
+		human-readable name for the option that will appear
+		in the right sidebar.
+		"""
+		return (
+			('Dijo Si', 'Dijo Si'),
+			('Dijo No', 'Dijo No'),
+			('Escucho Gracias', 'Escucho Gracias'),
+			('Disculpa', 'Disculpa'),
+			('No entiendo', 'No entiendo'),
+			('Corta rapido < 2 Seg', 'Corta rapido < 2 Seg'),
+		)
+
+	def queryset(self, request, queryset):
+
+		
+		for r in request.GET:
+
+			if r=='resultado':
+
+				if request.GET['resultado']=='Dijo Si':
+
+					return queryset.filter(respuesta01=1,respuesta02=0)
+
+				if request.GET['resultado']=='Dijo No':
+
+					return queryset.filter(respuesta01=2,respuesta02=0)
+
+				if request.GET['resultado']=='Escucho Gracias':
+
+					return queryset.filter(respuesta01=1,respuesta02=1)
+
+				if request.GET['resultado']=='Disculpa':
+
+					return queryset.filter(respuesta01=2,respuesta02=2)
+
+				if request.GET['resultado']=='No entiendo':
+
+					return queryset.filter(respuesta01=3,respuesta02=0)
+
+				if request.GET['resultado']=='Corta rapido < 2 Seg':
+
+					return queryset.filter(respuesta01=0,respuesta02=0)
 
 @admin.register(DLlamadas)
 class DLlamadasAdmin(admin.ModelAdmin):
-	list_display = ('cliente','uid','destino','audio','derivacion','dtmf','despedida','flagfin','resultado')
-	list_filter=('resultado',)
+	list_display = ('cliente','uid','destino','audio','derivacion','dtmf','despedida','respuesta01','respuesta02')
+	list_filter = (ListFilter,)
+
+
+
+
+
 
 
 
