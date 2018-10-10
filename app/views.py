@@ -14,6 +14,16 @@ from app.serializers import *
 from app.forms import *
 from ws4redis.publisher import RedisPublisher
 from ws4redis.redis_store import RedisMessage
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
+
+
+
+
+
+
+
 
 # Create your views here.
 def ingresar(request):
@@ -72,8 +82,48 @@ def ingresar(request):
 		return render(request, 'ingresar.html',{})
 
 
+def actualiza_resultado(request):
+
+	dll = DLlamadas.objects.all()
+
+	for d in dll:
+
+		if d.respuesta01==1 and d.respuesta02==0:
+
+			d.resultado='Dijo Que si'
+			d.save()
+
+		if d.respuesta01==2 and d.respuesta02==0:
+
+			d.resultado='Dijo No'
+			d.save()
+
+
+		if d.respuesta01==1 and d.respuesta02==1:
+
+			d.resultado='Escucho gracias'
+			d.save()
+
+		if d.respuesta01==2 and d.respuesta02==2:
+
+			d.resultado='Robot dijo disculpa'
+			d.save()
+
+		if d.respuesta01==3 and d.respuesta02==0:
+
+			d.resultado='No entiende robot'
+			d.save()
+
+		if d.respuesta01==0 and d.respuesta02==0:
+
+			d.resultado='Corta rapido menor de 2 seg'
+			d.save()
+
+	return JsonResponse('serializer.data', safe=False)
 
 def api_agentes(request):
+
+
 
 	_data = Agente.objects.all()
 	serializer =  AgentesSerializer(_data,many=True)

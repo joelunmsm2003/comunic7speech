@@ -27,6 +27,7 @@ urlpatterns = [
 	url(r'^monitor/', monitor),
 	url(r'^monitor/', monitor),
 	url(r'^api_agentes/', api_agentes),
+    url(r'^actualiza_resultado/', actualiza_resultado),
     url(r'^lanzagestion/(\d+)/(\d+)', lanzagestion),
     url(r'^lanzafinllamada/(\d+)/(\d+)', lanzafinllamada),
     url(r'^lanzaestado/', lanzaestado),

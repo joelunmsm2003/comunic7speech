@@ -202,6 +202,7 @@ class DLlamadas(models.Model):
     vuelta = models.IntegerField()
     vclient = models.IntegerField( null=True)
     cid = models.CharField(max_length=45, blank=True)
+    resultado = models.CharField(max_length=200, blank=True)
     
     class Meta:
         managed = True

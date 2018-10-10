@@ -80,9 +80,12 @@ class DBlasterAdmin(admin.ModelAdmin):
 	list_filter =('campania','campania__estado')
 
 
+
 @admin.register(DLlamadas)
 class DLlamadasAdmin(admin.ModelAdmin):
-	list_display = ('cliente','uid','destino','audio','derivacion','dtmf','despedida','flagfin')
+	list_display = ('cliente','uid','destino','audio','derivacion','dtmf','despedida','flagfin','resultado')
+	list_filter=('resultado',)
+
 
 
 	
