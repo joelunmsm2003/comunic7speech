@@ -1,3 +1,12 @@
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Basic ZGlsb29kaXJlY3Q6ampVWTI2c1Q=" \
+-d "{\"to\":[\"051980729169\"],\"text\":\"mensaje de texto\",\"from\":\"msg\"}" \
+https://gateway.plusmms.net/rest/message 
+
+
+
 redis-server /usr/local/etc/redis.conf
 
 racle is a registered trademark of Oracle Corporation and/or its
