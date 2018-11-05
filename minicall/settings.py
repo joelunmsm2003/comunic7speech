@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'discador',
     'rest_framework',
     'ws4redis',
     'raven.contrib.django.raven_compat',
@@ -119,7 +120,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.prueba'),
+        'NAME': os.path.join(BASE_DIR, 'db.prueba2'),
     }
 }
 
