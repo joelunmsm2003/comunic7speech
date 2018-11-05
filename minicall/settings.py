@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'discador',
     'rest_framework',
     'ws4redis',
     'raven.contrib.django.raven_compat',
