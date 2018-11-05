@@ -31,4 +31,5 @@ urlpatterns = [
     url(r'^lanzagestion/(\d+)/(\d+)', lanzagestion),
     url(r'^lanzafinllamada/(\d+)/(\d+)', lanzafinllamada),
     url(r'^lanzaestado/', lanzaestado),
+    url(r'^apiagentes/', apiagentes),
 ]
