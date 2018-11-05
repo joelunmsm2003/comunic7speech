@@ -16,8 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from app.views import *
+from django.conf.urls import include
 
-admin.site.site_header = 'Comunica7 Speech'
+admin.site.site_header = 'Comunica'
 
 
 urlpatterns = [
@@ -31,5 +32,6 @@ urlpatterns = [
     url(r'^lanzagestion/(\d+)/(\d+)', lanzagestion),
     url(r'^lanzafinllamada/(\d+)/(\d+)', lanzafinllamada),
     url(r'^lanzaestado/', lanzaestado),
-    url(r'^apiagentes/', apiagentes),
+    url(r'^api_agentes/', api_agentes),
+    url(r'^discador/', include('discador.urls')),
 ]
