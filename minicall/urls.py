@@ -33,5 +33,5 @@ urlpatterns = [
     url(r'^lanzafinllamada/(\d+)/(\d+)', lanzafinllamada),
     url(r'^lanzaestado/', lanzaestado),
     url(r'^api_agentes/', api_agentes),
-    url(r'^discador/', include('discador.urls')),
+    #url(r'^discador/', include('discador.urls')),
 ]
