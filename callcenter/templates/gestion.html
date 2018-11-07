@@ -1,0 +1,95 @@
+    
+      {% if error %}
+
+            <div  class="alert alert-primary animated fadeIn" role="alert">
+              {{error}}
+            </div>
+
+      {% endif %}
+
+
+
+      <h2>Campaña {{base.campania.nombre}}</h2>
+<!-- 
+      Formulario Base -->
+
+
+      <div class='row'>
+
+            {% for field in form %}
+              <div class="form-group col-md-3 ">
+
+                  {{ field.label_tag }} {{ field }}
+                  
+              </div>
+            {% endfor %}
+
+      </div>
+  
+
+<!--     
+      Formulario Agendar -->
+
+        <h3>Agendar</h3>
+
+        <form action="/agente/{{base.id}}" method="GET">
+        {% csrf_token %}
+
+
+        <div class="form-group">
+
+          <input type="hidden" class='form-control' value='2' name="estado"></input>
+          </div>
+          <label>Fecha</label>
+           <div class="form-group col-md-3">
+          <input type="date" class='form-control' name="agente"></input>
+        </div>
+         <div class="form-group">
+           <label>Descripcion</label>
+          <textarea type="text" class='form-control' name="descripcion"></textarea>
+
+       
+        </div>
+        
+
+        {% if agente.estado.nombre == 'Ocupado' %}
+
+        <input class='btn btn-primary' data-toggle="modal" data-target="#exampleModalLong" value="Guardar">
+
+        {% endif %}
+
+        {% if agente.estado.nombre == 'Gestion' %}
+
+        <input class='btn btn-primary' type="submit" value="Guardar">
+
+        {% endif %}
+
+        </form>
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Estado : En Llamada</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Se actualizo los datos, Aun no termino la llamada, espere un momento para que estes disponible y te caya otra gestion
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+   

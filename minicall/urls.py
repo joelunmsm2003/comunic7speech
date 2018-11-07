@@ -18,20 +18,14 @@ from django.contrib import admin
 from app.views import *
 from django.conf.urls import include
 
-admin.site.site_header = 'Comunica'
+admin.site.site_header = 'Comunica7'
 
 
 urlpatterns = [
-	url(r'^admin/', admin.site.urls),
-	url(r'^agente/(\d+)', m_agente),
-	url(r'^ingresar/', ingresar),
-	url(r'^monitor/', monitor),
-	url(r'^monitor/', monitor),
-	url(r'^api_agentes/', api_agentes),
-    url(r'^actualiza_resultado/', actualiza_resultado),
-    url(r'^lanzagestion/(\d+)/(\d+)', lanzagestion),
-    url(r'^lanzafinllamada/(\d+)/(\d+)', lanzafinllamada),
-    url(r'^lanzaestado/', lanzaestado),
-    url(r'^api_agentes/', api_agentes),
+
+    url(r'^admin/', admin.site.urls),
+    url(r'^ingresar/', ingresar),
+    url(r'^callcenter/', include('callcenter.urls')),
+    url(r'^speech/', include('speech.urls')),
     url(r'^discador/', include('discador.urls')),
 ]
