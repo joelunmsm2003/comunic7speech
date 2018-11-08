@@ -5,6 +5,32 @@ from django.db import models
 
 
 
+class Tipo_cartera(models.Model):
+	cod_dpto=models.CharField(max_length=100,blank=True,null=True)
+	cod_prov=models.CharField(max_length=100,blank=True,null=True)
+	cod_dist=models.CharField(max_length=100,blank=True,null=True)
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+	dpto=models.CharField(max_length=100,blank=True,null=True)
+	provincia=models.CharField(max_length=100,blank=True,null=True)
+
+	distrito=models.CharField(max_length=100,blank=True,null=True)
+
+
+
+class Ubigeo(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+
+class Plano(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+
+class Cuadrante(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+class Producto(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
 
 class Estado_cliente(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
