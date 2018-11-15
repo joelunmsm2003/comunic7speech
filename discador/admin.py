@@ -20,6 +20,33 @@ import pandas as pd
 
 # Register your models here.
 
+@admin.register(Tipo_cartera)
+class Tipo_carteraAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre','cod_dpto','cod_prov','cod_dist','dpto','provincia')
+
+@admin.register(Ubigeo)
+class UbigeoAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+
+@admin.register(Plano)
+class PlanoAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+
+
+@admin.register(Cuadrante)
+class CuadranteAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+
+@admin.register(Producto)
+class ProductoAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+
+
+
 @admin.register(Estado_cliente)
 class Estado_clienteAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
