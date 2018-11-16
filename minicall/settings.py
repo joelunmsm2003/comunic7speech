@@ -48,8 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app',
     'discador',
+    'app',
+    'callcenter',
+    'speech',
     'rest_framework',
     'ws4redis',
     'raven.contrib.django.raven_compat',
@@ -99,7 +101,7 @@ ROOT_URLCONF = 'minicall.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'callcenter/templates'),os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,7 +123,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.prueba4'),
+        'NAME': os.path.join(BASE_DIR, 'db.prueba6'),
     }
 }
 
