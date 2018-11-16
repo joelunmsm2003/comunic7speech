@@ -7,7 +7,8 @@ from django.db import models
 class Proveedor(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
-
+	def __unicode__(self):
+		return self.nombre
 
 
 
@@ -74,10 +75,26 @@ class Tipo_persona(models.Model):
 class Estado_cliente(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
+
+
+
 class Cartera(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+	def __unicode__(self):
+		return self.nombre
+
+
+class CarteraProveedor(models.Model):
+	cartera=models.ForeignKey(Cartera, blank=True, null=True)
 	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
 
+class ProveedorCarteras(models.Model):
+	cartera=models.ForeignKey(Cartera, blank=True, null=True)
+	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
+
+class Sexo(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
 
 
 class Tipo_domicilio(models.Model):

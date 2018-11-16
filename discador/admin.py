@@ -16,9 +16,42 @@ import requests
 from django.contrib.admin.filters import DateFieldListFilter
 import pandas as pd
 from django.utils.html import format_html
+from django.utils.html import format_html_join
+from django.utils.safestring import mark_safe
 
 
 # Register your models here.
+@admin.register(Sexo)
+class SexoAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+	#readonly_fields = ('nombre',)
+
+	# def nombre(self, instance):
+	# 	# assuming get_full_address() returns a list of strings
+	# 	# for each line of the address and you want to separate each
+	# 	# line by a linebreak
+	# 	return format_html_join(
+	# 		mark_safe('<br/>'),
+	# 		'{}',
+	# 		((line,) for line in instance.get_full_address()),
+	# 	) or mark_safe("<span class='errors'>I can't determine this address.</span>")
+
+
+	# nombre.short_description = "Address"
+
+
+@admin.register(Cartera)
+class CarteraAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+
+@admin.register(ProveedorCarteras)
+class ProveedorCarterasAdmin(admin.ModelAdmin):
+	list_display = ('id','cartera','proveedor')
+	list_display_links = ('cartera',)
+	list_filter = ('proveedor',)
+
 
 @admin.register(Tipo_cartera)
 class Tipo_carteraAdmin(admin.ModelAdmin):
@@ -70,9 +103,6 @@ class Tipo_personaAdmin(admin.ModelAdmin):
 # 	list_display = ('id','nombre')
 
 
-@admin.register(Cartera)
-class CarteraAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre')
 
 
 @admin.register(Tipo_direccion)
@@ -113,13 +143,14 @@ class TelefonosAdmin(admin.ModelAdmin):
 class ProveedorAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre','cartera')
 
+
 	def cartera(self, obj):
 
 		print self
 		print '.....'
 		print obj.id
 		return format_html(
-			'<a class="button"  href="/agente/'+str(obj.id)+'">Cartera</a>'
+			'<a class="button"  href="/admin/discador/proveedorcarteras/?proveedor__id__exact='+str(obj.id)+'">Cartera</a>'
 		)
 
 
