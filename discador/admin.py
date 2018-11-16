@@ -15,7 +15,7 @@ import json
 import requests
 from django.contrib.admin.filters import DateFieldListFilter
 import pandas as pd
-
+from django.utils.html import format_html
 
 
 # Register your models here.
@@ -111,7 +111,17 @@ class TelefonosAdmin(admin.ModelAdmin):
 
 @admin.register(Proveedor)
 class ProveedorAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre')
+	list_display = ('id','nombre','cartera')
+
+	def cartera(self, obj):
+
+		print self
+		print '.....'
+		print obj.id
+		return format_html(
+			'<a class="button"  href="/agente/'+str(obj.id)+'">Cartera</a>'
+		)
+
 
 
 
@@ -122,7 +132,7 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(Cuentas)
 class CuentasAdmin(admin.ModelAdmin):
-	list_display = ('id','cliente','capital','numero_cuenta','total','compania','mora','interes','dias_mora','tramo','fecha_vencimiento','estado','Proveedor','cartera' )
+	list_display = ('id','cliente','capital','numero_cuenta','total','compania','mora','interes','dias_mora','tramo','fecha_vencimiento','estado','cartera' )
 
 
 @admin.register(Segmentacion)

@@ -4,6 +4,14 @@ from django.db import models
 
 
 
+class Proveedor(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+
+
+
+
+
 
 class Tipo_cartera(models.Model):
 	cod_dpto=models.CharField(max_length=100,blank=True,null=True)
@@ -68,6 +76,8 @@ class Estado_cliente(models.Model):
 
 class Cartera(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
+	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
+
 
 
 class Tipo_domicilio(models.Model):
@@ -142,12 +152,6 @@ class Telefonos(models.Model):
 
 
 
-class Proveedor(models.Model):
-	nombre=models.CharField(max_length=100,blank=True,null=True)
-
-
-
-
 
 class Cuentas(models.Model):
 	cliente= models.ForeignKey(Cliente, blank=True, null=True)
@@ -161,8 +165,8 @@ class Cuentas(models.Model):
 	tramo=models.CharField(max_length=100,blank=True,null=True)
 	fecha_vencimiento=models.CharField(max_length=100,blank=True,null=True)
 	estado=models.CharField(max_length=100,blank=True,null=True)
-	Proveedor= models.ForeignKey(Proveedor, blank=True, null=True,related_name='proveedor')
-	cartera = models.ForeignKey(Cartera, blank=True, null=True,related_name='cartera')
+	proveedor= models.ForeignKey(Proveedor, blank=True, null=True,related_name='rel_proveedor')
+	cartera = models.ForeignKey(Cartera, blank=True, null=True,related_name='rel_cartera')
 
 
 

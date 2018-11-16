@@ -4,13 +4,22 @@
 
 @import url(fonts.css);
 
+*{
+
+    --color:#fff;
+    --azul:#9cc7e8;
+    --default:#34a5f1;
+    --font-family:'Cairo';
+
+}
+
 body {
     margin: 0;
     padding: 0;
     font-size: 14px;
-    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    font-family: var(--font-family);
     color: #333;
-    background: #fff;
+    background: var(--color);
 }
 
 /* LINKS */
@@ -252,7 +261,7 @@ td, th {
     border-bottom: 1px solid #eee;
     vertical-align: top;
     padding: 8px;
-    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    font-family: var(--font-family);
 }
 
 th {
@@ -410,7 +419,7 @@ input, textarea, select, .form-row p, form .button {
     margin: 2px 0;
     padding: 2px 3px;
     vertical-align: middle;
-    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    font-family: var(--font-family);
     font-weight: normal;
     font-size: 13px;
 }
@@ -449,7 +458,7 @@ select[multiple] {
 /* FORM BUTTONS */
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
-    background: #79aec8;
+    background: var(--azul);
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -475,7 +484,7 @@ a.button {
     float: right;
     border: none;
     font-weight: 400;
-    background: #417690;
+    background: var(--default);
 }
 
 .button.default:active, input[type=submit].default:active,
@@ -522,7 +531,7 @@ input[type=button][disabled].default {
     font-weight: 400;
     font-size: 13px;
     text-align: left;
-    background: #79aec8;
+    background: var(--azul);
     color: #fff;
 }
 
@@ -646,7 +655,7 @@ div.system-message p.system-message-title {
 /* BREADCRUMBS */
 
 div.breadcrumbs {
-    background: #79aec8;
+    background: var(--azul);
     padding: 10px 40px;
     border: none;
     font-size: 14px;
@@ -736,7 +745,7 @@ a.deletelink:focus, a.deletelink:hover {
 }
 
 .object-tools a:focus, .object-tools a:hover {
-    background-color: #417690;
+    background-color: var(--default);
 }
 
 .object-tools a:focus{
@@ -834,7 +843,7 @@ table#change-history tbody th {
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    background: #417690;
+    background: var(--default);
     color: #ffc;
     overflow: hidden;
 }
@@ -892,8 +901,8 @@ table#change-history tbody th {
 
 #user-tools a:focus, #user-tools a:hover {
     text-decoration: none;
-    border-bottom-color: #79aec8;
-    color: #79aec8;
+    border-bottom-color: var(--azul);
+    color: var(--azul);
 }
 
 /* SIDEBAR */

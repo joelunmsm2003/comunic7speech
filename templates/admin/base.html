@@ -1,4 +1,7 @@
 {% load i18n static %}<!DOCTYPE html>
+
+<link href="https://fonts.googleapis.com/css?family=Cairo:300" rel="stylesheet">
+
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
@@ -49,7 +52,7 @@
                 <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
                 {% endif %}
                 <!-- <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a> -->
-                <a href="/ingresar">{% trans 'Log out' %}</a>
+                 <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
 
             {% endblock %}
         </div>
@@ -94,33 +97,4 @@
 </body>
 </html>
 
-<link href="https://fonts.googleapis.com/css?family=Cairo:300" rel="stylesheet">
 
-<style type="text/css">
-
-body,td,th,input{
-
-
-  font-family: 'Cairo'
-}
-
-    
-    #header {
-    width: auto;
-    height: 40px;
-    padding: 10px 40px;
-    background: #000 !important;
-    line-height: 40px;
-    color: #fff !important;
-    overflow: hidden;
-}
-caption,.breadcrumbs{
-
-
-    background: #007bff !important;
-}
-h2{
-    color: #fff !important;
-}
-
-</style>
