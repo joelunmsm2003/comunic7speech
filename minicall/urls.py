@@ -24,6 +24,7 @@ admin.site.site_header = 'Comunica7'
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
+    url(r'^', admin.site.urls),
     url(r'^ingresar/', ingresar),
     url(r'^callcenter/', include('callcenter.urls')),
     url(r'^speech/', include('speech.urls')),
