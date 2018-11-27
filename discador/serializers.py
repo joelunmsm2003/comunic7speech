@@ -15,27 +15,27 @@ class Tipo_contactoSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Tipo_contacto
-		fields = '_all_'
+		fields = '__all__'
 
 class ScoreSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Score
-		fields = '_all_'
+		fields = '__all__'
 
 
 class Tipo_personaSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Tipo_persona
-		fields = '_all_'
+		fields = '__all__'
 
 
 class ScoreSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Score
-		fields = '_all_'
+		fields = '__all__'
 
 
 
@@ -43,7 +43,7 @@ class Estado_clienteSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Estado_cliente
-		fields = '_all_'
+		fields = '__all__'
 
 
 
@@ -51,7 +51,7 @@ class CarteraSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Cartera
-		fields = '_all_'
+		fields = '__all__'
 
 
 
@@ -60,28 +60,28 @@ class Tipo_domicilioSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Tipo_domicilio
-		fields = '_all_'
+		fields = '__all__'
 
 
 class Tipo_direccionSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Tipo_direccion
-		fields = '_all_'
+		fields = '__all__'
 
 
 class Tipo_telefonoSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Tipo_telefono
-		fields = '_all_'
+		fields = '__all__'
 
 
 class ClienteSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Cliente
-		fields = '_all_'
+		fields = '__all__'
 
 
 
@@ -89,7 +89,7 @@ class DireccionesSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Direcciones
-		fields = '_all_'
+		fields = '__all__'
 
 
 class AgenteSerializer(serializers.ModelSerializer):
@@ -104,7 +104,7 @@ class Fuente_telefonoSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Fuente_telefono
-		fields = '_all_'
+		fields = '__all__'
 
 
 
@@ -112,7 +112,7 @@ class TelefonosSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Telefonos
-		fields = '_all_'
+		fields = '__all__'
 
 
 
@@ -120,7 +120,7 @@ class ProveedorSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Proveedor
-		fields = '_all_'
+		fields = '__all__'
 
 
 
@@ -128,14 +128,14 @@ class CuentasSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Cuentas
-		fields = '_all_'
+		fields = '__all__'
 
 
 class SegmentacionSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Segmentacion
-		fields = '_all_'
+		fields = '__all__'
 
 
 
@@ -144,8 +144,7 @@ class MailSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Mail
-		fields = '_all_'
-
+		fields = '__all__'
 
 
 

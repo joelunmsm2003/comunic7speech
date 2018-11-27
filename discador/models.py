@@ -57,6 +57,10 @@ class Resultado(models.Model):
 
 class Sub_categoria(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+	def __unicode__(self):
+		return self.nombre
+
 # class Cliente(models.Model):
 
 #     dni  =models.CharField(max_length=100,blank=True,null=True)

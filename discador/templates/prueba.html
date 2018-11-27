@@ -80,7 +80,9 @@ class Agentes extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
+      carteras:[],
+      resultados:[]
     };
 
     this.state= {title: 'Click text'}
@@ -88,7 +90,7 @@ class Agentes extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://138.68.230.137:8000/distrito")
+    fetch("http://localhost:8000/discador/api_proveedor/")
       .then(res => res.json())
       .then(
         (result) => {
@@ -96,7 +98,9 @@ class Agentes extends React.Component {
           console.log(result)
           this.setState({
             isLoaded: true,
-            items: result
+            items: result,
+            carteras:[],
+            resultados:[]
           });
         },
         // Note: it's important to handle errors here
@@ -116,7 +120,7 @@ class Agentes extends React.Component {
   sacacarteras(item) {
 
 
-    fetch("http://138.68.230.137:8000/categorias/"+item.id)
+    fetch("http://localhost:8000/discador/api_cartera/"+item.id)
       .then(res => res.json())
       .then(
         (result) => {
@@ -124,7 +128,7 @@ class Agentes extends React.Component {
           console.log(result)
           this.setState({
             isLoaded: true,
-            items: result
+            carteras: result
           });
         },
         // Note: it's important to handle errors here
@@ -144,7 +148,7 @@ class Agentes extends React.Component {
 
 
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, items, carteras } = this.state;
 
  
     if (error) {
@@ -153,7 +157,10 @@ class Agentes extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <ul>
+         <ul>
+          <h1>Proveedores</h1>
+
+
           {items.map(item => (
             <li onClick={(e) => this.sacacarteras(item, e)} key={item.nombre} >
               {item.nombre}
@@ -161,16 +168,22 @@ class Agentes extends React.Component {
           ))}
 
         <h1>Carteras</h1>
-        {items.map(item => (
-            <li onClick={(e) => this.sacacarteras(item, e)} key={item.nombre} >
-              {item.nombre}
-            </li>
-          ))}
+
+        {carteras.map(item => (
+          <li onClick={(e) => this.sacacarteras(item, e)} key={item.nombre} >
+          {item.nombre}
+          </li>
+        ))}
+
+
+
+  
+
+
+
+
+
         </ul>
-        
-
-
-
       );
     }
   }
