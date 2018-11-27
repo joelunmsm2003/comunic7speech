@@ -92,7 +92,7 @@ class Tipo_contactoAdmin(admin.ModelAdmin):
 
 @admin.register(Score)
 class ScoreAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre')
+	list_display = ('id','nombre','proveedor','cartera','resultado','sub_categoria','peso')
 
 @admin.register(Tipo_persona)
 class Tipo_personaAdmin(admin.ModelAdmin):

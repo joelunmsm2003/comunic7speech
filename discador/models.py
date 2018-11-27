@@ -50,6 +50,13 @@ class Estado_cliente(models.Model):
 class Tipo_contacto(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
+
+class Resultado(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+
+class Sub_categoria(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
 # class Cliente(models.Model):
 
 #     dni  =models.CharField(max_length=100,blank=True,null=True)
@@ -67,8 +74,20 @@ class Tipo_contacto(models.Model):
     #fecha = models.DateTimeField(db_column='fecha', default=datetime.datetime.today()) 
 
 
+class Cartera(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+	def __unicode__(self):
+		return self.nombre
+		
 class Score(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
+	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
+	cartera=models.ForeignKey(Cartera, blank=True, null=True)
+	resultado = models.ForeignKey(Resultado, blank=True, null=True)
+	sub_categoria = models.ForeignKey(Sub_categoria, blank=True)
+	peso=models.CharField(max_length=100,blank=True,null=True)
+
 class Tipo_persona(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
@@ -78,11 +97,7 @@ class Estado_cliente(models.Model):
 
 
 
-class Cartera(models.Model):
-	nombre=models.CharField(max_length=100,blank=True,null=True)
 
-	def __unicode__(self):
-		return self.nombre
 
 
 class CarteraProveedor(models.Model):
