@@ -25,7 +25,118 @@ def api_agentes(request):
 
 	_data = Agente.objects.all()
 
+	print 'traes la daata?', _data
+	serializer =  AgenteSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+# Create your views here.
+
+
+def menu_proveedor(request):
+
+
+	discador = Proveedor.objects.all()
+
+	try:
+	
+		id=request.GET['proveedor']
+
+		print 'Proveedor....'+id
+
+		x=Score.objects.filter(proveedor_id=id)
+
+		print x
+
+		id=request.GET['cartera']
+
+		if id!=0:
+
+			r=Score.objects.filter(cartera_id=id)
+
+
+		return render(request, 'proveedor.html',{'discador': discador,'carteras':x,'resultado':r})
+
+	except:
+
+
+		return render(request, 'proveedor.html',{'discador': discador})
+
+	
+
+	
+
 	# print 'traes la daata?', _data
 	# serializer =  AgenteSerializer(_data,many=True)
 	# return JsonResponse(serializer.data, safe=False)
+
+
+
+def api_proveedor(request):
+
+	print 'engtrree'
+
+	_datos = Proveedor.objects.all()
+
+	print 'traes la daata?', api_proveedor
+	serializer =  ProveedorSerializer(_datos,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
 # Create your views here.
+
+def api_estadocliente(request):
+
+	print 'engtrree'
+
+	_datos = Estado_cliente.objects.all()
+
+	print 'traes la daata?', _datos
+	serializer =  Estado_clienteSerializer(_datos,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
+def api_tipo_contacto(request):
+
+	print 'engtrree'
+
+	_datos = Tipo_contacto.objects.all()
+
+	print 'traes la daata?', _datos
+	serializer =  Tipo_contactoSerializer(_datos,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
+
+def api_score(request):
+
+	print 'engtrree'
+
+	_datos = Score.objects.all()
+
+	print 'traes la daata?', _datos
+	serializer =  ScoreSerializer(_datos,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
+
+def api_cartera(request):
+
+	print 'engtrree'
+
+	_datos = Cartera.objects.all()
+
+	print 'traes la daata?', _datos
+	serializer =  CarteraSerializer(_datos,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
+
+def api_tipodomicilio(request):
+
+	print 'engtrree'
+
+	_datos = Tipo_domicilio.objects.all()
+
+	print 'traes la daata?', _datos
+	serializer =  Tipo_domicilioSerializer(_datos,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+

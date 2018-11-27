@@ -20,11 +20,6 @@ from django.dispatch import receiver
 
 
 
-
-
-
-
-
 # Create your views here.
 def ingresar(request):
 

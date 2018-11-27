@@ -77,11 +77,14 @@ class CuadranteAdmin(admin.ModelAdmin):
 class ProductoAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 
-
-
-
 @admin.register(Estado_cliente)
 class Estado_clienteAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+
+
+@admin.register(Sub_categoria)
+class Sub_categoriaAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 
 
@@ -90,10 +93,15 @@ class Estado_clienteAdmin(admin.ModelAdmin):
 class Tipo_contactoAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 
+@admin.register(Resultado)
+class ResultadoAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
 @admin.register(Score)
 class ScoreAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre','proveedor','cartera','resultado','sub_categoria','peso')
-
+	list_editable=('peso',)
+	list_filter=('proveedor','cartera','resultado')
 @admin.register(Tipo_persona)
 class Tipo_personaAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')

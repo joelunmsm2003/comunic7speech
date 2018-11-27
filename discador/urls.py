@@ -21,5 +21,18 @@ from discador.views import *
 urlpatterns = [
 
     url(r'^api_agentes/', api_agentes),
+    url(r'^menu_proveedor/', menu_proveedor),
+    url(r'^api_proveedor/', api_proveedor),
+    url(r'^api_estadocliente/', api_estadocliente),
+    url(r'^api_tipocontacto/', api_tipo_contacto),
+    url(r'^api_score/', api_score),
+    url(r'^api_cartera/', api_cartera),
+    url(r'^api_tipodomicilio/', api_tipodomicilio),
+
+    
+
+
+
+
 
 ]
