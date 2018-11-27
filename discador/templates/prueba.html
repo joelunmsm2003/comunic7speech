@@ -1,0 +1,197 @@
+prueba.<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+
+</head>
+<body>
+
+
+  <div id="root"></div>
+
+   <div id="carteras"></div>
+
+
+</body>
+</html>
+
+
+
+
+
+<script type="text/babel">
+
+
+
+class Prueba extends React.Component {
+
+
+ state = {
+    name: 'techsith'
+  } 
+
+  changeName = (newName) => {
+    this.setState({
+      name: newName
+    })
+  }
+
+  changeNameFromInput = (event) => {
+    this.setState({
+      name: event.target.value
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+      <br/>
+      {/* two way binding */}
+      <input type="text" onChange={this.changeNameFromInput} value={this.state.name}/>
+      <br/>
+      <button onClick={() => this.changeName('Awsome Techsith :(')}>Change Using Anon Function</button>
+      <br/>
+      {/* bind is more effiecent */}
+      <button onClick={this.changeName.bind(this, 'Awsome Techsith :)')}>Change Using Bind</button>
+        <br/><br/><br/>
+        <div>{this.state.name}</div>
+      </div>
+    );
+  }
+
+
+}
+
+class Greeting extends React.Component {
+  render() {
+    return <h1>{this.props.greeting}</h1>;
+  }
+}
+
+ReactDOM.render(<Prueba/>, document.getElementById('carteras'))
+
+
+class Agentes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: []
+    };
+
+    this.state= {title: 'Click text'}
+   
+  }
+
+  componentDidMount() {
+    fetch("http://138.68.230.137:8000/distrito")
+      .then(res => res.json())
+      .then(
+        (result) => {
+
+          console.log(result)
+          this.setState({
+            isLoaded: true,
+            items: result
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
+
+
+  sacacarteras(item) {
+
+
+    fetch("http://138.68.230.137:8000/categorias/"+item.id)
+      .then(res => res.json())
+      .then(
+        (result) => {
+
+          console.log(result)
+          this.setState({
+            isLoaded: true,
+            items: result
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+
+   
+
+  }
+
+
+  render() {
+    const { error, isLoaded, items } = this.state;
+
+ 
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <ul>
+          {items.map(item => (
+            <li onClick={(e) => this.sacacarteras(item, e)} key={item.nombre} >
+              {item.nombre}
+            </li>
+          ))}
+
+        <h1>Carteras</h1>
+        {items.map(item => (
+            <li onClick={(e) => this.sacacarteras(item, e)} key={item.nombre} >
+              {item.nombre}
+            </li>
+          ))}
+        </ul>
+        
+
+
+
+      );
+    }
+  }
+
+
+
+
+
+
+}
+
+
+
+
+
+
+ReactDOM.render(
+    <Agentes />,
+    document.getElementById('root')
+);
+
+
+
+</script>

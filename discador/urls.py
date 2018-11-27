@@ -20,6 +20,6 @@ from discador.views import *
 
 urlpatterns = [
 
-    url(r'^api_agentes/', api_agentes),
+    url(r'^menu_proveedor/', proveedor),
 
 ]

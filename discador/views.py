@@ -1,9 +1,6 @@
-
 from django.shortcuts import render
 from discador.models import *
 from django.contrib.auth.decorators import login_required
-
-
 from django.views.decorators.csrf import csrf_exempt
 import simplejson
 from django.http import HttpResponse,JsonResponse,HttpResponseRedirect
@@ -19,11 +16,18 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from discador.admin import *
 
-def api_agentes(request):
+def proveedor(request):
 
 	print 'engtrree'
 
-	_data = Agente.objects.all()
+	_data = Proveedor.objects.all()
+
+	serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'prueba.html',{'data':_data,'score':serializer})
+
+
 
 	# print 'traes la daata?', _data
 	# serializer =  AgenteSerializer(_data,many=True)
