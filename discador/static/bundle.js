@@ -37,7 +37,7 @@ var Hello = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            fetch("http://localhost:8000/discador/api_proveedor/").then(function (res) {
+            fetch("http://call.comunica7.com/discador/api_proveedor/").then(function (res) {
                 return res.json();
             }).then(function (result) {
 
@@ -57,7 +57,7 @@ var Hello = function (_React$Component) {
                 nombre_proveedor: item.nombre
             });
 
-            fetch("http://localhost:8000/discador/api_cartera/" + item.id).then(function (res) {
+            fetch("http://call.comunica7.com/discador/api_cartera/" + item.id).then(function (res) {
                 return res.json();
             }).then(function (result) {
 
@@ -89,7 +89,7 @@ var Hello = function (_React$Component) {
             var proveedor = this.state.proveedor;
 
 
-            fetch("http://localhost:8000/discador/api_resultados/" + proveedor.id + '/' + item.cartera.id).then(function (res) {
+            fetch("http://call.comunica7.com/discador/api_resultados/" + proveedor.id + '/' + item.cartera.id).then(function (res) {
                 return res.json();
             }).then(function (result) {
 
