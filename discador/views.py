@@ -125,17 +125,14 @@ def api_score(request):
 
 
 def api_cartera(request,id_proveedor):
-
-
-
 	_datos = Score.objects.filter(proveedor_id=id_proveedor)
-
-
 	serializer =  ScoreSerializer(_datos,many=True)
-	
-	
 	return JsonResponse(serializer.data, safe=False)
 
+def api_resultados(request,id_provedor,id_cartera):
+	_datos = Score.objects.filter(cartera_id=id_cartera,proveedor_id=id_provedor)
+	serializer =  ScoreSerializer(_datos,many=True)
+	return JsonResponse(serializer.data, safe=False)
 
 
 def api_tipodomicilio(request):

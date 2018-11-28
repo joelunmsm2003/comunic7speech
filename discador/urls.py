@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^api_tipocontacto/', api_tipo_contacto),
     url(r'^api_score/', api_score),
     url(r'^api_cartera/(\w+)/', api_cartera),
+    url(r'^api_resultados/(\w+)/(\w+)/', api_resultados),
     url(r'^api_tipodomicilio/', api_tipodomicilio),
 
     

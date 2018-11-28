@@ -19,9 +19,12 @@ var Hello = function (_React$Component) {
         _this.state = {
             error: null,
             isLoaded: false,
+            proveedor: null,
+            cartera: null,
             proveedores: [],
             carteras: [],
-            resultados: []
+            resultados: [],
+            nombre_proveedor: ''
         };
 
         console.log(_this.state);
@@ -49,6 +52,11 @@ var Hello = function (_React$Component) {
         value: function sacacarteras(item) {
             var _this3 = this;
 
+            this.setState({
+                proveedor: item,
+                nombre_proveedor: item.nombre
+            });
+
             fetch("http://localhost:8000/discador/api_cartera/" + item.id).then(function (res) {
                 return res.json();
             }).then(function (result) {
@@ -74,14 +82,21 @@ var Hello = function (_React$Component) {
         value: function sacaresultados(item) {
             var _this4 = this;
 
-            fetch("http://localhost:8000/discador/api_cartera/" + item.id).then(function (res) {
+            this.setState({
+                cartera: item
+            });
+
+            var proveedor = this.state.proveedor;
+
+
+            fetch("http://localhost:8000/discador/api_resultados/" + proveedor.id + '/' + item.cartera.id).then(function (res) {
                 return res.json();
             }).then(function (result) {
 
-                console.log(result);
+                console.log('api_resultados', result);
                 _this4.setState({
                     isLoaded: true,
-                    carteras: result
+                    resultados: result
                 });
             },
             // Note: it's important to handle errors here
@@ -100,10 +115,13 @@ var Hello = function (_React$Component) {
             var _this5 = this;
 
             var _state = this.state,
+                nombre_proveedor = _state.nombre_proveedor,
                 error = _state.error,
                 isLoaded = _state.isLoaded,
+                proveedor = _state.proveedor,
                 proveedores = _state.proveedores,
-                carteras = _state.carteras;
+                carteras = _state.carteras,
+                resultados = _state.resultados;
 
 
             if (!isLoaded) {
@@ -135,15 +153,31 @@ var Hello = function (_React$Component) {
                     React.createElement(
                         "h1",
                         null,
-                        "Carteras"
+                        "Carteras ",
+                        nombre_proveedor
                     ),
                     carteras.map(function (item) {
                         return React.createElement(
                             "li",
                             { onClick: function onClick(e) {
                                     return _this5.sacaresultados(item, e);
-                                }, key: item.nombre },
-                            item.nombre
+                                }, key: item.cartera.nombre },
+                            item.cartera.nombre
+                        );
+                    }),
+                    React.createElement(
+                        "h1",
+                        null,
+                        "Resultados"
+                    ),
+                    resultados.map(function (item) {
+                        return React.createElement(
+                            "li",
+                            { onClick: function onClick(e) {
+                                    return _this5.sacasubresultados(item, e);
+                                }, key: item.resultado.nombre },
+                            item.resultado.nombre,
+                            React.createElement("input", { type: "checkbox", name: "vehicle1", value: item.resultado.check })
                         );
                     })
                 );

@@ -1,5 +1,4 @@
 
-
             class Hello extends React.Component {
                 
               constructor(props) {
@@ -9,9 +8,12 @@
                   this.state = {
                       error: null,
                       isLoaded: false,
+                      proveedor:null,
+                      cartera:null,
                       proveedores: [],
                       carteras:[],
-                      resultados:[]
+                      resultados:[],
+                      nombre_proveedor:''
                   };
 
 
@@ -53,6 +55,14 @@
 
 
               sacacarteras(item) {
+
+
+                this.setState({                
+                    proveedor:item,
+                    nombre_proveedor:item.nombre
+                });
+
+                  
                   
                   fetch("http://localhost:8000/discador/api_cartera/"+item.id)
                   .then(res => res.json())
@@ -80,16 +90,22 @@
 
 
               sacaresultados(item) {
-                  
-                  fetch("http://localhost:8000/discador/api_cartera/"+item.id)
+
+                this.setState({                
+                    cartera:item
+                });
+
+                const { proveedor } = this.state;
+
+                  fetch("http://localhost:8000/discador/api_resultados/"+proveedor.id+'/'+item.cartera.id)
                   .then(res => res.json())
                   .then(
                       (result) => {
 
-                      console.log(result)
+                      console.log('api_resultados',result)
                       this.setState({
                           isLoaded: true,
-                          carteras: result
+                          resultados:result
                       });
                       },
                       // Note: it's important to handle errors here
@@ -108,7 +124,10 @@
               render() {
 
 
-                  const { error, isLoaded, proveedores, carteras } = this.state;
+                  const { nombre_proveedor, error, isLoaded, proveedor, proveedores, carteras,resultados } = this.state;
+
+                   
+                    
 
                       if (!isLoaded) {
                           
@@ -131,13 +150,27 @@
 
                               ))}
 
-                              <h1>Carteras</h1>
+                              <h1>Carteras {nombre_proveedor}</h1>
+
 
                               {carteras.map(item => (
-                              <li onClick={(e) => this.sacaresultados(item, e)} key={item.nombre} >
-                              {item.nombre}
+                              <li onClick={(e) => this.sacaresultados(item, e)} key={item.cartera.nombre} >
+                              {item.cartera.nombre}
                               </li>
                               ))}
+
+
+                               <h1>Resultados</h1>
+
+                                {resultados.map(item => (
+                                <li onClick={(e) => this.sacasubresultados(item, e)} key={item.resultado.nombre} >
+                                {item.resultado.nombre}
+                                
+                                <input type="checkbox" name="vehicle1" value={item.resultado.check}/>
+                                </li>
+                                
+
+                                ))}
 
                               
                               

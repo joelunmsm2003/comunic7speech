@@ -30,9 +30,38 @@ class Tipo_personaSerializer(serializers.ModelSerializer):
 		model = Tipo_persona
 		fields = '__all__'
 
+class CarteraSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Cartera
+		fields = '__all__'
+
+class DireccionesSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Direcciones
+		fields = '__all__'
+
+
+
+
+class Sub_categoriaSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Sub_categoria
+		fields = '__all__'
+
+class ResultadoSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Resultado
+		fields = '__all__'
+
 
 class ScoreSerializer(serializers.ModelSerializer):
 
+	resultado = ResultadoSerializer(many=False, read_only=True)
+	cartera = CarteraSerializer(many=False, read_only=True)
 	class Meta:
 		model = Score
 		fields = '__all__'
@@ -47,11 +76,7 @@ class Estado_clienteSerializer(serializers.ModelSerializer):
 
 
 
-class CarteraSerializer(serializers.ModelSerializer):
 
-	class Meta:
-		model = Cartera
-		fields = '__all__'
 
 
 
