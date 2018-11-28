@@ -116,36 +116,47 @@ var Hello = function (_React$Component) {
             } else {
 
                 return React.createElement(
-                    "ul",
-                    null,
+                    "div",
+                    { className: "row" },
                     React.createElement(
-                        "h1",
-                        null,
-                        "Proveedores"
+                        "div",
+                        { className: "col-6" },
+                        proveedores.map(function (item) {
+                            return React.createElement(
+                                "div",
+                                { className: "list-group", id: "myList", role: "tablist" },
+                                React.createElement(
+                                    "a",
+                                    { className: "list-group-item list-group-item-action active", id: "list-home-list", "data-toggle": "list", href: "#list-home", role: "tab", "aria-controls": "home", onClick: function onClick(e) {
+                                            return _this5.sacacarteras(item, e);
+                                        }, key: item.nombre },
+                                    item.nombre
+                                )
+                            );
+                        })
                     ),
-                    proveedores.map(function (item) {
-                        return React.createElement(
-                            "li",
-                            { onClick: function onClick(e) {
-                                    return _this5.sacacarteras(item, e);
-                                }, key: item.nombre },
-                            item.nombre
-                        );
-                    }),
                     React.createElement(
                         "h1",
                         null,
                         "Carteras"
                     ),
-                    carteras.map(function (item) {
-                        return React.createElement(
-                            "li",
-                            { onClick: function onClick(e) {
-                                    return _this5.sacaresultados(item, e);
-                                }, key: item.nombre },
-                            item.nombre
-                        );
-                    })
+                    React.createElement(
+                        "div",
+                        { className: "col-6" },
+                        carteras.map(function (item) {
+                            return React.createElement(
+                                "div",
+                                { className: "tab-content", id: "nav-tabContent" },
+                                React.createElement(
+                                    "div",
+                                    { className: "tab-pane fade show active", id: "list-home", role: "tabpanel", "aria-labelledby": "list-home-list", onClick: function onClick(e) {
+                                            return _this5.sacaresultados(item, e);
+                                        }, key: item.nombre },
+                                    item.nombre
+                                )
+                            );
+                        })
+                    )
                 );
             }
         }

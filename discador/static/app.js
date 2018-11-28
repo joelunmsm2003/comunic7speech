@@ -119,30 +119,43 @@
                       else {
                           
                           return (
-                              <ul>
-                              <h1>Proveedores</h1>
 
-
+                              
+                              <div className="row">
+                               <div className="col-6">
                               {proveedores.map(item => (
 
-                                  <li onClick={(e) => this.sacacarteras(item, e)} key={item.nombre} >
-                                  {item.nombre}
-                                  </li>
+                                  
+
+                                  <div className="list-group" id="myList" role="tablist">
+                                  <a className="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</a> 
+
+                                   </div>
+                                   
+
 
                               ))}
+                              </div>
 
                               <h1>Carteras</h1>
+                              <div className="col-6">
 
                               {carteras.map(item => (
-                              <li onClick={(e) => this.sacaresultados(item, e)} key={item.nombre} >
-                              {item.nombre}
-                              </li>
-                              ))}
 
                               
+                                <div className="tab-content" id="nav-tabContent">
+                                  <div className="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list" onClick={(e) => this.sacaresultados(item, e)} key={item.nombre} >{item.nombre}</div>
+                                </div>
                               
-                              </ul>
+                              ))}
+                              </div>
+                
+                              
+                              
+                             </div>
+
                           );
+
                           }
               }
 
