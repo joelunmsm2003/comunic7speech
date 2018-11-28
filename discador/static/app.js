@@ -27,7 +27,7 @@
 
               componentDidMount() {
 
-                     fetch("http://localhost:8000/discador/api_proveedor/")
+                     fetch("http://call.comunica7.com/discador/api_proveedor/")
                           .then(res => res.json())
                           .then(
                               (result) => {
@@ -64,7 +64,7 @@
 
                   
                   
-                  fetch("http://localhost:8000/discador/api_cartera/"+item.id)
+                  fetch("http://call.comunica7.com/discador/api_cartera/"+item.id)
                   .then(res => res.json())
                   .then(
                       (result) => {
@@ -97,7 +97,7 @@
 
                 const { proveedor } = this.state;
 
-                  fetch("http://localhost:8000/discador/api_resultados/"+proveedor.id+'/'+item.cartera.id)
+                  fetch("http://call.comunica7.com/discador/api_resultados/"+proveedor.id+'/'+item.cartera.id)
                   .then(res => res.json())
                   .then(
                       (result) => {
