@@ -138,44 +138,81 @@
                       else {
                           
                           return (
-                              <ul>
-                              <h1>Proveedores</h1>
 
+                             <div className='container'>
+                              
+                              <div className="row">
+                               <div className="col-3">
 
+                                <h2>Proveedores</h2>
                               {proveedores.map(item => (
 
-                                  <li onClick={(e) => this.sacacarteras(item, e)} key={item.nombre} >
-                                  {item.nombre}
-                                  </li>
+                                  
+
+                                  <div className="list-group">
+                                  <a className="list-group-item list-group-item-action"   onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</a> 
+
+                                   </div>
+                                   
+
+
 
                               ))}
+                              </div>
 
-                              <h1>Carteras {nombre_proveedor}</h1>
+                              <div className="col-3">
+                                 
+                              <h2>Carteras </h2>
+                              <h2>{nombre_proveedor}</h2>
 
 
                               {carteras.map(item => (
-                              <li onClick={(e) => this.sacaresultados(item, e)} key={item.cartera.nombre} >
-                              {item.cartera.nombre}
-                              </li>
+
+                                <div className="list-group">
+                                <a className="list-group-item list-group-item-action"    onClick={(e) => this.sacaresultados(item, e)} key={item.nombre}>{item.cartera.nombre}</a> 
+                                </div>
+
+                            
+
+
                               ))}
 
+                              </div>
 
-                               <h1>Resultados</h1>
+                              <div className="col-3">
+
+
+
+                               <h2>Resultados</h2>
+
 
                                 {resultados.map(item => (
-                                <li onClick={(e) => this.sacasubresultados(item, e)} key={item.resultado.nombre} >
-                                {item.resultado.nombre}
-                                
-                                <input type="checkbox" name="vehicle1" value={item.resultado.check}/>
-                                </li>
-                                
 
-                                ))}
+                                    <div className="list-group">
+                                    <a className="list-group-item list-group-item-action"    onClick={(e) => this.sacaresultados(item, e)} key={item.nombre}>{item.resultado.nombre}
+                                    <input type='checkbox'></input>
+                                    </a> 
+                                    
+                                    
+                                    </div>
+
+                                    ))}
+
+                    
 
                               
+                                
                               
-                              </ul>
+                              </div>
+                
+                              
+                              
+                             </div>
+
+                             </div>
+
                           );
+
                           }
               }
 

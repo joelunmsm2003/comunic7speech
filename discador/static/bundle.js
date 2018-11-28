@@ -134,52 +134,84 @@ var Hello = function (_React$Component) {
             } else {
 
                 return React.createElement(
-                    "ul",
-                    null,
+                    "div",
+                    { className: "container" },
                     React.createElement(
-                        "h1",
-                        null,
-                        "Proveedores"
-                    ),
-                    proveedores.map(function (item) {
-                        return React.createElement(
-                            "li",
-                            { onClick: function onClick(e) {
-                                    return _this5.sacacarteras(item, e);
-                                }, key: item.nombre },
-                            item.nombre
-                        );
-                    }),
-                    React.createElement(
-                        "h1",
-                        null,
-                        "Carteras ",
-                        nombre_proveedor
-                    ),
-                    carteras.map(function (item) {
-                        return React.createElement(
-                            "li",
-                            { onClick: function onClick(e) {
-                                    return _this5.sacaresultados(item, e);
-                                }, key: item.cartera.nombre },
-                            item.cartera.nombre
-                        );
-                    }),
-                    React.createElement(
-                        "h1",
-                        null,
-                        "Resultados"
-                    ),
-                    resultados.map(function (item) {
-                        return React.createElement(
-                            "li",
-                            { onClick: function onClick(e) {
-                                    return _this5.sacasubresultados(item, e);
-                                }, key: item.resultado.nombre },
-                            item.resultado.nombre,
-                            React.createElement("input", { type: "checkbox", name: "vehicle1", value: item.resultado.check })
-                        );
-                    })
+                        "div",
+                        { className: "row" },
+                        React.createElement(
+                            "div",
+                            { className: "col-3" },
+                            React.createElement(
+                                "h2",
+                                null,
+                                "Proveedores"
+                            ),
+                            proveedores.map(function (item) {
+                                return React.createElement(
+                                    "div",
+                                    { className: "list-group" },
+                                    React.createElement(
+                                        "a",
+                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
+                                                return _this5.sacacarteras(item, e);
+                                            }, key: item.nombre },
+                                        item.nombre
+                                    )
+                                );
+                            })
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col-3" },
+                            React.createElement(
+                                "h2",
+                                null,
+                                "Carteras "
+                            ),
+                            React.createElement(
+                                "h2",
+                                null,
+                                nombre_proveedor
+                            ),
+                            carteras.map(function (item) {
+                                return React.createElement(
+                                    "div",
+                                    { className: "list-group" },
+                                    React.createElement(
+                                        "a",
+                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
+                                                return _this5.sacaresultados(item, e);
+                                            }, key: item.nombre },
+                                        item.cartera.nombre
+                                    )
+                                );
+                            })
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col-3" },
+                            React.createElement(
+                                "h2",
+                                null,
+                                "Resultados"
+                            ),
+                            resultados.map(function (item) {
+                                return React.createElement(
+                                    "div",
+                                    { className: "list-group" },
+                                    React.createElement(
+                                        "a",
+                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
+                                                return _this5.sacaresultados(item, e);
+                                            }, key: item.nombre },
+                                        item.resultado.nombre,
+                                        React.createElement("input", { type: "checkbox" })
+                                    )
+                                );
+                            })
+                        )
+                    )
                 );
             }
         }
