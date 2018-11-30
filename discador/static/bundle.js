@@ -18,16 +18,23 @@ var Hello = function (_React$Component) {
 
         _this.state = {
             error: null,
+            poetFilter: "",
             isLoaded: false,
             proveedor: null,
             cartera: null,
             proveedores: [],
             carteras: [],
             resultados: [],
-            nombre_proveedor: ''
+            nombre_proveedor: '',
+            data: [],
+            todosInit: [],
+            todos: [],
+            todoText: ""
         };
 
-        console.log(_this.state);
+        _this.updateTodoText = _this.updateTodoText.bind(_this);
+        _this.createTodo = _this.createTodo.bind(_this);
+        _this.filterTodo = _this.filterTodo.bind(_this);
 
         return _this;
     }
@@ -36,6 +43,21 @@ var Hello = function (_React$Component) {
         key: "componentDidMount",
         value: function componentDidMount() {
             var _this2 = this;
+
+            // this.setState({
+            //     todos: this.state.todosInit,
+            //     });
+
+
+            fetch('/static/data.json').then(function (res) {
+                return res.json();
+            }).then(function (res) {
+
+                _this2.setState({
+                    todosInit: res,
+                    todos: res
+                });
+            });
 
             fetch("/discador/api_proveedor/").then(function (res) {
                 return res.json();
@@ -46,6 +68,70 @@ var Hello = function (_React$Component) {
                     proveedores: result
                 });
             }, function (error) {});
+        }
+    }, {
+        key: "onLoad",
+        value: function onLoad(data) {
+
+            this.setState({
+                data: this.parseData(data)
+            });
+        }
+    }, {
+        key: "updateTodoText",
+        value: function updateTodoText(e) {
+            this.setState({
+                todoText: e.target.value
+            });
+        }
+    }, {
+        key: "createTodo",
+        value: function createTodo(e) {
+
+            e.preventDefault();
+
+            console.log(e.target.value);
+
+            var obj = { "id": 3, "name": this.state.todoText };
+
+            this.state.todos.push(obj);
+
+            console.log('0000', this.state.todos);
+
+            this.setState({
+                todos: this.state.todos,
+                todoText: ""
+            });
+        }
+    }, {
+        key: "filterTodo",
+        value: function filterTodo(e) {
+
+            console.log('filtrando..', e);
+            var updatedList = this.state.todosInit;
+
+            updatedList = updatedList.filter(function (item) {
+                return item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1;
+            });
+
+            this.setState({
+                todos: updatedList
+            });
+            if (updatedList == 0) {
+                this.setState({
+                    message: true
+                });
+            } else {
+                this.setState({
+                    message: false
+                });
+            }
+        }
+    }, {
+        key: "parseData",
+        value: function parseData(response) {
+            console.log('ooo', response.data);
+            return response.data;
         }
     }, {
         key: "sacacarteras",
@@ -115,6 +201,7 @@ var Hello = function (_React$Component) {
             var _this5 = this;
 
             var _state = this.state,
+                data = _state.data,
                 nombre_proveedor = _state.nombre_proveedor,
                 error = _state.error,
                 isLoaded = _state.isLoaded,
@@ -136,6 +223,65 @@ var Hello = function (_React$Component) {
                 return React.createElement(
                     "div",
                     { className: "container" },
+                    React.createElement(
+                        "form",
+                        { onSubmit: this.createTodo },
+                        React.createElement(
+                            "div",
+                            { className: "col-lg-12 input-group" },
+                            React.createElement("input", { type: "text",
+                                className: "center-block",
+                                placeholder: "Insert here\u2026",
+                                value: this.state.todoText,
+                                onChange: this.updateTodoText
+                            }),
+                            React.createElement(
+                                "button",
+                                { className: "btn btn-success center-block" },
+                                "Create"
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        "ul",
+                        null,
+                        this.state.todos.map(function (todo) {
+                            return React.createElement(
+                                "li",
+                                null,
+                                todo.id,
+                                " ",
+                                todo.name
+                            );
+                        }),
+                        this.state.message ? React.createElement(
+                            "li",
+                            null,
+                            "No search results."
+                        ) : ''
+                    ),
+                    React.createElement("input", { type: "text",
+                        className: "center-block",
+                        placeholder: "Filter here\u2026",
+                        onChange: this.filterTodo
+                    }),
+                    React.createElement(
+                        "div",
+                        null,
+                        data.map(function (item) {
+                            return React.createElement(
+                                "div",
+                                { key: item.id },
+                                React.createElement(
+                                    "a",
+                                    { href: 'mailto:${item.email}' },
+                                    item.name
+                                ),
+                                " ",
+                                item.company
+                            );
+                        })
+                    ),
                     React.createElement(
                         "div",
                         { className: "row" },

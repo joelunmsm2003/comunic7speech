@@ -1,4 +1,5 @@
 
+
             class Hello extends React.Component {
                 
               constructor(props) {
@@ -7,27 +8,48 @@
 
                   this.state = {
                       error: null,
+                      poetFilter: "",
                       isLoaded: false,
                       proveedor:null,
                       cartera:null,
                       proveedores: [],
                       carteras:[],
                       resultados:[],
-                      nombre_proveedor:''
+                      nombre_proveedor:'',
+                      data:[],
+                      todosInit: [],
+                      todos: [],
+                      todoText: ""
                   };
 
-
-                  console.log(this.state)
+                    this.updateTodoText = this.updateTodoText.bind(this);
+                    this.createTodo = this.createTodo.bind(this);
+                    this.filterTodo = this.filterTodo.bind(this);
 
  
-              
               }
-
-
 
               componentDidMount() {
 
-                     fetch("/discador/api_proveedor/")
+
+
+                // this.setState({
+                //     todos: this.state.todosInit,
+                //     });
+
+
+                    fetch('/static/data.json')
+                    .then(res => res.json())
+                    .then(res => {
+
+                        this.setState({
+                            todosInit:res,
+                            todos: res
+                          });
+
+                    })
+                   
+                    fetch("/discador/api_proveedor/")
                           .then(res => res.json())
                           .then(
                               (result) => {
@@ -50,8 +72,77 @@
               }
 
 
-     
+              onLoad(data){
 
+                this.setState({
+                  data: this.parseData(data)
+                });
+
+            }
+
+
+
+            updateTodoText (e)
+            {
+            this.setState({
+            todoText: e.target.value
+            });
+            }
+            
+            createTodo (e)
+            {
+
+            e.preventDefault();
+
+
+            console.log(e.target.value)
+
+            var obj = { "id":3, "name": this.state.todoText };
+
+            this.state.todos.push(obj)
+
+            console.log('0000',this.state.todos)
+
+
+            this.setState({ 
+            todos: this.state.todos,
+            todoText: "",
+            });
+            }
+            
+            filterTodo(e)
+            { 
+
+            console.log('filtrando..',e)
+            var updatedList = this.state.todosInit;
+
+            updatedList = updatedList.filter((item =>{
+                return item.name.toLowerCase().search(
+                e.target.value.toLowerCase()) !== -1;
+            }) );
+
+            this.setState({ 
+                todos: updatedList,
+            });
+            if (updatedList == 0 ) {
+            this.setState({ 
+            message: true,
+            });
+            } else {
+            this.setState({ 
+            message: false,
+            });
+            
+            
+            }
+            
+            }
+
+            parseData (response) {
+                console.log('ooo',response.data)
+                return response.data;
+              }
+             
 
 
 
@@ -86,6 +177,7 @@
                       });
                       }
                   )
+
 
               }
 
@@ -125,7 +217,7 @@
               render() {
 
 
-                  const { nombre_proveedor, error, isLoaded, proveedor, proveedores, carteras,resultados } = this.state;
+                  const { data,nombre_proveedor, error, isLoaded, proveedor, proveedores, carteras,resultados } = this.state;
 
                    
                     
@@ -141,6 +233,46 @@
                           return (
 
                              <div className='container'>
+
+                                <form onSubmit={this.createTodo}>
+                                    <div className='col-lg-12 input-group'>
+                                    <input type='text'
+                                    className='center-block'
+                                    placeholder='Insert here…'
+                                    value={this.state.todoText}
+                                    onChange={this.updateTodoText}
+                                    />
+                                    <button className='btn btn-success center-block'>Create</button>
+                                    </div>
+                                </form>
+
+                                <ul>
+
+                                    
+
+                                {this.state.todos.map((todo) => 
+                                {
+                                return (<li>{todo.id} {todo.name}</li>)
+                                }
+                                )} 
+                                {this.state.message ? <li>No search results.</li> : '' }
+                                </ul>
+
+                                <input type='text'
+                                className='center-block'
+                                placeholder='Filter here…'
+                                onChange={this.filterTodo}
+                                />
+
+                               <div>
+                                {
+                                    data.map(item => (
+                                    <div key={item.id}>
+                                        <a href={'mailto:${item.email}'}>{item.name}</a> {item.company}
+                                    </div>
+                                    ))
+                                }
+                                </div>
                               
                               <div className="row">
                                <div className="col-3">
