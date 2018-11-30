@@ -16,6 +16,16 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from discador.admin import *
 
+
+def usuarios(request):
+
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'usuarios.html',{})
+
 def proveedor(request):
 
 

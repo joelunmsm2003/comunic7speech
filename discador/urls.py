@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^api_score/', api_score),
     url(r'^api_cartera/(\w+)/', api_cartera),
     url(r'^api_tipodomicilio/', api_tipodomicilio),
+    url(r'^usuarios/', usuarios),
 
     
 

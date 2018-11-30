@@ -122,12 +122,12 @@
 
                               
                               <div className="row">
-                               <div className="col-6">
+                               <div className="col-2">
                               {proveedores.map(item => (
 
                                   
 
-                                  <div className="list-group" id="myList" role="tablist">
+                                  <div className="list-group">
                                   <a className="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</a> 
 
                                    </div>
@@ -137,14 +137,15 @@
                               ))}
                               </div>
 
-                              <h1>Carteras</h1>
-                              <div className="col-6">
+                             
+
+                              <div className="col-3">
 
                               {carteras.map(item => (
 
                               
                                 <div className="tab-content" id="nav-tabContent">
-                                  <div className="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list" onClick={(e) => this.sacaresultados(item, e)} key={item.nombre} >{item.nombre}</div>
+                                  <div className="list-group-item list-group-item-action active" id="list-home" role="tabpanel" aria-labelledby="list-home-list" onClick={(e) => this.sacaresultados(item, e)} key={item.nombre} >{item.nombre}</div>
                                 </div>
                               
                               ))}

@@ -120,11 +120,11 @@ var Hello = function (_React$Component) {
                     { className: "row" },
                     React.createElement(
                         "div",
-                        { className: "col-6" },
+                        { className: "col-2" },
                         proveedores.map(function (item) {
                             return React.createElement(
                                 "div",
-                                { className: "list-group", id: "myList", role: "tablist" },
+                                { className: "list-group" },
                                 React.createElement(
                                     "a",
                                     { className: "list-group-item list-group-item-action active", id: "list-home-list", "data-toggle": "list", href: "#list-home", role: "tab", "aria-controls": "home", onClick: function onClick(e) {
@@ -136,20 +136,15 @@ var Hello = function (_React$Component) {
                         })
                     ),
                     React.createElement(
-                        "h1",
-                        null,
-                        "Carteras"
-                    ),
-                    React.createElement(
                         "div",
-                        { className: "col-6" },
+                        { className: "col-3" },
                         carteras.map(function (item) {
                             return React.createElement(
                                 "div",
                                 { className: "tab-content", id: "nav-tabContent" },
                                 React.createElement(
                                     "div",
-                                    { className: "tab-pane fade show active", id: "list-home", role: "tabpanel", "aria-labelledby": "list-home-list", onClick: function onClick(e) {
+                                    { className: "list-group-item list-group-item-action active", id: "list-home", role: "tabpanel", "aria-labelledby": "list-home-list", onClick: function onClick(e) {
                                             return _this5.sacaresultados(item, e);
                                         }, key: item.nombre },
                                     item.nombre

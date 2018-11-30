@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+	{% include "base.html" %}
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+<div class="container">
+ 
+
+<form>
+  <div class="form-row align-items-center">
+    <div class="col-auto my-1">
+      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+      <h4>Estado</h4>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        <option selected>Todos</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-auto my-1">
+      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+      <h4>Nivel</h4>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        <option selected>Todos</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-auto my-1">
+      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+      <h4>Proveedor</h4>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        <option selected>Todos</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-auto my-1">
+     
+      <h4>Cartera</h4>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        <option selected>Todos</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+
+ <div class="col-auto my-1">
+ 
+    
+   
+<h4>Nombre</h4>  
+<input type="text" class="form-control" id="inputPassword2" placeholder="Nombre">
+</div>
+
+
+<!-- Modala iNICIANDO MI MODAL -->
+
+
+
+
+
+   <!--  <div class="col-auto my-1">
+      <div class="custom-control custom-checkbox mr-sm-2">
+        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+        <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+      </div>
+    </div>
+    <div class="col-auto my-1">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div> -->
+  </div>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  NUEVO
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" class="btn btn-link">Descargar</button>
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Login</th>
+      <th scope="col">Nivel</th>
+      <th scope="col">Anexo</th>
+      <th scope="col">Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td>@twitter</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <td>@fat</td>
+    </tr>
+
+
+  </tbody>
+
+
+</table>
+
+  <div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">...</div>
+      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+      <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+    </div>
+  </div>
+</div>
+
+
+
+</form>
+
+</div>
+
+</body>
+</html>
