@@ -30,8 +30,17 @@ urlpatterns = [
     url(r'^api_tipocontacto/', api_tipo_contacto),
     url(r'^api_score/', api_score),
     url(r'^api_cartera/(\w+)/', api_cartera),
+    url(r'^api_agentes/', api_agentes),
+    url(r'^api_resultados/(\w+)/(\w+)/', api_resultados),
     url(r'^api_tipodomicilio/', api_tipodomicilio),
+    url(r'^api_producto/', api_producto),
+    url(r'^api_cuadrante/', api_cuadrante),
+    url(r'^api_plano/', api_plano),
+
     url(r'^usuarios/', usuarios),
+    url(r'^marcador/', marcador),
+    url(r'^importador/',importador),
+
 
     
 

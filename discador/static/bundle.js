@@ -20,13 +20,23 @@ var Hello = function (_React$Component) {
 
         _this.state = {
             error: null,
+            poetFilter: "",
             isLoaded: false,
+            proveedor: null,
+            cartera: null,
             proveedores: [],
             carteras: [],
-            resultados: []
+            resultados: [],
+            nombre_proveedor: '',
+            data: [],
+            todosInit: [],
+            todos: [],
+            todoText: ""
         };
 
-        console.log(_this.state);
+        _this.updateTodoText = _this.updateTodoText.bind(_this);
+        _this.createTodo = _this.createTodo.bind(_this);
+        _this.filterTodo = _this.filterTodo.bind(_this);
 
         return _this;
     }
@@ -36,7 +46,22 @@ var Hello = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            fetch("http://localhost:8000/discador/api_proveedor/").then(function (res) {
+            // this.setState({
+            //     todos: this.state.todosInit,
+            //     });
+
+
+            fetch('/static/data.json').then(function (res) {
+                return res.json();
+            }).then(function (res) {
+
+                _this2.setState({
+                    todosInit: res,
+                    todos: res
+                });
+            });
+
+            fetch("/discador/api_proveedor/").then(function (res) {
                 return res.json();
             }).then(function (result) {
 
@@ -47,11 +72,80 @@ var Hello = function (_React$Component) {
             }, function (error) {});
         }
     }, {
+        key: "onLoad",
+        value: function onLoad(data) {
+
+            this.setState({
+                data: this.parseData(data)
+            });
+        }
+    }, {
+        key: "updateTodoText",
+        value: function updateTodoText(e) {
+            this.setState({
+                todoText: e.target.value
+            });
+        }
+    }, {
+        key: "createTodo",
+        value: function createTodo(e) {
+
+            e.preventDefault();
+
+            console.log(e.target.value);
+
+            var obj = { "id": 3, "name": this.state.todoText };
+
+            this.state.todos.push(obj);
+
+            console.log('0000', this.state.todos);
+
+            this.setState({
+                todos: this.state.todos,
+                todoText: ""
+            });
+        }
+    }, {
+        key: "filterTodo",
+        value: function filterTodo(e) {
+
+            console.log('filtrando..', e);
+            var updatedList = this.state.todosInit;
+
+            updatedList = updatedList.filter(function (item) {
+                return item.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1;
+            });
+
+            this.setState({
+                todos: updatedList
+            });
+            if (updatedList == 0) {
+                this.setState({
+                    message: true
+                });
+            } else {
+                this.setState({
+                    message: false
+                });
+            }
+        }
+    }, {
+        key: "parseData",
+        value: function parseData(response) {
+            console.log('ooo', response.data);
+            return response.data;
+        }
+    }, {
         key: "sacacarteras",
         value: function sacacarteras(item) {
             var _this3 = this;
 
-            fetch("http://localhost:8000/discador/api_cartera/" + item.id).then(function (res) {
+            this.setState({
+                proveedor: item,
+                nombre_proveedor: item.nombre
+            });
+
+            fetch("/discador/api_cartera/" + item.id).then(function (res) {
                 return res.json();
             }).then(function (result) {
 
@@ -76,14 +170,21 @@ var Hello = function (_React$Component) {
         value: function sacaresultados(item) {
             var _this4 = this;
 
-            fetch("http://localhost:8000/discador/api_cartera/" + item.id).then(function (res) {
+            this.setState({
+                cartera: item
+            });
+
+            var proveedor = this.state.proveedor;
+
+
+            fetch("/discador/api_resultados/" + proveedor.id + '/' + item.cartera.id).then(function (res) {
                 return res.json();
             }).then(function (result) {
 
-                console.log(result);
+                console.log('api_resultados', result);
                 _this4.setState({
                     isLoaded: true,
-                    carteras: result
+                    resultados: result
                 });
             },
             // Note: it's important to handle errors here
@@ -102,10 +203,14 @@ var Hello = function (_React$Component) {
             var _this5 = this;
 
             var _state = this.state,
+                data = _state.data,
+                nombre_proveedor = _state.nombre_proveedor,
                 error = _state.error,
                 isLoaded = _state.isLoaded,
+                proveedor = _state.proveedor,
                 proveedores = _state.proveedores,
-                carteras = _state.carteras;
+                carteras = _state.carteras,
+                resultados = _state.resultados;
 
 
             if (!isLoaded) {
@@ -119,40 +224,141 @@ var Hello = function (_React$Component) {
 
                 return React.createElement(
                     "div",
-                    { className: "row" },
+                    { className: "container" },
+                    React.createElement(
+                        "form",
+                        { onSubmit: this.createTodo },
+                        React.createElement(
+                            "div",
+                            { className: "col-lg-12 input-group" },
+                            React.createElement("input", { type: "text",
+                                className: "center-block",
+                                placeholder: "Insert here\u2026",
+                                value: this.state.todoText,
+                                onChange: this.updateTodoText
+                            }),
+                            React.createElement(
+                                "button",
+                                { className: "btn btn-success center-block" },
+                                "Create"
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        "ul",
+                        null,
+                        this.state.todos.map(function (todo) {
+                            return React.createElement(
+                                "li",
+                                null,
+                                todo.id,
+                                " ",
+                                todo.name
+                            );
+                        }),
+                        this.state.message ? React.createElement(
+                            "li",
+                            null,
+                            "No search results."
+                        ) : ''
+                    ),
+                    React.createElement("input", { type: "text",
+                        className: "center-block",
+                        placeholder: "Filter here\u2026",
+                        onChange: this.filterTodo
+                    }),
                     React.createElement(
                         "div",
-                        { className: "col-2" },
-                        proveedores.map(function (item) {
+                        null,
+                        data.map(function (item) {
                             return React.createElement(
                                 "div",
-                                { className: "list-group" },
+                                { key: item.id },
                                 React.createElement(
                                     "a",
-                                    { className: "list-group-item list-group-item-action active", id: "list-home-list", "data-toggle": "list", href: "#list-home", role: "tab", "aria-controls": "home", onClick: function onClick(e) {
-                                            return _this5.sacacarteras(item, e);
-                                        }, key: item.nombre },
-                                    item.nombre
-                                )
+                                    { href: 'mailto:${item.email}' },
+                                    item.name
+                                ),
+                                " ",
+                                item.company
                             );
                         })
                     ),
                     React.createElement(
                         "div",
-                        { className: "col-3" },
-                        carteras.map(function (item) {
-                            return React.createElement(
-                                "div",
-                                { className: "tab-content", id: "nav-tabContent" },
-                                React.createElement(
+                        { className: "row" },
+                        React.createElement(
+                            "div",
+                            { className: "col-3" },
+                            React.createElement(
+                                "h2",
+                                null,
+                                "Proveedores"
+                            ),
+                            proveedores.map(function (item) {
+                                return React.createElement(
                                     "div",
-                                    { className: "list-group-item list-group-item-action active", id: "list-home", role: "tabpanel", "aria-labelledby": "list-home-list", onClick: function onClick(e) {
-                                            return _this5.sacaresultados(item, e);
-                                        }, key: item.nombre },
-                                    item.nombre
-                                )
-                            );
-                        })
+                                    { className: "list-group" },
+                                    React.createElement(
+                                        "a",
+                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
+                                                return _this5.sacacarteras(item, e);
+                                            }, key: item.nombre },
+                                        item.nombre
+                                    )
+                                );
+                            })
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col-3" },
+                            React.createElement(
+                                "h2",
+                                null,
+                                "Carteras "
+                            ),
+                            React.createElement(
+                                "h2",
+                                null,
+                                nombre_proveedor
+                            ),
+                            carteras.map(function (item) {
+                                return React.createElement(
+                                    "div",
+                                    { className: "list-group" },
+                                    React.createElement(
+                                        "a",
+                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
+                                                return _this5.sacaresultados(item, e);
+                                            }, key: item.nombre },
+                                        item.cartera.nombre
+                                    )
+                                );
+                            })
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col-3" },
+                            React.createElement(
+                                "h2",
+                                null,
+                                "Resultados"
+                            ),
+                            resultados.map(function (item) {
+                                return React.createElement(
+                                    "div",
+                                    { className: "list-group" },
+                                    React.createElement(
+                                        "a",
+                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
+                                                return _this5.sacaresultados(item, e);
+                                            }, key: item.nombre },
+                                        item.resultado.nombre,
+                                        React.createElement("input", { type: "checkbox" })
+                                    )
+                                );
+                            })
+                        )
                     )
                 );
             }

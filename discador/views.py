@@ -17,6 +17,28 @@ from django.dispatch import receiver
 from discador.admin import *
 
 
+
+@csrf_exempt
+
+
+def importador(request):
+
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'importador.html',{})
+
+def marcador(request):
+
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'marcador.html',{})
+
 def usuarios(request):
 
 	#_data = Proveedor.objects.all()
@@ -26,6 +48,39 @@ def usuarios(request):
 
 	return render(request, 'usuarios.html',{})
 
+def api_agentes(request):
+
+	_data = Agente.objects.all()
+
+	serializer =  AgenteSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+def api_cuadrante(request):
+
+	_data = Cuadrante.objects.all()
+
+	serializer =  CuadranteSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
+def api_plano(request):
+
+	_data = Plano.objects.all()
+
+	serializer =  PlanoSerializer(_data,many=True)
+	
+	return JsonResponse(serializer.data, safe=False)
+
+
+
+
+def api_producto(request):
+
+	_data = Producto.objects.all()
+
+	serializer =  ProductoSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
 def proveedor(request):
 
 
@@ -34,7 +89,7 @@ def proveedor(request):
 	serializer =  AgenteSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
-
+@csrf_exempt
 def menu_proveedor_1(request):
 
 	#_data = Proveedor.objects.all()
@@ -47,7 +102,7 @@ def menu_proveedor_1(request):
 
 
 
-
+@csrf_exempt
 def menu_proveedor(request):
 
 
@@ -86,7 +141,7 @@ def menu_proveedor(request):
 	# return JsonResponse(serializer.data, safe=False)
 
 
-
+@csrf_exempt
 def api_proveedor(request):
 
 	print 'engtrree'
@@ -98,7 +153,7 @@ def api_proveedor(request):
 	return JsonResponse(serializer.data, safe=False)
 
 # Create your views here.
-
+@csrf_exempt
 def api_estadocliente(request):
 
 	print 'engtrree'
@@ -109,7 +164,7 @@ def api_estadocliente(request):
 	serializer =  Estado_clienteSerializer(_datos,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
-
+@csrf_exempt
 def api_tipo_contacto(request):
 
 	print 'engtrree'
@@ -121,7 +176,7 @@ def api_tipo_contacto(request):
 	return JsonResponse(serializer.data, safe=False)
 
 
-
+@csrf_exempt
 def api_score(request):
 
 	print 'engtrree'
@@ -133,21 +188,18 @@ def api_score(request):
 	return JsonResponse(serializer.data, safe=False)
 
 
-
+@csrf_exempt
 def api_cartera(request,id_proveedor):
-
-
-
 	_datos = Score.objects.filter(proveedor_id=id_proveedor)
-
-
 	serializer =  ScoreSerializer(_datos,many=True)
-	
-	
+	return JsonResponse(serializer.data, safe=False)
+@csrf_exempt
+def api_resultados(request,id_provedor,id_cartera):
+	_datos = Score.objects.filter(cartera_id=id_cartera,proveedor_id=id_provedor)
+	serializer =  ScoreSerializer(_datos,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
-
-
+@csrf_exempt
 def api_tipodomicilio(request):
 
 	print 'engtrree'

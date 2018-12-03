@@ -53,7 +53,8 @@ class Tipo_contacto(models.Model):
 
 class Resultado(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
-
+	def __unicode__(self):
+		return self.nombre
 
 class Sub_categoria(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
