@@ -1,4 +1,4 @@
-//Proveedore
+
 
             class Hello extends React.Component {
                 
@@ -161,7 +161,7 @@
               }
 
 
-  }
+          }
 
 
 
@@ -176,34 +176,3 @@
 
           );
 
-
-
-
-//// Usuarios
-
-
-
-         class User extends React.Component {
-            
-
-               render() {
-
-                  <h1>Hola</h1>
-
-
-               }
-
-
-         }
-
-
-
-
-          ReactDOM.render(
-
-
-              <User/>,
-              document.getElementById('user')
-
-
-          );

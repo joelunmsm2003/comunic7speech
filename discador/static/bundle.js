@@ -8,6 +8,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+//Proveedore
+
 var Hello = function (_React$Component) {
     _inherits(Hello, _React$Component);
 
@@ -161,3 +163,32 @@ var Hello = function (_React$Component) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'));
+
+//// Usuarios
+
+
+var User = function (_React$Component2) {
+    _inherits(User, _React$Component2);
+
+    function User() {
+        _classCallCheck(this, User);
+
+        return _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).apply(this, arguments));
+    }
+
+    _createClass(User, [{
+        key: "render",
+        value: function render() {
+
+            React.createElement(
+                "h1",
+                null,
+                "Hola"
+            );
+        }
+    }]);
+
+    return User;
+}(React.Component);
+
+ReactDOM.render(React.createElement(User, null), document.getElementById('user'));
