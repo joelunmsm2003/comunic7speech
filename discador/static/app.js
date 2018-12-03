@@ -275,15 +275,20 @@
                                 </div>
                               
                               <div className="row">
+
                                <div className="col-3">
 
                                 <h2>Proveedores</h2>
+
                               {proveedores.map(item => (
 
                                   
 
                                   <div className="list-group">
+
                                   <a className="list-group-item list-group-item-action"   onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</a> 
+
+
 
                                    </div>
                                    
@@ -292,6 +297,7 @@
 
                               ))}
                               </div>
+
 
                               <div className="col-3">
                                  
@@ -303,6 +309,7 @@
 
                                 <div className="list-group">
                                 <a className="list-group-item list-group-item-action"    onClick={(e) => this.sacaresultados(item, e)} key={item.nombre}>{item.cartera.nombre}</a> 
+
                                 </div>
 
                             
@@ -356,6 +363,8 @@
 
 
 
+
+
           ReactDOM.render(
 
 
@@ -364,4 +373,7 @@
 
 
           );
+
+
+
 
