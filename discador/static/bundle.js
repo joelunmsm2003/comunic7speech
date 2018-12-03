@@ -29,12 +29,14 @@ var Hello = function (_React$Component) {
             data: [],
             todosInit: [],
             todos: [],
-            todoText: ""
+            todoText: "",
+            value: ""
         };
 
         _this.updateTodoText = _this.updateTodoText.bind(_this);
         _this.createTodo = _this.createTodo.bind(_this);
         _this.filterTodo = _this.filterTodo.bind(_this);
+        _this.sacacarteras = _this.sacacarteras.bind(_this);
 
         return _this;
     }
@@ -134,39 +136,9 @@ var Hello = function (_React$Component) {
             return response.data;
         }
     }, {
-        key: "sacacarteras",
-        value: function sacacarteras(item) {
-            var _this3 = this;
-
-            this.setState({
-                proveedor: item,
-                nombre_proveedor: item.nombre
-            });
-
-            fetch("/discador/api_cartera/" + item.id).then(function (res) {
-                return res.json();
-            }).then(function (result) {
-
-                console.log(result);
-                _this3.setState({
-                    isLoaded: true,
-                    carteras: result
-                });
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            function (error) {
-                _this3.setState({
-                    isLoaded: true,
-                    error: error
-                });
-            });
-        }
-    }, {
         key: "sacaresultados",
         value: function sacaresultados(item) {
-            var _this4 = this;
+            var _this3 = this;
 
             this.setState({
                 cartera: item
@@ -180,9 +152,40 @@ var Hello = function (_React$Component) {
             }).then(function (result) {
 
                 console.log('api_resultados', result);
-                _this4.setState({
+                _this3.setState({
                     isLoaded: true,
                     resultados: result
+                });
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            function (error) {
+                _this3.setState({
+                    isLoaded: true,
+                    error: error
+                });
+            });
+        }
+    }, {
+        key: "sacacarteras",
+        value: function sacacarteras(event) {
+            var _this4 = this;
+
+            console.log(event.target.value);
+
+            // this.setState({                
+            //     proveedor:item,
+            //     nombre_proveedor:item.nombre
+            // });
+
+            fetch("/discador/api_cartera/" + event.target.value).then(function (res) {
+                return res.json();
+            }).then(function (result) {
+
+                _this4.setState({
+                    isLoaded: true,
+                    carteras: result
                 });
             },
             // Note: it's important to handle errors here
@@ -201,6 +204,7 @@ var Hello = function (_React$Component) {
             var _this5 = this;
 
             var _state = this.state,
+                value = _state.value,
                 data = _state.data,
                 nombre_proveedor = _state.nombre_proveedor,
                 error = _state.error,
@@ -293,19 +297,21 @@ var Hello = function (_React$Component) {
                                 null,
                                 "Proveedores"
                             ),
-                            proveedores.map(function (item) {
-                                return React.createElement(
-                                    "div",
-                                    { className: "list-group" },
-                                    React.createElement(
-                                        "a",
-                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
-                                                return _this5.sacacarteras(item, e);
-                                            }, key: item.nombre },
-                                        item.nombre
-                                    )
-                                );
-                            })
+                            React.createElement(
+                                "select",
+                                { className: "form-control", onChange: this.sacacarteras },
+                                proveedores.map(function (item) {
+                                    return (
+
+                                        // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                        React.createElement(
+                                            "option",
+                                            { value: item.id },
+                                            item.nombre
+                                        )
+                                    );
+                                })
+                            )
                         ),
                         React.createElement(
                             "div",

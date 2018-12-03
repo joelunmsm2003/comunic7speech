@@ -19,12 +19,14 @@
                       data:[],
                       todosInit: [],
                       todos: [],
-                      todoText: ""
+                      todoText: "",
+                      value:""
                   };
 
                     this.updateTodoText = this.updateTodoText.bind(this);
                     this.createTodo = this.createTodo.bind(this);
                     this.filterTodo = this.filterTodo.bind(this);
+                    this.sacacarteras = this.sacacarteras.bind(this);
 
  
               }
@@ -146,40 +148,6 @@
 
 
 
-              sacacarteras(item) {
-
-
-                this.setState({                
-                    proveedor:item,
-                    nombre_proveedor:item.nombre
-                });
-
-                  
-                  
-                  fetch("/discador/api_cartera/"+item.id)
-                  .then(res => res.json())
-                  .then(
-                      (result) => {
-
-                      console.log(result)
-                      this.setState({
-                          isLoaded: true,
-                          carteras: result
-                      });
-                      },
-                      // Note: it's important to handle errors here
-                      // instead of a catch() block so that we don't swallow
-                      // exceptions from actual bugs in components.
-                      (error) => {
-                      this.setState({
-                          isLoaded: true,
-                          error
-                      });
-                      }
-                  )
-
-
-              }
 
 
               sacaresultados(item) {
@@ -214,10 +182,44 @@
 
               }
 
+              sacacarteras(event) {
+
+
+                console.log(event.target.value)
+                
+                // this.setState({                
+                //     proveedor:item,
+                //     nombre_proveedor:item.nombre
+                // });
+                
+                fetch("/discador/api_cartera/"+event.target.value)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+
+                    this.setState({
+                        isLoaded: true,
+                        carteras: result
+                    });
+                    },
+                    // Note: it's important to handle errors here
+                    // instead of a catch() block so that we don't swallow
+                    // exceptions from actual bugs in components.
+                    (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                    }
+                )
+
+
+              }
+
               render() {
 
 
-                  const { data,nombre_proveedor, error, isLoaded, proveedor, proveedores, carteras,resultados } = this.state;
+                  const { value,data,nombre_proveedor, error, isLoaded, proveedor, proveedores, carteras,resultados } = this.state;
 
                    
                     
@@ -280,22 +282,21 @@
 
                                 <h2>Proveedores</h2>
 
+                           
+
+  
+
+
+                                <select className='form-control'   onChange={this.sacacarteras}>
+
                               {proveedores.map(item => (
 
-                                  
-
-                                  <div className="list-group">
-
-                                  <a className="list-group-item list-group-item-action"   onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</a> 
-
-
-
-                                   </div>
-                                   
-
-
+                                 // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                 <option  value={item.id} >{item.nombre}</option>
 
                               ))}
+
+                              </select> 
                               </div>
 
 
