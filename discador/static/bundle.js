@@ -31,12 +31,14 @@ var Hello = function (_React$Component) {
             data: [],
             todosInit: [],
             todos: [],
-            todoText: ""
+            todoText: "",
+            value: ""
         };
 
         _this.updateTodoText = _this.updateTodoText.bind(_this);
         _this.createTodo = _this.createTodo.bind(_this);
         _this.filterTodo = _this.filterTodo.bind(_this);
+        _this.sacacarteras = _this.sacacarteras.bind(_this);
 
         return _this;
     }
@@ -136,39 +138,9 @@ var Hello = function (_React$Component) {
             return response.data;
         }
     }, {
-        key: "sacacarteras",
-        value: function sacacarteras(item) {
-            var _this3 = this;
-
-            this.setState({
-                proveedor: item,
-                nombre_proveedor: item.nombre
-            });
-
-            fetch("/discador/api_cartera/" + item.id).then(function (res) {
-                return res.json();
-            }).then(function (result) {
-
-                console.log(result);
-                _this3.setState({
-                    isLoaded: true,
-                    carteras: result
-                });
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            function (error) {
-                _this3.setState({
-                    isLoaded: true,
-                    error: error
-                });
-            });
-        }
-    }, {
         key: "sacaresultados",
         value: function sacaresultados(item) {
-            var _this4 = this;
+            var _this3 = this;
 
             this.setState({
                 cartera: item
@@ -182,9 +154,40 @@ var Hello = function (_React$Component) {
             }).then(function (result) {
 
                 console.log('api_resultados', result);
-                _this4.setState({
+                _this3.setState({
                     isLoaded: true,
                     resultados: result
+                });
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            function (error) {
+                _this3.setState({
+                    isLoaded: true,
+                    error: error
+                });
+            });
+        }
+    }, {
+        key: "sacacarteras",
+        value: function sacacarteras(event) {
+            var _this4 = this;
+
+            console.log(event.target.value);
+
+            // this.setState({                
+            //     proveedor:item,
+            //     nombre_proveedor:item.nombre
+            // });
+
+            fetch("/discador/api_cartera/" + event.target.value).then(function (res) {
+                return res.json();
+            }).then(function (result) {
+
+                _this4.setState({
+                    isLoaded: true,
+                    carteras: result
                 });
             },
             // Note: it's important to handle errors here
@@ -203,6 +206,7 @@ var Hello = function (_React$Component) {
             var _this5 = this;
 
             var _state = this.state,
+                value = _state.value,
                 data = _state.data,
                 nombre_proveedor = _state.nombre_proveedor,
                 error = _state.error,
@@ -240,7 +244,7 @@ var Hello = function (_React$Component) {
                             React.createElement(
                                 "button",
                                 { className: "btn btn-success center-block" },
-                                "Create"
+                                "Creates"
                             )
                         )
                     ),
@@ -264,8 +268,8 @@ var Hello = function (_React$Component) {
                     ),
                     React.createElement("input", { type: "text",
                         className: "center-block",
-                        placeholder: "Filter here\u2026",
-                        onChange: this.filterTodo
+                        placeholder: "Filter here\u2026"
+
                     }),
                     React.createElement(
                         "div",
@@ -295,19 +299,96 @@ var Hello = function (_React$Component) {
                                 null,
                                 "Proveedores"
                             ),
-                            proveedores.map(function (item) {
-                                return React.createElement(
+                            React.createElement("img", { src: "/static/add.png", height: "30", width: "30", "class": "btn btn-primary", "data-toggle": "modal", "data-target": "#exampleModal", "data-whatever": "@mdo" }),
+                            React.createElement("img", { src: "/static/edit.png", height: "30", width: "30" }),
+                            React.createElement("img", { src: "/static/delete.png", height: "30", width: "30" }),
+                            React.createElement(
+                                "div",
+                                { className: "modal fade", id: "exampleModal", tabindex: "-1", role: "dialog", "aria-labelledby": "exampleModalLabel", "aria-hidden": "true" },
+                                React.createElement(
                                     "div",
-                                    { className: "list-group" },
+                                    { className: "modal-dialog", role: "document" },
                                     React.createElement(
-                                        "a",
-                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
-                                                return _this5.sacacarteras(item, e);
-                                            }, key: item.nombre },
-                                        item.nombre
+                                        "div",
+                                        { className: "modal-content" },
+                                        React.createElement(
+                                            "div",
+                                            { className: "modal-header" },
+                                            React.createElement(
+                                                "h5",
+                                                { className: "modal-title", id: "exampleModalLabel" },
+                                                "Nuevo Provedor"
+                                            ),
+                                            React.createElement(
+                                                "button",
+                                                { type: "button", "class": "close", "data-dismiss": "modal", "aria-label": "Close" },
+                                                React.createElement(
+                                                    "span",
+                                                    { "aria-hidden": "true" },
+                                                    "\xD7"
+                                                )
+                                            )
+                                        ),
+                                        React.createElement(
+                                            "div",
+                                            { "class": "modal-body" },
+                                            React.createElement(
+                                                "form",
+                                                null,
+                                                React.createElement(
+                                                    "div",
+                                                    { "class": "form-group" },
+                                                    React.createElement(
+                                                        "label",
+                                                        { "for": "recipient-name", "class": "col-form-label" },
+                                                        "Recipient:"
+                                                    ),
+                                                    React.createElement("input", { type: "text", "class": "form-control", id: "recipient-name" })
+                                                ),
+                                                React.createElement(
+                                                    "div",
+                                                    { "class": "form-group" },
+                                                    React.createElement(
+                                                        "label",
+                                                        { "for": "message-text", "class": "col-form-label" },
+                                                        "Message:"
+                                                    ),
+                                                    React.createElement("textarea", { "class": "form-control", id: "message-text" })
+                                                )
+                                            )
+                                        ),
+                                        React.createElement(
+                                            "div",
+                                            { className: "modal-footer" },
+                                            React.createElement(
+                                                "button",
+                                                { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
+                                                "Calcelar"
+                                            ),
+                                            React.createElement(
+                                                "button",
+                                                { type: "button", className: "btn btn-primary" },
+                                                "Guardar"
+                                            )
+                                        )
                                     )
-                                );
-                            })
+                                )
+                            ),
+                            React.createElement(
+                                "select",
+                                { className: "form-control", onChange: this.sacacarteras },
+                                proveedores.map(function (item) {
+                                    return (
+
+                                        // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                        React.createElement(
+                                            "option",
+                                            { value: item.id },
+                                            item.nombre
+                                        )
+                                    );
+                                })
+                            )
                         ),
                         React.createElement(
                             "div",
@@ -322,19 +403,27 @@ var Hello = function (_React$Component) {
                                 null,
                                 nombre_proveedor
                             ),
-                            carteras.map(function (item) {
-                                return React.createElement(
-                                    "div",
-                                    { className: "list-group" },
-                                    React.createElement(
-                                        "a",
-                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
-                                                return _this5.sacaresultados(item, e);
-                                            }, key: item.nombre },
+                            React.createElement("img", { src: "/static/add.png", height: "30", width: "30", "class": "btn btn-primary", "data-toggle": "modal", "data-target": "#exampleModal", "data-whatever": "@mdo" }),
+                            React.createElement("img", { src: "/static/edit.png", height: "30", width: "30" }),
+                            React.createElement("img", { src: "/static/delete.png", height: "30", width: "30" }),
+                            React.createElement(
+                                "select",
+                                { className: "form-control", onChange: this.sacaresultados },
+                                carteras.map(function (item) {
+                                    return React.createElement(
+                                        "option",
+                                        { value: item.id },
                                         item.cartera.nombre
                                     )
-                                );
-                            })
+                                    // <div className="list-group">
+                                    // <a className="list-group-item list-group-item-action"    onClick={(e) => this.sacaresultados(item, e)} key={item.nombre}>{item.cartera.nombre}</a> 
+
+                                    //</div>
+
+
+                                    ;
+                                })
+                            )
                         ),
                         React.createElement(
                             "div",
@@ -342,7 +431,7 @@ var Hello = function (_React$Component) {
                             React.createElement(
                                 "h2",
                                 null,
-                                "Resultados"
+                                "Resultadoss"
                             ),
                             resultados.map(function (item) {
                                 return React.createElement(
@@ -369,32 +458,3 @@ var Hello = function (_React$Component) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(Hello, null), document.getElementById('root'));
-
-//// Usuarios
-
-
-var User = function (_React$Component2) {
-    _inherits(User, _React$Component2);
-
-    function User() {
-        _classCallCheck(this, User);
-
-        return _possibleConstructorReturn(this, (User.__proto__ || Object.getPrototypeOf(User)).apply(this, arguments));
-    }
-
-    _createClass(User, [{
-        key: "render",
-        value: function render() {
-
-            React.createElement(
-                "h1",
-                null,
-                "Hola"
-            );
-        }
-    }]);
-
-    return User;
-}(React.Component);
-
-ReactDOM.render(React.createElement(User, null), document.getElementById('user'));
