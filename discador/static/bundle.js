@@ -2,6 +2,8 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -41,6 +43,8 @@ var Hello = function (_React$Component) {
         _this.createTodo = _this.createTodo.bind(_this);
         _this.filterTodo = _this.filterTodo.bind(_this);
         _this.sacacarteras = _this.sacacarteras.bind(_this);
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
 
         return _this;
     }
@@ -175,6 +179,12 @@ var Hello = function (_React$Component) {
             return response.data;
         }
     }, {
+        key: "guardar",
+        value: function guardar(nombre) {
+
+            console.log(nombre);
+        }
+    }, {
         key: "sacaresultados",
         value: function sacaresultados(item) {
             var _this3 = this;
@@ -238,6 +248,45 @@ var Hello = function (_React$Component) {
             });
         }
     }, {
+        key: "handleChange",
+        value: function handleChange(event) {
+            this.setState({ value: event.target.value });
+        }
+    }, {
+        key: "handleSubmit",
+        value: function handleSubmit(event) {
+            var _this5 = this;
+
+            console.log(this.state.value);
+
+            fetch('/discador/api_proveedor/', {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombre: this.state.value })
+            }).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+
+                fetch("/discador/api_proveedor/").then(function (res) {
+                    return res.json();
+                }).then(function (result) {
+                    _this5.setState({
+                        isLoaded: true,
+                        proveedores: result
+                    });
+
+                    $('#proveedor').modal('hide');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                }, function (error) {});
+            });
+
+            event.preventDefault();
+        }
+    }, {
         key: "render",
         value: function render() {
             var _state = this.state,
@@ -262,47 +311,71 @@ var Hello = function (_React$Component) {
                     "Loading..."
                 );
             } else {
+                var _React$createElement, _React$createElement2;
 
                 return React.createElement(
                     "div",
-                    { className: "container" },
+                    { className: "container-fluid" },
+                    React.createElement("br", null),
                     React.createElement(
                         "div",
                         { className: "row" },
                         React.createElement(
                             "div",
-                            { className: "col-2" },
+                            { className: "col-md-2" },
                             React.createElement(
-                                "h4",
+                                "h5",
                                 null,
                                 "Proveedores"
                             ),
                             React.createElement(
-                                "select",
-                                { className: "form-control" },
-                                proveedores.map(function (item) {
-                                    return (
+                                "div",
+                                { className: "row" },
+                                React.createElement(
+                                    "div",
+                                    { className: "col-10" },
+                                    React.createElement(
+                                        "select",
+                                        { className: "form-control" },
+                                        proveedores.map(function (item) {
+                                            return (
 
-                                        // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
-                                        React.createElement(
-                                            "option",
-                                            { value: item.id },
-                                            item.nombre
-                                        )
-                                    );
-                                })
+                                                // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                                React.createElement(
+                                                    "option",
+                                                    { value: item.id },
+                                                    item.nombre
+                                                )
+                                            );
+                                        })
+                                    )
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { className: "col-2" },
+                                    React.createElement(
+                                        "button",
+                                        { type: "button", "data-toggle": "modal", "data-target": "#proveedor", className: "btn btn-sm btn-dark" },
+                                        "Add"
+                                    ),
+                                    React.createElement(
+                                        "button",
+                                        { type: "button", "data-toggle": "modal", "data-target": "#editproveedor", className: "btn btn-sm btn-dark" },
+                                        "Edit"
+                                    )
+                                )
                             )
                         ),
                         React.createElement(
                             "div",
-                            { className: "col-2" },
+                            { className: "col-md-2" },
                             React.createElement(
-                                "h4",
+                                "h5",
                                 null,
                                 "Carteras "
                             ),
                             React.createElement(
-                                "h4",
+                                "h5",
                                 null,
                                 nombre_proveedor
                             ),
@@ -320,9 +393,9 @@ var Hello = function (_React$Component) {
                         ),
                         React.createElement(
                             "div",
-                            { className: "col-2" },
+                            { className: "col-md-2" },
                             React.createElement(
-                                "h4",
+                                "h5",
                                 null,
                                 "Gestion "
                             ),
@@ -344,9 +417,9 @@ var Hello = function (_React$Component) {
                         ),
                         React.createElement(
                             "div",
-                            { className: "col-2" },
+                            { className: "col-md-2" },
                             React.createElement(
-                                "h4",
+                                "h5",
                                 null,
                                 "Resultados"
                             ),
@@ -368,9 +441,9 @@ var Hello = function (_React$Component) {
                         ),
                         React.createElement(
                             "div",
-                            { className: "col-2" },
+                            { className: "col-md-2" },
                             React.createElement(
-                                "h4",
+                                "h5",
                                 null,
                                 "Subresultados"
                             ),
@@ -449,6 +522,138 @@ var Hello = function (_React$Component) {
                                 item.company
                             );
                         })
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "modal fade", id: "proveedor", tabindex: "-1", role: "dialog", "aria-labelledby": "exampleModalLabel", "aria-hidden": "true" },
+                        React.createElement(
+                            "div",
+                            { className: "modal-dialog", role: "document" },
+                            React.createElement(
+                                "div",
+                                { className: "modal-content" },
+                                React.createElement(
+                                    "form",
+                                    { onSubmit: this.handleSubmit },
+                                    React.createElement(
+                                        "div",
+                                        { className: "modal-header" },
+                                        React.createElement(
+                                            "h5",
+                                            { className: "modal-title", id: "exampleModalLabel" },
+                                            "Nuevo Provedor"
+                                        ),
+                                        React.createElement(
+                                            "button",
+                                            { type: "button", className: "close", "data-dismiss": "modal", "aria-label": "Close" },
+                                            React.createElement(
+                                                "span",
+                                                { "aria-hidden": "true" },
+                                                "\xD7"
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "modal-body" },
+                                        React.createElement(
+                                            "form",
+                                            null,
+                                            React.createElement(
+                                                "div",
+                                                { className: "form-group" },
+                                                React.createElement(
+                                                    "label",
+                                                    { "for": "recipient-name", className: "col-form-label" },
+                                                    "Nombre:"
+                                                ),
+                                                React.createElement("input", { type: "text", className: "form-control", value: this.state.value, onChange: this.handleChange, id: "recipient-name" })
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "modal-footer" },
+                                        React.createElement(
+                                            "button",
+                                            { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
+                                            "Cancelar"
+                                        ),
+                                        React.createElement(
+                                            "button",
+                                            (_React$createElement = { type: "button", className: "btn btn-primary" }, _defineProperty(_React$createElement, "type", "submit"), _defineProperty(_React$createElement, "value", "Buscar"), _React$createElement),
+                                            "Guardar"
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "modal fade", id: "editproveedor", tabindex: "-1", role: "dialog", "aria-labelledby": "exampleModalLabel", "aria-hidden": "true" },
+                        React.createElement(
+                            "div",
+                            { className: "modal-dialog", role: "document" },
+                            React.createElement(
+                                "div",
+                                { className: "modal-content" },
+                                React.createElement(
+                                    "form",
+                                    { onSubmit: this.handleSubmit },
+                                    React.createElement(
+                                        "div",
+                                        { className: "modal-header" },
+                                        React.createElement(
+                                            "h5",
+                                            { className: "modal-title", id: "exampleModalLabel" },
+                                            "Editar Provedor"
+                                        ),
+                                        React.createElement(
+                                            "button",
+                                            { type: "button", className: "close", "data-dismiss": "modal", "aria-label": "Close" },
+                                            React.createElement(
+                                                "span",
+                                                { "aria-hidden": "true" },
+                                                "\xD7"
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "modal-body" },
+                                        React.createElement(
+                                            "form",
+                                            null,
+                                            React.createElement(
+                                                "div",
+                                                { className: "form-group" },
+                                                React.createElement(
+                                                    "label",
+                                                    { "for": "recipient-name", className: "col-form-label" },
+                                                    "Nombre:"
+                                                ),
+                                                React.createElement("input", { type: "text", className: "form-control", value: this.state.value, onChange: this.handleChange, id: "recipient-name" })
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "modal-footer" },
+                                        React.createElement(
+                                            "button",
+                                            { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
+                                            "Cancelar"
+                                        ),
+                                        React.createElement(
+                                            "button",
+                                            (_React$createElement2 = { type: "button", className: "btn btn-primary" }, _defineProperty(_React$createElement2, "type", "submit"), _defineProperty(_React$createElement2, "value", "Buscar"), _React$createElement2),
+                                            "Actualizar"
+                                        )
+                                    )
+                                )
+                            )
+                        )
                     )
                 );
             }

@@ -29,6 +29,8 @@
                     this.createTodo = this.createTodo.bind(this);
                     this.filterTodo = this.filterTodo.bind(this);
                     this.sacacarteras = this.sacacarteras.bind(this);
+                    this.handleChange = this.handleChange.bind(this);
+                    this.handleSubmit = this.handleSubmit.bind(this);
 
  
               }
@@ -188,7 +190,12 @@
                 return response.data;
               }
              
+            guardar(nombre) {
 
+                console.log(nombre)
+
+               
+              }
 
 
 
@@ -259,6 +266,51 @@
 
               }
 
+
+              handleChange(event) {
+                this.setState({value: event.target.value});
+              }
+            
+              handleSubmit(event) {
+
+                console.log(this.state.value)
+                
+                fetch('/discador/api_proveedor/', {
+                    method: 'post',
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({nombre: this.state.value})
+                    }).then(res=>res.json())
+                    .then(res => {
+
+                          fetch("/discador/api_proveedor/")
+                          .then(res => res.json())
+                          .then((result) => {
+                              this.setState({
+                                  isLoaded: true,
+                                  proveedores: result
+                              });
+
+                                $('#proveedor').modal('hide'); 
+                                $('body').removeClass('modal-open'); 
+                                $('.modal-backdrop').remove();
+
+                              },
+                              (error) => {
+                              }
+                          )
+
+
+
+                        
+                    });
+                
+                    
+                event.preventDefault();
+              }
+
               render() {
 
 
@@ -277,36 +329,49 @@
                           
                           return (
 
-                             <div className='container'>
+                             <div className='container-fluid'>
 
                             
+                            <br></br>
 
                              <div className="row">
 
                               
 
-                                <div className="col-2">
+                                <div className="col-md-2">
 
-                                <h4>Proveedores</h4>
-
-                                <select className='form-control'>
                                 
+                                  
+                                <h5>Proveedores</h5>
+                               
+                                
+                                    <div className='row'>
+                                            <div className='col-10'>
+                                            <select className='form-control'>
+                                            
 
-                                {proveedores.map(item => (
+                                            {proveedores.map(item => (
 
-                                // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
-                                <option  value={item.id} >{item.nombre}</option>
+                                            // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                            <option  value={item.id} >{item.nombre}</option>
 
-                                ))}
+                                            ))}
 
-                                </select> 
+                                            </select> 
+                                            </div>
+
+                                            <div className='col-2'>
+                                            <button type="button" data-toggle="modal" data-target="#proveedor" className="btn btn-sm btn-dark">Add</button>
+                                            <button type="button" data-toggle="modal" data-target="#editproveedor" className="btn btn-sm btn-dark">Edit</button>
+                                            </div>
+                                    </div>
                                 </div>
 
 
-                                <div className="col-2">
+                                <div className="col-md-2">
                                 
-                                <h4>Carteras </h4>
-                                <h4>{nombre_proveedor}</h4>
+                                <h5>Carteras </h5>
+                                <h5>{nombre_proveedor}</h5>
 
 
 
@@ -322,9 +387,9 @@
 
                                 </div>
 
-                                <div className="col-2">
+                                <div className="col-md-2">
                                 
-                                <h4>Gestion </h4>
+                                <h5>Gestion </h5>
                                 
 
 
@@ -341,11 +406,11 @@
 
                                 </div>
 
-                                <div className="col-2">
+                                <div className="col-md-2">
 
 
 
-                                <h4>Resultados</h4>
+                                <h5>Resultados</h5>
 
 
                                 <select className='form-control'   onChange={this.sacaresultados}>
@@ -361,11 +426,11 @@
 
                                 </div>
 
-                                <div className="col-2">
+                                <div className="col-md-2">
 
 
 
-                                <h4>Subresultados</h4>
+                                <h5>Subresultados</h5>
 
 
                                 <select className='form-control'>
@@ -430,41 +495,63 @@
                               
 
 
-                          
-                                {/* <img src="/static/add.png"  height="30" width="30"class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-                                </img><img src="/static/edit.png"  height="30" width="30"></img>
-                                <img src="/static/delete.png" height="30" width="30" ></img> */}
+                                <div className="modal fade" id="proveedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog" role="document">
+                                    <div className="modal-content">
 
+                                    <form onSubmit={this.handleSubmit}>
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="exampleModalLabel">Nuevo Provedor</h5>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <form>
+                                        <div className="form-group">
+                                            <label for="recipient-name" className="col-form-label">Nombre:</label>
+                                            <input type="text"  className="form-control" value={this.state.value} onChange={this.handleChange} id="recipient-name"></input>
+                                        </div>
+                                        </form>
+                                    </div>
 
-{/* <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog" role="document">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title" id="exampleModalLabel">Nuevo Provedor</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name"></input>
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" className="btn btn-primary" type="submit" value="Buscar">Guardar</button>
+                                    </div>
+                                    </form>
+                                    </div>
+                                </div>
+                                </div> 
 
-      <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-dismiss="modal">Calcelar</button>
-        <button type="button" className="btn btn-primary">Guardar</button>
-      </div>
-    </div>
-  </div>
-</div> */}
+                                <div className="modal fade" id="editproveedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog" role="document">
+                                    <div className="modal-content">
+
+                                    <form onSubmit={this.handleSubmit}>
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="exampleModalLabel">Editar Provedor</h5>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <form>
+                                        <div className="form-group">
+                                            <label for="recipient-name" className="col-form-label">Nombre:</label>
+                                            <input type="text"  className="form-control" value={this.state.value} onChange={this.handleChange} id="recipient-name"></input>
+                                        </div>
+                                        </form>
+                                    </div>
+
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" className="btn btn-primary" type="submit" value="Buscar">Actualizar</button>
+                                    </div>
+                                    </form>
+                                    </div>
+                                </div>
+                                </div> 
 
 
 

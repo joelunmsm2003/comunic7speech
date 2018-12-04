@@ -68,6 +68,7 @@ def api_carteras(request):
 	_data = Cartera.objects.all()
 
 	serializer =  CarteraSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
 
 def api_cuadrante(request):
 
@@ -159,13 +160,24 @@ def menu_proveedor(request):
 @csrf_exempt
 def api_proveedor(request):
 
-	print 'engtrree'
+	if request.method == 'POST':
 
-	_datos = Proveedor.objects.all()
+		nombre = json.loads(request.body)['nombre']
 
-	print 'traes la daata?', api_proveedor
-	serializer =  ProveedorSerializer(_datos,many=True)
-	return JsonResponse(serializer.data, safe=False)
+		Proveedor(nombre=nombre).save()
+
+		a= simplejson.dumps('OK')
+		
+		return HttpResponse(a, content_type="application/json")
+
+	if request.method == 'GET':
+
+
+		_datos = Proveedor.objects.all()
+
+		print 'traes la daata?', api_proveedor
+		serializer =  ProveedorSerializer(_datos,many=True)
+		return JsonResponse(serializer.data, safe=False)
 
 # Create your views here.
 @csrf_exempt
