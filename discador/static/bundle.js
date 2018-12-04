@@ -24,7 +24,9 @@ var Hello = function (_React$Component) {
             cartera: null,
             proveedores: [],
             carteras: [],
+            gestiones: [],
             resultados: [],
+            subresultados: [],
             nombre_proveedor: '',
             data: [],
             todosInit: [],
@@ -64,10 +66,45 @@ var Hello = function (_React$Component) {
             fetch("/discador/api_proveedor/").then(function (res) {
                 return res.json();
             }).then(function (result) {
-
                 _this2.setState({
                     isLoaded: true,
                     proveedores: result
+                });
+            }, function (error) {});
+
+            fetch("/discador/api_carteras/").then(function (res) {
+                return res.json();
+            }).then(function (result) {
+                _this2.setState({
+                    isLoaded: true,
+                    carteras: result
+                });
+            }, function (error) {});
+
+            fetch("/discador/api_gestiones/").then(function (res) {
+                return res.json();
+            }).then(function (result) {
+                _this2.setState({
+                    isLoaded: true,
+                    gestiones: result
+                });
+            }, function (error) {});
+
+            fetch("/discador/api_resultados/").then(function (res) {
+                return res.json();
+            }).then(function (result) {
+                _this2.setState({
+                    isLoaded: true,
+                    resultados: result
+                });
+            }, function (error) {});
+
+            fetch("/discador/api_subresultados/").then(function (res) {
+                return res.json();
+            }).then(function (result) {
+                _this2.setState({
+                    isLoaded: true,
+                    subresultados: result
                 });
             }, function (error) {});
         }
@@ -201,8 +238,6 @@ var Hello = function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            var _this5 = this;
-
             var _state = this.state,
                 value = _state.value,
                 data = _state.data,
@@ -212,7 +247,9 @@ var Hello = function (_React$Component) {
                 proveedor = _state.proveedor,
                 proveedores = _state.proveedores,
                 carteras = _state.carteras,
-                resultados = _state.resultados;
+                gestiones = _state.gestiones,
+                resultados = _state.resultados,
+                subresultados = _state.subresultados;
 
 
             if (!isLoaded) {
@@ -227,6 +264,131 @@ var Hello = function (_React$Component) {
                 return React.createElement(
                     "div",
                     { className: "container" },
+                    React.createElement(
+                        "div",
+                        { className: "row" },
+                        React.createElement(
+                            "div",
+                            { className: "col-2" },
+                            React.createElement(
+                                "h4",
+                                null,
+                                "Proveedores"
+                            ),
+                            React.createElement(
+                                "select",
+                                { className: "form-control" },
+                                proveedores.map(function (item) {
+                                    return (
+
+                                        // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                        React.createElement(
+                                            "option",
+                                            { value: item.id },
+                                            item.nombre
+                                        )
+                                    );
+                                })
+                            )
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col-2" },
+                            React.createElement(
+                                "h4",
+                                null,
+                                "Carteras "
+                            ),
+                            React.createElement(
+                                "h4",
+                                null,
+                                nombre_proveedor
+                            ),
+                            React.createElement(
+                                "select",
+                                { className: "form-control" },
+                                carteras.map(function (item) {
+                                    return React.createElement(
+                                        "option",
+                                        { value: item.id },
+                                        item.nombre
+                                    );
+                                })
+                            )
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col-2" },
+                            React.createElement(
+                                "h4",
+                                null,
+                                "Gestion "
+                            ),
+                            React.createElement(
+                                "select",
+                                { className: "form-control" },
+                                gestiones.map(function (item) {
+                                    return (
+
+                                        // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                        React.createElement(
+                                            "option",
+                                            { value: item.id },
+                                            item.nombre
+                                        )
+                                    );
+                                })
+                            )
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col-2" },
+                            React.createElement(
+                                "h4",
+                                null,
+                                "Resultados"
+                            ),
+                            React.createElement(
+                                "select",
+                                { className: "form-control", onChange: this.sacaresultados },
+                                resultados.map(function (item) {
+                                    return (
+
+                                        // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                        React.createElement(
+                                            "option",
+                                            { value: item.id },
+                                            item.nombre
+                                        )
+                                    );
+                                })
+                            )
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col-2" },
+                            React.createElement(
+                                "h4",
+                                null,
+                                "Subresultados"
+                            ),
+                            React.createElement(
+                                "select",
+                                { className: "form-control" },
+                                subresultados.map(function (item) {
+                                    return (
+
+                                        // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                        React.createElement(
+                                            "option",
+                                            { value: item.id },
+                                            item.nombre
+                                        )
+                                    );
+                                })
+                            )
+                        )
+                    ),
                     React.createElement(
                         "form",
                         { onSubmit: this.createTodo },
@@ -285,84 +447,6 @@ var Hello = function (_React$Component) {
                                 item.company
                             );
                         })
-                    ),
-                    React.createElement(
-                        "div",
-                        { className: "row" },
-                        React.createElement(
-                            "div",
-                            { className: "col-3" },
-                            React.createElement(
-                                "h2",
-                                null,
-                                "Proveedores"
-                            ),
-                            React.createElement(
-                                "select",
-                                { className: "form-control", onChange: this.sacacarteras },
-                                proveedores.map(function (item) {
-                                    return (
-
-                                        // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
-                                        React.createElement(
-                                            "option",
-                                            { value: item.id },
-                                            item.nombre
-                                        )
-                                    );
-                                })
-                            )
-                        ),
-                        React.createElement(
-                            "div",
-                            { className: "col-3" },
-                            React.createElement(
-                                "h2",
-                                null,
-                                "Carteras "
-                            ),
-                            React.createElement(
-                                "h2",
-                                null,
-                                nombre_proveedor
-                            ),
-                            carteras.map(function (item) {
-                                return React.createElement(
-                                    "div",
-                                    { className: "list-group" },
-                                    React.createElement(
-                                        "a",
-                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
-                                                return _this5.sacaresultados(item, e);
-                                            }, key: item.nombre },
-                                        item.cartera.nombre
-                                    )
-                                );
-                            })
-                        ),
-                        React.createElement(
-                            "div",
-                            { className: "col-3" },
-                            React.createElement(
-                                "h2",
-                                null,
-                                "Resultados"
-                            ),
-                            resultados.map(function (item) {
-                                return React.createElement(
-                                    "div",
-                                    { className: "list-group" },
-                                    React.createElement(
-                                        "a",
-                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
-                                                return _this5.sacaresultados(item, e);
-                                            }, key: item.nombre },
-                                        item.resultado.nombre,
-                                        React.createElement("input", { type: "checkbox" })
-                                    )
-                                );
-                            })
-                        )
                     )
                 );
             }

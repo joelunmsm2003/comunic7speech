@@ -14,7 +14,9 @@
                       cartera:null,
                       proveedores: [],
                       carteras:[],
+                      gestiones:[],
                       resultados:[],
+                      subresultados:[],
                       nombre_proveedor:'',
                       data:[],
                       todosInit: [],
@@ -53,22 +55,63 @@
                    
                     fetch("/discador/api_proveedor/")
                           .then(res => res.json())
-                          .then(
-                              (result) => {
-
-                              
+                          .then((result) => {
                               this.setState({
                                   isLoaded: true,
                                   proveedores: result
                               });
-
-                            
                               },
-
                               (error) => {
-                             
                               }
                           )
+
+                    fetch("/discador/api_carteras/")
+                    .then(res => res.json())
+                    .then((result) => {
+                        this.setState({
+                            isLoaded: true,
+                            carteras: result
+                        });
+                        },
+                        (error) => {
+                        }
+                    )
+
+                    fetch("/discador/api_gestiones/")
+                    .then(res => res.json())
+                    .then((result) => {
+                        this.setState({
+                            isLoaded: true,
+                            gestiones: result
+                        });
+                        },
+                        (error) => {
+                        }
+                    )
+
+                    fetch("/discador/api_resultados/")
+                    .then(res => res.json())
+                    .then((result) => {
+                        this.setState({
+                            isLoaded: true,
+                            resultados: result
+                        });
+                        },
+                        (error) => {
+                        }
+                    )
+
+                    fetch("/discador/api_subresultados/")
+                    .then(res => res.json())
+                    .then((result) => {
+                        this.setState({
+                            isLoaded: true,
+                            subresultados: result
+                        });
+                        },
+                        (error) => {
+                        }
+                    )
                
 
               }
@@ -219,7 +262,7 @@
               render() {
 
 
-                  const { value,data,nombre_proveedor, error, isLoaded, proveedor, proveedores, carteras,resultados } = this.state;
+                  const { value,data,nombre_proveedor, error, isLoaded, proveedor, proveedores,carteras,gestiones,resultados,subresultados } = this.state;
 
                    
                     
@@ -235,6 +278,112 @@
                           return (
 
                              <div className='container'>
+
+                            
+
+                             <div className="row">
+
+                              
+
+                                <div className="col-2">
+
+                                <h4>Proveedores</h4>
+
+                                <select className='form-control'>
+                                
+
+                                {proveedores.map(item => (
+
+                                // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                <option  value={item.id} >{item.nombre}</option>
+
+                                ))}
+
+                                </select> 
+                                </div>
+
+
+                                <div className="col-2">
+                                
+                                <h4>Carteras </h4>
+                                <h4>{nombre_proveedor}</h4>
+
+
+
+                                <select className='form-control'>
+
+                                {carteras.map(item => (
+
+                                <option  value={item.id} >{item.nombre}</option>
+
+                                ))}
+
+                                </select> 
+
+                                </div>
+
+                                <div className="col-2">
+                                
+                                <h4>Gestion </h4>
+                                
+
+
+                                <select className='form-control'>
+
+                                {gestiones.map(item => (
+
+                                    // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                    <option  value={item.id} >{item.nombre}</option>
+
+                                ))}
+
+                                </select>
+
+                                </div>
+
+                                <div className="col-2">
+
+
+
+                                <h4>Resultados</h4>
+
+
+                                <select className='form-control'   onChange={this.sacaresultados}>
+
+                                {resultados.map(item => (
+
+                                    // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                    <option  value={item.id} >{item.nombre}</option>
+
+                                ))}
+
+                                </select>
+
+                                </div>
+
+                                <div className="col-2">
+
+
+
+                                <h4>Subresultados</h4>
+
+
+                                <select className='form-control'>
+
+                                {subresultados.map(item => (
+
+                                    // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
+                                    <option  value={item.id} >{item.nombre}</option>
+
+                                ))}
+
+                                </select>
+
+                                </div>
+
+
+
+                                </div>
 
                                 <form onSubmit={this.createTodo}>
                                     <div className='col-lg-12 input-group'>
@@ -276,79 +425,7 @@
                                 }
                                 </div>
                               
-                              <div className="row">
-
-                               <div className="col-3">
-
-                                <h2>Proveedores</h2>
-
-                           
-
-  
-
-
-                                <select className='form-control'   onChange={this.sacacarteras}>
-
-                              {proveedores.map(item => (
-
-                                 // <option  onClick={(e) => this.sacacarteras(item, e)} key={item.nombre}>{item.nombre}</option> 
-                                 <option  value={item.id} >{item.nombre}</option>
-
-                              ))}
-
-                              </select> 
-                              </div>
-
-
-                              <div className="col-3">
-                                 
-                              <h2>Carteras </h2>
-                              <h2>{nombre_proveedor}</h2>
-
-
-                              {carteras.map(item => (
-
-                                <div className="list-group">
-                                <a className="list-group-item list-group-item-action"    onClick={(e) => this.sacaresultados(item, e)} key={item.nombre}>{item.cartera.nombre}</a> 
-
-                                </div>
-
-                            
-
-
-                              ))}
-
-                              </div>
-
-                              <div className="col-3">
-
-
-
-                               <h2>Resultados</h2>
-
-
-                                {resultados.map(item => (
-
-                                    <div className="list-group">
-                                    <a className="list-group-item list-group-item-action"    onClick={(e) => this.sacaresultados(item, e)} key={item.nombre}>{item.resultado.nombre}
-                                    <input type='checkbox'></input>
-                                    </a> 
-                                    
-                                    
-                                    </div>
-
-                                    ))}
-
-                    
-
                               
-                                
-                              
-                              </div>
-                
-                              
-                              
-                             </div>
 
                              </div>
 

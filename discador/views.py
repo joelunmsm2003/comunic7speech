@@ -35,6 +35,12 @@ def api_agentes(request):
 	serializer =  AgenteSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
+def api_carteras(request):
+
+	_data = Cartera.objects.all()
+
+	serializer =  CarteraSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
 
 def proveedor(request):
 
@@ -148,10 +154,20 @@ def api_cartera(request,id_proveedor):
 	_datos = Score.objects.filter(proveedor_id=id_proveedor)
 	serializer =  ScoreSerializer(_datos,many=True)
 	return JsonResponse(serializer.data, safe=False)
+
+
 @csrf_exempt
-def api_resultados(request,id_provedor,id_cartera):
-	_datos = Score.objects.filter(cartera_id=id_cartera,proveedor_id=id_provedor)
-	serializer =  ScoreSerializer(_datos,many=True)
+def api_resultados(request):
+
+	_datos = Resultado.objects.all()
+	serializer =  ResultadoSerializer(_datos,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def api_subresultados(request):
+
+	_datos = Sub_categoria.objects.all()
+	serializer =  Sub_categoriaSerializer(_datos,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
 @csrf_exempt
