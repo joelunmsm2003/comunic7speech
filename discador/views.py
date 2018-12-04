@@ -21,6 +21,13 @@ from discador.admin import *
 @csrf_exempt
 
 
+
+def api_gestion(request):
+
+	_data = Gestion.objects.all()
+
+	serializer =  GestionSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
 def importador(request):
 
 	#_data = Proveedor.objects.all()

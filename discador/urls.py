@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^api_producto/', api_producto),
     url(r'^api_cuadrante/', api_cuadrante),
     url(r'^api_plano/', api_plano),
+    url(r'^api_gestion/', api_gestion),
 
     url(r'^usuarios/', usuarios),
     url(r'^marcador/', marcador),

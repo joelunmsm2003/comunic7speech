@@ -370,19 +370,20 @@
 
                                <h2>Resultadoss</h2>
 
-
+                                <select className='form-control'   onChange={this.sacaresultados}>
                                 {resultados.map(item => (
 
-                                    <div className="list-group">
-                                    <a className="list-group-item list-group-item-action"    onClick={(e) => this.sacaresultados(item, e)} key={item.nombre}>{item.resultado.nombre}
-                                    <input type='checkbox'></input>
-                                    </a> 
+                                    //<div className="list-group">
+                                    //<a className="list-group-item list-group-item-action"    onClick={(e) => this.sacaresultados(item, e)} key={item.nombre}>{item.resultado.nombre}
+                                    //<input type='checkbox'></input>
+                                    //</a> 
                                     
                                     
-                                    </div>
+                                    //</div>
+                                    <option  value={item.id} >{item.resultado.nombre}</option>
 
                                     ))}
-
+                                    </select> 
                     
 
                               

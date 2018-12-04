@@ -7,6 +7,13 @@ from rest_framework import serializers
 
 
 
+class GestionSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Gestion
+		fields = '__all__'
+
+
 class ScoreSerializer(serializers.ModelSerializer):
 
 	class Meta:

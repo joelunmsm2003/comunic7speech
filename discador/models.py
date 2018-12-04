@@ -26,6 +26,9 @@ class Tipo_cartera(models.Model):
 
 
 
+class Gestion(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
 class Ubigeo(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
@@ -92,7 +95,7 @@ class Score(models.Model):
 	resultado = models.ForeignKey(Resultado, blank=True, null=True)
 	sub_categoria = models.ForeignKey(Sub_categoria, blank=True)
 	peso=models.CharField(max_length=100,blank=True,null=True)
-
+	gestion = models.ForeignKey(Gestion, blank=True, null=True)
 class Tipo_persona(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 

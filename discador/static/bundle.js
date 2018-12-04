@@ -203,8 +203,6 @@ var Hello = function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            var _this5 = this;
-
             var _state = this.state,
                 value = _state.value,
                 data = _state.data,
@@ -433,20 +431,27 @@ var Hello = function (_React$Component) {
                                 null,
                                 "Resultadoss"
                             ),
-                            resultados.map(function (item) {
-                                return React.createElement(
-                                    "div",
-                                    { className: "list-group" },
-                                    React.createElement(
-                                        "a",
-                                        { className: "list-group-item list-group-item-action", onClick: function onClick(e) {
-                                                return _this5.sacaresultados(item, e);
-                                            }, key: item.nombre },
-                                        item.resultado.nombre,
-                                        React.createElement("input", { type: "checkbox" })
-                                    )
-                                );
-                            })
+                            React.createElement(
+                                "select",
+                                { className: "form-control", onChange: this.sacaresultados },
+                                resultados.map(function (item) {
+                                    return (
+
+                                        //<div className="list-group">
+                                        //<a className="list-group-item list-group-item-action"    onClick={(e) => this.sacaresultados(item, e)} key={item.nombre}>{item.resultado.nombre}
+                                        //<input type='checkbox'></input>
+                                        //</a> 
+
+
+                                        //</div>
+                                        React.createElement(
+                                            "option",
+                                            { value: item.id },
+                                            item.resultado.nombre
+                                        )
+                                    );
+                                })
+                            )
                         )
                     )
                 );
