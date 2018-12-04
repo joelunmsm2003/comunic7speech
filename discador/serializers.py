@@ -2,20 +2,17 @@ from django.contrib.auth.models import User
 from discador.models import *
 from rest_framework import serializers
 
-class Estado_clienteSerializer(serializers.ModelSerializer):
+
+
+
+
+
+class GestionSerializer(serializers.ModelSerializer):
 
 	class Meta:
-		model = Estado_cliente
-
+		model = Gestion
 		fields = '__all__'
 
-
-
-class Tipo_contactoSerializer(serializers.ModelSerializer):
-
-	class Meta:
-		model = Tipo_contacto
-		fields = '__all__'
 
 class ScoreSerializer(serializers.ModelSerializer):
 
@@ -30,11 +27,7 @@ class Tipo_personaSerializer(serializers.ModelSerializer):
 		model = Tipo_persona
 		fields = '__all__'
 
-class CarteraSerializer(serializers.ModelSerializer):
 
-	class Meta:
-		model = Cartera
-		fields = '__all__'
 
 class DireccionesSerializer(serializers.ModelSerializer):
 
@@ -42,6 +35,48 @@ class DireccionesSerializer(serializers.ModelSerializer):
 		model = Direcciones
 		fields = '__all__'
 
+
+class PlanoSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Plano
+		fields = '__all__'
+
+
+class CuadranteSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Cuadrante
+		fields = '__all__'
+
+
+
+class ProductoSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Producto
+		fields = '__all__'
+
+
+class Estado_clienteSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Estado_cliente
+		fields = '__all__'
+
+
+class Tipo_contactoSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Tipo_contacto
+		fields = '__all__'
+
+
+class ResultadoSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Resultado
+		fields = '__all__'
 
 
 
@@ -51,10 +86,11 @@ class Sub_categoriaSerializer(serializers.ModelSerializer):
 		model = Sub_categoria
 		fields = '__all__'
 
-class ResultadoSerializer(serializers.ModelSerializer):
+
+class CarteraSerializer(serializers.ModelSerializer):
 
 	class Meta:
-		model = Resultado
+		model = Cartera
 		fields = '__all__'
 
 
@@ -65,18 +101,6 @@ class ScoreSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Score
 		fields = '__all__'
-
-
-
-class Estado_clienteSerializer(serializers.ModelSerializer):
-
-	class Meta:
-		model = Estado_cliente
-		fields = '__all__'
-
-
-
-
 
 
 
@@ -141,19 +165,12 @@ class TelefonosSerializer(serializers.ModelSerializer):
 
 
 
-class ProveedorSerializer(serializers.ModelSerializer):
-
-	class Meta:
-		model = Proveedor
-		fields = '__all__'
-
-
-
 class CuentasSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Cuentas
 		fields = '__all__'
+
 
 
 class SegmentacionSerializer(serializers.ModelSerializer):
@@ -163,13 +180,26 @@ class SegmentacionSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 
-
-
 class MailSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Mail
 		fields = '__all__'
+
+
+
+
+class ProveedorSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Proveedor
+		fields = '__all__'
+
+
+
+
+
+
 
 
 

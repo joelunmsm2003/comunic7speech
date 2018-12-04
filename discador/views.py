@@ -19,6 +19,33 @@ from discador.admin import *
 
 
 @csrf_exempt
+
+
+
+def api_gestion(request):
+
+	_data = Gestion.objects.all()
+
+	serializer =  GestionSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+def importador(request):
+
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'importador.html',{})
+
+def marcador(request):
+
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'marcador.html',{})
+
 def usuarios(request):
 
 	#_data = Proveedor.objects.all()
@@ -35,11 +62,38 @@ def api_agentes(request):
 	serializer =  AgenteSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
+
 def api_carteras(request):
 
 	_data = Cartera.objects.all()
 
 	serializer =  CarteraSerializer(_data,many=True)
+
+def api_cuadrante(request):
+
+	_data = Cuadrante.objects.all()
+
+	serializer =  CuadranteSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
+def api_plano(request):
+
+	_data = Plano.objects.all()
+
+	serializer =  PlanoSerializer(_data,many=True)
+	
+	return JsonResponse(serializer.data, safe=False)
+
+
+
+
+def api_producto(request):
+
+	_data = Producto.objects.all()
+
+	serializer =  ProductoSerializer(_data,many=True)
+
 	return JsonResponse(serializer.data, safe=False)
 
 def proveedor(request):

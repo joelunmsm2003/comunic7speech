@@ -60,7 +60,7 @@ def ingresar(request):
 					if str(_grupo)=='Admin':
 
 
-						return HttpResponseRedirect("/admin")
+						return HttpResponseRedirect("/discador/marcador")
 
 
 
