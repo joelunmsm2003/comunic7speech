@@ -36,7 +36,9 @@ var Hello = function (_React$Component) {
             todosInit: [],
             todos: [],
             todoText: "",
-            value: ""
+            value: "",
+            editvalue: "",
+            detalle_proveedor: []
         };
 
         _this.updateTodoText = _this.updateTodoText.bind(_this);
@@ -45,6 +47,9 @@ var Hello = function (_React$Component) {
         _this.sacacarteras = _this.sacacarteras.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
         _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.editProveedor = _this.editProveedor.bind(_this);
+        _this.seleccionaProveedor = _this.seleccionaProveedor.bind(_this);
+        _this.editproveedorSubmit = _this.editproveedorSubmit.bind(_this);
 
         return _this;
     }
@@ -242,10 +247,68 @@ var Hello = function (_React$Component) {
             // exceptions from actual bugs in components.
             function (error) {
                 _this4.setState({
-                    isLoaded: true,
-                    error: error
+                    isLoaded: true
                 });
             });
+        }
+    }, {
+        key: "seleccionaProveedor",
+        value: function seleccionaProveedor(event) {
+            var _this5 = this;
+
+            fetch("/discador/api_proveedor_detalle/" + event.target.value).then(function (res) {
+                return res.json();
+            }).then(function (result) {
+
+                _this5.setState({ detalle_proveedor: result });
+            }, function (error) {});
+        }
+    }, {
+        key: "editProveedor",
+        value: function editProveedor(event) {
+
+            console.log(event.target.value);
+
+            //this.setState({editvalue: event.target.value});
+        }
+    }, {
+        key: "editproveedorSubmit",
+        value: function editproveedorSubmit(event) {
+
+            console.log(this.state.editvalue);
+
+            // fetch('/discador/api_proveedor/', {
+            //     method: 'put',
+            //     headers: {
+            //         'Accept': 'application/json, text/plain, */*',
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({nombre: this.state.value})
+            //     }).then(res=>res.json())
+            //     .then(res => {
+
+            //           fetch("/discador/api_proveedor/")
+            //           .then(res => res.json())
+            //           .then((result) => {
+            //               this.setState({
+            //                   isLoaded: true,
+            //                   proveedores: result
+            //               });
+
+            //                 $('#proveedor').modal('hide'); 
+            //                 $('body').removeClass('modal-open'); 
+            //                 $('.modal-backdrop').remove();
+
+            //               },
+            //               (error) => {
+            //               }
+            //           )
+
+
+            //     });
+
+
+            event.preventDefault();
         }
     }, {
         key: "handleChange",
@@ -255,7 +318,7 @@ var Hello = function (_React$Component) {
     }, {
         key: "handleSubmit",
         value: function handleSubmit(event) {
-            var _this5 = this;
+            var _this6 = this;
 
             console.log(this.state.value);
 
@@ -273,7 +336,7 @@ var Hello = function (_React$Component) {
                 fetch("/discador/api_proveedor/").then(function (res) {
                     return res.json();
                 }).then(function (result) {
-                    _this5.setState({
+                    _this6.setState({
                         isLoaded: true,
                         proveedores: result
                     });
@@ -290,7 +353,9 @@ var Hello = function (_React$Component) {
         key: "render",
         value: function render() {
             var _state = this.state,
+                detalle_proveedor = _state.detalle_proveedor,
                 value = _state.value,
+                editvalue = _state.editvalue,
                 data = _state.data,
                 nombre_proveedor = _state.nombre_proveedor,
                 error = _state.error,
@@ -336,7 +401,7 @@ var Hello = function (_React$Component) {
                                     { className: "col-10" },
                                     React.createElement(
                                         "select",
-                                        { className: "form-control" },
+                                        { className: "form-control", onChange: this.seleccionaProveedor },
                                         proveedores.map(function (item) {
                                             return (
 
@@ -600,7 +665,7 @@ var Hello = function (_React$Component) {
                                 { className: "modal-content" },
                                 React.createElement(
                                     "form",
-                                    { onSubmit: this.handleSubmit },
+                                    { onSubmit: this.editproveedorSubmit },
                                     React.createElement(
                                         "div",
                                         { className: "modal-header" },
@@ -631,9 +696,19 @@ var Hello = function (_React$Component) {
                                                 React.createElement(
                                                     "label",
                                                     { "for": "recipient-name", className: "col-form-label" },
+                                                    "ID:"
+                                                ),
+                                                React.createElement("input", { type: "text", className: "form-control", value: this.state.detalle_proveedor.id, onChange: this.editProveedor, id: "recipient-name" })
+                                            ),
+                                            React.createElement(
+                                                "div",
+                                                { className: "form-group" },
+                                                React.createElement(
+                                                    "label",
+                                                    { "for": "recipient-name", className: "col-form-label" },
                                                     "Nombre:"
                                                 ),
-                                                React.createElement("input", { type: "text", className: "form-control", value: this.state.value, onChange: this.handleChange, id: "recipient-name" })
+                                                React.createElement("input", { type: "text", className: "form-control", value: this.state.detalle_proveedor.nombre, onChange: this.editProveedor, id: "recipient-name" })
                                             )
                                         )
                                     ),

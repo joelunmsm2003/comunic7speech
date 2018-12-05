@@ -55,6 +55,14 @@ def usuarios(request):
 
 	return render(request, 'usuarios.html',{})
 
+def api_proveedor(request,id):
+
+	_data = Proveedor.objects.get(id=id)
+
+	serializer =  ProveedorSerializer(_data,many=False)
+	return JsonResponse(serializer.data, safe=False)
+
+
 def api_agentes(request):
 
 	_data = Agente.objects.all()
@@ -158,7 +166,7 @@ def menu_proveedor(request):
 
 
 @csrf_exempt
-def api_proveedor(request):
+def api_proveedores(request):
 
 	if request.method == 'POST':
 

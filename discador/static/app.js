@@ -22,7 +22,9 @@
                       todosInit: [],
                       todos: [],
                       todoText: "",
-                      value:""
+                      value:"",
+                      editvalue:"",
+                      detalle_proveedor:[]
                   };
 
                     this.updateTodoText = this.updateTodoText.bind(this);
@@ -31,6 +33,9 @@
                     this.sacacarteras = this.sacacarteras.bind(this);
                     this.handleChange = this.handleChange.bind(this);
                     this.handleSubmit = this.handleSubmit.bind(this);
+                    this.editProveedor = this.editProveedor.bind(this);
+                    this.seleccionaProveedor = this.seleccionaProveedor.bind(this);
+                    this.editproveedorSubmit = this.editproveedorSubmit.bind(this);
 
  
               }
@@ -257,8 +262,7 @@
                     // exceptions from actual bugs in components.
                     (error) => {
                     this.setState({
-                        isLoaded: true,
-                        error
+                        isLoaded: true
                     });
                     }
                 )
@@ -266,6 +270,76 @@
 
               }
 
+              seleccionaProveedor(event){
+
+                
+
+
+                fetch("/discador/api_proveedor_detalle/"+event.target.value)
+                .then(res => res.json())
+                .then((result) => {
+
+                    this.setState({detalle_proveedor: result})
+
+                    },
+                    (error) => {
+                    }
+                )
+
+
+              }
+
+              editProveedor(event) {
+
+
+                console.log(event.target.value)
+
+                //this.setState({editvalue: event.target.value});
+
+              }
+
+              editproveedorSubmit(event) {
+
+                console.log(this.state.editvalue)
+
+
+                
+                // fetch('/discador/api_proveedor/', {
+                //     method: 'put',
+                //     headers: {
+                //         'Accept': 'application/json, text/plain, */*',
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({nombre: this.state.value})
+                //     }).then(res=>res.json())
+                //     .then(res => {
+
+                //           fetch("/discador/api_proveedor/")
+                //           .then(res => res.json())
+                //           .then((result) => {
+                //               this.setState({
+                //                   isLoaded: true,
+                //                   proveedores: result
+                //               });
+
+                //                 $('#proveedor').modal('hide'); 
+                //                 $('body').removeClass('modal-open'); 
+                //                 $('.modal-backdrop').remove();
+
+                //               },
+                //               (error) => {
+                //               }
+                //           )
+
+
+
+                        
+                //     });
+                
+                    
+                event.preventDefault();
+                
+              }
 
               handleChange(event) {
                 this.setState({value: event.target.value});
@@ -314,7 +388,7 @@
               render() {
 
 
-                  const { value,data,nombre_proveedor, error, isLoaded, proveedor, proveedores,carteras,gestiones,resultados,subresultados } = this.state;
+                  const { detalle_proveedor,value,editvalue,data,nombre_proveedor, error, isLoaded, proveedor, proveedores,carteras,gestiones,resultados,subresultados } = this.state;
 
                    
                     
@@ -347,7 +421,7 @@
                                 
                                     <div className='row'>
                                             <div className='col-10'>
-                                            <select className='form-control'>
+                                            <select className='form-control' onChange={this.seleccionaProveedor}>
                                             
 
                                             {proveedores.map(item => (
@@ -528,7 +602,7 @@
                                 <div className="modal-dialog" role="document">
                                     <div className="modal-content">
 
-                                    <form onSubmit={this.handleSubmit}>
+                                    <form onSubmit={this.editproveedorSubmit}>
                                     <div className="modal-header">
                                         <h5 className="modal-title" id="exampleModalLabel">Editar Provedor</h5>
                                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -538,9 +612,15 @@
                                     <div className="modal-body">
                                         <form>
                                         <div className="form-group">
-                                            <label for="recipient-name" className="col-form-label">Nombre:</label>
-                                            <input type="text"  className="form-control" value={this.state.value} onChange={this.handleChange} id="recipient-name"></input>
+                                            <label for="recipient-name" className="col-form-label">ID:</label>
+                                            <input type="text"  className="form-control" value={this.state.detalle_proveedor.id} onChange={this.editProveedor} id="recipient-name"></input>
                                         </div>
+
+                                        <div className="form-group">
+                                            <label for="recipient-name" className="col-form-label">Nombre:</label>
+                                            <input type="text"  className="form-control" value={this.state.detalle_proveedor.nombre} onChange={this.editProveedor} id="recipient-name"></input>
+                                        </div>
+
                                         </form>
                                     </div>
 
