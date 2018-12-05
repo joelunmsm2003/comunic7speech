@@ -46,10 +46,12 @@ var Hello = function (_React$Component) {
         _this.filterTodo = _this.filterTodo.bind(_this);
         _this.sacacarteras = _this.sacacarteras.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
+        _this.handleChange1 = _this.handleChange1.bind(_this);
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         _this.editProveedor = _this.editProveedor.bind(_this);
         _this.seleccionaProveedor = _this.seleccionaProveedor.bind(_this);
         _this.editproveedorSubmit = _this.editproveedorSubmit.bind(_this);
+        _this.handleSubmit1 = _this.handleSubmit1.bind(_this);
 
         return _this;
     }
@@ -233,7 +235,7 @@ var Hello = function (_React$Component) {
             //     nombre_proveedor:item.nombre
             // });
 
-            fetch("/discador/api_cartera/" + event.target.value).then(function (res) {
+            fetch("/discador/api_carteras/" + event.target.value).then(function (res) {
                 return res.json();
             }).then(function (result) {
 
@@ -350,6 +352,45 @@ var Hello = function (_React$Component) {
             event.preventDefault();
         }
     }, {
+        key: "handleChange1",
+        value: function handleChange1(event) {
+            this.setState({ value: event.target.value });
+        }
+    }, {
+        key: "handleSubmit1",
+        value: function handleSubmit1(event) {
+            var _this7 = this;
+
+            console.log(this.state.value);
+
+            fetch('/discador/api_carteras/', {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombre: this.state.value })
+            }).then(function (res) {
+                return res.json();
+            }).then(function (res) {
+
+                fetch("/discador/api_carteras/").then(function (res) {
+                    return res.json();
+                }).then(function (result) {
+                    _this7.setState({
+                        isLoaded: true,
+                        carteras: result
+                    });
+
+                    $('#cartera').modal('hide');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                }, function (error) {});
+            });
+
+            event.preventDefault();
+        }
+    }, {
         key: "render",
         value: function render() {
             var _state = this.state,
@@ -376,7 +417,7 @@ var Hello = function (_React$Component) {
                     "Loading..."
                 );
             } else {
-                var _React$createElement, _React$createElement2;
+                var _React$createElement, _React$createElement2, _React$createElement3;
 
                 return React.createElement(
                     "div",
@@ -440,20 +481,42 @@ var Hello = function (_React$Component) {
                                 "Carteras "
                             ),
                             React.createElement(
-                                "h5",
-                                null,
-                                nombre_proveedor
+                                "div",
+                                { className: "row" },
+                                React.createElement(
+                                    "div",
+                                    { className: "col-10" },
+                                    React.createElement(
+                                        "h5",
+                                        null,
+                                        nombre_proveedor
+                                    ),
+                                    React.createElement(
+                                        "select",
+                                        { className: "form-control" },
+                                        carteras.map(function (item) {
+                                            return React.createElement(
+                                                "option",
+                                                { value: item.id },
+                                                item.nombre
+                                            );
+                                        })
+                                    )
+                                )
                             ),
                             React.createElement(
-                                "select",
-                                { className: "form-control" },
-                                carteras.map(function (item) {
-                                    return React.createElement(
-                                        "option",
-                                        { value: item.id },
-                                        item.nombre
-                                    );
-                                })
+                                "div",
+                                { className: "col-2" },
+                                React.createElement(
+                                    "button",
+                                    { type: "button", "data-toggle": "modal", "data-target": "#cartera", className: "btn btn-sm btn-dark" },
+                                    "Add"
+                                ),
+                                React.createElement(
+                                    "button",
+                                    { type: "button", "data-toggle": "modal", "data-target": "#editcartera", className: "btn btn-sm btn-dark" },
+                                    "Edit"
+                                )
                             )
                         ),
                         React.createElement(
@@ -486,7 +549,7 @@ var Hello = function (_React$Component) {
                             React.createElement(
                                 "h5",
                                 null,
-                                "Resultados"
+                                "Resultadoss"
                             ),
                             React.createElement(
                                 "select",
@@ -724,6 +787,72 @@ var Hello = function (_React$Component) {
                                             "button",
                                             (_React$createElement2 = { type: "button", className: "btn btn-primary" }, _defineProperty(_React$createElement2, "type", "submit"), _defineProperty(_React$createElement2, "value", "Buscar"), _React$createElement2),
                                             "Actualizar"
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "modal fade", id: "cartera", tabindex: "-1", role: "dialog", "aria-labelledby": "exampleModalLabel", "aria-hidden": "true" },
+                        React.createElement(
+                            "div",
+                            { className: "modal-dialog", role: "document" },
+                            React.createElement(
+                                "div",
+                                { className: "modal-content" },
+                                React.createElement(
+                                    "form",
+                                    { onSubmit: this.handleSubmit1 },
+                                    React.createElement(
+                                        "div",
+                                        { className: "modal-header" },
+                                        React.createElement(
+                                            "h5",
+                                            { className: "modal-title", id: "exampleModalLabel" },
+                                            "Nueva Cartera"
+                                        ),
+                                        React.createElement(
+                                            "button",
+                                            { type: "button", className: "close", "data-dismiss": "modal", "aria-label": "Close" },
+                                            React.createElement(
+                                                "span",
+                                                { "aria-hidden": "true" },
+                                                "\xD7"
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "modal-body" },
+                                        React.createElement(
+                                            "form",
+                                            null,
+                                            React.createElement(
+                                                "div",
+                                                { className: "form-group" },
+                                                React.createElement(
+                                                    "label",
+                                                    { "for": "recipient-name", className: "col-form-label" },
+                                                    "Nombre:"
+                                                ),
+                                                React.createElement("input", { type: "text", className: "form-control", value: this.state.value, onChange: this.handleChange1, id: "recipient-name" })
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        "div",
+                                        { className: "modal-footer" },
+                                        React.createElement(
+                                            "button",
+                                            { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
+                                            "Cancelar"
+                                        ),
+                                        React.createElement(
+                                            "button",
+                                            (_React$createElement3 = { type: "button", className: "btn btn-primary" }, _defineProperty(_React$createElement3, "type", "submit"), _defineProperty(_React$createElement3, "value", "Buscar"), _React$createElement3),
+                                            "Guardar"
                                         )
                                     )
                                 )

@@ -19,15 +19,13 @@ from discador.admin import *
 
 
 @csrf_exempt
-
-
-
 def api_gestion(request):
 
 	_data = Gestion.objects.all()
 
 	serializer =  GestionSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
+
 def importador(request):
 
 	#_data = Proveedor.objects.all()
@@ -63,6 +61,7 @@ def api_proveedor(request,id):
 	return JsonResponse(serializer.data, safe=False)
 
 
+@csrf_exempt
 def api_agentes(request):
 
 	_data = Agente.objects.all()
@@ -70,13 +69,28 @@ def api_agentes(request):
 	serializer =  AgenteSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
-
+@csrf_exempt
 def api_carteras(request):
 
-	_data = Cartera.objects.all()
+	
+	if request.method == 'POST':
 
-	serializer =  CarteraSerializer(_data,many=True)
-	return JsonResponse(serializer.data, safe=False)
+		nombre = json.loads(request.body)['nombre']
+
+		Cartera(nombre=nombre).save()
+
+		a= simplejson.dumps('OK')
+		
+		return HttpResponse(a, content_type="application/json")
+
+	if request.method == 'GET':
+
+
+		_datos = Cartera.objects.all()
+
+		
+		serializer =  CarteraSerializer(_datos,many=True)
+		return JsonResponse(serializer.data, safe=False)
 
 def api_cuadrante(request):
 
@@ -225,9 +239,27 @@ def api_score(request):
 
 @csrf_exempt
 def api_cartera(request,id_proveedor):
-	_datos = Score.objects.filter(proveedor_id=id_proveedor)
-	serializer =  ScoreSerializer(_datos,many=True)
-	return JsonResponse(serializer.data, safe=False)
+
+
+	if request.method == 'POST':
+
+		nombre = json.loads(request.body)['nombre']
+
+		Cartera(nombre=nombre).save()
+
+		a= simplejson.dumps('OK')
+		
+		return HttpResponse(a, content_type="application/json")
+
+	if request.method == 'GET':
+
+
+
+		_datos = Cartera.objects.filter(proveedor_id=id_proveedor)
+
+		print ('traes la daata?', _datos)
+		serializer =  CarteraSerializer(_datos,many=True)
+		return JsonResponse(serializer.data, safe=False)
 
 
 @csrf_exempt
