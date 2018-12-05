@@ -30,7 +30,9 @@
                     this.filterTodo = this.filterTodo.bind(this);
                     this.sacacarteras = this.sacacarteras.bind(this);
                     this.handleChange = this.handleChange.bind(this);
+                    this.handleChange1 = this.handleChange1.bind(this);
                     this.handleSubmit = this.handleSubmit.bind(this);
+                    this.handleSubmit1 = this.handleSubmit1.bind(this);
 
  
               }
@@ -242,7 +244,7 @@
                 //     nombre_proveedor:item.nombre
                 // });
                 
-                fetch("/discador/api_cartera/"+event.target.value)
+                fetch("/discador/api_carteras/"+event.target.value)
                 .then(res => res.json())
                 .then(
                     (result) => {
@@ -311,6 +313,53 @@
                 event.preventDefault();
               }
 
+              handleChange1(event) {
+                this.setState({value: event.target.value});
+              }
+
+              handleSubmit1(event) {
+
+                console.log(this.state.value)
+                
+                fetch('/discador/api_carteras/', {
+                    method: 'post',
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({nombre: this.state.value})
+                    }).then(res=>res.json())
+                    .then(res => {
+                        
+
+                          fetch("/discador/api_carteras/")
+                          .then(res => res.json())
+                          .then((result) => {
+                              this.setState({
+                                  isLoaded: true,
+                                  carteras: result
+                              });
+
+                                $('#cartera').modal('hide'); 
+                                $('body').removeClass('modal-open'); 
+                                $('.modal-backdrop').remove();
+
+                              },
+                              (error) => {
+                              }
+                          )
+
+
+
+                        
+                    });
+                
+                    
+                event.preventDefault();
+              }
+
+
+
               render() {
 
 
@@ -368,9 +417,12 @@
                                 </div>
 
 
+
                                 <div className="col-md-2">
                                 
                                 <h5>Carteras </h5>
+                                <div className='row'>
+                                <div className='col-10'>
                                 <h5>{nombre_proveedor}</h5>
 
 
@@ -384,8 +436,19 @@
                                 ))}
 
                                 </select> 
+                                    </div>
 
+
+                                    </div>
+
+                                     <div className='col-2'>
+                                            <button type="button" data-toggle="modal" data-target="#cartera" className="btn btn-sm btn-dark">Add</button>
+                                            <button type="button" data-toggle="modal" data-target="#editcartera" className="btn btn-sm btn-dark">Edit</button>
+                                            </div>
                                 </div>
+
+
+
 
                                 <div className="col-md-2">
                                 
@@ -410,7 +473,7 @@
 
 
 
-                                <h5>Resultados</h5>
+                                <h5>Resultadoss</h5>
 
 
                                 <select className='form-control'   onChange={this.sacaresultados}>
@@ -522,6 +585,7 @@
                                     </form>
                                     </div>
                                 </div>
+
                                 </div> 
 
                                 <div className="modal fade" id="editproveedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -551,8 +615,38 @@
                                     </form>
                                     </div>
                                 </div>
-                                </div> 
+                                </div>
 
+                          
+
+                            <div className="modal fade" id="cartera" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog" role="document">
+                                    <div className="modal-content">
+
+                                    <form onSubmit={this.handleSubmit1}>
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="exampleModalLabel">Nueva Cartera</h5>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <form>
+                                        <div className="form-group">
+                                            <label for="recipient-name" className="col-form-label">Nombre:</label>
+                                            <input type="text"  className="form-control" value={this.state.value} onChange={this.handleChange1} id="recipient-name"></input>
+                                        </div>
+                                        </form>
+                                    </div>
+
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" className="btn btn-primary" type="submit" value="Buscar">Guardar</button>
+                                    </div>
+                                    </form>
+                                    </div>
+                                </div>
+                                </div> 
 
 
 
