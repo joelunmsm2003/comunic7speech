@@ -1,4 +1,149 @@
-//Proveedore
+class Select extends React.Component {
+    constructor(props) {
+        super(props);
+        
+      }
+
+    render() {
+      return (
+        <div>
+            <select className='form-control'>
+                                            
+
+                {this.props.value.map(item => (
+
+                 <option  value={item.id} >{item.nombre}</option>
+
+                ))}
+
+            </select> 
+        </div>
+      );
+    }
+  }
+
+  class EditModal extends React.Component {
+    constructor(props) {
+        super(props);
+        
+      }
+
+    render() {
+      return (
+       
+
+            <div className="modal fade" id={this.props.modal} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+
+                    <form>
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Editar {this.props.opcion}</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <form>
+                        <div className="form-group">
+                            <label for="recipient-name" className="col-form-label">ID:</label>
+                            <input type="text"  className="form-control" value={this.props.id}  ></input>
+                        </div>
+
+                        <div className="form-group">
+                            <label for="recipient-name" className="col-form-label">Nombre:</label>
+                            <input type="text"  className="form-control" value={this.props.nombre}></input>
+                        </div>
+
+                        </form>
+                    </div>
+
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" className="btn btn-primary" type="submit" value="Buscar">Actualizar</button>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+             
+      
+      );
+    }
+  }
+
+class Opcion extends React.Component {
+
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            proveedores: [],
+            carteras:[],
+            gestiones:[]
+        };
+
+        fetch("/discador/api_proveedor/")
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                proveedores: result
+            });
+            },
+            (error) => {
+            }
+        )
+
+        fetch("/discador/api_carteras/")
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                carteras: result
+            });
+            },
+            (error) => {
+            }
+        )
+
+        fetch("/discador/api_gestiones/")
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                gestiones: result
+            });
+            },
+            (error) => {
+            }
+        )
+
+    }
+
+    render() {
+    
+     const { proveedores,carteras,gestiones} = this.state;
+
+      return (
+        <div className='row'>
+           <div className='col-md-4'><Select value={proveedores}/></div>
+           <div className='col-md-4'><Select value={carteras}/></div>
+           <div className='col-md-4'><Select value={gestiones}/></div>
+        </div>
+      );
+    }
+  }
+  
+
+
+ReactDOM.render(
+<Opcion />,
+document.getElementById('user')
+);
+
+//Proveedores
 
             class Hello extends React.Component {
                 
@@ -459,12 +604,8 @@
 
                              <div className="row">
 
-                              
-
                                 <div className="col-md-2">
 
-                                
-                                  
                                 <h5>Proveedores</h5>
                                
                                 
