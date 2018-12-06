@@ -18,6 +18,7 @@ from discador.admin import *
 
 
 
+
 @csrf_exempt
 def api_gestion(request):
 
@@ -286,5 +287,29 @@ def api_tipodomicilio(request):
 	print 'traes la daata?', _datos
 	serializer =  Tipo_domicilioSerializer(_datos,many=True)
 	return JsonResponse(serializer.data, safe=False)
+
+
+@csrf_exempt
+def api_detalle_cartera(request,id):
+
+	if request.method == 'POST':
+
+		nombre = json.loads(request.body)['nombre']
+
+		Cartera(nombre=nombre).save()
+
+		a= simplejson.dumps('OK')
+		
+		return HttpResponse(a, content_type="application/json")
+
+	if request.method == 'GET':
+
+
+		_datos = Cartera.objects.get(id=id)
+
+		print 'traes la daata?', 
+		serializer =  ProveedorSerializer(_datos,many=False)
+		return JsonResponse(serializer.data, safe=False)
+
 
 

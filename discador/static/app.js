@@ -24,7 +24,8 @@
                       todoText: "",
                       value:"",
                       editvalue:"",
-                      detalle_proveedor:[]
+                      detalle_proveedor:[],
+                      detalle_cartera:[]
                   };
 
                     this.updateTodoText = this.updateTodoText.bind(this);
@@ -37,6 +38,8 @@
                     this.editProveedor = this.editProveedor.bind(this);
                     this.seleccionaProveedor = this.seleccionaProveedor.bind(this);
                     this.editproveedorSubmit = this.editproveedorSubmit.bind(this);
+                    this.seleccionaCartera= this.seleccionaCartera.bind(this);
+                    this.editcarteraSubmit = this.editcarteraSubmit.bind(this);
                     this.handleSubmit1 = this.handleSubmit1.bind(this);
 
  
@@ -343,6 +346,82 @@
                 
               }
 
+              seleccionaCartera(event){
+
+                
+
+
+                fetch("/discador/api_detalle_cartera/"+event.target.value)
+                .then(res => res.json())
+                .then((result) => {
+
+                    this.setState({detalle_cartera: result})
+
+                    },
+                    (error) => {
+                    }
+                )
+
+
+              }
+
+              editCartera(event) {
+
+
+                console.log(event.target.value)
+
+                //this.setState({editvalue: event.target.value});
+
+              }
+
+              editcarteraSubmit(event) {
+
+                console.log(this.state.editvalue)
+
+
+                
+                // fetch('/discador/api_proveedor/', {
+                //     method: 'put',
+                //     headers: {
+                //         'Accept': 'application/json, text/plain, */*',
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({nombre: this.state.value})
+                //     }).then(res=>res.json())
+                //     .then(res => {
+
+                //           fetch("/discador/api_proveedor/")
+                //           .then(res => res.json())
+                //           .then((result) => {
+                //               this.setState({
+                //                   isLoaded: true,
+                //                   proveedores: result
+                //               });
+
+                //                 $('#proveedor').modal('hide'); 
+                //                 $('body').removeClass('modal-open'); 
+                //                 $('.modal-backdrop').remove();
+
+                //               },
+                //               (error) => {
+                //               }
+                //           )
+
+
+
+                        
+                //     });
+                
+                    
+                event.preventDefault();
+                
+              }
+
+
+           
+
+
+
               handleChange(event) {
                 this.setState({value: event.target.value});
               }
@@ -501,7 +580,7 @@
 
 
 
-                                <select className='form-control'>
+                                <select className='form-control' onChange={this.seleccionaCartera}>
 
                                 {carteras.map(item => (
 
@@ -586,6 +665,7 @@
 
 
                                 </div>
+                           
 
                                 <form onSubmit={this.createTodo}>
                                     <div className='col-lg-12 input-group'>
@@ -727,6 +807,42 @@
                                     </div>
                                 </div>
                                 </div> 
+
+
+                                 <div className="modal fade" id="editcartera" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog" role="document">
+                                    <div className="modal-content">
+
+                                    <form onSubmit={this.editcarteraSubmit}>
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="exampleModalLabel">Editar Provedor</h5>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <form>
+                                        <div className="form-group">
+                                            <label for="recipient-name" className="col-form-label">ID:</label>
+                                            <input type="text"  className="form-control" value={this.state.detalle_cartera.id} onChange={this.editCartera} id="recipient-name"></input>
+                                        </div>
+
+                                        <div className="form-group">
+                                            <label for="recipient-name" className="col-form-label">Nombre:</label>
+                                            <input type="text"  className="form-control" value={this.state.detalle_cartera.nombre} onChange={this.editCartera} id="recipient-name"></input>
+                                        </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" className="btn btn-primary" type="submit" value="Buscar">Actualizar</button>
+                                    </div>
+                                    </form>
+                                    </div>
+                                </div>
+                                </div>
 
 
 

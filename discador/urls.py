@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^api_carteras/', api_carteras),
     url(r'^api_proveedores/', api_proveedores),
     url(r'^api_proveedor_detalle/(\d+)', api_proveedor),
+    url(r'^api_detalle_cartera/(\d+)', api_detalle_cartera),
     url(r'^api_resultados/', api_resultados),
     url(r'^api_subresultados/', api_subresultados),
     url(r'^api_tipodomicilio/', api_tipodomicilio),
