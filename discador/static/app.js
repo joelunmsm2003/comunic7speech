@@ -1,3 +1,5 @@
+
+
 class Select extends React.Component {
     constructor(props) {
         super(props);
@@ -81,7 +83,10 @@ class Opcion extends React.Component {
         this.state = {
             proveedores: [],
             carteras:[],
-            gestiones:[]
+            gestiones:[],
+            resultados:[],
+            subresultados:[]
+
         };
 
         fetch("/discador/api_proveedor/")
@@ -120,17 +125,47 @@ class Opcion extends React.Component {
             }
         )
 
+        fetch("/discador/api_resultados/")
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                resultados: result
+            });
+            },
+            (error) => {
+            }
+        )
+
+
+        fetch("/discador/api_subresultados/")
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                subresultados: result
+            });
+            },
+            (error) => {
+            }
+        )
+
     }
 
     render() {
     
-     const { proveedores,carteras,gestiones} = this.state;
+     const { proveedores,carteras,gestiones,resultados,subresultados} = this.state;
 
       return (
+        <div className='container-fluid'>
         <div className='row'>
-           <div className='col-md-4'><Select value={proveedores}/></div>
-           <div className='col-md-4'><Select value={carteras}/></div>
-           <div className='col-md-4'><Select value={gestiones}/></div>
+           
+           <div className='col-md-2'>  <h5>Proveedores</h5><Select value={proveedores}/></div>
+           <div className='col-md-2'><h5>Carteras</h5><Select value={carteras}/></div>
+           <div className='col-md-2'><h5>Gestiones</h5><Select value={gestiones}/></div>
+           <div className='col-md-2'><h5>Resultados</h5><Select value={resultados}/></div>
+           <div className='col-md-2'><h5>Subresultados</h5><Select value={subresultados}/></div>
+        </div>
         </div>
       );
     }

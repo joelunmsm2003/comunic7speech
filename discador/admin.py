@@ -20,6 +20,10 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 
 
+@admin.register(Gestion)
+class GestionAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
 # Register your models here.
 @admin.register(Sexo)
 class SexoAdmin(admin.ModelAdmin):
