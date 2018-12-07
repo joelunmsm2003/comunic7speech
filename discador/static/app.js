@@ -234,7 +234,10 @@ class Opcion extends React.Component {
         this.state = {
             proveedores: [],
             carteras:[],
-            gestiones:[]
+            gestiones:[],
+            resultados:[],
+            subresultados:[]
+
         };
 
         fetch("/discador/api_proveedor/")
@@ -273,17 +276,44 @@ class Opcion extends React.Component {
             }
         )
 
+        fetch("/discador/api_resultados/")
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                resultados: result
+            });
+            },
+            (error) => {
+            }
+        )
+
+
+        fetch("/discador/api_subresultados/")
+        .then(res => res.json())
+        .then((result) => {
+            this.setState({
+                isLoaded: true,
+                subresultados: result
+            });
+            },
+            (error) => {
+            }
+        )
+
     }
 
     render() {
     
-     const { proveedores,carteras,gestiones} = this.state;
+     const { proveedores,carteras,gestiones,resultados,subresultados} = this.state;
 
       return (
+        <div className='container-fluid'>
         <div className='row'>
            <div className='col-md-4'><Select edit_modal='_proveedor' opcion='proveedor' api='api_proveedores' name='api_proveedor_detalle' value={proveedores}/></div>
            <div className='col-md-4'><Select edit_modal='_cartera' opcion='cartera' api='api_carteras' name='api_detalle_cartera' value={carteras}/></div>
            <div className='col-md-4'><Select edit_modal='_gestion' opcion='gestion' api='api_gestiones' name='api_gestiones' value={gestiones}/></div>
+        </div>
         </div>
       );
     }

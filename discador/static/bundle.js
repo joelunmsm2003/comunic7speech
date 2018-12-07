@@ -364,7 +364,10 @@ var Opcion = function (_React$Component4) {
         _this8.state = {
             proveedores: [],
             carteras: [],
-            gestiones: []
+            gestiones: [],
+            resultados: [],
+            subresultados: []
+
         };
 
         fetch("/discador/api_proveedor/").then(function (res) {
@@ -394,6 +397,24 @@ var Opcion = function (_React$Component4) {
             });
         }, function (error) {});
 
+        fetch("/discador/api_resultados/").then(function (res) {
+            return res.json();
+        }).then(function (result) {
+            _this8.setState({
+                isLoaded: true,
+                resultados: result
+            });
+        }, function (error) {});
+
+        fetch("/discador/api_subresultados/").then(function (res) {
+            return res.json();
+        }).then(function (result) {
+            _this8.setState({
+                isLoaded: true,
+                subresultados: result
+            });
+        }, function (error) {});
+
         return _this8;
     }
 
@@ -403,26 +424,32 @@ var Opcion = function (_React$Component4) {
             var _state = this.state,
                 proveedores = _state.proveedores,
                 carteras = _state.carteras,
-                gestiones = _state.gestiones;
+                gestiones = _state.gestiones,
+                resultados = _state.resultados,
+                subresultados = _state.subresultados;
 
 
             return React.createElement(
                 "div",
-                { className: "row" },
+                { className: "container-fluid" },
                 React.createElement(
                     "div",
-                    { className: "col-md-4" },
-                    React.createElement(Select, { edit_modal: "_proveedor", opcion: "proveedor", api: "api_proveedores", name: "api_proveedor_detalle", value: proveedores })
-                ),
-                React.createElement(
-                    "div",
-                    { className: "col-md-4" },
-                    React.createElement(Select, { edit_modal: "_cartera", opcion: "cartera", api: "api_carteras", name: "api_detalle_cartera", value: carteras })
-                ),
-                React.createElement(
-                    "div",
-                    { className: "col-md-4" },
-                    React.createElement(Select, { edit_modal: "_gestion", opcion: "gestion", api: "api_gestiones", name: "api_gestiones", value: gestiones })
+                    { className: "row" },
+                    React.createElement(
+                        "div",
+                        { className: "col-md-4" },
+                        React.createElement(Select, { edit_modal: "_proveedor", opcion: "proveedor", api: "api_proveedores", name: "api_proveedor_detalle", value: proveedores })
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "col-md-4" },
+                        React.createElement(Select, { edit_modal: "_cartera", opcion: "cartera", api: "api_carteras", name: "api_detalle_cartera", value: carteras })
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "col-md-4" },
+                        React.createElement(Select, { edit_modal: "_gestion", opcion: "gestion", api: "api_gestiones", name: "api_gestiones", value: gestiones })
+                    )
                 )
             );
         }
