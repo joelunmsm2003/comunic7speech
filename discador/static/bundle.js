@@ -45,12 +45,7 @@ var Botones = function (_React$Component) {
                 { className: "row" },
                 React.createElement(
                     "div",
-                    { className: "col-md-8" },
-                    this.props.name
-                ),
-                React.createElement(
-                    "div",
-                    { className: "col-md-4" },
+                    { className: "col-md-2" },
                     React.createElement(
                         "div",
                         { "class": "btn-group btn-group-toggle", "data-toggle": "buttons" },
@@ -64,19 +59,13 @@ var Botones = function (_React$Component) {
                                     } },
                                 "Add"
                             )
-                        ),
-                        React.createElement(
-                            "label",
-                            { "class": "btn btn-secondary" },
-                            React.createElement(
-                                "button",
-                                { type: "button", "data-toggle": "modal", className: "btn btn-sm btn-dark", onClick: function onClick(e) {
-                                        return _this2.editamodal(_this2.props.edit_modal, e);
-                                    } },
-                                "Edit"
-                            )
                         )
                     )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "col-md-3" },
+                    this.props.name
                 )
             );
         }
@@ -105,27 +94,13 @@ var Select = function (_React$Component2) {
     _createClass(Select, [{
         key: "selecciona",
         value: function selecciona(api, e) {
-            var _this4 = this;
 
             console.log(api, e.target.value);
-
-            fetch("/discador/" + api + '/' + e.target.value).then(function (res) {
-                return res.json();
-            }).then(function (result) {
-
-                console.log(result);
-
-                _this4.setState({
-
-                    editar: result
-                });
-            }, function (error) {});
         }
     }, {
         key: "render",
         value: function render() {
-            var _React$createElement,
-                _this5 = this;
+            var _this4 = this;
 
             return React.createElement(
                 "div",
@@ -133,87 +108,9 @@ var Select = function (_React$Component2) {
                 React.createElement(Botones, { name: this.props.opcion, edit_modal: this.props.edit_modal }),
                 React.createElement(AddModal, { name: this.props.opcion, api: this.props.api }),
                 React.createElement(
-                    "div",
-                    { className: "modal fade", id: this.props.edit_modal, tabindex: "-1", role: "dialog", "aria-labelledby": "exampleModalLabel", "aria-hidden": "true" },
-                    React.createElement(
-                        "div",
-                        { className: "modal-dialog", role: "document" },
-                        React.createElement(
-                            "div",
-                            { className: "modal-content" },
-                            React.createElement(
-                                "form",
-                                null,
-                                React.createElement(
-                                    "div",
-                                    { className: "modal-header" },
-                                    React.createElement(
-                                        "h5",
-                                        { className: "modal-title", id: "exampleModalLabel" },
-                                        "Editar ",
-                                        this.props.edit_modal,
-                                        " "
-                                    ),
-                                    React.createElement(
-                                        "button",
-                                        { type: "button", className: "close", "data-dismiss": "modal", "aria-label": "Close" },
-                                        React.createElement(
-                                            "span",
-                                            { "aria-hidden": "true" },
-                                            "\xD7"
-                                        )
-                                    )
-                                ),
-                                React.createElement(
-                                    "div",
-                                    { className: "modal-body" },
-                                    React.createElement(
-                                        "form",
-                                        null,
-                                        React.createElement(
-                                            "div",
-                                            { className: "form-group" },
-                                            React.createElement(
-                                                "label",
-                                                { "for": "recipient-name", className: "col-form-label" },
-                                                "ID:"
-                                            ),
-                                            React.createElement("input", { type: "text", value: this.state.editar.id, className: "form-control" })
-                                        ),
-                                        React.createElement(
-                                            "div",
-                                            { className: "form-group" },
-                                            React.createElement(
-                                                "label",
-                                                { "for": "recipient-name", className: "col-form-label" },
-                                                "Nombre:"
-                                            ),
-                                            React.createElement("input", { type: "text", value: this.state.editar.nombre, className: "form-control" })
-                                        )
-                                    )
-                                ),
-                                React.createElement(
-                                    "div",
-                                    { className: "modal-footer" },
-                                    React.createElement(
-                                        "button",
-                                        { type: "button", className: "btn btn-secondary", "data-dismiss": "modal" },
-                                        "Cancelar"
-                                    ),
-                                    React.createElement(
-                                        "button",
-                                        (_React$createElement = { type: "button", className: "btn btn-primary" }, _defineProperty(_React$createElement, "type", "submit"), _defineProperty(_React$createElement, "value", "Buscar"), _React$createElement),
-                                        "Actualizar"
-                                    )
-                                )
-                            )
-                        )
-                    )
-                ),
-                React.createElement(
                     "select",
                     { className: "form-control", onChange: function onChange(e) {
-                            return _this5.selecciona(_this5.props.name, e);
+                            return _this4.selecciona(_this4.props.name, e);
                         } },
                     this.props.value.map(function (item) {
                         return React.createElement(
@@ -236,15 +133,15 @@ var AddModal = function (_React$Component3) {
     function AddModal(props) {
         _classCallCheck(this, AddModal);
 
-        var _this6 = _possibleConstructorReturn(this, (AddModal.__proto__ || Object.getPrototypeOf(AddModal)).call(this, props));
+        var _this5 = _possibleConstructorReturn(this, (AddModal.__proto__ || Object.getPrototypeOf(AddModal)).call(this, props));
 
-        _this6.state = {
+        _this5.state = {
             value: []
         };
 
-        _this6.guarda = _this6.guarda.bind(_this6);
+        _this5.guarda = _this5.guarda.bind(_this5);
 
-        return _this6;
+        return _this5;
     }
 
     _createClass(AddModal, [{
@@ -255,7 +152,7 @@ var AddModal = function (_React$Component3) {
     }, {
         key: "guarda",
         value: function guarda(event) {
-            var _this7 = this;
+            var _this6 = this;
 
             fetch('/discador/' + this.props.api + '/', {
                 method: 'post',
@@ -268,7 +165,7 @@ var AddModal = function (_React$Component3) {
                 return res.json();
             }).then(function (res) {
 
-                $('#' + _this7.props.name).modal('hide');
+                $('#' + _this6.props.name).modal('hide');
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
             });
@@ -278,7 +175,7 @@ var AddModal = function (_React$Component3) {
     }, {
         key: "render",
         value: function render() {
-            var _React$createElement2;
+            var _React$createElement;
 
             return React.createElement(
                 "div",
@@ -339,7 +236,7 @@ var AddModal = function (_React$Component3) {
                                 ),
                                 React.createElement(
                                     "button",
-                                    (_React$createElement2 = { type: "button", className: "btn btn-primary" }, _defineProperty(_React$createElement2, "type", "submit"), _defineProperty(_React$createElement2, "value", "Buscar"), _React$createElement2),
+                                    (_React$createElement = { type: "button", className: "btn btn-primary" }, _defineProperty(_React$createElement, "type", "submit"), _defineProperty(_React$createElement, "value", "Buscar"), _React$createElement),
                                     "Guardar"
                                 )
                             )
@@ -359,9 +256,9 @@ var Opcion = function (_React$Component4) {
     function Opcion(props) {
         _classCallCheck(this, Opcion);
 
-        var _this8 = _possibleConstructorReturn(this, (Opcion.__proto__ || Object.getPrototypeOf(Opcion)).call(this, props));
+        var _this7 = _possibleConstructorReturn(this, (Opcion.__proto__ || Object.getPrototypeOf(Opcion)).call(this, props));
 
-        _this8.state = {
+        _this7.state = {
             proveedores: [],
             carteras: [],
             gestiones: [],
@@ -373,7 +270,7 @@ var Opcion = function (_React$Component4) {
         fetch("/discador/api_proveedor/").then(function (res) {
             return res.json();
         }).then(function (result) {
-            _this8.setState({
+            _this7.setState({
                 isLoaded: true,
                 proveedores: result
             });
@@ -382,7 +279,7 @@ var Opcion = function (_React$Component4) {
         fetch("/discador/api_carteras/").then(function (res) {
             return res.json();
         }).then(function (result) {
-            _this8.setState({
+            _this7.setState({
                 isLoaded: true,
                 carteras: result
             });
@@ -391,7 +288,7 @@ var Opcion = function (_React$Component4) {
         fetch("/discador/api_gestiones/").then(function (res) {
             return res.json();
         }).then(function (result) {
-            _this8.setState({
+            _this7.setState({
                 isLoaded: true,
                 gestiones: result
             });
@@ -400,7 +297,7 @@ var Opcion = function (_React$Component4) {
         fetch("/discador/api_resultados/").then(function (res) {
             return res.json();
         }).then(function (result) {
-            _this8.setState({
+            _this7.setState({
                 isLoaded: true,
                 resultados: result
             });
@@ -409,13 +306,13 @@ var Opcion = function (_React$Component4) {
         fetch("/discador/api_subresultados/").then(function (res) {
             return res.json();
         }).then(function (result) {
-            _this8.setState({
+            _this7.setState({
                 isLoaded: true,
                 subresultados: result
             });
         }, function (error) {});
 
-        return _this8;
+        return _this7;
     }
 
     _createClass(Opcion, [{
@@ -436,19 +333,33 @@ var Opcion = function (_React$Component4) {
                     "div",
                     { className: "row" },
                     React.createElement(
+                        "a",
+                        { "class": "btn btn-sm", href: "/admin/discador/score/" },
+                        "Admin"
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "row" },
+                    React.createElement(
                         "div",
-                        { className: "col-md-4" },
-                        React.createElement(Select, { edit_modal: "_proveedor", opcion: "proveedor", api: "api_proveedores", name: "api_proveedor_detalle", value: proveedores })
+                        { className: "col-md-3" },
+                        React.createElement(Select, { edit_modal: "_proveedor", opcion: "Proveedor", api: "api_proveedores", name: "api_proveedor_detalle", value: proveedores })
                     ),
                     React.createElement(
                         "div",
-                        { className: "col-md-4" },
-                        React.createElement(Select, { edit_modal: "_cartera", opcion: "cartera", api: "api_carteras", name: "api_detalle_cartera", value: carteras })
+                        { className: "col-md-3" },
+                        React.createElement(Select, { edit_modal: "_cartera", opcion: "Cartera", api: "api_carteras", name: "api_detalle_cartera", value: carteras })
                     ),
                     React.createElement(
                         "div",
-                        { className: "col-md-4" },
-                        React.createElement(Select, { edit_modal: "_gestion", opcion: "gestion", api: "api_gestiones", name: "api_gestiones", value: gestiones })
+                        { className: "col-md-3" },
+                        React.createElement(Select, { edit_modal: "_gestion", opcion: "Gestion", api: "api_gestiones", name: "api_gestiones", value: gestiones })
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "col-md-3" },
+                        React.createElement(Select, { edit_modal: "_gestion", opcion: "Resultados", api: "api_gestiones", name: "api_gestiones", value: resultados })
                     )
                 )
             );

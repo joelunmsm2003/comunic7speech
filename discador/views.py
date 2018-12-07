@@ -148,7 +148,7 @@ def menu_proveedor_1(request):
 	#serializer =  ScoreSerializer(_data,many=True)
 	#return JsonResponse(serializer.data, safe=False)
 
-	return render(request, 'menu_proveedor.html',{})
+	return render(request, 'proveedor.html',{})
 
 
 
