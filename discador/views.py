@@ -22,10 +22,22 @@ from discador.admin import *
 @csrf_exempt
 def api_gestion(request):
 
-	_data = Gestion.objects.all()
+	if request.method == 'POST':
 
-	serializer =  GestionSerializer(_data,many=True)
-	return JsonResponse(serializer.data, safe=False)
+		nombre = json.loads(request.body)['nombre']
+
+		Gestion(nombre=nombre).save()
+
+		a= simplejson.dumps('OK')
+		
+		return HttpResponse(a, content_type="application/json")
+
+	if request.method == 'GET':
+
+		_data = Gestion.objects.all()
+
+		serializer =  GestionSerializer(_data,many=True)
+		return JsonResponse(serializer.data, safe=False)
 
 def importador(request):
 
