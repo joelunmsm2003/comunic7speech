@@ -122,6 +122,22 @@ def api_plano(request):
 	return JsonResponse(serializer.data, safe=False)
 
 
+def api_resultados_gestion(request,id):
+
+	_data = Score.objects.filter(gestion_id=id)
+
+	_ges = []
+
+	for d in _data:
+
+		_ges.append(d.resultado.id)
+
+	_data = Resultado.objects.filter(id__in=_ges)
+
+	serializer =  ResultadoSerializer(_data,many=True)
+
+	return JsonResponse(serializer.data, safe=False)
+
 
 
 def api_producto(request):
@@ -241,11 +257,8 @@ def api_tipo_contacto(request):
 @csrf_exempt
 def api_score(request):
 
-	print 'engtrree'
-
 	_datos = Score.objects.all()
 
-	print 'traes la daata?', _datos
 	serializer =  ScoreSerializer(_datos,many=True)
 	return JsonResponse(serializer.data, safe=False)
 

@@ -103,7 +103,7 @@ class ResultadoAdmin(admin.ModelAdmin):
 
 @admin.register(Score)
 class ScoreAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre','proveedor','cartera','resultado','sub_categoria','peso')
+	list_display = ('id','nombre','proveedor','cartera','gestion','resultado','sub_categoria','peso')
 	list_editable=('peso',)
 	list_filter=('proveedor','cartera','resultado')
 @admin.register(Tipo_persona)

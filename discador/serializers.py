@@ -93,11 +93,21 @@ class CarteraSerializer(serializers.ModelSerializer):
 		model = Cartera
 		fields = '__all__'
 
+class ProveedorSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Proveedor
+		fields = '__all__'
+
 
 class ScoreSerializer(serializers.ModelSerializer):
 
+	proveedor = ProveedorSerializer(many=False, read_only=True)
 	resultado = ResultadoSerializer(many=False, read_only=True)
 	cartera = CarteraSerializer(many=False, read_only=True)
+	gestion = GestionSerializer(many=False, read_only=True)
+	sub_categoria = Sub_categoriaSerializer(many=False, read_only=True)
+
 	class Meta:
 		model = Score
 		fields = '__all__'
@@ -189,11 +199,6 @@ class MailSerializer(serializers.ModelSerializer):
 
 
 
-class ProveedorSerializer(serializers.ModelSerializer):
-
-	class Meta:
-		model = Proveedor
-		fields = '__all__'
 
 
 
