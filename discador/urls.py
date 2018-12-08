@@ -46,6 +46,7 @@ urlpatterns = [
     url(r'^usuarios/', usuarios),
     url(r'^marcador/', marcador),
     url(r'^importador/',importador),
+    url(r'^prueba/',prueba),
 
 
     

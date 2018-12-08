@@ -167,7 +167,15 @@ def menu_proveedor_1(request):
 	return render(request, 'proveedor.html',{})
 
 
+@csrf_exempt
+def prueba(request):
 
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'prueba.html',{})
 
 @csrf_exempt
 def menu_proveedor(request):

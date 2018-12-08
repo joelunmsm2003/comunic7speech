@@ -1,16 +1,36 @@
 {
-	"name": "kkw",
-	"main": "index.js",
-	"scripts": {
-		"dev": "live-server public",
-		"build": "babel static/proveedor.js --out-file=static/bundle.js --presets=env,react --watch",
-		"usuarios": "babel static/usuarios.js --out-file=static/bundle_usuarios.js --presets=env,react --watch",
-		"importador": "babel static/importador.js --out-file=static/bundle_importador.js --presets=env,react --watch"
-	},
-	"dependencies": {
-		"babel-cli": "^6.26.0",
-		"babel-preset-env": "^1.7.0",
-		"babel-preset-react": "^6.24.1",
-		"live-server": "^1.2.0"
-	}
+  "name": "kkw",
+  "main": "index.js",
+  "scripts": {
+    "dev1": "webpack --mode development frontend/src/index.js --output static/main.js --watch",
+    "build1": "webpack --mode production static/proveedor.js --output ./project/frontend/static/frontend/main.js",
+    "dev": "live-server public",
+    "build": "babel static/proveedor.js --out-file=static/bundle.js --presets=env,react --watch",
+    "usuarios": "babel static/usuarios.js --out-file=static/bundle_usuarios.js --presets=env,react --watch",
+    "importador": "babel static/importador.js --out-file=static/bundle_importador.js --presets=env,react --watch"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "live-server": "^1.2.0"
+  },
+  "version": "1.0.0",
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "weak-key": "^1.0.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
