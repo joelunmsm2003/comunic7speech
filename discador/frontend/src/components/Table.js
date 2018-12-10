@@ -1,46 +1,56 @@
 import React from "react";
 
-class Table extends React.Component {
-    constructor(props) {
-        super(props);
-        this.abremodal = this.abremodal.bind(this);
-
-      }
+import { addToCart } from "../actionCreators"
+import { connect } from 'react-redux';
 
 
-    abremodal (opcion,e) {
+const Table = ({cart,addToCart}) =>{
 
-        $("#"+opcion).modal()
-    
-    }
-
-    editamodal (opcion,e) {
-
-        $("#"+opcion).modal()
-    
-    }
-
-    render() {
       return (
         <div className='row'>
 
-            <div className='col-md-2'>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                <button type="button" data-toggle="modal" className="btn btn-sm btn-dark">Add</button>
-                </label>
-                
-                </div>
-            </div>
+            {cart.map(product=>
+            <li>{product}</li>
+            
+            )}
 
             <div className='col-md-3'>
-            kjkjkjk
+            <a onClick={()=>addToCart('00')}>Ingresar</a>
             </div>
   
         </div>
       );
+
+
     }
+
+
+
+    
+
+
+const  mapStateToProps = state =>{
+
+    return{
+        cart:state.cart
+    }
+
+}
+
+const mapDispatchToProps = dispatch=>{
+    return{
+
+        addToCart(data){
+
+            console.log(data)
+      
+            dispatch(addToCart(data))
+            
+        }
+
+    }
+
 }
 
 
-export default Table;
+export default connect(mapStateToProps,mapDispatchToProps)(Table);

@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/joelunmsm2003/comunic7speech/issues"
   },
-  "homepage": "https://github.com/joelunmsm2003/comunic7speech#readme"
+  "homepage": "https://github.com/joelunmsm2003/comunic7speech#readme",
+  "dependencies": {
+    "redux": "^4.0.1"
+  }
 }

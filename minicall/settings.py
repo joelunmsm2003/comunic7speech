@@ -11,19 +11,11 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-
-RAVEN_CONFIG = {
-    'dsn': 'https://568c5d90d7604f05b223e143d7dfc0bf:cebd607e75fa4d6188e042182151c0cd@sentry.io/1276794',
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-    'release': raven.fetch_git_sha(BASE_DIR),
-}
 
 
 
@@ -53,8 +45,7 @@ INSTALLED_APPS = [
     'callcenter',
     'speech',
     'rest_framework',
-    'ws4redis',
-    'raven.contrib.django.raven_compat',
+    'ws4redis'
     
 ]
 
