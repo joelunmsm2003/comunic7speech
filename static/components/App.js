@@ -6,7 +6,7 @@ import Gestion from "./Gestion";
 import store from "../store";
 import { Provider } from "react-redux";
 import {loadProveedores, loadDeltas, loadGestiones} from "../actionCreators";
-
+import AppRouter from "./Rutas"
 
 class App extends React.Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class App extends React.Component {
             <div class='container'>
               
               
-
+                <AppRouter/>
                 <Proveedores/>
               
                 
@@ -37,10 +37,6 @@ class App extends React.Component {
         </div>
       );
     }
-
-  
-
-    
 
   }
 
