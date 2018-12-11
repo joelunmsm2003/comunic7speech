@@ -16,22 +16,17 @@ const divStyle = {
 const Proveedores = ({proveedores,deltas}) =>{
 
       return (
-        <div style={divStyle}>
-            <h1>Proveedores</h1>
+
+          <ul class="list-group">
+             
             {proveedores.map(product=>
-            <li>{product.nombre}</li>
             
+            <li class="list-group-item">{product.nombre}</li>
+
             )}
 
-            <h1>Deltas</h1>
-
-            {deltas.map(product=>
-            <li>{product.nombre}</li>
-            
-            )}
-
-           
-        </div>
+          </ul>
+       
       );
 
 

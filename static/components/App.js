@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Proveedores from "./Proveedores";
-import Table from "./Table";
+import Header from "./Header";
 import Gestion from "./Gestion";
 import store from "../store";
 import { Provider } from "react-redux";
@@ -22,13 +22,18 @@ class App extends React.Component {
 
     render() {
       return (
-        <div>
-            <h1>Hola</h1>
-            <Table/>
-            <Proveedores/>
-            <Gestion/>
-            
 
+        <div>
+        <Header/>
+            <div class='container'>
+              
+              
+
+                <Proveedores/>
+              
+                
+
+            </div>
         </div>
       );
     }
