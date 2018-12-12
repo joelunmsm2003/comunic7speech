@@ -18,12 +18,12 @@ const Proveedores = ({proveedores,deltas}) =>{
       return (
 
           <ul class="list-group">
-             
+          
             {proveedores.map(product=>
-            
-            <li class="list-group-item">{product.nombre}</li>
+            <option>{product.nombre}</option>
 
             )}
+            
 
           </ul>
        
@@ -40,6 +40,9 @@ const  mapStateToProps = state =>{
     }
 
 }
+
+
+
 
 
 

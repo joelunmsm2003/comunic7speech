@@ -18,6 +18,27 @@ from discador.admin import *
 
 
 
+@csrf_exempt
+def api_cuentas(request):
+
+	if request.method == 'POST':
+
+		nombre = json.loads(request.body)['nombre']
+
+		Cuentas(nombre=nombre).save()
+
+		a= simplejson.dumps('OK')
+		
+		return HttpResponse(a, content_type="application/json")
+
+	if request.method == 'GET':
+
+		_data = Cuentas.objects.all()
+
+		serializer =  CuentasSerializer(_data,many=True)
+		return JsonResponse(serializer.data, safe=False)
+
+
 
 @csrf_exempt
 def api_gestion(request):

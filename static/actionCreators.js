@@ -50,10 +50,45 @@ const loadDeltas = ()=>{
         });
     };
 
+
+    
   
 
 }
 
+
+const loadCarteras = ()=>{
+
+    return dispatch =>{
+
+         return axios.get("http://localhost:8000/discador/api_carteras")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_CARTERAS",
+                carteras:response.data
+            })
+        });
+    };
+
+}
+
+
+
+ const loadCuentas = ()=>{
+
+        return dispatch =>{
+    
+             return axios.get("http://localhost:8000/discador/api_cuentas")
+            .then(response=>{
+                console.log(response)
+                dispatch({
+                    type:"TRAE_CUENTAS",
+                    cuentas:response.data
+                })
+            });
+        };
+}
 const addToCart = producto => {
 
     return {
@@ -65,4 +100,4 @@ const addToCart = producto => {
 }
 
 
-export { addToCart,loadProveedores,loadDeltas,loadGestiones };
+export { addToCart,loadProveedores,loadDeltas,loadGestiones,loadCarteras,loadCuentas };

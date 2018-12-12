@@ -20,12 +20,21 @@ if(action.type==='TRAE_PROVEEDORES'){
  return state;
 
 }
-
+ 
 
 const gestiones = (state=[],action) => {
 
     if(action.type==='TRAE_GESTIONES'){
         return action.gestiones;
+    }
+     return state;
+    
+}
+
+const cuentas = (state=[],action) => {
+
+    if(action.type==='TRAE_CUENTAS'){
+        return action.cuentas;
     }
      return state;
     
@@ -48,4 +57,4 @@ const logger = store => next => action => {
     return result
   }
 
-export default createStore(combineReducers({cart,proveedores,deltas,gestiones}),applyMiddleware(logger,thunk));
+export default createStore(combineReducers({cart,proveedores,deltas,gestiones,cuentas}),applyMiddleware(logger,thunk));
