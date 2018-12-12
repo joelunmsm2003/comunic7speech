@@ -3,9 +3,25 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+class Industria(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+	def __unicode__(self):
+		return self.nombre
+
 
 class Proveedor(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
+	industria=models.ForeignKey(Industria,max_length=100,blank=True,null=True)
+
+	@property
+	def contar_carteras(self):
+
+		cont = ProveedorCarteras.objects.filter(proveedor_id=self.id).count()
+
+		return cont
+
+
 
 	def __unicode__(self):
 		return self.nombre

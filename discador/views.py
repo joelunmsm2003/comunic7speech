@@ -177,6 +177,15 @@ def prueba(request):
 
 	return render(request, 'prueba.html',{})
 
+
+@csrf_exempt
+def carteras(request,id_proveedor):
+
+	pro = Proveedor.objects.get(id=id_proveedor)
+	return render(request, 'cartera.html',{'proveedor':pro})
+
+
+
 @csrf_exempt
 def menu_proveedor(request):
 

@@ -2,6 +2,8 @@
   "name": "kkw",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build2": "webpack",
     "dev1": "webpack --mode development frontend/src/index.js --output static/main.js --watch",
     "build1": "webpack --mode production static/proveedor.js --output ./project/frontend/static/frontend/main.js",
     "dev": "live-server public",
@@ -12,9 +14,16 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
+    "babel-plugin-react-html-attrs": "^2.1.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+<<<<<<< HEAD
     "live-server": "^1.2.0",
+=======
+    "bootstrap": "^4.0.0-beta.2",
+    "live-server": "^1.2.0",
+    "nwb-sass": "^0.9.0",
+>>>>>>> e0bf1828de97a7da4575845df79d7bac98bda58a
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
@@ -26,9 +35,11 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "sass-loader": "^7.1.0",
     "weak-key": "^1.0.1",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
