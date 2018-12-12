@@ -1,9 +1,13 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: ['./app.js', './scss/main.scss', './css/plain_css.css'],
+  entry: {
+    'app.js': './app.js', 
+    'cartera.js': './cartera.js',
+    'style':'./scss/main.scss'
+  },
   output: {
-    filename: 'dist/bundle.js'
+    filename: './dist/[name]'
   },
   module: {
     rules: [

@@ -48,6 +48,7 @@ const Proveedores = ({proveedores,deltas,total_carteras}) =>{
                 </div>
 
 
+
             </div>
             
 
