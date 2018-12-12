@@ -947,6 +947,10 @@ var createPath = function createPath(location) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return total_carteras; });
 /* unused harmony export loadCarteras */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return loadCuentas; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return trae_carteras_proveedor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return trae_id_gestion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_resultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_subresultados; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 var _this = this;
@@ -955,7 +959,7 @@ var _this = this;
 
 var loadProveedores = function loadProveedores() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/discador/api_proveedor").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_proveedor").then(function (response) {
       console.log('action response.....FOR');
       _this.contador = 0;
 
@@ -975,7 +979,7 @@ var loadProveedores = function loadProveedores() {
 
 var total_carteras = function total_carteras() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/discador/api_proveedor").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_proveedor").then(function (response) {
       _this.contador = 0;
 
       for (_this.i = 0; _this.i < response.data.length; _this.i++) {
@@ -991,9 +995,60 @@ var total_carteras = function total_carteras() {
   };
 };
 
+var trae_resultados = function trae_resultados(data) {
+  console.log(data);
+  return function (dispatch) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_resultados/" + data).then(function (response) {
+      console.log(response);
+      dispatch({
+        type: "TRAE_DATOS_RESULTADOS",
+        resultados: response.data
+      });
+    });
+  };
+};
+
+var trae_subresultados = function trae_subresultados(data) {
+  console.log(data);
+  return function (dispatch) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_subresultados/" + data).then(function (response) {
+      console.log(response);
+      dispatch({
+        type: "TRAE_DATOS_SUBRESULTADOS",
+        subresultados: response.data
+      });
+    });
+  };
+};
+
+var trae_carteras_proveedor = function trae_carteras_proveedor(data) {
+  return function (dispatch) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_carteras_proveedor/" + data).then(function (response) {
+      console.log(response);
+      dispatch({
+        type: "TRAE_CARTERAS_PROVEEDOR",
+        trae_carteras_proveedor: response.data
+      });
+    });
+  };
+};
+
+var trae_id_gestion = function trae_id_gestion(data) {
+  console.log('actioncreator....', data);
+  return function (dispatch) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_id_gestion/" + data).then(function (response) {
+      console.log('APIIIIIIIIII');
+      dispatch({
+        type: "TRAE_ID_GESTIONES",
+        id_gestiones: response.data
+      });
+    });
+  };
+};
+
 var loadGestiones = function loadGestiones() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/discador/api_gestiones").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_gestiones").then(function (response) {
       console.log(response);
       dispatch({
         type: "TRAE_GESTIONES",
@@ -1005,7 +1060,7 @@ var loadGestiones = function loadGestiones() {
 
 var loadDeltas = function loadDeltas() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/discador/api_proveedor").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_proveedor").then(function (response) {
       console.log(response);
       dispatch({
         type: "TRAE_DELTAS",
@@ -1017,7 +1072,7 @@ var loadDeltas = function loadDeltas() {
 
 var loadCarteras = function loadCarteras() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/discador/api_carteras").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_carteras").then(function (response) {
       console.log(response);
       dispatch({
         type: "TRAE_CARTERAS",
@@ -1029,7 +1084,7 @@ var loadCarteras = function loadCarteras() {
 
 var loadCuentas = function loadCuentas() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/discador/api_cuentas").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_cuentas").then(function (response) {
       console.log(response);
       dispatch({
         type: "TRAE_CUENTAS",
@@ -29615,6 +29670,51 @@ var proveedores = function proveedores() {
   return state;
 };
 
+var trae_carteras_proveedor = function trae_carteras_proveedor() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === 'TRAE_CARTERAS_PROVEEDOR') {
+    return action.trae_carteras_proveedor;
+  }
+
+  return state;
+};
+
+var id_gestiones = function id_gestiones() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === 'TRAE_ID_GESTIONES') {
+    console.log('INGRESE TRAE_ID_GESTIONES');
+    return action.id_gestiones;
+  }
+
+  return state;
+};
+
+var resultados = function resultados() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === 'TRAE_DATOS_RESULTADOS') {
+    return action.resultados;
+  }
+
+  return state;
+};
+
+var subresultados = function subresultados() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === 'TRAE_DATOS_SUBRESULTADOS') {
+    return action.subresultados;
+  }
+
+  return state;
+};
+
 var total_carteras = function total_carteras() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -29676,7 +29776,11 @@ var logger = function logger(store) {
   deltas: deltas,
   gestiones: gestiones,
   total_carteras: total_carteras,
-  cuentas: cuentas
+  cuentas: cuentas,
+  trae_carteras_proveedor: trae_carteras_proveedor,
+  id_gestiones: id_gestiones,
+  resultados: resultados,
+  subresultados: subresultados
 }), Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */])(logger, __WEBPACK_IMPORTED_MODULE_1_redux_thunk__["a" /* default */])));
 
 /***/ }),

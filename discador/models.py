@@ -79,7 +79,7 @@ class Resultado(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
-class Sub_categoria(models.Model):
+class Subresultado(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
 	def __unicode__(self):
@@ -107,15 +107,24 @@ class Cartera(models.Model):
 
 	def __unicode__(self):
 		return self.nombre
+
+class IDGestion(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+	def __unicode__(self):
+		return self.nombre
+		
+
 		
 class Score(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
 	cartera=models.ForeignKey(Cartera, blank=True, null=True)
-	resultado = models.ForeignKey(Resultado, blank=True, null=True)
-	sub_categoria = models.ForeignKey(Sub_categoria, blank=True)
-	peso=models.CharField(max_length=100,blank=True,null=True)
 	gestion = models.ForeignKey(Gestion, blank=True, null=True)
+	id_gestion = models.ForeignKey(IDGestion, blank=True, null=True)
+	resultado = models.ForeignKey(Resultado, blank=True, null=True)
+	subresultado = models.ForeignKey(Subresultado, blank=True)
+	peso=models.CharField(max_length=100,blank=True,null=True)
 	estado = models.CharField(max_length=1,default=0)
 
 class Tipo_persona(models.Model):

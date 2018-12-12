@@ -205,6 +205,51 @@ def carteras(request,id_proveedor):
 	pro = Proveedor.objects.get(id=id_proveedor)
 	return render(request, 'cartera.html',{'proveedor':pro})
 
+@csrf_exempt
+def api_carteras_proveedor(request,id_proveedor):
+
+	_data= ProveedorCarteras.objects.filter(proveedor_id=id_proveedor)
+
+	serializer =  ProveedorCarterasSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def api_id_gestion(request,id_gestion):
+
+	id_ges=[]
+
+	sc = Score.objects.filter(gestion_id=id_gestion)
+
+	print sc.count()
+
+	for s in sc:
+
+		print 'entre...',s.id
+
+		id_ges.append(s.id_gestion.id)
+
+	_data = IDGestion.objects.filter(id__in=id_ges)
+	serializer =  IDGestionSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def api_resultados(request,id_gestion):
+
+	id_res=[]
+
+	sc = Score.objects.filter(id_gestion_id=id_gestion)
+
+	print sc.count()
+
+	for s in sc:
+
+		print 'entre...',s.id
+
+		id_res.append(s.resultado.id)
+
+	_data = Resultado.objects.filter(id__in=id_res)
+	serializer =  ResultadoSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
 
 
 @csrf_exempt
@@ -326,19 +371,26 @@ def api_cartera(request,id_proveedor):
 		return JsonResponse(serializer.data, safe=False)
 
 
-@csrf_exempt
-def api_resultados(request):
-
-	_datos = Resultado.objects.all()
-	serializer =  ResultadoSerializer(_datos,many=True)
-	return JsonResponse(serializer.data, safe=False)
 
 @csrf_exempt
-def api_subresultados(request):
+def api_subresultados(request,id_resultado):
 
-	_datos = Sub_categoria.objects.all()
-	serializer =  Sub_categoriaSerializer(_datos,many=True)
+	id_subres=[]
+
+	sc = Score.objects.filter(resultado_id=id_resultado)
+
+	print sc.count()
+
+	for s in sc:
+
+		print 'entre...',s.id
+
+		id_subres.append(s.subresultado.id)
+
+	_data = Subresultado.objects.filter(id__in=id_subres)
+	serializer =  SubresultadoSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
+
 
 @csrf_exempt
 def api_tipodomicilio(request):

@@ -23,6 +23,55 @@ if(action.type==='TRAE_PROVEEDORES'){
  
 }
 
+const trae_carteras_proveedor = (state=[],action) => {
+
+    if(action.type==='TRAE_CARTERAS_PROVEEDOR'){
+        return action.trae_carteras_proveedor;
+    }
+     return state;
+    
+    
+     
+    }
+
+
+
+
+const id_gestiones = (state=[],action) => {
+
+    if(action.type==='TRAE_ID_GESTIONES'){
+
+        console.log('INGRESE TRAE_ID_GESTIONES')
+
+        return action.id_gestiones;
+    }
+        return state;
+    
+}
+
+
+
+const resultados = (state=[],action) => {
+
+    if(action.type==='TRAE_DATOS_RESULTADOS'){
+
+        return action.resultados;
+    }
+        return state;
+    
+}
+
+const subresultados = (state=[],action) => {
+
+    if(action.type==='TRAE_DATOS_SUBRESULTADOS'){
+
+        return action.subresultados;
+    }
+        return state;
+    
+}
+
+        
 const total_carteras = (state=[],action) => {
 
 
@@ -36,9 +85,6 @@ const total_carteras = (state=[],action) => {
 
 
 const gestiones = (state=[],action) => {
-
-
-    
 
     if(action.type==='TRAE_GESTIONES'){
         return action.gestiones;
@@ -74,4 +120,4 @@ const logger = store => next => action => {
   }
 
 
-export default createStore(combineReducers({cart,proveedores,deltas,gestiones,total_carteras,cuentas}),applyMiddleware(logger,thunk));
+export default createStore(combineReducers({cart,proveedores,deltas,gestiones,total_carteras,cuentas,trae_carteras_proveedor,id_gestiones,resultados,subresultados}),applyMiddleware(logger,thunk));

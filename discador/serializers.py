@@ -13,6 +13,11 @@ class GestionSerializer(serializers.ModelSerializer):
 		model = Gestion
 		fields = '__all__'
 
+class IDGestionSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = IDGestion
+		fields = '__all__'
 
 class ScoreSerializer(serializers.ModelSerializer):
 
@@ -79,12 +84,12 @@ class ResultadoSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 
-
-class Sub_categoriaSerializer(serializers.ModelSerializer):
+class SubresultadoSerializer(serializers.ModelSerializer):
 
 	class Meta:
-		model = Sub_categoria
+		model = Subresultado
 		fields = '__all__'
+
 
 
 class CarteraSerializer(serializers.ModelSerializer):
@@ -107,6 +112,16 @@ class ProveedorSerializer(serializers.ModelSerializer):
 		model = Proveedor
 		fields = ('id', 'nombre', 'industria', 'contar_carteras')
 
+class ProveedorCarterasSerializer(serializers.ModelSerializer):
+
+	proveedor = ProveedorSerializer(many=False, read_only=True)
+	cartera = CarteraSerializer(many=False, read_only=True)
+
+	class Meta:
+		model = ProveedorCarteras
+		fields = '__all__'
+
+
 
 class ScoreSerializer(serializers.ModelSerializer):
 
@@ -114,7 +129,7 @@ class ScoreSerializer(serializers.ModelSerializer):
 	resultado = ResultadoSerializer(many=False, read_only=True)
 	cartera = CarteraSerializer(many=False, read_only=True)
 	gestion = GestionSerializer(many=False, read_only=True)
-	sub_categoria = Sub_categoriaSerializer(many=False, read_only=True)
+	subresultado = SubresultadoSerializer(many=False, read_only=True)
 
 	class Meta:
 		model = Score

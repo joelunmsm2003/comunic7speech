@@ -53,6 +53,11 @@ class SexoAdmin(admin.ModelAdmin):
 class CarteraAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 
+@admin.register(IDGestion)
+class IDGestionAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+
 
 @admin.register(ProveedorCarteras)
 class ProveedorCarterasAdmin(admin.ModelAdmin):
@@ -91,9 +96,6 @@ class Estado_clienteAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(Sub_categoria)
-class Sub_categoriaAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre')
 
 
 
@@ -107,9 +109,10 @@ class ResultadoAdmin(admin.ModelAdmin):
 
 @admin.register(Score)
 class ScoreAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre','proveedor','cartera','gestion','resultado','sub_categoria','peso')
+	list_display = ('id','nombre','proveedor','cartera','gestion','id_gestion','resultado','subresultado','peso')
 	list_editable=('peso',)
 	list_filter=('proveedor','cartera','resultado')
+
 @admin.register(Tipo_persona)
 class Tipo_personaAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')

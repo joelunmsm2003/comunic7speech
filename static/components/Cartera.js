@@ -6,38 +6,49 @@ import Gestion from "./Gestion";
 import Select from "./Select";
 import store from "../store";
 import { Provider } from "react-redux";
-import {loadProveedores, loadDeltas, loadGestiones,total_carteras} from "../actionCreators";
+import {loadProveedores, loadDeltas, loadGestiones,total_carteras, trae_carteras_proveedor} from "../actionCreators";
 import AppRouter from "./Rutas"
 
 class App extends React.Component {
     constructor(props) {
+
+        console.log('carteras..')
+
         super(props);
 
         this.state = {
             value: "",
             editar:[],
-            cart:[]
+            cart:[],
+            proveedor_id:""
         };
     
       }
 
+
+      componentDidMount() {
+
+        this.state.proveedor_id = window.location.href.split('/')[5];
+
+        store.dispatch(trae_carteras_proveedor(this.state.proveedor_id))
+     
+
+      }
+
     render() {
+
       return (
-
-        <div>
-       
-    
-                     
+        <div>                     
          <Select/>
-              
-                
 
-        
         </div>
       );
     }
 
-  }
+}
+
+
+
 
   
 
@@ -48,6 +59,7 @@ store.dispatch(loadProveedores())
 store.dispatch(loadDeltas())
 store.dispatch(loadGestiones())
 store.dispatch(total_carteras())
+
 
 
 ReactDOM.render(
