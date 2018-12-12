@@ -19,6 +19,17 @@ from discador.admin import *
 
 
 @csrf_exempt
+def agentes(request):
+
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'agentes.html',{})
+
+
+@csrf_exempt
 def api_cuentas(request):
 
 	if request.method == 'POST':

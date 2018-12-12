@@ -4,12 +4,6 @@ import React from "react";
 import { loadProveedores } from "../actionCreators"
 import { connect } from 'react-redux';
 
-const divStyle = {
-
-    margin: '40px',
-    border: '5px solid pink'
-
-};
 
 
 
@@ -72,7 +66,7 @@ const Proveedores = ({proveedores,deltas,total_carteras}) =>{
 const  mapStateToProps = state =>{
 
 
-    console.log(state)
+    console.log('mapStateToProps, Proveedores',state)
 
     return{
         proveedores:state.proveedores,

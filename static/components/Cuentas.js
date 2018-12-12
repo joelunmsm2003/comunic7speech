@@ -17,17 +17,35 @@ const Cuentas = ({cuentas,deltas}) =>{
 
           <ul class="list-group">
           <div class="form-group col-md-4">
-              <select>
+          Informacion de Cuentas
+          <br></br>
+          <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nº Cuenta</th>
+      <th scope="col">Dias/Mora</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>  
 
-              
-            {cuentas.map(product=>
-            <option>{product.cliente}</option>
-          
            
+            {cuentas.map(product=>
+
+   
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>{product.numero_cuenta}</td>
+      <td>{product.dias_mora}</td>
+      <td>{product.total}</td>
+    </tr>
+    
+  </tbody>
 
             )}
-            
-            </select>
+            </table>  
+          
 </div>
           </ul>
        
