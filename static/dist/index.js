@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 122);
+/******/ 	return __webpack_require__(__webpack_require__.s = 126);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -944,9 +944,10 @@ var createPath = function createPath(location) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return loadProveedores; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadDeltas; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return loadGestiones; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return total_carteras; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return total_carteras; });
 /* unused harmony export loadCarteras */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return loadCuentas; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return loadScore; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 var _this = this;
@@ -1034,6 +1035,18 @@ var loadCuentas = function loadCuentas() {
       dispatch({
         type: "TRAE_CUENTAS",
         cuentas: response.data
+      });
+    });
+  };
+};
+
+var loadScore = function loadScore() {
+  return function (dispatch) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/discador/api_score").then(function (response) {
+      console.log(response);
+      dispatch({
+        type: "TRAE_SCORE",
+        score: response.data
       });
     });
   };
@@ -29659,6 +29672,17 @@ var deltas = function deltas() {
   return state;
 };
 
+var score = function score() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === 'TRAE_SCORE') {
+    return action.score;
+  }
+
+  return state;
+};
+
 var logger = function logger(store) {
   return function (next) {
     return function (action) {
@@ -29676,7 +29700,8 @@ var logger = function logger(store) {
   deltas: deltas,
   gestiones: gestiones,
   total_carteras: total_carteras,
-  cuentas: cuentas
+  cuentas: cuentas,
+  score: score
 }), Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */])(logger, __WEBPACK_IMPORTED_MODULE_1_redux_thunk__["a" /* default */])));
 
 /***/ }),
@@ -31729,12 +31754,65 @@ var Importador = function Importador() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionCreators__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(10);
+
+
+
+var divStyle = {
+  margin: '40px',
+  border: '5px solid pink'
+};
+
+var Cuentas = function Cuentas(_ref) {
+  var cuentas = _ref.cuentas,
+      deltas = _ref.deltas;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+    class: "list-group"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group col-md-4"
+  }, "Informacion de Cuentas", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+    class: "table"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "#"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "N\xBA Cuenta"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "Dias/Mora"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "Total"))), cuentas.map(function (product) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+      scope: "row"
+    }, "1"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.numero_cuenta), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.dias_mora), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.total)));
+  }))));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    cuentas: state.cuentas,
+    deltas: state.deltas
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps)(Cuentas));
+
+/***/ }),
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_App__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_App__ = __webpack_require__(127);
 
 
 /***/ }),
-/* 123 */
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31745,7 +31823,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Proveedores__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Header__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Gestion__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Cuentas__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Cuentas__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_redux__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__actionCreators__ = __webpack_require__(9);
@@ -31803,7 +31881,7 @@ function (_React$Component) {
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "container"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Proveedores__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Gestion__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Cuentas__["a" /* default */], null)));
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Proveedores__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Cuentas__["a" /* default */], null)));
     }
   }]);
 
@@ -31813,49 +31891,11 @@ function (_React$Component) {
 __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["d" /* loadProveedores */])());
 __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["b" /* loadDeltas */])());
 __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["c" /* loadGestiones */])());
-__WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["e" /* total_carteras */])());
+__WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["f" /* total_carteras */])());
 __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["a" /* loadCuentas */])());
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_redux__["a" /* Provider */], {
   store: __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */]
 }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null)), document.getElementById('app'));
-
-/***/ }),
-/* 124 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionCreators__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(10);
-
-
-
-var divStyle = {
-  margin: '40px',
-  border: '5px solid pink'
-};
-
-var Cuentas = function Cuentas(_ref) {
-  var cuentas = _ref.cuentas,
-      deltas = _ref.deltas;
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
-    class: "list-group"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    class: "form-group col-md-4"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", null, cuentas.map(function (product) {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, product.cliente);
-  }))));
-};
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    cuentas: state.cuentas,
-    deltas: state.deltas
-  };
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps)(Cuentas));
 
 /***/ })
 /******/ ]);

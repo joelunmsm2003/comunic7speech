@@ -30,7 +30,7 @@ class App extends React.Component {
               
               
                 <Proveedores/>
-                <Gestion/>
+              
                 <Cuentas/>
               
                 

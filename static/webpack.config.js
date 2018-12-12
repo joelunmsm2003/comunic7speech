@@ -4,6 +4,7 @@ module.exports = {
   entry: {
     'index.js': './index.js',
     'cartera.js': './cartera.js', 
+    'agentes.js':'./agentes.js',
     'style':'./scss/main.scss'
   },
   output: {

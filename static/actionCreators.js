@@ -129,6 +129,22 @@ const loadCarteras = ()=>{
             });
         };
 }
+
+const loadScore = ()=>{
+
+    return dispatch =>{
+
+         return axios.get("http://localhost:8000/discador/api_score")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_SCORE",
+                score:response.data
+            })
+        });
+    };
+}
+
 const addToCart = producto => {
 
     return {
@@ -140,4 +156,4 @@ const addToCart = producto => {
 }
 
 
-export { addToCart,loadProveedores,loadDeltas,loadGestiones,total_carteras,loadCarteras,loadCuentas };
+export { addToCart,loadProveedores,loadDeltas,loadGestiones,total_carteras,loadCarteras,loadCuentas,loadScore };

@@ -42,11 +42,12 @@ urlpatterns = [
     url(r'^api_cuadrante/', api_cuadrante),
     url(r'^api_plano/', api_plano),
     url(r'^api_gestiones/', api_gestion),
-     url(r'^api_cuentas/', api_cuentas),
+    url(r'^api_cuentas/', api_cuentas),
     url(r'^usuarios/', usuarios),
     url(r'^marcador/', marcador),
     url(r'^importador/',importador),
     url(r'^prueba/',prueba),
+    url(r'^agentes/',agentes),
     url(r'^carteras/(\d+)',carteras),
 
 
