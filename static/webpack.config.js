@@ -2,8 +2,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    'app.js': './app.js', 
-    'cartera.js': './cartera.js',
+    'index.js': './index.js', 
     'style':'./scss/main.scss'
   },
   output: {
