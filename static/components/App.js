@@ -3,9 +3,10 @@ import ReactDOM from "react-dom";
 import Proveedores from "./Proveedores";
 import Header from "./Header";
 import Gestion from "./Gestion";
+import Cuentas from "./Cuentas";
 import store from "../store";
 import { Provider } from "react-redux";
-import {loadProveedores, loadDeltas, loadGestiones,total_carteras} from "../actionCreators";
+import {loadProveedores, loadDeltas, loadGestiones,total_carteras,loadCuentas} from "../actionCreators";
 import AppRouter from "./Rutas"
 
 class App extends React.Component {
@@ -29,6 +30,8 @@ class App extends React.Component {
               
               
                 <Proveedores/>
+                <Gestion/>
+                <Cuentas/>
               
                 
 
@@ -40,15 +43,12 @@ class App extends React.Component {
   }
 
   
-
-
-
 store.dispatch(loadProveedores())
 
 store.dispatch(loadDeltas())
 store.dispatch(loadGestiones())
 store.dispatch(total_carteras())
-
+store.dispatch(loadCuentas())
 
 ReactDOM.render(
 

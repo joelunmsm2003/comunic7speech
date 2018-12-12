@@ -22,6 +22,7 @@ const Proveedores = ({proveedores,deltas,total_carteras}) =>{
 
           <ul class="list-group">
 
+
                  <div className='row'>
 
                     <div class='col-md-3'> <h1>Proveedor </h1></div>
@@ -55,7 +56,9 @@ const Proveedores = ({proveedores,deltas,total_carteras}) =>{
             </li>
 
 
+
             )}
+            
 
           </ul>
 
@@ -78,6 +81,9 @@ const  mapStateToProps = state =>{
     }
 
 }
+
+
+
 
 
 

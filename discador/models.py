@@ -121,8 +121,8 @@ class Score(models.Model):
 class Tipo_persona(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
-class Estado_cliente(models.Model):
-	nombre=models.CharField(max_length=100,blank=True,null=True)
+# class Estado_cliente(models.Model):
+# 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
 
 
