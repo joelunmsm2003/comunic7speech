@@ -13,20 +13,20 @@ const AppRouter = () => (
       <nav>
         <ul>
           <li>
-            <Link to="/">Importador</Link>
+            <Link to="#">Importador</Link>
           </li>
           <li>
-            <Link to="/about/">About</Link>
+            <Link to="#about">About</Link>
           </li>
           <li>
-            <Link to="/users/">Users</Link>
+            <Link to="#users">Users</Link>
           </li>
         </ul>
       </nav>
 
-      <Route path="/" exact component={Importador} />
-      <Route path="/about/" component={About} />
-      <Route path="/users/" component={Users} />
+      <Route path="#" exact component={Importador} />
+      <Route path="#about" component={About} />
+      <Route path="#users" component={Users} />
     </div>
   </Router>
 );

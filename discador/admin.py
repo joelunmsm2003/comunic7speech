@@ -19,6 +19,10 @@ from django.utils.html import format_html
 from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 
+@admin.register(Industria)
+class IndustriaAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
 
 @admin.register(Gestion)
 class GestionAdmin(admin.ModelAdmin):

@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^marcador/', marcador),
     url(r'^importador/',importador),
     url(r'^prueba/',prueba),
+    url(r'^carteras/(\d+)',carteras),
 
 
     

@@ -93,11 +93,19 @@ class CarteraSerializer(serializers.ModelSerializer):
 		model = Cartera
 		fields = '__all__'
 
+class IndustriaSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Industria
+		fields = '__all__'
+
 class ProveedorSerializer(serializers.ModelSerializer):
+
+	industria = IndustriaSerializer(many=False, read_only=True)
 
 	class Meta:
 		model = Proveedor
-		fields = '__all__'
+		fields = ('id', 'nombre', 'industria', 'contar_carteras')
 
 
 class ScoreSerializer(serializers.ModelSerializer):

@@ -6,17 +6,57 @@ const loadProveedores = ()=>{
 
          return axios.get("http://localhost:8000/discador/api_proveedor")
         .then(response=>{
-            console.log(response)
+            console.log('action response.....FOR')
+
+            this.contador=0
+
+            for (this.i = 0; this.i < response.data.length; this.i++) { 
+                console.log('hahah',response.data[this.i])
+
+                this.contador++
+            }
+
+
             dispatch({
                 type:"TRAE_PROVEEDORES",
-                proveedores:response.data
+                proveedores:response.data,
+                contador:this.contador
             })
         });
     };
 
-  
 
 }
+
+
+const total_carteras = ()=>{
+
+    return dispatch =>{
+
+        return axios.get("http://localhost:8000/discador/api_proveedor")
+       .then(response=>{
+  
+           this.contador=0
+
+           for (this.i = 0; this.i < response.data.length; this.i++) { 
+               console.log('hahah',response.data[this.i].contar_carteras)
+
+               this.contador=this.contador+response.data[this.i].contar_carteras
+           }
+
+
+           dispatch({
+               type:"TOTAL_CONTADOR",
+               total_carteras:this.contador,
+               
+           })
+       });
+   };
+
+
+}
+
+
 
 const loadGestiones = ()=>{
 
@@ -65,4 +105,4 @@ const addToCart = producto => {
 }
 
 
-export { addToCart,loadProveedores,loadDeltas,loadGestiones };
+export { addToCart,loadProveedores,loadDeltas,loadGestiones,total_carteras };
