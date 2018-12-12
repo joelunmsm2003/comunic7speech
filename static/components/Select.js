@@ -6,7 +6,7 @@ import { loadProveedores } from "../actionCreators"
 const Select = ({gestiones}) =>{
 
       return (
-        <div className='container'>
+        <div>
             <h1>Carteras</h1>
             {gestiones.map(data=>
             <li>{data.nombre}</li>

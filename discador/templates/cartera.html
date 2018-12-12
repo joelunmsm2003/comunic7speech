@@ -8,14 +8,28 @@
   <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p|Mallanna" rel="stylesheet">
 </head>
 <body>
+
  
-    <div id="app"></div>
+
+    {% include "base.html" %} 
+    
+
+    <div class='container'>
+
+    <h1>{{proveedor}}</h1>
+ 
+    
+    <div id='app'></div>
    
+    </div>
+ 
+
+    
 </body>
 
 <link rel="stylesheet" href="/static/dist/style.bundle.css">
 
-{{proveedor}}
+
     
 <script src="/static/dist/cartera.js"></script>
 </html>

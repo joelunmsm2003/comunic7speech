@@ -26,10 +26,9 @@ class App extends React.Component {
 
         <div>
        
-        <Header/>
-              
-             
-             <Select/>
+    
+                     
+         <Select/>
               
                 
 
