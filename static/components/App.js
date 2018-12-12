@@ -27,10 +27,11 @@ class App extends React.Component {
         <div>
        
             <div class='container'>
+            lllllllllllllllllllllllllllllllll
               
               
                 <Proveedores/>
-              
+                <Gestion/>
                 <Cuentas/>
               
                 

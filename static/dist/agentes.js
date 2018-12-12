@@ -48790,7 +48790,89 @@ function (_React$Component) {
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "container"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Cuentas__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Gestion__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Score__["a" /* default */], null)));
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+        class: "nav nav-tabs",
+        id: "myTab",
+        role: "tablist"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+        class: "nav-item"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+        class: "nav-link active",
+        id: "home-tab",
+        "data-toggle": "tab",
+        href: "#home",
+        role: "tab",
+        "aria-controls": "home",
+        "aria-selected": "true"
+      }, "Clientes")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+        class: "nav-item"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+        class: "nav-link",
+        id: "profile-tab",
+        "data-toggle": "tab",
+        href: "#profile",
+        role: "tab",
+        "aria-controls": "profile",
+        "aria-selected": "false"
+      }, "Telefonos")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+        class: "nav-item"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+        class: "nav-link",
+        id: "contact-tab",
+        "data-toggle": "tab",
+        href: "#contact",
+        role: "tab",
+        "aria-controls": "contact",
+        "aria-selected": "false"
+      }, "Direcciones")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+        class: "nav-item"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+        class: "nav-link",
+        id: "contact-tab",
+        "data-toggle": "tab",
+        href: "#contact",
+        role: "tab",
+        "aria-controls": "contact",
+        "aria-selected": "false"
+      }, "Contacto")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+        class: "nav-item"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+        class: "nav-link",
+        id: "contact-tab",
+        "data-toggle": "tab",
+        href: "#contact",
+        role: "tab",
+        "aria-controls": "contact",
+        "aria-selected": "false"
+      }, "Email"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "tab-content",
+        id: "myTabContent"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "tab-pane fade show active",
+        id: "home",
+        role: "tabpanel",
+        "aria-labelledby": "home-tab"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", null, "DNI"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", null, "DEPARTAMENTO")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "tab-pane fade",
+        id: "profile",
+        role: "tabpanel",
+        "aria-labelledby": "profile-tab"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", null, "NUMERO")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "tab-pane fade",
+        id: "contact",
+        role: "tabpanel",
+        "aria-labelledby": "contact-tab"
+      }, "..."), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "tab-pane fade",
+        id: "profile",
+        role: "tabpanel",
+        "aria-labelledby": "profile-tab"
+      }, "..."), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "tab-pane fade",
+        id: "contact",
+        role: "tabpanel",
+        "aria-labelledby": "contact-tab"
+      }, "...")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Cuentas__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Gestion__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Score__["a" /* default */], null)));
     }
   }]);
 
