@@ -94,20 +94,21 @@ const gestiones = (state=[],action) => {
     
 }
 
-const cuentas = (state=[],action) => {
-
-    if(action.type==='TRAE_CUENTAS'){
-        return action.cuentas;
-    }
-     return state;
-    
-}
 
 
 const score = (state=[],action) => {
 
     if(action.type==='TRAE_SCORE'){
         return action.score;
+    }
+    return state;
+
+}
+
+const cuentas = (state=[],action) => {
+
+    if(action.type==='TRAE_CUENTITAS'){
+        return action.cuentas;
     }
     return state;
 
@@ -123,3 +124,4 @@ const logger = store => next => action => {
 
 
 export default createStore(combineReducers({cart,proveedores,gestiones,total_carteras,cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados}),applyMiddleware(logger,thunk));
+

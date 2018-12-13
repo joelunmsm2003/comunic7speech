@@ -1,5 +1,4 @@
 import React from "react";
-import { loadCuentas } from "../actionCreators";
 import { connect } from 'react-redux';
 
 const divStyle = {
@@ -11,61 +10,59 @@ const divStyle = {
 
 
 
-const Cuentas = ({cuentas,deltas}) =>{
+const Cuentas = ({cuentas}) =>{
 
       return (
 
-          <ul class="list-group">
-          <div class="form-group col-md-4">
-          <h3>Informacion de Cuentas</h3>
-          <br></br>
-          <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nº Cuenta</th>
-      <th scope="col">Dias/Mora</th>
-      <th scope="col">Total</th>
-    </tr>
-  </thead>  
-
+         <div>
            
-            {cuentas.map(product=>
+           <h1>Cuentas</h1>
 
-   
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>{product.numero_cuenta}</td>
-      <td>{product.dias_mora}</td>
-      <td>{product.total}</td>
-    </tr>
-    
-  </tbody>
+           <ul class="list-group">
+                <div class="form-group col-md-6">
+                    <h3>Informacion de Cuentas</h3>
+               
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nº Cuenta</th>
+                            <th scope="col">Dias/Mora</th>
+                            <th scope="col">Total</th>
+                          </tr>
+                        </thead>  
 
-            )}
-            </table>  
-          
-</div>
-          </ul>
+                      <tbody>
+                      {cuentas.map(product=>
+                              <tr>
+                                <td>{product.numero_cuenta}</td>
+                                <td>{product.mora}</td>
+                                <td>{product.total}</td>
+                              
+                              </tr>
+                      )}
+                      </tbody>
+                      </table>
+                  </div>
+            </ul> 
+
+          </div>
        
       );
 
 
     }
 
+
+
 const  mapStateToProps = state =>{
 
+   console.log(state)
+
     return{
-        cuentas:state.cuentas,
-        deltas:state.deltas
+        cuentas:state.cuentas
     }
 
 }
-
-
-
-
 
 
 export default connect(mapStateToProps)(Cuentas);   

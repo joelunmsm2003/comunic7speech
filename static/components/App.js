@@ -101,10 +101,12 @@ class App extends React.Component {
        
             <div class='container'>
 
+
                 <AgregaProveedor/>
     
                 <input type='text' onChange={this.busca_proveedor.bind(this)} className='form-control' placeholder='Buscar Proveedor'></input>
                 
+
                 <Proveedores/>
 
              

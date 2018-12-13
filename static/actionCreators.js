@@ -173,11 +173,12 @@ const loadCarteras = ()=>{
             .then(response=>{
                 console.log(response)
                 dispatch({
-                    type:"TRAE_CUENTAS",
+                    type:"TRAE_DETALLE_CUENTAS",
                     cuentas:response.data
                 })
             });
         };
+
 }
 
 const loadScore = ()=>{
@@ -195,6 +196,59 @@ const loadScore = ()=>{
     };
 }
 
+
+// const loadDCuentas2 = ()=>{
+
+//     return dispatch =>{
+
+//          return axios.get("http://localhost:8000/discador/api_detalle_cuentas/3")
+//         .then(response=>{
+//             console.log(response)
+//             dispatch({
+//                 type:"TRAE_DETALLE_CUENTAS",
+//                 score:response.data
+//             })
+//         });
+//     };
+// }
+
+
+// const loadCuentas = ()=>{
+
+//     return dispatch =>{
+
+//          return axios.get("/discador/api_cuentas")
+//         .then(response=>{
+//             console.log(response)
+//             dispatch({
+//                 type:"TRAE_DETALLE_CUENTAS",
+//                 cuentas:response.data
+//             })
+//         });
+//     };
+
+// }
+
+const trae_cuentas = data=>{
+
+    console.log('ARMA..... HAHAHAHHA',data)
+
+
+        return dispatch =>{
+
+             dispatch({
+                 type:"TRAE_CUENTITAS",
+                 cuentas:data
+             })
+        
+        };
+
+
+}
+
+
+
+
 const addToCart = producto => {
 
     return {
@@ -207,4 +261,4 @@ const addToCart = producto => {
 
 
 
-export { addToCart,cargaproveedores,loadGestiones,total_carteras,loadCarteras,loadCuentas,loadScore,trae_carteras_proveedor,trae_id_gestion,trae_resultados,trae_subresultados };
+export { trae_cuentas,addToCart,cargaproveedores,loadGestiones,total_carteras,loadCarteras,loadScore,trae_carteras_proveedor,trae_id_gestion,trae_resultados,trae_subresultados };
