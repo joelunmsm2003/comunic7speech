@@ -21,6 +21,12 @@ class App extends React.Component {
     
       }
 
+      componentDidMount() {
+
+        store.dispatch(loadProveedores())
+        
+      }
+
     render() {
       return (
 
@@ -41,7 +47,7 @@ class App extends React.Component {
   }
 
   
-store.dispatch(loadProveedores())
+
 
 store.dispatch(loadDeltas())
 store.dispatch(loadGestiones())

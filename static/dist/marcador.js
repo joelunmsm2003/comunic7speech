@@ -961,14 +961,13 @@ var _this = this;
 var loadProveedores = function loadProveedores() {
   return function (dispatch) {
     return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_proveedor").then(function (response) {
-      console.log('action response.....FOR');
       _this.contador = 0;
 
       for (_this.i = 0; _this.i < response.data.length; _this.i++) {
-        console.log('hahah', response.data[_this.i]);
         _this.contador++;
       }
 
+      console.log(',,,,,', response.data);
       dispatch({
         type: "TRAE_PROVEEDORES",
         proveedores: response.data,
@@ -1059,7 +1058,8 @@ var loadGestiones = function loadGestiones() {
   };
 };
 
-var loadDeltas = function loadDeltas() {
+var loadDeltas = function loadDeltas(data) {
+  console.log('Ingrese a deltas.........', data);
   return function (dispatch) {
     return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_proveedor").then(function (response) {
       console.log(response);
@@ -27228,7 +27228,7 @@ var Proveedores = function Proveedores(_ref) {
     class: "col-md-3"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "Industria")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "# ", total_carteras))), proveedores.map(function (product) {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "# ", total_carteras))), deltas.map(function (product) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
       class: "list-group-item"
     }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
@@ -27246,7 +27246,6 @@ var Proveedores = function Proveedores(_ref) {
 };
 
 var mapStateToProps = function mapStateToProps(state) {
-  console.log('mapStateToProps, Proveedores', state);
   return {
     proveedores: state.proveedores,
     deltas: state.deltas,

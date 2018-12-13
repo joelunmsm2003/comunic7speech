@@ -25,7 +25,7 @@ const Proveedores = ({proveedores,deltas,total_carteras}) =>{
 
                 </div>
              
-            {proveedores.map(product=>
+            {deltas.map(product=>
             
             <li class="list-group-item">
                 
@@ -64,9 +64,6 @@ const Proveedores = ({proveedores,deltas,total_carteras}) =>{
     }
 
 const  mapStateToProps = state =>{
-
-
-    console.log('mapStateToProps, Proveedores',state)
 
     return{
         proveedores:state.proveedores,

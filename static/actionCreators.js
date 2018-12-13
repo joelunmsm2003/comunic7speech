@@ -6,16 +6,17 @@ const loadProveedores = ()=>{
 
          return axios.get("/discador/api_proveedor")
         .then(response=>{
-            console.log('action response.....FOR')
+            
 
             this.contador=0
 
             for (this.i = 0; this.i < response.data.length; this.i++) { 
-                console.log('hahah',response.data[this.i])
+                
 
                 this.contador++
             }
 
+            console.log(',,,,,',response.data)
 
             dispatch({
                 type:"TRAE_PROVEEDORES",
@@ -176,7 +177,10 @@ const loadGestiones = ()=>{
 
 }
 
-const loadDeltas = ()=>{
+const loadDeltas = (data)=>{
+
+
+    console.log('Ingrese a deltas.........',data)
 
     return dispatch =>{
 
