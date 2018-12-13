@@ -31773,7 +31773,7 @@ var Cuentas = function Cuentas(_ref) {
     class: "list-group"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "form-group col-md-4"
-  }, "Informacion de Cuentas", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Informacion de Cuentas"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
     class: "table"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"
@@ -48790,7 +48790,7 @@ function (_React$Component) {
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "container"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
         class: "nav nav-tabs",
         id: "myTab",
         role: "tablist"
@@ -48845,6 +48845,8 @@ function (_React$Component) {
         "aria-controls": "contact",
         "aria-selected": "false"
       }, "Email"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group row"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "tab-content",
         id: "myTabContent"
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
@@ -48852,12 +48854,106 @@ function (_React$Component) {
         id: "home",
         role: "tabpanel",
         "aria-labelledby": "home-tab"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", null, "DNI"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", null, "DEPARTAMENTO")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group row"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-1 col-form-label"
+      }, "DNI:"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-2"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: "75417613"
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-2 col-form-label"
+      }, "Nombre Completo:"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-3"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: "Daniel Acevedo Ruiz"
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-2 col-form-label"
+      }, "Fecha/Nac"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-2"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: " 27-03-79"
+      }))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group row"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-2 col-form-label"
+      }, "DEPARTAMENTO:"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-2"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: "LIMA"
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-2 col-form-label"
+      }, "PROVINCIA :"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-2"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: " LIMA"
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-2 col-form-label"
+      }, "DISTRITO :"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-2"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: "MIRAFLORES"
+      }))))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "tab-pane fade",
         id: "profile",
         role: "tabpanel",
         "aria-labelledby": "profile-tab"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", null, "NUMERO")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group row"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-1 col-form-label"
+      }, "Email"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-2"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: "email@example.com"
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-1 col-form-label"
+      }, "Email"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-2"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: "email@example.com"
+      }))))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "tab-pane fade",
         id: "contact",
         role: "tabpanel",
@@ -48872,7 +48968,31 @@ function (_React$Component) {
         id: "contact",
         role: "tabpanel",
         "aria-labelledby": "contact-tab"
-      }, "...")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Cuentas__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Gestion__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Score__["a" /* default */], null)));
+      }, "...")))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group row"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-1 col-form-label"
+      }, "Email"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-2"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: "email@example.com"
+      })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+        for: "staticEmail",
+        class: "col-sm-1 col-form-label"
+      }, "Email"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "col-sm-2"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        readonly: true,
+        class: "form-control-plaintext",
+        id: "staticEmail",
+        value: "email@example.com"
+      })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Cuentas__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Score__["a" /* default */], null)));
     }
   }]);
 
@@ -48913,10 +49033,32 @@ var Score = function Score(_ref) {
     class: "list-group"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "form-group col-md-4"
-  }, "Resultados Dela Gestion", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", null, score.map(function (product) {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Resultados Dela Gestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    className: "form-group"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+    for: "exampleFormControlSelect1"
+  }, "Tipo de la gestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group row"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
+    class: "form-control col-sm-6",
+    id: "exampleFormControlSelect1"
+  }, score.map(function (product) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, product.gestion.nombre);
-  }))));
+  })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
+    class: "form-control col-sm-6",
+    id: "exampleFormControlSelect1"
+  }, score.map(function (product) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, product.resultado.nombre);
+  })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+    type: "button",
+    class: "btn btn-primary"
+  }, "Guardar")));
 };
+
+__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+  type: "button",
+  class: "btn btn-primary"
+}, "Guardar");
 
 var mapStateToProps = function mapStateToProps(state) {
   return {

@@ -15,9 +15,12 @@ const Score = ({score,deltas}) =>{
 
           <ul class="list-group">
           <div class="form-group col-md-4">
-            Resultados Dela Gestion
+            <h3>Resultados Dela Gestion</h3>
           <br></br>
-              <select>
+<div className="form-group"> 
+<label for="exampleFormControlSelect1">Tipo de la gestion</label>
+<div class="form-group row">        
+              <select class="form-control col-sm-6" id="exampleFormControlSelect1">
 
         
 {score.map(product=>
@@ -26,21 +29,32 @@ const Score = ({score,deltas}) =>{
             )}
             
             </select>
+                  
+ <select class="form-control col-sm-6" id="exampleFormControlSelect1">
+ 
+        
+{score.map(product=>
+
+            <option>{product.resultado.nombre}</option>
+            
+            )}
+            
+            </select>
+            </div>
+            </div>
 
 
-
+<button type="button" class="btn btn-primary">Guardar</button>
 </div>
+
+
           </ul>
-
-
-       
+      
       );
-
-    
-
 
     }
 
+<button type="button" class="btn btn-primary">Guardar</button>
 
 
 

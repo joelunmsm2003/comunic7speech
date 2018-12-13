@@ -49,6 +49,7 @@ urlpatterns = [
     url(r'^prueba/',prueba),
     url(r'^agentes/',agentes),
     url(r'^carteras/(\d+)',carteras),
+    url(r'^api_detalle_cuentas/(\d+)', api_detalle_cuentas),
 
 
     

@@ -17,7 +17,7 @@ const Cuentas = ({cuentas,deltas}) =>{
 
           <ul class="list-group">
           <div class="form-group col-md-4">
-          Informacion de Cuentas
+          <h3>Informacion de Cuentas</h3>
           <br></br>
           <table class="table">
   <thead>

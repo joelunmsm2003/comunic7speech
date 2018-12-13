@@ -31773,7 +31773,7 @@ var Cuentas = function Cuentas(_ref) {
     class: "list-group"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "form-group col-md-4"
-  }, "Informacion de Cuentas", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Informacion de Cuentas"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
     class: "table"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"
