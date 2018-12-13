@@ -74,6 +74,15 @@ const score = (state=[],action) => {
 
 }
 
+const dcuentas = (state=[],action) => {
+
+    if(action.type==='TRAE_DETALLE_CUENTAS'){
+        return action.dcuentas;
+    }
+    return state;
+
+}
+
 
 const logger = store => next => action => {
     console.log('dispatching', action)
@@ -83,4 +92,4 @@ const logger = store => next => action => {
   }
 
 
-export default createStore(combineReducers({cart,proveedores,deltas,gestiones,total_carteras,cuentas,score}),applyMiddleware(logger,thunk));
+export default createStore(combineReducers({cart,proveedores,deltas,gestiones,total_carteras,cuentas,score,dcuentas}),applyMiddleware(logger,thunk));

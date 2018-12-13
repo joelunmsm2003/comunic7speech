@@ -123,7 +123,7 @@ const loadCarteras = ()=>{
             .then(response=>{
                 console.log(response)
                 dispatch({
-                    type:"TRAE_CUENTAS",
+                    type:"TRAE_DETALLE_CUENTAS",
                     cuentas:response.data
                 })
             });
@@ -145,6 +145,22 @@ const loadScore = ()=>{
     };
 }
 
+
+const loadDCuentas = ()=>{
+
+    return dispatch =>{
+
+         return axios.get("http://localhost:8000/discador/api_detalle_cuentas/3")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_DETALLE_CUENTAS",
+                score:response.data
+            })
+        });
+    };
+}
+
 const addToCart = producto => {
 
     return {
@@ -156,4 +172,4 @@ const addToCart = producto => {
 }
 
 
-export { addToCart,loadProveedores,loadDeltas,loadGestiones,total_carteras,loadCarteras,loadCuentas,loadScore };
+export { addToCart,loadProveedores,loadDeltas,loadGestiones,total_carteras,loadCarteras,loadCuentas,loadScore,loadDCuentas };
