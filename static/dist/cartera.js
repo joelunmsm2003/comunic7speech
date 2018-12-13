@@ -29683,15 +29683,15 @@ var Header = function Header() {
     "data-toggle": "dropdown",
     "aria-haspopup": "true",
     "aria-expanded": "false"
-  }, "Action"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+  }, "Administrador"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "dropdown-menu"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
-    href: "#"
-  }, "Action"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+    href: "/discador/opcion_proveedor"
+  }, "Proveedor"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
-    href: "#"
-  }, "Another action"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+    href: "/discador/usuarios"
+  }, "Usuarios"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
     href: "#"
   }, "Something else here"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
@@ -29747,7 +29747,7 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(Gestion));
+/* unused harmony default export */ var _unused_webpack_default_export = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(Gestion));
 
 /***/ }),
 /* 94 */
@@ -48785,6 +48785,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       this.state.proveedor_id = window.location.href.split('/')[5];
       __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["h" /* trae_carteras_proveedor */])(this.state.proveedor_id));
+      __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["d" /* loadGestiones */])());
     }
   }, {
     key: "render",

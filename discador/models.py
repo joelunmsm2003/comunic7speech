@@ -3,6 +3,14 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+
+class Negocio(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+	def __unicode__(self):
+		return self.nombre
+
+
 class Industria(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
@@ -126,6 +134,7 @@ class Score(models.Model):
 	subresultado = models.ForeignKey(Subresultado, blank=True)
 	peso=models.CharField(max_length=100,blank=True,null=True)
 	estado = models.CharField(max_length=1,default=0)
+	negocio = models.ForeignKey(Negocio, blank=True, null=True)
 
 class Tipo_persona(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)

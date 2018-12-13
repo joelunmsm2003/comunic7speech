@@ -31,6 +31,8 @@ class App extends React.Component {
         this.state.proveedor_id = window.location.href.split('/')[5];
 
         store.dispatch(trae_carteras_proveedor(this.state.proveedor_id))
+
+        store.dispatch(loadGestiones())
      
 
       }
@@ -39,7 +41,7 @@ class App extends React.Component {
 
       return (
         <div> 
-        <Header/>
+         <Header/>
 
          <div class='container'>                  
          <Select/>

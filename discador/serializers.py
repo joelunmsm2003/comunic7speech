@@ -47,6 +47,11 @@ class PlanoSerializer(serializers.ModelSerializer):
 		model = Plano
 		fields = '__all__'
 
+class NegocioSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Negocio
+		fields = '__all__'
 
 class CuadranteSerializer(serializers.ModelSerializer):
 

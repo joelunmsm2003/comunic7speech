@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import {cargaproveedores,total_carteras} from "../actionCreators";
 import AppRouter from "./Rutas"
 import axios from 'axios';
+import AgregaProveedor from "./AgregaProveedor";
 
 
 
@@ -85,6 +86,8 @@ class App extends React.Component {
 
           store.dispatch(cargaproveedores(this.state.filterproveedores,this.contador))
 
+          
+
      }
 
     render() {
@@ -93,12 +96,15 @@ class App extends React.Component {
         <div>
 
             <Header/>
+
+            
        
             <div class='container'>
-           
+
+                <AgregaProveedor/>
+    
                 <input type='text' onChange={this.busca_proveedor.bind(this)} className='form-control' placeholder='Buscar Proveedor'></input>
                 
-              
                 <Proveedores/>
 
              

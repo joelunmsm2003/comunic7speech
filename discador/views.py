@@ -18,6 +18,31 @@ from discador.admin import *
 
 
 
+
+@csrf_exempt
+def api_detalle_cuentas(request,id):
+
+	if request.method == 'POST':
+
+		nombre = json.loads(request.body)['nombre']
+
+		Cuentas(nombre=nombre).save()
+
+		a= simplejson.dumps('OK')
+		
+		return HttpResponse(a, content_type="application/json")
+
+	if request.method == 'GET':
+
+
+		_datos = Cuentas.objects.get(id=id)
+
+		print 'traes la daata?', 
+		serializer =  ProveedorSerializer(_datos,many=False)
+		return JsonResponse(serializer.data, safe=False)
+
+
+
 @csrf_exempt
 def agentes(request):
 
@@ -27,6 +52,7 @@ def agentes(request):
 	#return JsonResponse(serializer.data, safe=False)
 
 	return render(request, 'agentes.html',{})
+
 
 
 @csrf_exempt
@@ -170,6 +196,13 @@ def api_resultados_gestion(request,id):
 
 	return JsonResponse(serializer.data, safe=False)
 
+def api_negocios(request):
+
+	_data = Negocio.objects.all()
+
+	serializer =  NegocioSerializer(_data,many=True)
+
+	return JsonResponse(serializer.data, safe=False)
 
 
 def api_producto(request):
@@ -200,7 +233,7 @@ def menu_proveedor_1(request):
 
 
 @csrf_exempt
-def prueba(request):
+def opcion_proveedor(request):
 
 	#_data = Proveedor.objects.all()
 
@@ -436,6 +469,8 @@ def api_detalle_cartera(request,id):
 		print 'traes la daata?', 
 		serializer =  ProveedorSerializer(_datos,many=False)
 		return JsonResponse(serializer.data, safe=False)
+
+
 
 
 
