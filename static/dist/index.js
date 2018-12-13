@@ -751,7 +751,7 @@ module.exports = warning;
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__createHashHistory__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(102);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(13);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(8);
@@ -941,56 +941,29 @@ var createPath = function createPath(location) {
 
 "use strict";
 /* unused harmony export addToCart */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return loadProveedores; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadDeltas; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return loadGestiones; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return total_carteras; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return cargaproveedores; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return loadGestiones; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return total_carteras; });
 /* unused harmony export loadCarteras */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return loadCuentas; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return loadScore; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return trae_carteras_proveedor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_id_gestion; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_resultados; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return trae_subresultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadCuentas; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return loadScore; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_carteras_proveedor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_id_gestion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return trae_resultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return trae_subresultados; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-var _this = this;
 
 
-
-var loadProveedores = function loadProveedores() {
+var cargaproveedores = function cargaproveedores(data, total) {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_proveedor").then(function (response) {
-      _this.contador = 0;
-
-      for (_this.i = 0; _this.i < response.data.length; _this.i++) {
-        _this.contador++;
-      }
-
-      console.log(',,,,,', response.data);
-      dispatch({
-        type: "TRAE_PROVEEDORES",
-        proveedores: response.data,
-        contador: _this.contador
-      });
+    dispatch({
+      type: "PROVEEDORES",
+      proveedores: data
     });
-  };
-};
-
-var total_carteras = function total_carteras() {
-  return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_proveedor").then(function (response) {
-      _this.contador = 0;
-
-      for (_this.i = 0; _this.i < response.data.length; _this.i++) {
-        console.log('hahah', response.data[_this.i].contar_carteras);
-        _this.contador = _this.contador + response.data[_this.i].contar_carteras;
-      }
-
-      dispatch({
-        type: "TOTAL_CONTADOR",
-        total_carteras: _this.contador
-      });
+    dispatch({
+      type: "TOTAL_CONTADOR",
+      total_carteras: total
     });
   };
 };
@@ -1053,19 +1026,6 @@ var loadGestiones = function loadGestiones() {
       dispatch({
         type: "TRAE_GESTIONES",
         gestiones: response.data
-      });
-    });
-  };
-};
-
-var loadDeltas = function loadDeltas(data) {
-  console.log('Ingrese a deltas.........', data);
-  return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_proveedor").then(function (response) {
-      console.log(response);
-      dispatch({
-        type: "TRAE_DELTAS",
-        deltas: response.data
       });
     });
   };
@@ -1137,6 +1097,33 @@ var addToCart = function addToCart(producto) {
 
 /***/ }),
 /* 11 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1204,7 +1191,7 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1278,33 +1265,6 @@ var createLocation = function createLocation(path, state, key, currentLocation) 
 var locationsAreEqual = function locationsAreEqual(a, b) {
   return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && Object(__WEBPACK_IMPORTED_MODULE_1_value_equal__["a" /* default */])(a.state, b.state);
 };
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
 
 /***/ }),
 /* 14 */
@@ -1590,7 +1550,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 
 
@@ -4022,7 +3982,7 @@ var proveedores = function proveedores() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
-  if (action.type === 'TRAE_PROVEEDORES') {
+  if (action.type === 'PROVEEDORES') {
     return action.proveedores;
   }
 
@@ -4107,17 +4067,6 @@ var cuentas = function cuentas() {
   return state;
 };
 
-var deltas = function deltas() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  if (action.type === 'TRAE_DELTAS') {
-    return action.deltas;
-  }
-
-  return state;
-};
-
 var score = function score() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -4143,7 +4092,6 @@ var logger = function logger(store) {
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_0_redux__["d" /* createStore */])(Object(__WEBPACK_IMPORTED_MODULE_0_redux__["c" /* combineReducers */])({
   cart: cart,
   proveedores: proveedores,
-  deltas: deltas,
   gestiones: gestiones,
   total_carteras: total_carteras,
   cuentas: cuentas,
@@ -6362,7 +6310,7 @@ exports.unstable_scheduleCallback=function(a,b){var c=-1!==k?k:exports.unstable_
 b=c.previous;b.next=c.previous=a;a.next=c;a.previous=b}return a};exports.unstable_cancelCallback=function(a){var b=a.next;if(null!==b){if(b===a)d=null;else{a===d&&(d=b);var c=a.previous;c.next=b;b.previous=c}a.next=a.previous=null}};exports.unstable_wrapCallback=function(a){var b=h;return function(){var c=h,e=k;h=b;k=exports.unstable_now();try{return a.apply(this,arguments)}finally{h=c,k=e,v()}}};exports.unstable_getCurrentPriorityLevel=function(){return h};
 exports.unstable_shouldYield=function(){return!f&&(null!==d&&d.expirationTime<l||w())};
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
 /* 49 */
@@ -7004,7 +6952,7 @@ exports.unstable_shouldYield = unstable_shouldYield;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(11)))
 
 /***/ }),
 /* 50 */
@@ -27208,15 +27156,12 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionCreators__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(10);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(10);
 
 
 
 var Proveedores = function Proveedores(_ref) {
   var proveedores = _ref.proveedores,
-      deltas = _ref.deltas,
       total_carteras = _ref.total_carteras;
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
     class: "list-group"
@@ -27224,11 +27169,11 @@ var Proveedores = function Proveedores(_ref) {
     className: "row"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
-  }, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "Proveedor ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+  }, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "# Proveedor ", proveedores.length, " ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "Industria")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "# ", total_carteras))), deltas.map(function (product) {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "# Carteras ", total_carteras))), proveedores.map(function (product) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
       class: "list-group-item"
     }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
@@ -27246,6 +27191,7 @@ var Proveedores = function Proveedores(_ref) {
 };
 
 var mapStateToProps = function mapStateToProps(state) {
+  console.log(state);
   return {
     proveedores: state.proveedores,
     deltas: state.deltas,
@@ -27253,7 +27199,7 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps)(Proveedores));
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(Proveedores));
 
 /***/ }),
 /* 55 */
@@ -29425,7 +29371,7 @@ if (typeof self !== 'undefined') {
 var result = Object(__WEBPACK_IMPORTED_MODULE_0__ponyfill_js__["a" /* default */])(root);
 /* harmony default export */ __webpack_exports__["a"] = (result);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(13), __webpack_require__(85)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(11), __webpack_require__(85)(module)))
 
 /***/ }),
 /* 85 */
@@ -29771,7 +29717,7 @@ var Header = function Header() {
   }, "Salir")))));
 };
 
-/* unused harmony default export */ var _unused_webpack_default_export = (Header);
+/* harmony default export */ __webpack_exports__["a"] = (Header);
 
 /***/ }),
 /* 93 */
@@ -30009,11 +29955,11 @@ BrowserRouter.propTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(37);
@@ -30433,11 +30379,11 @@ function valueEqual(a, b) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(37);
@@ -30754,10 +30700,10 @@ var createHashHistory = function createHashHistory() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(20);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -31850,56 +31796,6 @@ var Importador = function Importador() {
 
 /***/ }),
 /* 122 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionCreators__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(10);
-
-
-
-var divStyle = {
-  margin: '40px',
-  border: '5px solid pink'
-};
-
-var Cuentas = function Cuentas(_ref) {
-  var cuentas = _ref.cuentas,
-      deltas = _ref.deltas;
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
-    class: "list-group"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    class: "form-group col-md-4"
-  }, "Informacion de Cuentas", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
-    class: "table"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
-    scope: "col"
-  }, "#"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
-    scope: "col"
-  }, "N\xBA Cuenta"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
-    scope: "col"
-  }, "Dias/Mora"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
-    scope: "col"
-  }, "Total"))), cuentas.map(function (product) {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
-      scope: "row"
-    }, "1"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.numero_cuenta), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.dias_mora), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.total)));
-  }))));
-};
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    cuentas: state.cuentas,
-    deltas: state.deltas
-  };
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps)(Cuentas));
-
-/***/ }),
-/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -31908,7 +31804,7 @@ var mapStateToProps = function mapStateToProps(state) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(124), __webpack_require__(125)) :
+   true ? factory(exports, __webpack_require__(123), __webpack_require__(124)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -35849,7 +35745,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 
 /***/ }),
-/* 124 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -46220,7 +46116,7 @@ return jQuery;
 
 
 /***/ }),
-/* 125 */
+/* 124 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48798,7 +48694,57 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(11)))
+
+/***/ }),
+/* 125 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionCreators__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(10);
+
+
+
+var divStyle = {
+  margin: '40px',
+  border: '5px solid pink'
+};
+
+var Cuentas = function Cuentas(_ref) {
+  var cuentas = _ref.cuentas,
+      deltas = _ref.deltas;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+    class: "list-group"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group col-md-4"
+  }, "Informacion de Cuentas", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+    class: "table"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "#"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "N\xBA Cuenta"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "Dias/Mora"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "Total"))), cuentas.map(function (product) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+      scope: "row"
+    }, "1"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.numero_cuenta), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.dias_mora), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.total)));
+  }))));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    cuentas: state.cuentas,
+    deltas: state.deltas
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps)(Cuentas));
 
 /***/ }),
 /* 126 */,
@@ -48809,7 +48755,7 @@ Popper.Defaults = Defaults;
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_App__ = __webpack_require__(129);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bootstrap__);
 
 
@@ -48826,11 +48772,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Proveedores__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Header__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Gestion__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Cuentas__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Cuentas__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_redux__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__actionCreators__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Rutas__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_axios__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48860,6 +48808,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -48874,7 +48823,8 @@ function (_React$Component) {
     _this.state = {
       value: "",
       editar: [],
-      cart: []
+      cart: [],
+      proveedores: []
     };
     return _this;
   }
@@ -48882,24 +48832,59 @@ function (_React$Component) {
   _createClass(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["d" /* loadProveedores */])());
+      var _this2 = this;
+
+      console.log('entre aca.....');
+      __WEBPACK_IMPORTED_MODULE_10_axios___default.a.get("/discador/api_proveedor").then(function (response) {
+        console.log(response.data);
+
+        _this2.setState({
+          proveedores: response.data,
+          filterproveedores: response.data
+        });
+
+        _this2.contador = _this2.contador_carteras(response.data);
+        __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["a" /* cargaproveedores */])(response.data, _this2.contador));
+      });
+    }
+  }, {
+    key: "contador_carteras",
+    value: function contador_carteras(data) {
+      this.contador = 0;
+
+      for (this.i = 0; this.i < data.length; this.i++) {
+        this.contador = this.contador + data[this.i].contar_carteras;
+      }
+
+      return this.contador;
+    }
+  }, {
+    key: "busca_proveedor",
+    value: function busca_proveedor(data) {
+      this.state.filterproveedores = this.state.proveedores.filter(function (poet) {
+        var poetName = poet.nombre;
+        return poetName.indexOf(data.target.value) !== -1;
+      });
+      this.contador = this.contador_carteras(this.state.filterproveedores);
+      __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["a" /* cargaproveedores */])(this.state.filterproveedores, this.contador));
     }
   }, {
     key: "render",
     value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Header__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "container"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Proveedores__["a" /* default */], null)));
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+        type: "text",
+        onChange: this.busca_proveedor.bind(this),
+        className: "form-control",
+        placeholder: "Buscar Proveedor"
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Proveedores__["a" /* default */], null)));
     }
   }]);
 
   return App;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-__WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["b" /* loadDeltas */])());
-__WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["c" /* loadGestiones */])());
-__WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["f" /* total_carteras */])());
-__WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["a" /* loadCuentas */])());
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_redux__["a" /* Provider */], {
   store: __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */]
 }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null)), document.getElementById('app'));

@@ -144,8 +144,9 @@ class CarteraProveedor(models.Model):
 	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
 
 class ProveedorCarteras(models.Model):
-	cartera=models.ForeignKey(Cartera, blank=True, null=True)
 	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
+	cartera=models.ForeignKey(Cartera, blank=True, null=True)
+	
 
 class Sexo(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)

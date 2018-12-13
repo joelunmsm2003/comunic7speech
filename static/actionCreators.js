@@ -1,61 +1,29 @@
 import axios from 'axios';
 
-const loadProveedores = ()=>{
+const cargaproveedores = (data,total)=>{
+
 
     return dispatch =>{
 
-         return axios.get("/discador/api_proveedor")
-        .then(response=>{
+        dispatch({
+            type:"PROVEEDORES",
+            proveedores:data,
             
+        })
 
-            this.contador=0
+        dispatch({
+            type:"TOTAL_CONTADOR",
+            total_carteras:total,
+            
+        })
 
-            for (this.i = 0; this.i < response.data.length; this.i++) { 
-                
-
-                this.contador++
-            }
-
-            console.log(',,,,,',response.data)
-
-            dispatch({
-                type:"TRAE_PROVEEDORES",
-                proveedores:response.data,
-                contador:this.contador
-            })
-        });
-    };
-
-
+    }
+ 
 }
 
 
-const total_carteras = ()=>{
-
-    return dispatch =>{
-
-        return axios.get("/discador/api_proveedor")
-       .then(response=>{
-  
-           this.contador=0
-
-           for (this.i = 0; this.i < response.data.length; this.i++) { 
-               console.log('hahah',response.data[this.i].contar_carteras)
-
-               this.contador=this.contador+response.data[this.i].contar_carteras
-           }
 
 
-           dispatch({
-               type:"TOTAL_CONTADOR",
-               total_carteras:this.contador,
-               
-           })
-       });
-   };
-
-
-}
 
 
 const trae_resultados = (data)=>{
@@ -177,28 +145,6 @@ const loadGestiones = ()=>{
 
 }
 
-const loadDeltas = (data)=>{
-
-
-    console.log('Ingrese a deltas.........',data)
-
-    return dispatch =>{
-
-         return axios.get("/discador/api_proveedor")
-        .then(response=>{
-            console.log(response)
-            dispatch({
-                type:"TRAE_DELTAS",
-                deltas:response.data
-            })
-        });
-    };
-
-
-    
-  
-
-}
 
 
 const loadCarteras = ()=>{
@@ -261,4 +207,4 @@ const addToCart = producto => {
 
 
 
-export { addToCart,loadProveedores,loadDeltas,loadGestiones,total_carteras,loadCarteras,loadCuentas,loadScore,trae_carteras_proveedor,trae_id_gestion,trae_resultados,trae_subresultados };
+export { addToCart,cargaproveedores,loadGestiones,total_carteras,loadCarteras,loadCuentas,loadScore,trae_carteras_proveedor,trae_id_gestion,trae_resultados,trae_subresultados };

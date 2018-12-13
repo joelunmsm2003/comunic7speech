@@ -17,19 +17,19 @@ const Score = ({score,deltas}) =>{
           <div class="form-group col-md-4">
             Resultados Dela Gestion
           <br></br>
-              <select>
+            <select>
 
         
-{score.map(product=>
-            <option>{product.gestion.nombre}</option>
-            
-            )}
+                {score.map(product=>
+                <option>{product.gestion.nombre}</option>
+                
+                )}
             
             </select>
 
 
 
-</div>
+                </div>
           </ul>
 
 

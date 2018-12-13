@@ -1,13 +1,12 @@
 import React from "react";
 
 
-import { loadProveedores } from "../actionCreators"
 import { connect } from 'react-redux';
 
 
 
 
-const Proveedores = ({proveedores,deltas,total_carteras}) =>{
+const Proveedores = ({proveedores,total_carteras}) =>{
 
       return (
 
@@ -19,13 +18,13 @@ const Proveedores = ({proveedores,deltas,total_carteras}) =>{
 
                  <div className='row'>
 
-                    <div class='col-md-3'> <h1>Proveedor </h1></div>
+                    <div class='col-md-3'> <h1># Proveedor {proveedores.length} </h1></div>
                     <div class='col-md-3'><h1>Industria</h1></div>
-                    <div class='col-md-3'><h1># {total_carteras}</h1></div>
+                    <div class='col-md-3'><h1># Carteras {total_carteras}</h1></div>
 
                 </div>
              
-            {deltas.map(product=>
+            {proveedores.map(product=>
             
             <li class="list-group-item">
                 
@@ -64,6 +63,9 @@ const Proveedores = ({proveedores,deltas,total_carteras}) =>{
     }
 
 const  mapStateToProps = state =>{
+
+
+    console.log(state)
 
     return{
         proveedores:state.proveedores,

@@ -14,7 +14,7 @@ const cart = (state=[],action) => {
 
 const proveedores = (state=[],action) => {
 
-if(action.type==='TRAE_PROVEEDORES'){
+if(action.type==='PROVEEDORES'){
     return action.proveedores;
 }
  return state;
@@ -22,6 +22,7 @@ if(action.type==='TRAE_PROVEEDORES'){
 
  
 }
+
 
 const trae_carteras_proveedor = (state=[],action) => {
 
@@ -102,14 +103,6 @@ const cuentas = (state=[],action) => {
     
 }
 
-const deltas = (state=[],action) => {
-
-    if(action.type==='TRAE_DELTAS'){
-        return action.deltas;
-    }
-    return state;
-
-}
 
 const score = (state=[],action) => {
 
@@ -129,4 +122,4 @@ const logger = store => next => action => {
   }
 
 
-export default createStore(combineReducers({cart,proveedores,deltas,gestiones,total_carteras,cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados}),applyMiddleware(logger,thunk));
+export default createStore(combineReducers({cart,proveedores,gestiones,total_carteras,cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados}),applyMiddleware(logger,thunk));

@@ -6,7 +6,7 @@ import Gestion from "./Gestion";
 import Select from "./Select";
 import store from "../store";
 import { Provider } from "react-redux";
-import {loadProveedores, loadDeltas, loadGestiones,total_carteras, trae_carteras_proveedor} from "../actionCreators";
+import {loadProveedores, loadGestiones,total_carteras, trae_carteras_proveedor} from "../actionCreators";
 import AppRouter from "./Rutas"
 
 class App extends React.Component {
@@ -38,8 +38,13 @@ class App extends React.Component {
     render() {
 
       return (
-        <div>                     
+        <div> 
+        <Header/>
+
+         <div class='container'>                  
          <Select/>
+
+         </div>
 
         </div>
       );
@@ -53,12 +58,6 @@ class App extends React.Component {
   
 
 
-
-store.dispatch(loadProveedores())
-
-store.dispatch(loadDeltas())
-store.dispatch(loadGestiones())
-store.dispatch(total_carteras())
 
 
 
