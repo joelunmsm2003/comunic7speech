@@ -2558,17 +2558,17 @@ var createPath = function createPath(location) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return cargaproveedores; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_resultados; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_subresultados; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return trae_carteras_proveedor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return trae_id_gestion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_resultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return trae_subresultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return trae_carteras_proveedor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_id_gestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return loadGestiones; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadCarteras; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return loadNegocios; });
 /* unused harmony export loadCuentas */
-/* unused harmony export loadScore */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return trae_cuentas; });
-/* unused harmony export addToCart */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return loadScore; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return trae_cuentas; });
+/* unused harmony export detalle_cuentas */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
@@ -2655,7 +2655,7 @@ var loadCarteras = function loadCarteras() {
 };
 var loadNegocios = function loadNegocios() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_negocioss").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_negocios").then(function (response) {
       console.log(response);
       dispatch({
         type: "TRAE_NEGOCIOS",
@@ -2677,7 +2677,7 @@ var loadCuentas = function loadCuentas() {
 };
 var loadScore = function loadScore() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/discador/api_score").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_score").then(function (response) {
       console.log(response);
       dispatch({
         type: "TRAE_SCORE",
@@ -2695,10 +2695,15 @@ var trae_cuentas = function trae_cuentas(data) {
     });
   };
 };
-var addToCart = function addToCart(producto) {
-  return {
-    type: "ADD_TO_CART",
-    product: producto
+var detalle_cuentas = function detalle_cuentas() {
+  return function (dispatch) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_detalle_cuentas/1").then(function (response) {
+      console.log(response);
+      dispatch({
+        type: "TRAE_DETALLE_C",
+        detalle_cuentas: response.data
+      });
+    });
   };
 };
 
@@ -2851,6 +2856,17 @@ var negocios = function negocios() {
   return state;
 };
 
+var detalle_cuentas = function detalle_cuentas() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === 'TRAE_DETALLE_C') {
+    return action.detalle_cuentas;
+  }
+
+  return state;
+};
+
 var logger = function logger(store) {
   return function (next) {
     return function (action) {
@@ -2874,7 +2890,8 @@ var logger = function logger(store) {
   trae_carteras_proveedor: trae_carteras_proveedor,
   id_gestiones: id_gestiones,
   resultados: resultados,
-  subresultados: subresultados
+  subresultados: subresultados,
+  detalle_cuentas: detalle_cuentas
 }), Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */])(logger, __WEBPACK_IMPORTED_MODULE_1_redux_thunk__["a" /* default */])));
 
 /***/ }),
@@ -48818,7 +48835,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.state.proveedor_id = window.location.href.split('/')[5];
-      __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["e" /* trae_carteras_proveedor */])(this.state.proveedor_id));
+      __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["f" /* trae_carteras_proveedor */])(this.state.proveedor_id));
       __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["c" /* loadGestiones */])());
     }
   }, {
@@ -48876,7 +48893,7 @@ var Select = function Select(_ref) {
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, "Gestiones"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
     className: "form-control",
     onChange: function onChange(e) {
-      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["g" /* trae_id_gestion */])(e.target.value));
+      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["h" /* trae_id_gestion */])(e.target.value));
     }
   }, gestiones.map(function (item) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {
@@ -48887,7 +48904,7 @@ var Select = function Select(_ref) {
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, "IDGestiones"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
     className: "form-control",
     onChange: function onChange(e) {
-      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["h" /* trae_resultados */])(e.target.value));
+      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["i" /* trae_resultados */])(e.target.value));
     }
   }, id_gestiones ? id_gestiones.map(function (item) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {
@@ -48898,7 +48915,7 @@ var Select = function Select(_ref) {
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, "Resultados"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
     className: "form-control",
     onChange: function onChange(e) {
-      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["i" /* trae_subresultados */])(e.target.value));
+      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["j" /* trae_subresultados */])(e.target.value));
     }
   }, resultados ? resultados.map(function (item) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {

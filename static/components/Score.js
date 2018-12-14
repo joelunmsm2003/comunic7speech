@@ -1,6 +1,7 @@
 import React from "react";
-import { loadScore } from "../actionCreators";
+import { loadScore} from "../actionCreators";
 import { connect } from 'react-redux';
+
 
 const divStyle = {
 
@@ -9,7 +10,7 @@ const divStyle = {
 
 };
 
-const Score = ({score,deltas}) =>{
+const Score = ({score}) =>{
 
       return (
 
@@ -17,16 +18,16 @@ const Score = ({score,deltas}) =>{
           <div class="form-group col-md-4">
             <h3>Resultados Dela Gestion</h3>
           <br></br>
-<div className="form-group"> 
-<label for="exampleFormControlSelect1">Tipo de la gestion</label>
-<div class="form-group row">        
-              <select class="form-control col-sm-6" id="exampleFormControlSelect1">
+                    <div className="form-group"> 
+                    <label for="exampleFormControlSelect1">Tipo de la gestion</label>
+                    <div class="form-group row">        
+             <select class="form-control col-sm-6" id="exampleFormControlSelect1">
 
         
-                {score.map(product=>
-                <option>{product.gestion.nombre}</option>
-                
-                )}
+{score.map(product=>
+            <option>{product.gestion.nombre}</option>
+            
+            )}
             
             </select>
                   
@@ -54,8 +55,6 @@ const Score = ({score,deltas}) =>{
 
     }
 
-<button type="button" class="btn btn-primary">Guardar</button>
-
 
 
 
@@ -63,7 +62,8 @@ const  mapStateToProps = state =>{
 
     return{
         score:state.score,
-        deltas:state.deltas
+     
+       
     }
 
 }

@@ -2393,17 +2393,17 @@ module.exports = Cancel;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return cargaproveedores; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_resultados; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_subresultados; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return trae_carteras_proveedor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return trae_id_gestion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_resultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return trae_subresultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return trae_carteras_proveedor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_id_gestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return loadGestiones; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadCarteras; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return loadNegocios; });
 /* unused harmony export loadCuentas */
-/* unused harmony export loadScore */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return trae_cuentas; });
-/* unused harmony export addToCart */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return loadScore; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return trae_cuentas; });
+/* unused harmony export detalle_cuentas */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
@@ -2490,7 +2490,7 @@ var loadCarteras = function loadCarteras() {
 };
 var loadNegocios = function loadNegocios() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_negocioss").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_negocios").then(function (response) {
       console.log(response);
       dispatch({
         type: "TRAE_NEGOCIOS",
@@ -2512,7 +2512,7 @@ var loadCuentas = function loadCuentas() {
 };
 var loadScore = function loadScore() {
   return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("http://localhost:8000/discador/api_score").then(function (response) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_score").then(function (response) {
       console.log(response);
       dispatch({
         type: "TRAE_SCORE",
@@ -2530,10 +2530,15 @@ var trae_cuentas = function trae_cuentas(data) {
     });
   };
 };
-var addToCart = function addToCart(producto) {
-  return {
-    type: "ADD_TO_CART",
-    product: producto
+var detalle_cuentas = function detalle_cuentas() {
+  return function (dispatch) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_detalle_cuentas/1").then(function (response) {
+      console.log(response);
+      dispatch({
+        type: "TRAE_DETALLE_C",
+        detalle_cuentas: response.data
+      });
+    });
   };
 };
 
@@ -2686,6 +2691,17 @@ var negocios = function negocios() {
   return state;
 };
 
+var detalle_cuentas = function detalle_cuentas() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === 'TRAE_DETALLE_C') {
+    return action.detalle_cuentas;
+  }
+
+  return state;
+};
+
 var logger = function logger(store) {
   return function (next) {
     return function (action) {
@@ -2709,7 +2725,8 @@ var logger = function logger(store) {
   trae_carteras_proveedor: trae_carteras_proveedor,
   id_gestiones: id_gestiones,
   resultados: resultados,
-  subresultados: subresultados
+  subresultados: subresultados,
+  detalle_cuentas: detalle_cuentas
 }), Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */])(logger, __WEBPACK_IMPORTED_MODULE_1_redux_thunk__["a" /* default */])));
 
 /***/ }),
@@ -45296,10 +45313,12 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actionCreators__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Tabs__ = __webpack_require__(127);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Cuentas__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_redux__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_axios__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Historial_agente__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Score__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__store__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_react_redux__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_axios__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45328,6 +45347,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -45339,32 +45360,48 @@ function (_React$Component) {
     _classCallCheck(this, App);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this.state = {};
+    _this.state = {
+      detalle_cuentas: [{
+        id: 1
+      }]
+    };
     return _this;
   }
 
   _createClass(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      __WEBPACK_IMPORTED_MODULE_8_axios___default.a.get("/discador/api_cuentas").then(function (response) {
-        console.log(response.data);
-        __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actionCreators__["f" /* trae_cuentas */])(response.data));
+      var _this2 = this;
+
+      __WEBPACK_IMPORTED_MODULE_10_axios___default.a.get("/discador/api_cuentas").then(function (response) {
+        console.log('trae_Cuenta', response.data);
+        __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actionCreators__["g" /* trae_cuentas */])(response.data));
+      });
+      __WEBPACK_IMPORTED_MODULE_10_axios___default.a.get("/discador/api_detalle_cuentas/1").then(function (response) {
+        _this2.setState({
+          detalle_cuentas: response.data
+        });
       });
     }
   }, {
     key: "render",
     value: function render() {
+      var detalle_cuentas = this.state.detalle_cuentas;
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "container"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Tabs__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Cuentas__["a" /* default */], null)));
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Tabs__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Cuentas__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__Score__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Historial_agente__["a" /* default */], {
+        detalle_cuentas: detalle_cuentas
+      })));
     }
   }]);
 
   return App;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component); // store.dispatch(total_carteras())
 
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_redux__["a" /* Provider */], {
-  store: __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */]
+
+__WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actionCreators__["e" /* loadScore */])());
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9_react_redux__["a" /* Provider */], {
+  store: __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */]
 }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null)), document.getElementById('root'));
 
 /***/ }),
@@ -45393,7 +45430,7 @@ var Tabs = function Tabs() {
     role: "tab",
     "aria-controls": "pills-home",
     "aria-selected": "true"
-  }, "Home")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+  }, "Clientes")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
     class: "nav-item"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "nav-link",
@@ -45403,7 +45440,7 @@ var Tabs = function Tabs() {
     role: "tab",
     "aria-controls": "pills-profile",
     "aria-selected": "false"
-  }, "Profile")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+  }, "Telefono")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
     class: "nav-item"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "nav-link",
@@ -45413,7 +45450,27 @@ var Tabs = function Tabs() {
     role: "tab",
     "aria-controls": "pills-contact",
     "aria-selected": "false"
-  }, "Contact"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+  }, "Direcciones")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+    class: "nav-item"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+    class: "nav-link",
+    id: "pills-m-tab",
+    "data-toggle": "pill",
+    href: "#pills-m",
+    role: "tab",
+    "aria-controls": "pills-m",
+    "aria-selected": "false"
+  }, "Contactos")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+    class: "nav-item"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+    class: "nav-link",
+    id: "pills-email-tab",
+    "data-toggle": "pill",
+    href: "#pills-email",
+    role: "tab",
+    "aria-controls": "pills-email",
+    "aria-selected": "false"
+  }, "Email"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "tab-content",
     id: "pills-tabContent"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
@@ -45421,7 +45478,77 @@ var Tabs = function Tabs() {
     id: "pills-home",
     role: "tabpanel",
     "aria-labelledby": "pills-home-tab"
-  }, "1"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+  }, "1", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group row"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+    for: "staticEmail",
+    class: "col-sm-1 col-form-label"
+  }, "DNI:"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "col-sm-2"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+    type: "text",
+    readonly: true,
+    class: "form-control-plaintext",
+    id: "staticEmail",
+    value: "75417613"
+  })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+    for: "staticEmail",
+    class: "col-sm-2 col-form-label"
+  }, "Nombre Completo:"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "col-sm-3"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+    type: "text",
+    readonly: true,
+    class: "form-control-plaintext",
+    id: "staticEmail",
+    value: "Daniel Acevedo Ruiz"
+  })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+    for: "staticEmail",
+    class: "col-sm-2 col-form-label"
+  }, "Fecha/Nac"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "col-sm-2"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+    type: "text",
+    readonly: true,
+    class: "form-control-plaintext",
+    id: "staticEmail",
+    value: " 27-03-79"
+  }))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group row"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+    for: "staticEmail",
+    class: "col-sm-2 col-form-label"
+  }, "Departamento:"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "col-sm-2"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+    type: "text",
+    readonly: true,
+    class: "form-control-plaintext",
+    id: "staticEmail",
+    value: "Lima"
+  })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+    for: "staticEmail",
+    class: "col-sm-2 col-form-label"
+  }, "Provincia :"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "col-sm-2"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+    type: "text",
+    readonly: true,
+    class: "form-control-plaintext",
+    id: "staticEmail",
+    value: " Lima"
+  })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+    for: "staticEmail",
+    class: "col-sm-2 col-form-label"
+  }, "Distrito :"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "col-sm-2"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+    type: "text",
+    readonly: true,
+    class: "form-control-plaintext",
+    id: "staticEmail",
+    value: "Miraflore"
+  })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "tab-pane fade",
     id: "pills-profile",
     role: "tabpanel",
@@ -45431,7 +45558,17 @@ var Tabs = function Tabs() {
     id: "pills-contact",
     role: "tabpanel",
     "aria-labelledby": "pills-contact-tab"
-  }, ".3.")));
+  }, ".3."), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "tab-pane fade",
+    id: "pills-m",
+    role: "tabpanel",
+    "aria-labelledby": "pills-m-tab"
+  }, ".4."), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "tab-pane fade",
+    id: "pills-email",
+    role: "tabpanel",
+    "aria-labelledby": "pills-email-tab"
+  }, ".5.")));
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -45460,6 +45597,102 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bootstrap__);
 
 
+
+/***/ }),
+/* 135 */,
+/* 136 */,
+/* 137 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(7);
+
+
+var divStyle = {
+  margin: '40px',
+  border: '5px solid pink'
+};
+
+var Historial_agente = function Historial_agente(_ref) {
+  var detalle_cuentas = _ref.detalle_cuentas;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "Cuentas"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+    class: "list-group"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group col-md-6"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Informacion de Cuentas"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+    class: "table"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "N\xBA Cuenta"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "Dias/Mora"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "Total"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, detalle_cuentas.map(function (product) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.id));
+  }))))));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  console.log(state);
+  return {};
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(Historial_agente));
+
+/***/ }),
+/* 138 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionCreators__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(7);
+
+
+
+var divStyle = {
+  margin: '40px',
+  border: '5px solid pink'
+};
+
+var Score = function Score(_ref) {
+  var score = _ref.score;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+    class: "list-group"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group col-md-4"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Resultados Dela Gestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    className: "form-group"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+    for: "exampleFormControlSelect1"
+  }, "Tipo de la gestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group row"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
+    class: "form-control col-sm-6",
+    id: "exampleFormControlSelect1"
+  }, score.map(function (product) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, product.gestion.nombre);
+  })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
+    class: "form-control col-sm-6",
+    id: "exampleFormControlSelect1"
+  }, score.map(function (product) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, product.resultado.nombre);
+  })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+    type: "button",
+    class: "btn btn-primary"
+  }, "Guardar")));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    score: state.score
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps)(Score));
 
 /***/ })
 /******/ ]);

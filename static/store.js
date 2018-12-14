@@ -108,6 +108,7 @@ const score = (state=[],action) => {
 
 }
 
+
 const cuentas = (state=[],action) => {
 
     if(action.type==='TRAE_CUENTITAS'){
@@ -116,6 +117,7 @@ const cuentas = (state=[],action) => {
     return state;
 
 }
+
 
 const carteras = (state=[],action) => {
 
@@ -131,6 +133,17 @@ const negocios = (state=[],action) => {
     if(action.type==='TRAE_NEGOCIOS'){
         return action.negocios;
     }
+
+    return state
+
+}
+
+const detalle_cuentas = (state=[],action) => {
+
+    if(action.type==='TRAE_DETALLE_C'){
+        return action.detalle_cuentas;
+    } 
+
     return state;
 
 }
@@ -144,6 +157,4 @@ const logger = store => next => action => {
   }
 
 
-
-export default createStore(combineReducers({negocios,carteras,cart,proveedores,gestiones,total_carteras,cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados}),applyMiddleware(logger,thunk));
-
+export default createStore(combineReducers({negocios,carteras,cart,proveedores,gestiones,total_carteras,cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados,detalle_cuentas}),applyMiddleware(logger,thunk));

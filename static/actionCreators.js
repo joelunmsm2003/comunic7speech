@@ -168,7 +168,7 @@ export const loadNegocios = ()=>{
 
     return dispatch =>{
 
-         return axios.get("/discador/api_negocioss")
+         return axios.get("/discador/api_negocios")
         .then(response=>{
             console.log(response)
             dispatch({
@@ -201,7 +201,7 @@ export const loadScore = ()=>{
 
     return dispatch =>{
 
-         return axios.get("http://localhost:8000/discador/api_score")
+         return axios.get("/discador/api_score")
         .then(response=>{
             console.log(response)
             dispatch({
@@ -211,9 +211,6 @@ export const loadScore = ()=>{
         });
     };
 }
-
-
-
 
 export const trae_cuentas = data=>{
 
@@ -234,16 +231,25 @@ export const trae_cuentas = data=>{
 
 
 
+export const detalle_cuentas = ()=>{
 
-export const addToCart = producto => {
+    return dispatch =>{
 
-    return {
-
-        type:"ADD_TO_CART",
-        product:producto
-
-      }
+         return axios.get("/discador/api_detalle_cuentas/1")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_DETALLE_C",
+                detalle_cuentas:response.data
+            })
+        });
+    };
 }
+
+
+
+
+
 
 
 
