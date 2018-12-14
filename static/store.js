@@ -105,11 +105,21 @@ const score = (state=[],action) => {
 
 }
 
+
 const cuentas = (state=[],action) => {
 
     if(action.type==='TRAE_CUENTITAS'){
         return action.cuentas;
     }
+    return state;
+
+}
+
+const detalle_cuentass = (state=[],action) => {
+
+    if(action.type==='TRAE_DETALLE_C'){
+        return action.detalle_cuentas;
+    } 
     return state;
 
 }
@@ -123,5 +133,7 @@ const logger = store => next => action => {
   }
 
 
-export default createStore(combineReducers({cart,proveedores,gestiones,total_carteras,cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados}),applyMiddleware(logger,thunk));
+
+
+export default createStore(combineReducers({cart,proveedores,gestiones,total_carteras,cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados,detalle_cuentass}),applyMiddleware(logger,thunk));
 

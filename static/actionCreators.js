@@ -185,7 +185,7 @@ const loadScore = ()=>{
 
     return dispatch =>{
 
-         return axios.get("http://localhost:8000/discador/api_score")
+         return axios.get("/discador/api_score")
         .then(response=>{
             console.log(response)
             dispatch({
@@ -195,6 +195,41 @@ const loadScore = ()=>{
         });
     };
 }
+
+const trae_cuentas = data=>{
+
+    console.log('ARMA..... HAHAHAHHA',data)
+
+
+        return dispatch =>{
+
+             dispatch({
+                 type:"TRAE_CUENTITAS",
+                 cuentas:data
+             })
+        
+        };
+
+
+}
+
+
+
+const detalle_cuentas = ()=>{
+
+    return dispatch =>{
+
+         return axios.get("/discador/api_detalle_cuentas/1")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_DETALLE_C",
+                detalle_cuentas:response.data
+            })
+        });
+    };
+}
+
 
 
 // const loadDCuentas2 = ()=>{
@@ -229,22 +264,7 @@ const loadScore = ()=>{
 
 // }
 
-const trae_cuentas = data=>{
 
-    console.log('ARMA..... HAHAHAHHA',data)
-
-
-        return dispatch =>{
-
-             dispatch({
-                 type:"TRAE_CUENTITAS",
-                 cuentas:data
-             })
-        
-        };
-
-
-}
 
 
 
@@ -261,4 +281,4 @@ const addToCart = producto => {
 
 
 
-export { trae_cuentas,addToCart,cargaproveedores,loadGestiones,total_carteras,loadCarteras,loadScore,trae_carteras_proveedor,trae_id_gestion,trae_resultados,trae_subresultados };
+export { trae_cuentas,addToCart,cargaproveedores,loadGestiones,total_carteras,loadCarteras,loadScore,trae_carteras_proveedor,trae_id_gestion,trae_resultados,trae_subresultados,detalle_cuentas };

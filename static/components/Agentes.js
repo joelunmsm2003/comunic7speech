@@ -3,9 +3,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import Header from "./Header";
-import { trae_cuentas } from "../actionCreators";
+import { trae_cuentas, loadScore} from "../actionCreators";
 import Tabs from "./Tabs";
 import Cuentas from "./Cuentas";
+import Historial_agente from "./Historial_agente";
+
+import Score from "./Score";
 import store from "../store";
 import { Provider } from "react-redux";
 import axios from "axios"
@@ -29,17 +32,16 @@ class App extends React.Component {
         axios.get("/discador/api_cuentas")
         .then(response=>{
 
-          console.log(response.data)
+          console.log('trae_Cuenta',response.data)
     
 
           store.dispatch(trae_cuentas(response.data))
+          
      
 
         });
 
-        
-
-       
+    
       }
 
     render() {
@@ -51,10 +53,11 @@ class App extends React.Component {
         
 
         <Tabs/>
+        
         <Cuentas/>
 
-
-
+        <Score/>
+       
 
         </div>
         </div>
@@ -64,7 +67,9 @@ class App extends React.Component {
 
   }
 
-  
+  // store.dispatch(total_carteras())
+  store.dispatch(loadScore())
+ 
 
 
 
