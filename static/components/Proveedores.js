@@ -11,18 +11,26 @@ const Proveedores = ({proveedores,total_carteras}) =>{
       return (
 
       
-                    
+        <div>
+
+
+           
+             <div className='row'>
+
+                <div class='col-md-3'> <h1># Proveedor {proveedores.length} </h1></div>
+                <div class='col-md-3'><h1>Industria</h1></div>
+                <div class='col-md-3'><h1># Carteras {total_carteras}</h1></div>
+
+            </div>
+
+          
 
           <ul class="list-group">
 
 
-                 <div className='row'>
+                
+               
 
-                    <div class='col-md-3'> <h1># Proveedor {proveedores.length} </h1></div>
-                    <div class='col-md-3'><h1>Industria</h1></div>
-                    <div class='col-md-3'><h1># Carteras {total_carteras}</h1></div>
-
-                </div>
              
             {proveedores.map(product=>
             
@@ -55,6 +63,9 @@ const Proveedores = ({proveedores,total_carteras}) =>{
 
           </ul>
 
+
+          </div>
+
           
        
       );
@@ -74,6 +85,9 @@ const  mapStateToProps = state =>{
     }
 
 }
+
+
+
 
 
 

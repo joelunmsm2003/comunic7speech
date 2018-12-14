@@ -122,7 +122,12 @@ class IDGestion(models.Model):
 	def __unicode__(self):
 		return self.nombre
 		
+class Negocio(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
 
+	def __unicode__(self):
+		return self.nombre
+		
 		
 class Score(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
@@ -142,21 +147,11 @@ class Tipo_persona(models.Model):
 # class Estado_cliente(models.Model):
 # 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
-
-
-
-
-
-
-class CarteraProveedor(models.Model):
-	cartera=models.ForeignKey(Cartera, blank=True, null=True)
-	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
-
 class ProveedorCarteras(models.Model):
 	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
 	cartera=models.ForeignKey(Cartera, blank=True, null=True)
+	negocio=models.ForeignKey(Negocio, blank=True, null=True)
 	
-
 class Sexo(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 

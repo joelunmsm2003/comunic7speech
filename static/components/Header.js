@@ -19,7 +19,7 @@ const Header = ()=> {
                     {/* <a class="nav-link" href="#">Administrador <span class="sr-only">(current)</span></a> */}
                    
 <div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Administrador
   </button>
   <div class="dropdown-menu">

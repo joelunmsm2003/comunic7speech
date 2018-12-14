@@ -109,6 +109,13 @@ class IndustriaSerializer(serializers.ModelSerializer):
 		model = Industria
 		fields = '__all__'
 
+class NegocioSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Negocio
+		fields = '__all__'
+
+
 class ProveedorSerializer(serializers.ModelSerializer):
 
 	industria = IndustriaSerializer(many=False, read_only=True)
@@ -121,11 +128,11 @@ class ProveedorCarterasSerializer(serializers.ModelSerializer):
 
 	proveedor = ProveedorSerializer(many=False, read_only=True)
 	cartera = CarteraSerializer(many=False, read_only=True)
+	negocio = NegocioSerializer(many=False, read_only=True)
 
 	class Meta:
 		model = ProveedorCarteras
 		fields = '__all__'
-
 
 
 class ScoreSerializer(serializers.ModelSerializer):
