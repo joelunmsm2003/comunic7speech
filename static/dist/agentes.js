@@ -2704,7 +2704,7 @@ var cuentas = function cuentas() {
   return state;
 };
 
-var detalle_cuentass = function detalle_cuentass() {
+var detalle_cuentas = function detalle_cuentas() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
@@ -2737,7 +2737,7 @@ var logger = function logger(store) {
   id_gestiones: id_gestiones,
   resultados: resultados,
   subresultados: subresultados,
-  detalle_cuentass: detalle_cuentass
+  detalle_cuentas: detalle_cuentas
 }), Object(__WEBPACK_IMPORTED_MODULE_0_redux__["a" /* applyMiddleware */])(logger, __WEBPACK_IMPORTED_MODULE_1_redux_thunk__["a" /* default */])));
 
 /***/ }),
