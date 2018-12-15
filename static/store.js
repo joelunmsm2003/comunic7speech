@@ -98,7 +98,7 @@ const gestiones = (state=[],action) => {
 
 const score = (state=[],action) => {
 
-    if(action.type==='TRAE_SCORE'){
+    if(action.type==='TRAE_DATOS_SCORE'){
         return action.score;
     }
     return state;

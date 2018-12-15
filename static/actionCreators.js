@@ -185,16 +185,19 @@ const loadScore = ()=>{
 
     return dispatch =>{
 
-         return axios.get("http://localhost:8000/discador/api_score")
+         return axios.get("/discador/api_score")
         .then(response=>{
             console.log(response)
             dispatch({
-                type:"TRAE_SCORE",
+                type:"TRAE_DATOS_SCORE",
                 score:response.data
             })
         });
     };
 }
+
+
+
 
 
 // const loadDCuentas2 = ()=>{

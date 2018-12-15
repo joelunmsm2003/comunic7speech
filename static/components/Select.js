@@ -6,11 +6,12 @@ import store from "../store";
 
 
 
-const Select = ({data,gestiones,id_gestiones,resultados,subresultados}) =>{
+const Select = ({data,gestiones,id_gestiones,resultados,subresultados,id_proveedor}) =>{
 
       return (
 
         <div>
+            {id_proveedor}
         <div className='form-row'>
                 <div className='form-group col-md-3'>
 

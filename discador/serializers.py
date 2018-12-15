@@ -134,6 +134,7 @@ class ScoreSerializer(serializers.ModelSerializer):
 	resultado = ResultadoSerializer(many=False, read_only=True)
 	cartera = CarteraSerializer(many=False, read_only=True)
 	gestion = GestionSerializer(many=False, read_only=True)
+	idgestion = IDGestionSerializer(many=False, read_only=True)
 	subresultado = SubresultadoSerializer(many=False, read_only=True)
 
 	class Meta:

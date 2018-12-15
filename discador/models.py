@@ -146,15 +146,10 @@ class Tipo_persona(models.Model):
 
 
 
-
-
-class CarteraProveedor(models.Model):
-	cartera=models.ForeignKey(Cartera, blank=True, null=True)
-	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
-
 class ProveedorCarteras(models.Model):
 	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
 	cartera=models.ForeignKey(Cartera, blank=True, null=True)
+	negocio=models.ForeignKey(Negocio, blank=True, null=True)
 	
 
 class Sexo(models.Model):
