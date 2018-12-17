@@ -1100,18 +1100,18 @@ module.exports = defaults;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return cargaproveedores; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_resultados; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return trae_subresultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return trae_resultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return trae_subresultados; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return trae_carteras_proveedor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_id_gestion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_id_gestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return loadGestiones; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return loadCarteras; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return loadNegocios; });
-/* unused harmony export loadCuentas */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return loadScore; });
-/* unused harmony export trae_cuentas */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_cuentas; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return detalle_cuentas; });
 /* unused harmony export proveedores */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return trae_telefonos; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
@@ -1206,18 +1206,19 @@ var loadNegocios = function loadNegocios() {
       });
     });
   };
-};
-var loadCuentas = function loadCuentas() {
-  return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_cuentas").then(function (response) {
-      console.log(response);
-      dispatch({
-        type: "TRAE_CUENTAS",
-        cuentas: response.data
-      });
-    });
-  };
-};
+}; // export const loadCuentas = ()=>{
+//         return dispatch =>{
+//              return axios.get("/discador/api_cuentas")
+//             .then(response=>{
+//                 console.log(response)
+//                 dispatch({
+//                     type:"TRAE_CUENTAS",
+//                     cuentas:response.data
+//                 })
+//             });
+//         };
+// }
+
 var loadScore = function loadScore() {
   return function (dispatch) {
     return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_score").then(function (response) {
@@ -1229,12 +1230,14 @@ var loadScore = function loadScore() {
     });
   };
 };
-var trae_cuentas = function trae_cuentas(data) {
-  console.log('ARMA..... HAHAHAHHA', data);
+var trae_cuentas = function trae_cuentas() {
+  console.log('ARMA..... HAHAHAHHA');
   return function (dispatch) {
-    dispatch({
-      type: "TRAE_CUENTITAS",
-      cuentas: data
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_cuentas").then(function (response) {
+      dispatch({
+        type: "TRAE_CUENTITAS",
+        trae_cuentas: response.data
+      });
     });
   };
 };
@@ -1256,6 +1259,17 @@ var proveedores = function proveedores() {
       dispatch({
         type: "PROVEEDORES",
         proveedores: response.data
+      });
+    });
+  };
+};
+var trae_telefonos = function trae_telefonos() {
+  return function (dispatch) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_telefonos/").then(function (response) {
+      console.log(response);
+      dispatch({
+        type: "TRAE_TELEFONOS",
+        trae_telefonos: response.data
       });
     });
   };
@@ -2670,12 +2684,12 @@ var score = function score() {
   return state;
 };
 
-var cuentas = function cuentas() {
+var trae_cuentas = function trae_cuentas() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   if (action.type === 'TRAE_CUENTITAS') {
-    return action.cuentas;
+    return action.trae_cuentas;
   }
 
   return state;
@@ -2714,6 +2728,17 @@ var detalle_cuentas = function detalle_cuentas() {
   return state;
 };
 
+var trae_telefonos = function trae_telefonos() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === 'TRAE_TELEFONOS') {
+    return action.trae_telefonos;
+  }
+
+  return state;
+};
+
 var logger = function logger(store) {
   return function (next) {
     return function (action) {
@@ -2726,13 +2751,14 @@ var logger = function logger(store) {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_0_redux__["d" /* createStore */])(Object(__WEBPACK_IMPORTED_MODULE_0_redux__["c" /* combineReducers */])({
+  trae_telefonos: trae_telefonos,
   negocios: negocios,
   carteras: carteras,
   cart: cart,
   proveedores: proveedores,
   gestiones: gestiones,
   total_carteras: total_carteras,
-  cuentas: cuentas,
+  trae_cuentas: trae_cuentas,
   score: score,
   trae_carteras_proveedor: trae_carteras_proveedor,
   id_gestiones: id_gestiones,
@@ -45250,12 +45276,12 @@ var divStyle = {
 };
 
 var Cuentas = function Cuentas(_ref) {
-  var cuentas = _ref.cuentas;
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "Cuentas"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+  var trae_cuentas = _ref.trae_cuentas;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
     class: "list-group"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    class: "form-group col-md-6"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Informacion de Cuentas"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+    class: "form-group col-md-12"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "informaci\xF3n de Cuentas"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
     class: "table"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"
@@ -45263,7 +45289,7 @@ var Cuentas = function Cuentas(_ref) {
     scope: "col"
   }, "Dias/Mora"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"
-  }, "Total"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, cuentas.map(function (product) {
+  }, "Total"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, trae_cuentas.map(function (product) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.numero_cuenta), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.mora), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.total));
   }))))));
 };
@@ -45271,7 +45297,7 @@ var Cuentas = function Cuentas(_ref) {
 var mapStateToProps = function mapStateToProps(state) {
   console.log(state);
   return {
-    cuentas: state.cuentas
+    trae_cuentas: state.trae_cuentas
   };
 };
 
@@ -45284,7 +45310,59 @@ var mapStateToProps = function mapStateToProps(state) {
 /* 94 */,
 /* 95 */,
 /* 96 */,
-/* 97 */,
+/* 97 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionCreators__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(6);
+
+
+
+var divStyle = {
+  margin: '40px',
+  border: '5px solid pink'
+};
+
+var Score = function Score(_ref) {
+  var score = _ref.score;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+    class: "list-group"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group col-md-12"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Resultados De la Gesti\xF3n"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    className: "form-group"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
+    for: "exampleFormControlSelect1"
+  }, "Tipo de la Gesti\xF3n"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group row"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
+    class: "form-control col-sm-6",
+    id: "exampleFormControlSelect1"
+  }, score.map(function (product) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, product.gestion.nombre);
+  })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
+    class: "form-control col-sm-6",
+    id: "exampleFormControlSelect1"
+  }, score.map(function (product) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, product.resultado.nombre);
+  })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+    type: "button",
+    class: "btn btn-primary"
+  }, "Guardar")));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    score: state.score
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps)(Score));
+
+/***/ }),
 /* 98 */,
 /* 99 */,
 /* 100 */,
@@ -45313,7 +45391,8 @@ var mapStateToProps = function mapStateToProps(state) {
 /* 123 */,
 /* 124 */,
 /* 125 */,
-/* 126 */
+/* 126 */,
+/* 127 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45323,14 +45402,15 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Header__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actionCreators__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Tabs__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Tabs__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Cuentas__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Historial_agente__ = __webpack_require__(128);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Score__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Historial_agente__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Score__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__store__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_react_redux__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Telefonos__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_react_redux__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_axios__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45348,6 +45428,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -45391,7 +45472,25 @@ function (_React$Component) {
       var detalle_cuentas = this.state.detalle_cuentas;
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "container"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Tabs__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Cuentas__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__Score__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Historial_agente__["a" /* default */], null)));
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Tabs__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group row"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group col-md-6"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "card"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Cuentas__["a" /* default */], null))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group col-md-6"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "card"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Historial_agente__["a" /* default */], null))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group col-md-6"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "card"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__Score__["a" /* default */], null))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "form-group col-md-6"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+        class: "card"
+      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__Telefonos__["a" /* default */], null))))));
     }
   }]);
 
@@ -45400,12 +45499,14 @@ function (_React$Component) {
 
 
 __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actionCreators__["f" /* loadScore */])());
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9_react_redux__["a" /* Provider */], {
+__WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actionCreators__["h" /* trae_cuentas */])());
+__WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actionCreators__["l" /* trae_telefonos */])());
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10_react_redux__["a" /* Provider */], {
   store: __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */]
 }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null)), document.getElementById('root'));
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45416,7 +45517,9 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 
 
 var Tabs = function Tabs() {
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "card"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
     class: "nav nav-pills mb-3",
     id: "pills-tab",
     role: "tablist"
@@ -45568,7 +45671,7 @@ var Tabs = function Tabs() {
     id: "pills-email",
     role: "tabpanel",
     "aria-labelledby": "pills-email-tab"
-  }, ".5.")));
+  }, ".5.")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("hr", null)));
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -45581,7 +45684,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(Tabs));
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45597,19 +45700,15 @@ var divStyle = {
 
 var Historial_agente = function Historial_agente(_ref) {
   var detalle_cuentas = _ref.detalle_cuentas;
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "Cuentas"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
     class: "list-group"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    class: "form-group col-md-6"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Informacion de Cuentas"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+    class: "form-group col-md-12"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "historial deGesti\xF3n"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
     class: "table"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"
-  }, "N\xBA Cuenta"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
-    scope: "col"
-  }, "Dias/Mora"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
-    scope: "col"
-  }, "Total"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, detalle_cuentas.map(function (product) {
+  }, "Id"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, detalle_cuentas.map(function (product) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.id));
   }))))));
 };
@@ -45622,59 +45721,6 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(Historial_agente));
-
-/***/ }),
-/* 129 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actionCreators__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__(6);
-
-
-
-var divStyle = {
-  margin: '40px',
-  border: '5px solid pink'
-};
-
-var Score = function Score(_ref) {
-  var score = _ref.score;
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
-    class: "list-group"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    class: "form-group col-md-4"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Resultados Dela Gestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    className: "form-group"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
-    for: "exampleFormControlSelect1"
-  }, "Tipo de la gestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    class: "form-group row"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
-    class: "form-control col-sm-6",
-    id: "exampleFormControlSelect1"
-  }, score.map(function (product) {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, product.gestion.nombre);
-  })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
-    class: "form-control col-sm-6",
-    id: "exampleFormControlSelect1"
-  }, score.map(function (product) {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, product.resultado.nombre);
-  })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
-    type: "button",
-    class: "btn btn-primary"
-  }, "Guardar")));
-};
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    score: state.score
-  };
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["b" /* connect */])(mapStateToProps)(Score));
 
 /***/ }),
 /* 130 */,
@@ -45690,11 +45736,51 @@ var mapStateToProps = function mapStateToProps(state) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Agentes__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Agentes__ = __webpack_require__(127);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bootstrap__);
 
 
+
+/***/ }),
+/* 139 */,
+/* 140 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(6);
+
+
+var divStyle = {
+  margin: '40px',
+  border: '5px solid pink'
+};
+
+var Telefonos = function Telefonos(_ref) {
+  var trae_telefonos = _ref.trae_telefonos;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+    class: "list-group"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+    class: "form-group col-md-12"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Tel\xE9fonos"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+    class: "table"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+    scope: "col"
+  }, "numero telefonico"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, trae_telefonos.map(function (product) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, product.id));
+  }))))));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  console.log(state);
+  return {
+    trae_telefonos: state.trae_telefonos
+  };
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["b" /* connect */])(mapStateToProps)(Telefonos));
 
 /***/ })
 /******/ ]);

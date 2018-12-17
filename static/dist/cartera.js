@@ -1195,18 +1195,18 @@ module.exports = defaults;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return cargaproveedores; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_resultados; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return trae_subresultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return trae_resultados; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return trae_subresultados; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return trae_carteras_proveedor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_id_gestion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return trae_id_gestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return loadGestiones; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return loadCarteras; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return loadNegocios; });
-/* unused harmony export loadCuentas */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return loadScore; });
-/* unused harmony export trae_cuentas */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return trae_cuentas; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return detalle_cuentas; });
 /* unused harmony export proveedores */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return trae_telefonos; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
@@ -1301,18 +1301,19 @@ var loadNegocios = function loadNegocios() {
       });
     });
   };
-};
-var loadCuentas = function loadCuentas() {
-  return function (dispatch) {
-    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_cuentas").then(function (response) {
-      console.log(response);
-      dispatch({
-        type: "TRAE_CUENTAS",
-        cuentas: response.data
-      });
-    });
-  };
-};
+}; // export const loadCuentas = ()=>{
+//         return dispatch =>{
+//              return axios.get("/discador/api_cuentas")
+//             .then(response=>{
+//                 console.log(response)
+//                 dispatch({
+//                     type:"TRAE_CUENTAS",
+//                     cuentas:response.data
+//                 })
+//             });
+//         };
+// }
+
 var loadScore = function loadScore() {
   return function (dispatch) {
     return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_score").then(function (response) {
@@ -1324,12 +1325,14 @@ var loadScore = function loadScore() {
     });
   };
 };
-var trae_cuentas = function trae_cuentas(data) {
-  console.log('ARMA..... HAHAHAHHA', data);
+var trae_cuentas = function trae_cuentas() {
+  console.log('ARMA..... HAHAHAHHA');
   return function (dispatch) {
-    dispatch({
-      type: "TRAE_CUENTITAS",
-      cuentas: data
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_cuentas").then(function (response) {
+      dispatch({
+        type: "TRAE_CUENTITAS",
+        trae_cuentas: response.data
+      });
     });
   };
 };
@@ -1351,6 +1354,17 @@ var proveedores = function proveedores() {
       dispatch({
         type: "PROVEEDORES",
         proveedores: response.data
+      });
+    });
+  };
+};
+var trae_telefonos = function trae_telefonos() {
+  return function (dispatch) {
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/discador/api_telefonos/").then(function (response) {
+      console.log(response);
+      dispatch({
+        type: "TRAE_TELEFONOS",
+        trae_telefonos: response.data
       });
     });
   };
@@ -2835,12 +2849,12 @@ var score = function score() {
   return state;
 };
 
-var cuentas = function cuentas() {
+var trae_cuentas = function trae_cuentas() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   if (action.type === 'TRAE_CUENTITAS') {
-    return action.cuentas;
+    return action.trae_cuentas;
   }
 
   return state;
@@ -2879,6 +2893,17 @@ var detalle_cuentas = function detalle_cuentas() {
   return state;
 };
 
+var trae_telefonos = function trae_telefonos() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === 'TRAE_TELEFONOS') {
+    return action.trae_telefonos;
+  }
+
+  return state;
+};
+
 var logger = function logger(store) {
   return function (next) {
     return function (action) {
@@ -2891,13 +2916,14 @@ var logger = function logger(store) {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_0_redux__["d" /* createStore */])(Object(__WEBPACK_IMPORTED_MODULE_0_redux__["c" /* combineReducers */])({
+  trae_telefonos: trae_telefonos,
   negocios: negocios,
   carteras: carteras,
   cart: cart,
   proveedores: proveedores,
   gestiones: gestiones,
   total_carteras: total_carteras,
-  cuentas: cuentas,
+  trae_cuentas: trae_cuentas,
   score: score,
   trae_carteras_proveedor: trae_carteras_proveedor,
   id_gestiones: id_gestiones,
@@ -48964,7 +48990,7 @@ var Select = function Select(_ref) {
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, "Gestiones"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
     className: "form-control",
     onChange: function onChange(e) {
-      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["h" /* trae_id_gestion */])(e.target.value));
+      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["i" /* trae_id_gestion */])(e.target.value));
     }
   }, gestiones.map(function (item) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {
@@ -48975,7 +49001,7 @@ var Select = function Select(_ref) {
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, "IDGestiones"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
     className: "form-control",
     onChange: function onChange(e) {
-      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["i" /* trae_resultados */])(e.target.value));
+      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["j" /* trae_resultados */])(e.target.value));
     }
   }, id_gestiones ? id_gestiones.map(function (item) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {
@@ -48986,7 +49012,7 @@ var Select = function Select(_ref) {
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, "Resultados"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
     className: "form-control",
     onChange: function onChange(e) {
-      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["j" /* trae_subresultados */])(e.target.value));
+      return __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actionCreators__["k" /* trae_subresultados */])(e.target.value));
     }
   }, resultados ? resultados.map(function (item) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {

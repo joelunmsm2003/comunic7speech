@@ -9,7 +9,8 @@ const Tabs = () =>{
       return (
 
          <div >
-           
+
+         <div class="card" >
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Clientes</a>
@@ -77,8 +78,11 @@ const Tabs = () =>{
                 <div class="tab-pane fade" id="pills-email" role="tabpanel" aria-labelledby="pills-email-tab">.5.</div>
             </div>
 
-
+ <hr></hr>
+ 
+</div>
           </div>
+         
        
       );
 

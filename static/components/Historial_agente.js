@@ -16,18 +16,17 @@ const Historial_agente = ({detalle_cuentas}) =>{
 
          <div>
            
-           <h1>Cuentas</h1>
+           <h1></h1>
 
            <ul class="list-group">
-                <div class="form-group col-md-6">
-                    <h3>Informacion de Cuentas</h3>
+                <div class="form-group col-md-12">
+                    <h3>historial deGestión</h3>
                
                     <table class="table">
                         <thead>
                           <tr>
-                            <th scope="col">Nº Cuenta</th>
-                            <th scope="col">Dias/Mora</th>
-                            <th scope="col">Total</th>
+                            <th scope="col">Id</th>
+                           
                           </tr>
                         </thead>  
 

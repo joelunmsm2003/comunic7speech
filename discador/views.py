@@ -19,6 +19,16 @@ from discador.admin import *
 
 
 
+
+@csrf_exempt
+def api_telefonos(request):
+
+	_data = Telefonos.objects.all()
+
+	serializer =  TelefonosSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
 @csrf_exempt
 def api_detalle_cuentas(request,id):
 
