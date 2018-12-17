@@ -18,18 +18,18 @@ const Header = ()=> {
                 <li class="nav-item active">
                   
                    
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Administrador
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/discador/opcion_proveedor">Proveedor</a>
-                        <a class="dropdown-item" href="/discador/agentes">Agente</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                    </div>
+                <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Administrador
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/discador/opcion_proveedor">Proveedor</a>
+                    <a class="dropdown-item" href="/discador/agentes">Agente</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+                </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Marcador</a>

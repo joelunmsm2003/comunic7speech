@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const cargaproveedores = (data,total)=>{
+export const cargaproveedores = (data,total)=>{
 
 
     return dispatch =>{
@@ -26,7 +26,8 @@ const cargaproveedores = (data,total)=>{
 
 
 
-const trae_resultados = (data)=>{
+
+export const trae_resultados = (data)=>{
 
 
     console.log(data)
@@ -49,7 +50,7 @@ const trae_resultados = (data)=>{
 
 }
 
-const trae_subresultados = (data)=>{
+export const trae_subresultados = (data)=>{
 
 
     console.log(data)
@@ -72,7 +73,7 @@ const trae_subresultados = (data)=>{
 
 }
 
-const trae_carteras_proveedor = (data)=>{
+export const trae_carteras_proveedor = (data)=>{
 
 
     return dispatch =>{
@@ -92,7 +93,7 @@ const trae_carteras_proveedor = (data)=>{
 
 }
 
- const trae_id_gestion = (data)=>{
+export  const trae_id_gestion = (data)=>{
 
 
     console.log('actioncreator....',data)
@@ -124,7 +125,7 @@ const trae_carteras_proveedor = (data)=>{
 
 
 
-const loadGestiones = ()=>{
+export const loadGestiones = ()=>{
 
     return dispatch =>{
 
@@ -147,7 +148,7 @@ const loadGestiones = ()=>{
 
 
 
-const loadCarteras = ()=>{
+export const loadCarteras = ()=>{
 
     return dispatch =>{
 
@@ -163,9 +164,24 @@ const loadCarteras = ()=>{
 
 }
 
+export const loadNegocios = ()=>{
+
+    return dispatch =>{
+
+         return axios.get("/discador/api_negocios")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_NEGOCIOS",
+                negocios:response.data
+            })
+        });
+    };
+
+}
 
 
- const loadCuentas = ()=>{
+export const loadCuentas = ()=>{
 
         return dispatch =>{
     
@@ -173,7 +189,7 @@ const loadCarteras = ()=>{
             .then(response=>{
                 console.log(response)
                 dispatch({
-                    type:"TRAE_DETALLE_CUENTAS",
+                    type:"TRAE_CUENTAS",
                     cuentas:response.data
                 })
             });
@@ -181,7 +197,7 @@ const loadCarteras = ()=>{
 
 }
 
-const loadScore = ()=>{
+export const loadScore = ()=>{
 
     return dispatch =>{
 
@@ -196,43 +212,7 @@ const loadScore = ()=>{
     };
 }
 
-
-
-
-
-// const loadDCuentas2 = ()=>{
-
-//     return dispatch =>{
-
-//          return axios.get("http://localhost:8000/discador/api_detalle_cuentas/3")
-//         .then(response=>{
-//             console.log(response)
-//             dispatch({
-//                 type:"TRAE_DETALLE_CUENTAS",
-//                 score:response.data
-//             })
-//         });
-//     };
-// }
-
-
-// const loadCuentas = ()=>{
-
-//     return dispatch =>{
-
-//          return axios.get("/discador/api_cuentas")
-//         .then(response=>{
-//             console.log(response)
-//             dispatch({
-//                 type:"TRAE_DETALLE_CUENTAS",
-//                 cuentas:response.data
-//             })
-//         });
-//     };
-
-// }
-
-const trae_cuentas = data=>{
+export const trae_cuentas = data=>{
 
     console.log('ARMA..... HAHAHAHHA',data)
 
@@ -251,17 +231,39 @@ const trae_cuentas = data=>{
 
 
 
+export const detalle_cuentas = ()=>{
 
-const addToCart = producto => {
+    return dispatch =>{
 
-    return {
+         return axios.get("/discador/api_detalle_cuentas/1")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_DETALLE_CUENTAS",
+                detalle_cuentas:response.data
+            })
+        });
+    };
+}
 
-        type:"ADD_TO_CART",
-        product:producto
+export const proveedores = ()=>{
 
-      }
+    return dispatch =>{
+
+         return axios.get("/discador/api_proveedor/")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"PROVEEDORES",
+                proveedores:response.data
+            })
+        });
+    };
 }
 
 
 
-export { trae_cuentas,addToCart,cargaproveedores,loadGestiones,total_carteras,loadCarteras,loadScore,trae_carteras_proveedor,trae_id_gestion,trae_resultados,trae_subresultados };
+
+
+
+

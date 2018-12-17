@@ -28,7 +28,7 @@ const Carteras = ({carteras,deltas}) =>{
             )}
             
             </select>
-</div>
+            </div>
           </ul>
        
       );

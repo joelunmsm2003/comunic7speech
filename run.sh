@@ -1,4 +1,5 @@
 killall -9 python 
-python manage.py runserver 0.0.0.0:5000
-cd discador
+killall -9 node
+python manage.py runserver&
+cd static
 npm run build&

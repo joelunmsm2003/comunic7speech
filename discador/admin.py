@@ -67,7 +67,7 @@ class IDGestionAdmin(admin.ModelAdmin):
 
 @admin.register(ProveedorCarteras)
 class ProveedorCarterasAdmin(admin.ModelAdmin):
-	list_display = ('id','cartera','proveedor')
+	list_display = ('id','cartera','proveedor','negocio')
 	list_display_links = ('cartera',)
 	list_filter = ('proveedor',)
 

@@ -6,7 +6,7 @@ import Gestion from "./Gestion";
 import Cuentas from "./Cuentas";
 import store from "../store";
 import { Provider } from "react-redux";
-import {cargaproveedores,total_carteras} from "../actionCreators";
+import {cargaproveedores,total_carteras,proveedores, loadCarteras,loadNegocios, loadGestiones} from "../actionCreators";
 import AppRouter from "./Rutas"
 import axios from 'axios';
 import AgregaProveedor from "./AgregaProveedor";
@@ -20,8 +20,10 @@ class App extends React.Component {
         this.state = {
             value: "",
             editar:[],
-            cart:[],
-            proveedores:[]
+            carteras:[],
+            proveedor:"",
+            cartera:"",
+            negocio:""
         };
     
       }
@@ -29,7 +31,11 @@ class App extends React.Component {
       componentDidMount() {
 
 
-        console.log('entre aca.....')
+        store.dispatch(loadCarteras())
+
+        store.dispatch(loadNegocios())
+
+        //store.dispatch(proveedores())
 
         axios.get("/discador/api_proveedor")
         .then(response=>{
@@ -45,9 +51,9 @@ class App extends React.Component {
 
           this.contador = this.contador_carteras(response.data)
 
-
           store.dispatch(cargaproveedores(response.data,this.contador))
 
+  
 
     
         });
@@ -90,7 +96,45 @@ class App extends React.Component {
 
      }
 
+     onTextChange(data) {
+
+
+      const name = data.target.name;
+      const value = data.target.value
+
+      this.setState({
+        [name]: value
+      });
+
+ 
+    }
+
+    guarda(data){
+
+     
+
+
+      axios.post('/discador/guardaproveedor/', {
+        proveedor_id: this.state.proveedor,
+        cartera_id:this.state.cartera
+      })
+      .then(function (response) {
+        console.log('putassss');
+
+        $('#exampleModal').modal('hide')
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+    }
+
     render() {
+
+      const { proveedor } = this.state;
+
       return (
 
         <div>
@@ -101,16 +145,15 @@ class App extends React.Component {
        
             <div class='container'>
 
+              
 
-                <AgregaProveedor/>
+
+                <AgregaProveedor guarda={this.guarda.bind(this)} selectcartera={this.onTextChange.bind(this)}/>
     
                 <input type='text' onChange={this.busca_proveedor.bind(this)} className='form-control' placeholder='Buscar Proveedor'></input>
                 
 
                 <Proveedores/>
-
-             
-              
 
             </div>
         </div>

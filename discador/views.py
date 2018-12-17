@@ -35,10 +35,10 @@ def api_detalle_cuentas(request,id):
 	if request.method == 'GET':
 
 
-		_datos = Cuentas.objects.get(id=id)
+		_datos = Cuentas.objects.filter(id=id)
 
 		print 'traes la daata?', 
-		serializer =  ProveedorSerializer(_datos,many=False)
+		serializer =  CuentasSerializer(_datos,many=True)
 		return JsonResponse(serializer.data, safe=False)
 
 
@@ -205,6 +205,7 @@ def api_negocios(request):
 	return JsonResponse(serializer.data, safe=False)
 
 
+
 def api_producto(request):
 
 	_data = Producto.objects.all()
@@ -230,6 +231,24 @@ def menu_proveedor_1(request):
 	#return JsonResponse(serializer.data, safe=False)
 
 	return render(request, 'proveedor.html',{})
+
+
+@csrf_exempt
+def guardaproveedor(request):
+
+	if request.method == 'POST':
+
+		data = json.loads(request.body)
+		ProveedorCarteras(**data).save()
+
+
+	_data = Agente.objects.all()
+
+	serializer =  AgenteSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
+
 
 
 @csrf_exempt

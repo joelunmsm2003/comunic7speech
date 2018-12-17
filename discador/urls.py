@@ -51,7 +51,9 @@ urlpatterns = [
     url(r'^opcion_proveedor/',opcion_proveedor),
     url(r'^agentes/',agentes),
     url(r'^carteras/(\d+)',carteras),
+    url(r'^guardaproveedor/',guardaproveedor),
     url(r'^api_detalle_cuentas/(\d+)', api_detalle_cuentas),
+    url(r'^api_negocios/', api_negocios),
 
 
     
