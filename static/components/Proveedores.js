@@ -17,9 +17,9 @@ const Proveedores = ({proveedores,total_carteras}) =>{
            
              <div className='row'>
 
-                <div class='col-md-3'> <h1># Proveedor {proveedores.length} </h1></div>
-                <div class='col-md-3'><h1>Industria</h1></div>
-                <div class='col-md-3'><h1># Carteras {total_carteras}</h1></div>
+                <div class='col-md-3'> <h3># Proveedor {proveedores.length} </h3></div>
+                <div class='col-md-3'><h3>Industria</h3></div>
+                <div class='col-md-3'><h3># Carteras {total_carteras}</h3></div>
 
             </div>
 

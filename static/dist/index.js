@@ -46718,11 +46718,11 @@ var Proveedores = function Proveedores(_ref) {
     className: "row"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
-  }, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "# Proveedor ", proveedores.length, " ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+  }, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "# Proveedor ", proveedores.length, " ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "Industria")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Industria")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "# Carteras ", total_carteras))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "# Carteras ", total_carteras))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
     class: "list-group"
   }, proveedores.map(function (product) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
@@ -48870,6 +48870,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+var $ = __webpack_require__(88);
+
 var App =
 /*#__PURE__*/
 function (_React$Component) {
@@ -48887,7 +48889,10 @@ function (_React$Component) {
       carteras: [],
       proveedor: "",
       cartera: "",
-      negocio: ""
+      negocio: "",
+      proveedor_name: "",
+      cartera_name: "",
+      negocio_name: ""
     };
     return _this;
   }
@@ -48895,10 +48900,15 @@ function (_React$Component) {
   _createClass(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
       __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["c" /* loadCarteras */])());
       __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_8__actionCreators__["e" /* loadNegocios */])()); //store.dispatch(proveedores())
+
+      this.listaproveedores();
+    }
+  }, {
+    key: "listaproveedores",
+    value: function listaproveedores() {
+      var _this2 = this;
 
       __WEBPACK_IMPORTED_MODULE_10_axios___default.a.get("/discador/api_proveedor").then(function (response) {
         console.log(response.data);
@@ -48936,38 +48946,49 @@ function (_React$Component) {
   }, {
     key: "onTextChange",
     value: function onTextChange(data) {
+      var _this$setState;
+
+      console.log('selec.ss..', data.target.options[event.target.selectedIndex].text);
+      var name_select = data.target.name + '_name';
       var name = data.target.name;
       var value = data.target.value;
-      this.setState(_defineProperty({}, name, value));
+      var select_option = data.target.options[event.target.selectedIndex].text;
+      this.setState((_this$setState = {}, _defineProperty(_this$setState, name, value), _defineProperty(_this$setState, name_select, select_option), _this$setState));
     }
   }, {
-    key: "guarda",
-    value: function guarda(data) {
+    key: "handleSubmit",
+    value: function handleSubmit(data) {
       __WEBPACK_IMPORTED_MODULE_10_axios___default.a.post('/discador/guardaproveedor/', {
         proveedor_id: this.state.proveedor,
         cartera_id: this.state.cartera
       }).then(function (response) {
-        console.log('putassss');
+        $('.modal-backdrop').hide(); // for black background
+
+        $('body').removeClass('modal-open'); // For scroll run
+
         $('#exampleModal').modal('hide');
       }).catch(function (error) {
         console.log(error);
       });
+      data.preventDefault();
     }
   }, {
     key: "render",
     value: function render() {
-      var proveedor = this.state.proveedor;
+      var _this$state = this.state,
+          proveedor = _this$state.proveedor,
+          proveedor_name = _this$state.proveedor_name;
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Header__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
         class: "container"
-      }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__AgregaProveedor__["a" /* default */], {
-        guarda: this.guarda.bind(this),
+      }, proveedor_name, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__AgregaProveedor__["a" /* default */], {
+        guarda: this.handleSubmit.bind(this),
         selectcartera: this.onTextChange.bind(this)
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
         type: "text",
         onChange: this.busca_proveedor.bind(this),
         className: "form-control",
         placeholder: "Buscar Proveedor"
-      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Proveedores__["a" /* default */], null)));
+      }), proveedor_name.proveedor ? proveedor_name.proveedor.nombre : '', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Proveedores__["a" /* default */], null)));
     }
   }]);
 
@@ -49031,15 +49052,18 @@ var AgregaProveedor = function AgregaProveedor(_ref) {
     "aria-label": "Close"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", {
     "aria-hidden": "true"
-  }, "\xD7"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+  }, "\xD7"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
+    onSubmit: guarda
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "modal-body"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, "Proveedores"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
     className: "form-control",
+    required: true,
     name: "proveedor",
     onChange: function onChange(e) {
       return selectcartera(e);
     }
-  }, proveedores.map(function (item) {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null), proveedores.map(function (item) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {
       value: item.id
     }, item.nombre);
@@ -49047,11 +49071,12 @@ var AgregaProveedor = function AgregaProveedor(_ref) {
     style: divStyle
   }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, "Carteras"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
     className: "form-control",
+    required: true,
     name: "cartera",
     onChange: function onChange(e) {
       return selectcartera(e);
     }
-  }, carteras.map(function (item) {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null), carteras.map(function (item) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {
       value: item.id
     }, item.nombre);
@@ -49059,11 +49084,12 @@ var AgregaProveedor = function AgregaProveedor(_ref) {
     style: divStyle
   }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, "Negocios"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
     className: "form-control",
+    required: true,
     name: "negocio",
     onChange: function onChange(e) {
       return selectcartera(e);
     }
-  }, negocios.map(function (item) {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null), negocios.map(function (item) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {
       value: item.id
     }, item.nombre);
@@ -49074,13 +49100,9 @@ var AgregaProveedor = function AgregaProveedor(_ref) {
     class: "btn btn-secondary",
     "data-dismiss": "modal"
   }, "Cerrar"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
-    type: "button",
-    class: "btn btn-primary",
-    "data-dismiss": "modal",
-    onClick: function onClick(e) {
-      return guarda(e);
-    }
-  }, "Guardar"))))));
+    type: "submit",
+    class: "btn btn-primary"
+  }, "Guardar")))))));
 };
 
 var mapStateToProps = function mapStateToProps(state) {

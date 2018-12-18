@@ -31,53 +31,60 @@ const AgregaProveedor = ({proveedores,carteras,negocios,selectcartera,guarda}) =
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                    <label>Proveedores</label>
-                    <select className='form-control' name='proveedor' onChange={(e)=>selectcartera(e)}>
-                                                        
-                    {proveedores.map(item => (
 
-                        <option  value={item.id} >{item.nombre}</option>
+                    <form onSubmit={guarda}>
+                            <div class="modal-body">
+                            <label>Proveedores</label>
+                            <select className='form-control' required={true} name='proveedor' onChange={(e)=>selectcartera(e)}>
 
-                    ))}
-                                
-                    </select> 
-                    
-                    <div style={divStyle}></div>
-                    <label>Carteras</label>
-                    <select className='form-control' name='cartera' onChange={(e)=>selectcartera(e)}>
-                                                        
-                    {carteras.map(item => (
+                            <option></option>                    
+                            {proveedores.map(item => (
 
-                        <option  value={item.id} >{item.nombre}</option>
+                                <option  value={item.id} >{item.nombre}</option>
 
-                    ))}
-                                
-                    </select> 
+                            ))}
+                                        
+                            </select> 
+                            
+                            <div style={divStyle}></div>
+                            <label>Carteras</label>
+                            <select className='form-control' required={true} name='cartera' onChange={(e)=>selectcartera(e)}>
 
-                    <div style={divStyle}></div>
-                    <label>Negocios</label>
-                    <select className='form-control' name='negocio' onChange={(e)=>selectcartera(e)}>
-                                                        
-                    {negocios.map(item => (
+                            <option></option>                         
+                            {carteras.map(item => (
 
-                        <option  value={item.id} >{item.nombre}</option>
+                                <option  value={item.id} >{item.nombre}</option>
 
-                    ))}
-                                
-                    </select> 
+                            ))}
+                                        
+                            </select> 
 
-                    
+                            <div style={divStyle}></div>
+                            <label>Negocios</label>
+                            <select className='form-control' required={true} name='negocio' onChange={(e)=>selectcartera(e)}>
 
-                    
+                            <option></option>                         
+                            {negocios.map(item => (
+
+                                <option  value={item.id} >{item.nombre}</option>
+
+                            ))}
+                                        
+                            </select> 
+
+                            
 
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary"  >Guardar</button>
+                            </div>
+
+                    </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary"  data-dismiss="modal" onClick={(e)=>guarda(e)} >Guardar</button>
-                    </div>
-                    </div>
+                    
+                    
                 </div>
                 </div>
           </div>

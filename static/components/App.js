@@ -10,7 +10,7 @@ import {cargaproveedores,total_carteras,proveedores, loadCarteras,loadNegocios, 
 import AppRouter from "./Rutas"
 import axios from 'axios';
 import AgregaProveedor from "./AgregaProveedor";
-
+var $ = require ('jquery')
 
 
 class App extends React.Component {
@@ -23,8 +23,15 @@ class App extends React.Component {
             carteras:[],
             proveedor:"",
             cartera:"",
-            negocio:""
+            negocio:"",
+            proveedor_name:"",
+            cartera_name:"",
+            negocio_name:""
+
+
+
         };
+
     
       }
 
@@ -37,6 +44,14 @@ class App extends React.Component {
 
         //store.dispatch(proveedores())
 
+
+        this.listaproveedores()
+
+        
+      }
+
+
+      listaproveedores(){
         axios.get("/discador/api_proveedor")
         .then(response=>{
     
@@ -57,9 +72,6 @@ class App extends React.Component {
 
     
         });
-
-
-        
       }
 
       contador_carteras(data){
@@ -98,20 +110,27 @@ class App extends React.Component {
 
      onTextChange(data) {
 
+      
+          console.log('selec.ss..',data.target.options[event.target.selectedIndex].text)
 
-      const name = data.target.name;
-      const value = data.target.value
+          const name_select = data.target.name+'_name';
+          const name = data.target.name;
+          const value = data.target.value
+          const select_option = data.target.options[event.target.selectedIndex].text
 
-      this.setState({
-        [name]: value
-      });
+          this.setState({
+            [name]: value,
+            [name_select]: select_option
+          });
 
+  
  
     }
 
-    guarda(data){
 
-     
+    
+
+    handleSubmit(data){
 
 
       axios.post('/discador/guardaproveedor/', {
@@ -119,21 +138,24 @@ class App extends React.Component {
         cartera_id:this.state.cartera
       })
       .then(function (response) {
-        console.log('putassss');
 
-        $('#exampleModal').modal('hide')
+        $('.modal-backdrop').hide(); // for black background
+        $('body').removeClass('modal-open'); // For scroll run
+        $('#exampleModal').modal('hide'); 
 
       })
       .catch(function (error) {
         console.log(error);
       });
 
+      data.preventDefault()
+    
 
     }
 
     render() {
 
-      const { proveedor } = this.state;
+      const { proveedor,proveedor_name } = this.state;
 
       return (
 
@@ -146,12 +168,15 @@ class App extends React.Component {
             <div class='container'>
 
               
+                {proveedor_name}
 
-
-                <AgregaProveedor guarda={this.guarda.bind(this)} selectcartera={this.onTextChange.bind(this)}/>
+                <AgregaProveedor guarda={this.handleSubmit.bind(this)}  selectcartera={this.onTextChange.bind(this)}/>
     
                 <input type='text' onChange={this.busca_proveedor.bind(this)} className='form-control' placeholder='Buscar Proveedor'></input>
                 
+
+                {proveedor_name.proveedor ? proveedor_name.proveedor.nombre : '' } 
+
 
                 <Proveedores/>
 

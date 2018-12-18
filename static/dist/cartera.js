@@ -46676,11 +46676,11 @@ var Proveedores = function Proveedores(_ref) {
     className: "row"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
-  }, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "# Proveedor ", proveedores.length, " ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+  }, " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "# Proveedor ", proveedores.length, " ")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "Industria")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Industria")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "col-md-3"
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "# Carteras ", total_carteras))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "# Carteras ", total_carteras))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("ul", {
     class: "list-group"
   }, proveedores.map(function (product) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {

@@ -239,12 +239,13 @@ def guardaproveedor(request):
 	if request.method == 'POST':
 
 		data = json.loads(request.body)
+
 		ProveedorCarteras(**data).save()
 
 
-	_data = Agente.objects.all()
+	_data = ProveedorCarteras.objects.all()[:1]
 
-	serializer =  AgenteSerializer(_data,many=True)
+	serializer =  ProveedorCarterasSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
 
