@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'app',
     'callcenter',
     'speech',
+    'import_export',
     'rest_framework',
     'ws4redis'
     

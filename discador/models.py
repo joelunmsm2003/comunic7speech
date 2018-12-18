@@ -50,6 +50,9 @@ class Tipo_cartera(models.Model):
 class Gestion(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
+	class Meta:
+		verbose_name_plural='Tipo de Gestiones'
+
 	def __unicode__(self):
 		return self.nombre
 
@@ -86,6 +89,12 @@ class Resultado(models.Model):
 
 class Subresultado(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
+	
+	class Meta:
+		verbose_name_plural='Justificaciones'
+
+
+
 
 	def __unicode__(self):
 		return self.nombre
@@ -140,14 +149,18 @@ class ProveedorCarteras(models.Model):
 class Score(models.Model):
 
 	negocio=models.ForeignKey(Negocio, blank=True, null=True)
-	nombre=models.CharField(max_length=100,blank=True,null=True)
 	gestion = models.ForeignKey(Gestion, blank=True, null=True)
+	peso_tipo_gestion = models.CharField(max_length=1,default=0)
+
 	id_gestion = models.ForeignKey(IDGestion, blank=True, null=True)
+	peso_id_gestion = models.CharField(max_length=1,default=0)
 	resultado = models.ForeignKey(Resultado, blank=True, null=True)
+	peso_resultado = models.CharField(max_length=1,default=0)
 	subresultado = models.ForeignKey(Subresultado, blank=True)
+
 	peso=models.CharField(max_length=100,blank=True,null=True)
 	estado = models.CharField(max_length=1,default=0)
-	negocio = models.ForeignKey(Negocio, blank=True, null=True)
+	#negocio = models.ForeignKey(Negocio, blank=True, null=True)
 
 	def __unicode__(self):
 		return self.negocio.nombre
