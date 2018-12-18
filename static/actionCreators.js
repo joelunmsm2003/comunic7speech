@@ -181,21 +181,21 @@ export const loadNegocios = ()=>{
 }
 
 
-export const loadCuentas = ()=>{
+// export const loadCuentas = ()=>{
 
-        return dispatch =>{
+//         return dispatch =>{
     
-             return axios.get("/discador/api_cuentas")
-            .then(response=>{
-                console.log(response)
-                dispatch({
-                    type:"TRAE_CUENTAS",
-                    cuentas:response.data
-                })
-            });
-        };
+//              return axios.get("/discador/api_cuentas")
+//             .then(response=>{
+//                 console.log(response)
+//                 dispatch({
+//                     type:"TRAE_CUENTAS",
+//                     cuentas:response.data
+//                 })
+//             });
+//         };
 
-}
+// }
 
 export const loadScore = ()=>{
 
@@ -228,19 +228,25 @@ export const score_negocios = (id_negocio)=>{
 }
 
 
-export const trae_cuentas = data=>{
 
-    console.log('ARMA..... HAHAHAHHA',data)
+export const trae_cuentas = ()=>{
+
+    console.log('ARMA..... HAHAHAHHA',)
 
 
         return dispatch =>{
 
+            return axios.get("/discador/api_cuentas")
+            .then(response=>{
+
              dispatch({
                  type:"TRAE_CUENTITAS",
-                 cuentas:data
+                 trae_cuentas:response.data
              })
         
-        };
+        });
+
+    };
 
 
 }
@@ -275,6 +281,31 @@ export const proveedores = ()=>{
             })
         });
     };
+
+
+
+    
+}
+
+
+
+export const trae_telefonos = ()=>{
+
+    return dispatch =>{
+
+         return axios.get("/discador/api_telefonos/")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_TELEFONOS",
+                trae_telefonos:response.data
+            })
+        });
+    };
+
+
+
+    
 }
 
 

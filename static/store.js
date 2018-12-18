@@ -121,10 +121,12 @@ const score_negocios = (state=[],action) => {
 }
 
 
-const cuentas = (state=[],action) => {
+
+const trae_cuentas = (state=[],action) => {
+
 
     if(action.type==='TRAE_CUENTITAS'){
-        return action.cuentas;
+        return action.trae_cuentas;
     }
     return state;
 
@@ -161,6 +163,17 @@ const detalle_cuentas = (state=[],action) => {
 }
 
 
+const trae_telefonos = (state=[],action) => {
+
+    if(action.type==='TRAE_TELEFONOS'){
+        return action.trae_telefonos;
+    } 
+
+    return state;
+
+}
+
+
 const logger = store => next => action => {
     console.log('dispatching', action)
     let result = next(action)
@@ -169,4 +182,4 @@ const logger = store => next => action => {
   }
 
 
-export default createStore(combineReducers({negocios,carteras,cart,proveedores,gestiones,total_carteras,cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados,detalle_cuentas}),applyMiddleware(logger,thunk));
+export default createStore(combineReducers({trae_telefonos,negocios,carteras,cart,proveedores,gestiones,total_carteras,trae_cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados,detalle_cuentas}),applyMiddleware(logger,thunk));

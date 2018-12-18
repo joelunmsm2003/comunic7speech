@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from 'react-redux';
+import { connect , trae_cuentas} from 'react-redux';
 
 const divStyle = {
 
@@ -10,17 +10,17 @@ const divStyle = {
 
 
 
-const Cuentas = ({cuentas}) =>{
+const Cuentas = ({trae_cuentas}) =>{
 
       return (
 
          <div>
            
-           <h1>Cuentas</h1>
+           <h1></h1>
 
            <ul class="list-group">
-                <div class="form-group col-md-6">
-                    <h3>Informacion de Cuentas</h3>
+                <div class="form-group col-md-12">
+                    <h3>información de Cuentas</h3>
                
                     <table class="table">
                         <thead>
@@ -32,7 +32,7 @@ const Cuentas = ({cuentas}) =>{
                         </thead>  
 
                       <tbody>
-                      {cuentas.map(product=>
+                      {trae_cuentas.map(product=>
                               <tr>
                                 <td>{product.numero_cuenta}</td>
                                 <td>{product.mora}</td>
@@ -59,7 +59,7 @@ const  mapStateToProps = state =>{
    console.log(state)
 
     return{
-        cuentas:state.cuentas
+        trae_cuentas:state.trae_cuentas
     }
 
 }

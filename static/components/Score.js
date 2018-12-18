@@ -15,11 +15,11 @@ const Score = ({score}) =>{
       return (
 
           <ul class="list-group">
-          <div class="form-group col-md-4">
-            <h3>Resultados Dela Gestion</h3>
+          <div class="form-group col-md-12">
+            <h3>Resultados De la Gestión</h3>
           <br></br>
                     <div className="form-group"> 
-                    <label for="exampleFormControlSelect1">Tipo de la gestion</label>
+                    <label for="exampleFormControlSelect1">Tipo de la Gestión</label>
                     <div class="form-group row">        
              <select class="form-control col-sm-6" id="exampleFormControlSelect1">
 

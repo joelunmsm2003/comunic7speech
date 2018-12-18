@@ -53,6 +53,9 @@ urlpatterns = [
     url(r'^carteras/(\d+)',carteras),
     url(r'^guardaproveedor/',guardaproveedor),
     url(r'^api_detalle_cuentas/(\d+)', api_detalle_cuentas),
+    url(r'^api_telefonos', api_telefonos),
+
+
     url(r'^api_negocios/', api_negocios),
     url(r'^api_resultados_negocio/(\d+)', api_resultados_negocio),
 

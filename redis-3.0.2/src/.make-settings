@@ -1,10 +1,19 @@
 STD=-std=c99 -pedantic
 WARN=-Wall -W
 OPT=-O2
+<<<<<<< HEAD
 MALLOC=libc
+=======
+MALLOC=jemalloc
+>>>>>>> 60599cc624474ec64777bfa806895f666c1257d1
 CFLAGS=
 LDFLAGS=
 REDIS_CFLAGS=
 REDIS_LDFLAGS=
+<<<<<<< HEAD
 PREV_FINAL_CFLAGS=-std=c99 -pedantic -Wall -W -O2 -g -ggdb -I../deps/hiredis -I../deps/linenoise -I../deps/lua/src
 PREV_FINAL_LDFLAGS= -g -ggdb
+=======
+PREV_FINAL_CFLAGS=-std=c99 -pedantic -Wall -W -O2 -g -ggdb -I../deps/hiredis -I../deps/linenoise -I../deps/lua/src -DUSE_JEMALLOC -I../deps/jemalloc/include
+PREV_FINAL_LDFLAGS= -g -ggdb -rdynamic
+>>>>>>> 60599cc624474ec64777bfa806895f666c1257d1
