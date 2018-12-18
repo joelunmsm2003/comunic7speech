@@ -125,11 +125,22 @@ class Negocio(models.Model):
 	def __unicode__(self):
 		return self.nombre
 		
-		
-class Score(models.Model):
-	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+
+class ProveedorCarteras(models.Model):
 	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
 	cartera=models.ForeignKey(Cartera, blank=True, null=True)
+	negocio=models.ForeignKey(Negocio, blank=True, null=True)
+
+	def __unicode__(self):
+		return self.proveedor.nombre+self.cartera.nombre
+		
+	
+
+class Score(models.Model):
+
+	negocio=models.ForeignKey(Negocio, blank=True, null=True)
+	nombre=models.CharField(max_length=100,blank=True,null=True)
 	gestion = models.ForeignKey(Gestion, blank=True, null=True)
 	id_gestion = models.ForeignKey(IDGestion, blank=True, null=True)
 	resultado = models.ForeignKey(Resultado, blank=True, null=True)
@@ -138,17 +149,20 @@ class Score(models.Model):
 	estado = models.CharField(max_length=1,default=0)
 	negocio = models.ForeignKey(Negocio, blank=True, null=True)
 
+
+
+class ScoreProveedor(models.Model):
+
+	score=models.ForeignKey(Resultado, blank=True, null=True)
+	proveedor=models.ForeignKey(ProveedorCarteras, blank=True, null=True)
+
 class Tipo_persona(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
 # class Estado_cliente(models.Model):
 # 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
-class ProveedorCarteras(models.Model):
-	proveedor = models.ForeignKey(Proveedor, blank=True, null=True)
-	cartera=models.ForeignKey(Cartera, blank=True, null=True)
-	negocio=models.ForeignKey(Negocio, blank=True, null=True)
-	
+
 class Sexo(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 

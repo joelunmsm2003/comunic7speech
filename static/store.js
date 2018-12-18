@@ -10,6 +10,7 @@ const cart = (state=[],action) => {
 
     return state;
 
+
 }
 
 const proveedores = (state=[],action) => {
@@ -102,6 +103,17 @@ const gestiones = (state=[],action) => {
 const score = (state=[],action) => {
 
     if(action.type==='TRAE_DATOS_SCORE'){
+        return action.score;
+    }
+    return state;
+
+}
+
+
+
+const score_negocios = (state=[],action) => {
+
+    if(action.type==='TRAE_DATOS_NEGOCIOS_SCORE'){
         return action.score;
     }
     return state;

@@ -4,6 +4,7 @@ import Proveedores from "./Proveedores";
 import Header from "./Header";
 import Gestion from "./Gestion";
 import Cuentas from "./Cuentas";
+import AsignaScore from "./AsignaScore"
 import store from "../store";
 import { Provider } from "react-redux";
 import {cargaproveedores,total_carteras,proveedores, loadCarteras,loadNegocios, loadGestiones} from "../actionCreators";
@@ -171,6 +172,13 @@ class App extends React.Component {
                 {proveedor_name}
 
                 <AgregaProveedor guarda={this.handleSubmit.bind(this)}  selectcartera={this.onTextChange.bind(this)}/>
+
+
+
+
+                <AsignaScore/>
+
+
     
                 <input type='text' onChange={this.busca_proveedor.bind(this)} className='form-control' placeholder='Buscar Proveedor'></input>
                 
@@ -179,6 +187,8 @@ class App extends React.Component {
 
 
                 <Proveedores/>
+
+
 
             </div>
         </div>

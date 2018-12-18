@@ -54,6 +54,15 @@ def agentes(request):
 	return render(request, 'agentes.html',{})
 
 
+@csrf_exempt
+def api_resultados_negocio(request,id_negocio):
+
+	_data = Score.objects.filter(negocio_id=id_negocio)
+
+	serializer =  ScoreSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
 
 @csrf_exempt
 def api_cuentas(request):

@@ -212,6 +212,22 @@ export const loadScore = ()=>{
     };
 }
 
+export const score_negocios = (id_negocio)=>{
+
+    return dispatch =>{
+
+         return axios.get("/discador/api_resultados_negocio/"+id_negocio)
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_DATOS_NEGOCIOS_SCORE",
+                score:response.data
+            })
+        });
+    };
+}
+
+
 export const trae_cuentas = data=>{
 
     console.log('ARMA..... HAHAHAHHA',data)

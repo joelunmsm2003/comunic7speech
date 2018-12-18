@@ -10,7 +10,7 @@ const divStyle = {
 
 
 
-const AsignaScore = ({score}) =>{
+const AsignaScore = ({score_negocios}) =>{
 
       return (
 
@@ -34,8 +34,8 @@ const AsignaScore = ({score}) =>{
 
                           
 
-                            {score ?
-                                    score.map(item=>
+                            {score_negocios ?
+                                score_negocios.map(item=>
                                             <tr>
                                           
                                             <td>{item.gestion.nombre}</td>
@@ -79,7 +79,7 @@ const  mapStateToProps = state =>{
    console.log('00000',state)
 
     return{
-        score:state.score
+        score_negocios:state.score_negocios
     }
 
 }

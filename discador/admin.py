@@ -115,13 +115,19 @@ class ResultadoAdmin(admin.ModelAdmin):
 
 @admin.register(Score)
 class ScoreAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre','proveedor','cartera','gestion','id_gestion','resultado','subresultado','peso')
-	list_editable=('peso',)
-	list_filter=('proveedor','cartera','resultado')
+	list_display = ('id','negocio','gestion','id_gestion','resultado','subresultado','peso')
+	list_editable=('peso','negocio')
+	list_filter=('resultado',)
 
 @admin.register(Tipo_persona)
 class Tipo_personaAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
+
+
+@admin.register(ScoreProveedor)
+class ScoreProveedorAdmin(admin.ModelAdmin):
+	list_display = ('id','score','proveedor')
+
 
 # @admin.register(Estado_cliente)
 # class Estado_clienteAdmin(admin.ModelAdmin):
