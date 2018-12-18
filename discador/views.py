@@ -68,7 +68,7 @@ def agentes(request):
 @csrf_exempt
 def subescores(request):
 
-	df = pd.read_csv('/Users/xiencias/score.csv')
+	df = pd.read_csv('/home/jose/Descargas/Libro1.csv')
 
 	for i in range(df.shape[0]):
 
