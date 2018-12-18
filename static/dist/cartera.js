@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 135);
+/******/ 	return __webpack_require__(__webpack_require__.s = 136);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -46805,26 +46805,29 @@ var divStyle = {
 };
 
 var AsignaScore = function AsignaScore(_ref) {
-  var score_negocios = _ref.score_negocios;
+  var score_negocios = _ref.score_negocios,
+      activascore = _ref.activascore;
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
     class: "table"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"
-  }, "Gestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+  }, "Tipo de Gestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"
-  }, "IDGestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
+  }, "ID Gestion"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"
   }, "Resultado"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"
-  }, "SubResultado"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, score_negocios ? score_negocios.map(function (item) {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, item.gestion.nombre), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, item.idgestion ? item.idgestion.nombre : 'No existe'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, item.resultado ? item.resultado.nombre : 'No existe'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, item.subresultado ? item.resultado.nombre : 'No existe'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", {
-      class: "switch"
-    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-      type: "checkbox",
-      defaultChecked: true
-    }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", {
-      class: "slider round"
-    }))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null));
+  }, "Justificaci\xF3n"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tbody", null, score_negocios ? score_negocios.map(function (item) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, item.gestion.nombre), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, item.idgestion ? item.idgestion.nombre : 'No existe'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, item.resultado ? item.resultado.nombre : 'No existe'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, item.subresultado ? item.resultado.nombre : 'No existe'), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
+      className: "form-control",
+      onChange: function onChange(e) {
+        return activascore(e, item);
+      }
+    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {
+      value: "1"
+    }, "Desactivar"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", {
+      value: "2"
+    }, "Activar"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("td", null));
   }) : 'No hay Registros')));
 };
 
@@ -48863,19 +48866,20 @@ var Importador = function Importador() {
 /* 132 */,
 /* 133 */,
 /* 134 */,
-/* 135 */
+/* 135 */,
+/* 136 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Cartera__ = __webpack_require__(136);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Cartera__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bootstrap__);
 
 
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48887,7 +48891,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__AsignaScore__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Header__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Gestion__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Select__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Select__ = __webpack_require__(138);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__store__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react_redux__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__actionCreators__ = __webpack_require__(16);
@@ -48973,7 +48977,7 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null)), document.getElementById('app'));
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

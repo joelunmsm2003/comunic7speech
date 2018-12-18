@@ -10,7 +10,7 @@ const divStyle = {
 
 
 
-const AsignaScore = ({score_negocios}) =>{
+const AsignaScore = ({score_negocios,activascore}) =>{
 
       return (
 
@@ -22,10 +22,10 @@ const AsignaScore = ({score_negocios}) =>{
                     <table class="table">
                         <thead>
                             <tr>
-                            <th scope="col">Gestion</th>
-                            <th scope="col">IDGestion</th>
+                            <th scope="col">Tipo de Gestion</th>
+                            <th scope="col">ID Gestion</th>
                             <th scope="col">Resultado</th>
-                            <th scope="col">SubResultado</th>
+                            <th scope="col">Justificación</th>
 
                             </tr>
                         </thead>  
@@ -44,10 +44,10 @@ const AsignaScore = ({score_negocios}) =>{
                                             <td>{ item.resultado ? item.resultado.nombre: 'No existe'}</td>
                                             <td>{ item.subresultado ? item.resultado.nombre: 'No existe'}</td>
                                             <td>
-                                            <label class="switch">
-                                            <input type="checkbox" defaultChecked/>
-                                            <span class="slider round"></span>
-                                            </label>
+                                            <select className='form-control' onChange={(e)=>activascore(e,item)}>
+                                                <option value='1'>Desactivar</option>
+                                                <option value='2'>Activar</option>
+                                            </select>
                                             </td>
 
 

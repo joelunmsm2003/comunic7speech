@@ -156,6 +156,9 @@ class AgenteAdmin(admin.ModelAdmin):
 class Tipo_telefonoAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 
+@admin.register(EstadoScore)
+class Tipo_telefonoAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
 
 
 @admin.register(Fuente_telefono)

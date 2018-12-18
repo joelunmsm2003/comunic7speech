@@ -4,6 +4,7 @@ import Proveedores from "./Proveedores";
 import Header from "./Header";
 import Gestion from "./Gestion";
 import Cuentas from "./Cuentas";
+import Alerta from "./Alerta";
 import AsignaScore from "./AsignaScore"
 import store from "../store";
 import { Provider } from "react-redux";
@@ -32,7 +33,8 @@ class App extends React.Component {
             proveedor_name:"",
             cartera_name:"",
             negocio_name:"",
-            score_negocios:[]
+            score_negocios:[],
+            mensaje:""
 
 
 
@@ -80,6 +82,8 @@ class App extends React.Component {
         });
       }
 
+      
+
       contador_carteras(data){
 
           this.contador=0
@@ -91,6 +95,53 @@ class App extends React.Component {
           }
 
           return this.contador
+
+      }
+
+
+      activascore(data,item){
+
+
+        console.log(item.gestion)
+
+
+        this.setState({
+
+          mensaje:data.target.options[event.target.selectedIndex].text+' '+item.gestion.nombre
+
+        })
+
+
+      
+
+
+
+
+        this.setState({
+
+          mensaje:""
+        })
+  
+
+
+        axios.post('/discador/api_asigna_score/', {
+          item,
+          estado:data.target.value,
+          proveedor:{
+          proveedor_id:this.state.proveedor,
+          cartera_id:this.state.cartera,
+          negocio_id:this.state.negocio}
+        })
+        .then(function (response) {
+  
+          
+        
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
 
       }
 
@@ -142,10 +193,6 @@ class App extends React.Component {
                       
                     });  
 
-
-                    
-
-                   
         
               });
 
@@ -183,7 +230,7 @@ class App extends React.Component {
 
     render() {
 
-      const { proveedor,proveedor_name,cartera_name,negocio_name,score_negocios } = this.state;
+      const { mensaje,proveedor,proveedor_name,cartera_name,negocio_name,score_negocios } = this.state;
 
       return (
 
@@ -199,6 +246,10 @@ class App extends React.Component {
               
                 <h4>Asignacion del Score</h4>
 
+              
+                { mensaje ? <Alerta mensaje={mensaje}/> : <div></div>}
+                
+
                 <AgregaProveedor guarda={this.handleSubmit.bind(this)}  selectcartera={this.onTextChange.bind(this)}/>
 
                 <div style={divStyle}></div>
@@ -209,7 +260,7 @@ class App extends React.Component {
 
 
 
-                <AsignaScore score_negocios={score_negocios}/>
+                <AsignaScore score_negocios={score_negocios} activascore={(e,item)=>this.activascore(e,item)}/>
 
 
     

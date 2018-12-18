@@ -113,6 +113,14 @@ class Cartera(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
+
+class EstadoScore(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+	def __unicode__(self):
+		return self.nombre
+
+
 class IDGestion(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
@@ -156,6 +164,7 @@ class ScoreProveedor(models.Model):
 
 	score=models.ForeignKey(Score, blank=True, null=True)
 	proveedor=models.ForeignKey(ProveedorCarteras, blank=True, null=True)
+	estado=models.ForeignKey(EstadoScore, blank=True, null=True)
 
 class Tipo_persona(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)

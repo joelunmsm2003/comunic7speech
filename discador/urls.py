@@ -54,10 +54,12 @@ urlpatterns = [
     url(r'^guardaproveedor/',guardaproveedor),
     url(r'^api_detalle_cuentas/(\d+)', api_detalle_cuentas),
     url(r'^api_telefonos', api_telefonos),
-
+    url(r'^api_asigna_score', api_asigna_score),
+    url(r'^api_obtiene_estado_score/(\d+)/(\d+)/(\d+)', api_obtiene_estado_score),
 
     url(r'^api_negocios/', api_negocios),
     url(r'^api_resultados_negocio/(\d+)', api_resultados_negocio),
+    url(r'^subescores/', subescores),
 
 
     

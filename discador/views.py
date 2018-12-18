@@ -64,6 +64,36 @@ def agentes(request):
 	return render(request, 'agentes.html',{})
 
 
+
+@csrf_exempt
+def subescores(request):
+
+	df = pd.read_csv('/Users/xiencias/score.csv')
+
+	for i in range(df.shape[0]):
+
+
+		print df['TIPO GESTION'][i]
+
+		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+		print df['IDGESTION'][i]
+		idgestion_id=Resultado.objects.get(nombre=df['IDGESTION'][i]).id
+
+		print df['RESULTADO'][i]
+		resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+		print df['JUSTIFICACION'][i]
+		subresultado_id=Resultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+
+		peso_subresultado = df['PESO JUSTIFICACION'][i]
+		peso_tipo_gestion = df['PESO TIPO GESTION'][i]
+		peso_idgestion = df['PESO IDGESTION'][i]
+		peso_resultado = df['PESO RESULTADO'][i]
+
+		Score(negocio_id=1,gestion_id=gestion_id,idgestion_id=idgestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
+
+	return render(request, 'agentes.html',{})
+
+
 @csrf_exempt
 def api_resultados_negocio(request,id_negocio):
 
@@ -71,6 +101,19 @@ def api_resultados_negocio(request,id_negocio):
 
 	serializer =  ScoreSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
+
+
+@csrf_exempt
+def api_obtiene_estado_score(request,proveedor_id,cartera_id,negocio_id):
+
+	_data = Score.objects.filter(negocio_id=negocio_id,proveedor_id=proveedor_id,cartera_id=cartera_id)
+
+	if _data.count()>0:
+
+		serializer =  ScoreSerializer(_data,many=True)
+		return JsonResponse(serializer.data, safe=False)
+	
+
 
 
 
@@ -223,7 +266,49 @@ def api_negocios(request):
 
 	return JsonResponse(serializer.data, safe=False)
 
+@csrf_exempt
+def api_asigna_score(request):
 
+	if request.method == 'POST':
+
+		data = json.loads(request.body)
+
+		score_id = data['item']['id']
+
+		sco = Score.objects.get(id=score_id)
+
+		pro = data['proveedor']
+
+		print 'Proveedor....',pro
+
+		prove = ProveedorCarteras.objects.filter(**pro)
+
+		if prove.count()==0: 
+			
+			ProveedorCarteras(**pro).save()
+
+			proveedor_id=ProveedorCarteras.objects.all().order_by('-id')[0].id
+
+		else:
+
+			proveedor_id=prove[0].id
+
+		sco = ScoreProveedor.objects.filter(score_id=score_id,proveedor_id=proveedor_id)
+
+		if sco.count()==0: 
+		
+			ScoreProveedor(score_id=score_id,proveedor_id=proveedor_id,estado_id=data['estado']).save()
+		
+		else:
+
+			ScoreProveedor.objects.filter(id=sco[0].id,estado_id=data['estado']).update(score_id=score_id,proveedor_id=proveedor_id)
+
+
+	_data = Negocio.objects.all()
+
+	serializer =  NegocioSerializer(_data,many=True)
+
+	return JsonResponse(serializer.data, safe=False)
 
 def api_producto(request):
 
