@@ -79,7 +79,7 @@ const  mapStateToProps = state =>{
    console.log('00000',state)
 
     return{
-        score_negocios:state.score_negocios
+        
     }
 
 }

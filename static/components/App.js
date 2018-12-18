@@ -13,6 +13,10 @@ import axios from 'axios';
 import AgregaProveedor from "./AgregaProveedor";
 var $ = require ('jquery')
 
+const divStyle = {
+  height: '12px',
+
+};
 
 class App extends React.Component {
     constructor(props) {
@@ -27,7 +31,8 @@ class App extends React.Component {
             negocio:"",
             proveedor_name:"",
             cartera_name:"",
-            negocio_name:""
+            negocio_name:"",
+            score_negocios:[]
 
 
 
@@ -112,8 +117,7 @@ class App extends React.Component {
      onTextChange(data) {
 
       
-          console.log('selec.ss..',data.target.options[event.target.selectedIndex].text)
-
+       
           const name_select = data.target.name+'_name';
           const name = data.target.name;
           const value = data.target.value
@@ -123,6 +127,29 @@ class App extends React.Component {
             [name]: value,
             [name_select]: select_option
           });
+
+
+          if (name=='negocio'){
+
+            console.log('entre')
+
+            axios.get("/discador/api_resultados_negocio/"+value)
+                  .then(response=>{
+
+
+                    this.setState({
+                      score_negocios: response.data,
+                      
+                    });  
+
+
+                    
+
+                   
+        
+              });
+
+            }
 
   
  
@@ -156,7 +183,7 @@ class App extends React.Component {
 
     render() {
 
-      const { proveedor,proveedor_name } = this.state;
+      const { proveedor,proveedor_name,cartera_name,negocio_name,score_negocios } = this.state;
 
       return (
 
@@ -165,18 +192,24 @@ class App extends React.Component {
             <Header/>
 
             
-       
+            <div style={divStyle}></div>
+
             <div class='container'>
 
               
-                {proveedor_name}
+                <h4>Asignacion del Score</h4>
 
                 <AgregaProveedor guarda={this.handleSubmit.bind(this)}  selectcartera={this.onTextChange.bind(this)}/>
 
+                <div style={divStyle}></div>
+
+                <h3>{negocio_name}</h3>
+
+              
 
 
 
-                <AsignaScore/>
+                <AsignaScore score_negocios={score_negocios}/>
 
 
     

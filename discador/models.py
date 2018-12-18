@@ -133,7 +133,7 @@ class ProveedorCarteras(models.Model):
 	negocio=models.ForeignKey(Negocio, blank=True, null=True)
 
 	def __unicode__(self):
-		return self.proveedor.nombre+self.cartera.nombre
+		return self.proveedor.nombre+' - '+self.cartera.nombre
 		
 	
 
@@ -149,11 +149,12 @@ class Score(models.Model):
 	estado = models.CharField(max_length=1,default=0)
 	negocio = models.ForeignKey(Negocio, blank=True, null=True)
 
-
+	def __unicode__(self):
+		return self.negocio.nombre
 
 class ScoreProveedor(models.Model):
 
-	score=models.ForeignKey(Resultado, blank=True, null=True)
+	score=models.ForeignKey(Score, blank=True, null=True)
 	proveedor=models.ForeignKey(ProveedorCarteras, blank=True, null=True)
 
 class Tipo_persona(models.Model):

@@ -14,80 +14,70 @@ const AgregaProveedor = ({proveedores,carteras,negocios,selectcartera,guarda}) =
           <div>
 
 
- 
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
-                Agrega 
-                </button>
 
                 <div style={divStyle}></div>
 
-       
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Agregar Proveedor / Cartera / Score</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
                     <form onSubmit={guarda}>
-                            <div class="modal-body">
-                            <label>Proveedores</label>
-                            <select className='form-control' required={true} name='proveedor' onChange={(e)=>selectcartera(e)}>
 
-                            <option></option>                    
-                            {proveedores.map(item => (
 
-                                <option  value={item.id} >{item.nombre}</option>
+                            <div class='row'>
 
-                            ))}
-                                        
-                            </select> 
+
+                                    <div className='col-md-3'>
+                          
+                                        <label>Proveedores</label>
+                                        <select className='form-control' required={true} name='proveedor' onChange={(e)=>selectcartera(e)}>
+
+                                        <option></option>                    
+                                        {proveedores.map(item => (
+
+                                            <option  value={item.id} >{item.nombre}</option>
+
+                                        ))}
+                                                    
+                                        </select> 
+
+                                    </div>
                             
-                            <div style={divStyle}></div>
-                            <label>Carteras</label>
-                            <select className='form-control' required={true} name='cartera' onChange={(e)=>selectcartera(e)}>
+                                    <div className='col-md-3'>
 
-                            <option></option>                         
-                            {carteras.map(item => (
+                                        <label>Carteras</label>
+                                        <select className='form-control' required={true} name='cartera' onChange={(e)=>selectcartera(e)}>
 
-                                <option  value={item.id} >{item.nombre}</option>
+                                        <option></option>                         
+                                        {carteras.map(item => (
 
-                            ))}
-                                        
-                            </select> 
+                                            <option  value={item.id} >{item.nombre}</option>
 
-                            <div style={divStyle}></div>
-                            <label>Negocios</label>
-                            <select className='form-control' required={true} name='negocio' onChange={(e)=>selectcartera(e)}>
+                                        ))}
+                                                    
+                                        </select> 
+                                    
+                                    </div>
 
-                            <option></option>                         
-                            {negocios.map(item => (
+                                    <div className='col-md-3'>
 
-                                <option  value={item.id} >{item.nombre}</option>
+                                        <label>Negocios</label>
+                                        <select className='form-control' required={true} name='negocio' onChange={(e)=>selectcartera(e)}>
 
-                            ))}
-                                        
-                            </select> 
+                                        <option></option>                         
+                                        {negocios.map(item => (
 
-                            
+                                            <option  value={item.id} >{item.nombre}</option>
 
+                                        ))}
+                                                    
+                                        </select> 
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary"  >Guardar</button>
+                                    </div>
+
                             </div>
 
                     </form>
-                    </div>
                     
                     
-                </div>
-                </div>
-          </div>
+                    
+             </div>
 
           
        
