@@ -116,6 +116,9 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre', models.CharField(blank=True, max_length=100, null=True)),
             ],
+            options={
+                'verbose_name_plural': 'Tipo de Gestiones',
+            },
         ),
         migrations.CreateModel(
             name='IDGestion',
@@ -188,10 +191,39 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Score',
+            name='ProveedorCarteras',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('cartera', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.Cartera')),
+                ('negocio', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.Negocio')),
+                ('proveedor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.Proveedor')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Resultado',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre', models.CharField(blank=True, max_length=100, null=True)),
+                ('peso', models.CharField(blank=True, max_length=100, null=True)),
+                ('estado', models.CharField(default=0, max_length=1)),
+                ('gestion', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.Gestion')),
+                ('id_gestion', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.IDGestion')),
+                ('negocio', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.Negocio')),
+                ('resultado', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.Resultado')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='ScoreProveedor',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('proveedor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.ProveedorCarteras')),
+                ('score', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.Score')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Score',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('peso', models.CharField(blank=True, max_length=100, null=True)),
                 ('estado', models.CharField(default=0, max_length=1)),
                 ('gestion', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='discador.Gestion')),
@@ -231,6 +263,9 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre', models.CharField(blank=True, max_length=100, null=True)),
             ],
+            options={
+                'verbose_name_plural': 'Justificaciones',
+            },
         ),
         migrations.CreateModel(
             name='Telefonos',

@@ -18,8 +18,20 @@ import pandas as pd
 from django.utils.html import format_html
 from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
+from import_export.admin import ImportExportModelAdmin
+from django.contrib import admin
 
 
+
+@admin.register(Subresultado,)
+class SubresultadoAdmin(ImportExportModelAdmin):
+	list_display = ('id','nombre')
+	pass
+
+
+# @admin.register(Subresultado,)
+# class SubresultadoAdmin(admin.ModelAdmin,):
+# 	list_display = ('id','nombre')
 
 @admin.register(Negocio)
 class NegocioAdmin(admin.ModelAdmin):
