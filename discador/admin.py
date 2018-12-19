@@ -125,11 +125,17 @@ class Tipo_contactoAdmin(admin.ModelAdmin):
 class ResultadoAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 
+# @admin.register(Score)
+# class ScoreAdmin(admin.ModelAdmin):
+# 	list_display = ('id','negocio','gestion','id_gestion','resultado','subresultado')
+# 	list_editable=('negocio')
+# 	list_filter=('resultado',)
+
+
 @admin.register(Score)
 class ScoreAdmin(admin.ModelAdmin):
-	list_display = ('id','negocio','gestion','id_gestion','resultado','subresultado','peso')
-	list_editable=('peso','negocio')
-	list_filter=('resultado',)
+	list_display = ('id','negocio','gestion','id_gestion','resultado','subresultado')
+	
 
 @admin.register(Tipo_persona)
 class Tipo_personaAdmin(admin.ModelAdmin):
@@ -209,7 +215,7 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(Cuentas)
 class CuentasAdmin(admin.ModelAdmin):
-	list_display = ('id','cliente','capital','numero_cuenta','total','compania','mora','interes','dias_mora','tramo','fecha_vencimiento','estado','cartera' )
+	list_display = ('id','cliente' )
 
 
 @admin.register(Segmentacion)

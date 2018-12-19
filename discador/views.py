@@ -17,6 +17,49 @@ from django.dispatch import receiver
 from discador.admin import *
 
 
+@csrf_exempt
+def subecuentas(request):
+
+	df = pd.read_csv('/home/jose/Descargas/cuentas.csv')
+	Cuentas.objects.all().delete()
+
+	for i in range(df.shape[0]):
+
+
+		# print df['idcliente'][i]
+
+		# gestion_id=Gestion.objects.get(nombre=df['idcliente'][i]).id
+		# print df['IDGESTION'][i]
+		# id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+
+		# print df['RESULTADO'][i]
+		# resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+		# print df['JUSTIFICACION'][i]
+		# subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+
+		idcliente = df['idcliente'][i]
+		
+		moneda = df['moneda'][i]
+		producto = df['producto'][i]
+
+		print df['tipo_cartera'][i]
+		cartera_id=Cartera.objects.get(nombre=df['tipo_cartera'][i]).id
+
+		tipo_credito = df['tipo_credito'][i]
+		tipo_clasificacion = df['tipo_clasificacion'][i]
+		estado = df['id_estado'][i]
+		fecha_vencimiento = df['fecha_vencimiento'][i]
+		print('daniellllllll',estado)
+
+		print('?????????????????',cartera_id )
+		print('?????????????????',idcliente )
+
+		Cuentas(idcliente=idcliente,moneda=moneda,producto=producto,cartera_id=cartera_id,tipo_credito=tipo_credito,tipo_clasificacion=tipo_clasificacion,estado=estado,fecha_vencimiento=fecha_vencimiento).save()
+
+	return render(request, 'agentes.html',{})
+
+
+
 
 
 
@@ -69,6 +112,7 @@ def agentes(request):
 def subescores(request):
 
 	df = pd.read_csv('/home/jose/Descargas/Libro1.csv')
+	Score.objects.all().delete()
 
 	for i in range(df.shape[0]):
 
@@ -77,19 +121,20 @@ def subescores(request):
 
 		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
 		print df['IDGESTION'][i]
-		idgestion_id=Resultado.objects.get(nombre=df['IDGESTION'][i]).id
+		id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
 
 		print df['RESULTADO'][i]
 		resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
 		print df['JUSTIFICACION'][i]
-		subresultado_id=Resultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+		subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
 
 		peso_subresultado = df['PESO JUSTIFICACION'][i]
 		peso_tipo_gestion = df['PESO TIPO GESTION'][i]
-		peso_idgestion = df['PESO IDGESTION'][i]
+		peso_id_gestion = df['PESO IDGESTION'][i]
 		peso_resultado = df['PESO RESULTADO'][i]
+		print('?????????????????',id_gestion_id)
 
-		Score(negocio_id=1,gestion_id=gestion_id,idgestion_id=idgestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
+		Score(negocio_id=1,gestion_id=gestion_id,id_gestion_id=id_gestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
 
 	return render(request, 'agentes.html',{})
 

@@ -166,7 +166,7 @@ class Score(models.Model):
 	peso_resultado = models.CharField(max_length=1,default=0)
 	subresultado = models.ForeignKey(Subresultado, blank=True)
 
-	peso=models.CharField(max_length=100,blank=True,null=True)
+	peso_subresultado=models.CharField(max_length=100,blank=True,null=True)
 	estado = models.CharField(max_length=1,default=0)
 	#negocio = models.ForeignKey(Negocio, blank=True, null=True)
 
@@ -265,18 +265,46 @@ class Telefonos(models.Model):
 
 class Cuentas(models.Model):
 	cliente= models.ForeignKey(Cliente, blank=True, null=True)
-	capital=models.CharField(max_length=100,blank=True,null=True)
+	idcliente=models.CharField(max_length=100,blank=True,null=True)
 	numero_cuenta=models.CharField(max_length=100,blank=True,null=True)
-	total=models.CharField(max_length=100,blank=True,null=True)
-	compania=models.CharField(max_length=100,blank=True,null=True)
-	mora=models.CharField(max_length=100,blank=True,null=True)
-	interes=models.CharField(max_length=100,blank=True,null=True)
+	moneda=models.CharField(max_length=100,blank=True,null=True)
+	producto=models.CharField(max_length=100,blank=True,null=True)
+	cartera = models.ForeignKey(Cartera, blank=True, null=True,related_name='rel_cartera')
+	tipo_credito=models.CharField(max_length=100,blank=True,null=True)
+	tipo_clasificacion=models.CharField(max_length=100,blank=True,null=True)
+	estado=models.CharField(max_length=100,blank=True,null=True)
+	fecha_vencimiento=models.CharField(max_length=100,blank=True,null=True)
+	fecha_concecion= models.DateField(max_length=1000,blank=True, null=True)
+	nuemero_cuotas=models.CharField(max_length=100,blank=True,null=True)
 	dias_mora=models.CharField(max_length=100,blank=True,null=True)
 	tramo=models.CharField(max_length=100,blank=True,null=True)
-	fecha_vencimiento=models.CharField(max_length=100,blank=True,null=True)
-	estado=models.CharField(max_length=100,blank=True,null=True)
-	proveedor= models.ForeignKey(Proveedor, blank=True, null=True,related_name='rel_proveedor')
-	cartera = models.ForeignKey(Cartera, blank=True, null=True,related_name='rel_cartera')
+	rango_dias=models.CharField(max_length=100,blank=True,null=True)
+	segmento=models.CharField(max_length=100,blank=True,null=True)
+	grupo=models.CharField(max_length=100,blank=True,null=True)
+	ciclo=models.CharField(max_length=100,blank=True,null=True)
+	imp_capital=models.CharField(max_length=100,blank=True,null=True)
+	imp_interes=models.CharField(max_length=100,blank=True,null=True)
+	imp_mora=models.CharField(max_length=100,blank=True,null=True)
+	imp_otros=models.CharField(max_length=100,blank=True,null=True)
+	imp_total=models.CharField(max_length=100,blank=True,null=True)
+	imp_vencido=models.CharField(max_length=100,blank=True,null=True)
+	imp_minimo=models.CharField(max_length=100,blank=True,null=True)
+	imp_descuento=models.CharField(max_length=100,blank=True,null=True)
+	
+	imp_compania=models.CharField(max_length=100,blank=True,null=True)
+	
+	imp_cap_original=models.CharField(max_length=100,blank=True,null=True)
+	imp_prox_pago=models.CharField(max_length=100,blank=True,null=True)
+	fecha_prox_pago=models.CharField(max_length=100,blank=True,null=True)
+	observacion01=models.CharField(max_length=100,blank=True,null=True)
+	observacion02=models.CharField(max_length=100,blank=True,null=True)
+	observacion03=models.CharField(max_length=100,blank=True,null=True)
+
+	nro_tarjeta=models.CharField(max_length=100,blank=True,null=True)
+	fecha_deuda=models.DateField(max_length=100,blank=True,null=True)
+	id_gestor=models.CharField(max_length=100,blank=True,null=True)
+
+	
 
 
 
