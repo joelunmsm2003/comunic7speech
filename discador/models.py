@@ -159,25 +159,35 @@ class Score(models.Model):
 	negocio=models.ForeignKey(Negocio, blank=True, null=True)
 	gestion = models.ForeignKey(Gestion, blank=True, null=True)
 	peso_tipo_gestion = models.CharField(max_length=1,default=0)
-
 	id_gestion = models.ForeignKey(IDGestion, blank=True, null=True)
 	peso_id_gestion = models.CharField(max_length=1,default=0)
 	resultado = models.ForeignKey(Resultado, blank=True, null=True)
 	peso_resultado = models.CharField(max_length=1,default=0)
 	subresultado = models.ForeignKey(Subresultado, blank=True)
-
-	peso=models.CharField(max_length=100,blank=True,null=True)
+	peso_subresultado=models.CharField(max_length=100,default=0)
+	peso=models.CharField(max_length=100,default=0)
 	estado = models.CharField(max_length=1,default=0)
-	#negocio = models.ForeignKey(Negocio, blank=True, null=True)
+
 
 	def __unicode__(self):
 		return self.negocio.nombre
 
 class ScoreProveedor(models.Model):
 
-	score=models.ForeignKey(Score, blank=True, null=True)
-	proveedor=models.ForeignKey(ProveedorCarteras, blank=True, null=True)
+	proveedor=models.ForeignKey(Proveedor, blank=True, null=True)
+	cartera=models.ForeignKey(Cartera, blank=True, null=True)
+	negocio=models.ForeignKey(Negocio, blank=True, null=True)
 	estado=models.ForeignKey(EstadoScore, blank=True, null=True)
+	negocio=models.ForeignKey(Negocio, blank=True, null=True)
+	gestion = models.ForeignKey(Gestion, blank=True, null=True)
+	peso_tipo_gestion = models.CharField(max_length=1,default=0)
+	id_gestion = models.ForeignKey(IDGestion, blank=True, null=True)
+	peso_id_gestion = models.CharField(max_length=1,default=0)
+	resultado = models.ForeignKey(Resultado, blank=True, null=True)
+	peso_resultado = models.CharField(max_length=1,default=0)
+	subresultado = models.ForeignKey(Subresultado, blank=True)
+	peso_subresultado = models.CharField(max_length=1,default=0)
+	estado = models.CharField(max_length=1,default=0)
 
 class Tipo_persona(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)

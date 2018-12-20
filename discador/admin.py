@@ -138,8 +138,8 @@ class Tipo_personaAdmin(admin.ModelAdmin):
 
 @admin.register(ScoreProveedor)
 class ScoreProveedorAdmin(admin.ModelAdmin):
-	list_display = ('id','score','proveedor')
-
+	list_display = ('id','proveedor','cartera','negocio','gestion','peso_tipo_gestion','id_gestion','peso_id_gestion')
+	list_editable = ('peso_tipo_gestion',)
 
 # @admin.register(Estado_cliente)
 # class Estado_clienteAdmin(admin.ModelAdmin):

@@ -18,7 +18,21 @@ from discador.admin import *
 
 
 
+@csrf_exempt
+def api_proveedor_cartera_negocio(request):
 
+	_data = ProveedorCarteras.objects.all().order_by('-id')
+
+	serializer =  ProveedorCarterasSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def api_detalle_proveedor_cartera_negocio(request,proveedor,cartera,negocio):
+
+	_data = ScoreProveedor.objects.filter(proveedor_id=proveedor,cartera_id=cartera,negocio_id=negocio)
+
+	serializer =  ScoreProveedorSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
 
 @csrf_exempt
 def api_telefonos(request):
@@ -64,11 +78,20 @@ def agentes(request):
 	return render(request, 'agentes.html',{})
 
 
+@csrf_exempt
+def opcion_score(request):
+
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'opcion_score.html',{})
 
 @csrf_exempt
 def subescores(request):
 
-	df = pd.read_csv('/Users/xiencias/score.csv')
+	df = pd.read_csv('/home/jose/Descargas/Libro1.csv')
 
 	for i in range(df.shape[0]):
 
@@ -326,6 +349,15 @@ def proveedor(request):
 	serializer =  AgenteSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
+def api_detalle_cartera_negocio(request,proveedor,cartera,negocio):
+
+	_data = ScoreProveedor.objects.filter(proveedor_id=proveedor,cartera_id=cartera,negocio_id=negocio)
+
+	serializer =  ScoreProveedorSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+
+
 @csrf_exempt
 def menu_proveedor_1(request):
 
@@ -336,6 +368,15 @@ def menu_proveedor_1(request):
 
 	return render(request, 'proveedor.html',{})
 
+@csrf_exempt
+def opcion_asigna_score(request,proveedor,cartera,negocio):
+
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'opcion_asigna_score.html',{})
 
 @csrf_exempt
 def guardaproveedor(request):
@@ -344,7 +385,27 @@ def guardaproveedor(request):
 
 		data = json.loads(request.body)
 
+		print data['proveedor_id']
+
 		ProveedorCarteras(**data).save()
+
+		sc = Score.objects.filter(negocio_id=data['negocio_id'])
+
+		for s in sc:
+
+			ScoreProveedor(
+			cartera_id=data['cartera_id']
+			,proveedor_id=data['proveedor_id']
+			,negocio_id=data['negocio_id']
+			,gestion_id=s.gestion.id
+			,peso_tipo_gestion=s.peso_tipo_gestion
+			,id_gestion_id=s.id_gestion.id
+			,peso_id_gestion=s.peso_id_gestion
+			,resultado_id=s.resultado.id
+			,peso_resultado=s.peso_resultado
+			,subresultado_id=s.subresultado.id
+			,peso_subresultado=s.peso_subresultado
+			,estado=1).save()
 
 
 	_data = ProveedorCarteras.objects.all()[:1]

@@ -139,7 +139,7 @@ class ProveedorCarterasSerializer(serializers.ModelSerializer):
 
 class ScoreSerializer(serializers.ModelSerializer):
 
-	proveedor = ProveedorSerializer(many=False, read_only=True)
+	
 	resultado = ResultadoSerializer(many=False, read_only=True)
 	cartera = CarteraSerializer(many=False, read_only=True)
 	gestion = GestionSerializer(many=False, read_only=True)
@@ -150,7 +150,19 @@ class ScoreSerializer(serializers.ModelSerializer):
 		model = Score
 		fields = '__all__'
 
+class ScoreProveedorSerializer(serializers.ModelSerializer):
 
+	proveedor = ProveedorSerializer(many=False, read_only=True)
+	negocio = NegocioSerializer(many=False, read_only=True)
+	resultado = ResultadoSerializer(many=False, read_only=True)
+	cartera = CarteraSerializer(many=False, read_only=True)
+	gestion = GestionSerializer(many=False, read_only=True)
+	idgestion = IDGestionSerializer(many=False, read_only=True)
+	subresultado = SubresultadoSerializer(many=False, read_only=True)
+
+	class Meta:
+		model = ScoreProveedor
+		fields = '__all__'
 
 
 class Tipo_domicilioSerializer(serializers.ModelSerializer):

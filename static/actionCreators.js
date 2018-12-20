@@ -309,6 +309,25 @@ export const trae_telefonos = ()=>{
 }
 
 
+export const proveedor_cartera_negocio = ()=>{
+
+    return dispatch =>{
+
+         return axios.get("/discador/api_proveedor_cartera_negocio/")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_PROVEEDOR_CARTERA_NEGOCIO",
+                proveedor_cartera_negocio:response.data
+            })
+        });
+    };
+
+ 
+}
+
+
+
 
 
 

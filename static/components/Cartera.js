@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Proveedores from "./Proveedores";
-import AsignaScore from "./AsignaScore";
+
 import Header from "./Header";
-import Gestion from "./Gestion";
-import Select from "./Select";
+import ProveedorCartera from "./ProveedorCartera";
 import store from "../store";
 import { Provider } from "react-redux";
-import {loadProveedores,loadScore, loadGestiones,total_carteras, trae_carteras_proveedor} from "../actionCreators";
-import AppRouter from "./Rutas"
+import axios from 'axios';
+
 
 class App extends React.Component {
     constructor(props) {
@@ -21,7 +19,8 @@ class App extends React.Component {
             value: "",
             editar:[],
             cart:[],
-            proveedor_id:""
+            carteras:[],
+            proveedor:[]
         };
     
       }
@@ -31,32 +30,41 @@ class App extends React.Component {
 
       
 
-        this.setState({
-          proveedor_id: window.location.href.split('/')[5]
+
+
+        axios.get("/discador/api_carteras_proveedor/"+window.location.href.split('/')[5])
+        .then(response=>{
+
+
+          this.setState({
+            carteras: response.data,
+            proveedor:response.data[0]['proveedor']
   
+          });
+            
+
+
         });
 
-        store.dispatch(trae_carteras_proveedor(window.location.href.split('/')[5]))
 
-        store.dispatch(loadGestiones())
 
-        store.dispatch(loadScore())
      
 
       }
 
     render() {
 
-      const { proveedor_id } = this.state;
+      const { carteras,proveedor } = this.state;
 
       return (
         <div> 
          <Header/>
 
-         <div class='container'>                  
-         <Select id_proveedor={proveedor_id} />
+         <div class='container'>              
 
-         <AsignaScore/>
+          <h1>Proveedor {proveedor.nombre}</h1>    
+         
+         <ProveedorCartera carteras={carteras}/>
 
          </div>
 

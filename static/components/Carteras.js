@@ -11,7 +11,7 @@ const divStyle = {
 
 
 
-const Carteras = ({carteras,deltas}) =>{
+const Carteras = ({carteras}) =>{
 
       return (
 
@@ -39,8 +39,6 @@ const Carteras = ({carteras,deltas}) =>{
 const  mapStateToProps = state =>{
 
     return{
-        carteras:state.carteras,
-        deltas:state.deltas
     }
 
 }
