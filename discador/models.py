@@ -274,7 +274,7 @@ class Cuentas(models.Model):
 	tipo_clasificacion=models.CharField(max_length=100,blank=True,null=True)
 	estado=models.CharField(max_length=100,blank=True,null=True)
 	fecha_vencimiento=models.CharField(max_length=100,blank=True,null=True)
-	fecha_concecion= models.DateField(max_length=1000,blank=True, null=True)
+	fecha_concecion= models.CharField(max_length=1000,blank=True, null=True)
 	nuemero_cuotas=models.CharField(max_length=100,blank=True,null=True)
 	dias_mora=models.CharField(max_length=100,blank=True,null=True)
 	tramo=models.CharField(max_length=100,blank=True,null=True)
@@ -291,7 +291,7 @@ class Cuentas(models.Model):
 	imp_minimo=models.CharField(max_length=100,blank=True,null=True)
 	imp_descuento=models.CharField(max_length=100,blank=True,null=True)
 	
-	imp_compania=models.CharField(max_length=100,blank=True,null=True)
+	imp_campania=models.CharField(max_length=100,blank=True,null=True)
 	
 	imp_cap_original=models.CharField(max_length=100,blank=True,null=True)
 	imp_prox_pago=models.CharField(max_length=100,blank=True,null=True)
@@ -301,7 +301,7 @@ class Cuentas(models.Model):
 	observacion03=models.CharField(max_length=100,blank=True,null=True)
 
 	nro_tarjeta=models.CharField(max_length=100,blank=True,null=True)
-	fecha_deuda=models.DateField(max_length=100,blank=True,null=True)
+	fecha_deuda=models.CharField(max_length=100,blank=True,null=True)
 	id_gestor=models.CharField(max_length=100,blank=True,null=True)
 
 	

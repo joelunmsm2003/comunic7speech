@@ -215,7 +215,7 @@ class ClienteAdmin(admin.ModelAdmin):
 
 @admin.register(Cuentas)
 class CuentasAdmin(admin.ModelAdmin):
-	list_display = ('id','cliente' )
+	list_display = ('id','cliente','numero_cuenta','moneda' )
 
 
 @admin.register(Segmentacion)

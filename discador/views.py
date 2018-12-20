@@ -49,12 +49,48 @@ def subecuentas(request):
 		tipo_clasificacion = df['tipo_clasificacion'][i]
 		estado = df['id_estado'][i]
 		fecha_vencimiento = df['fecha_vencimiento'][i]
+		fecha_concecion = df['fecha_concecion'][i]
+		nuemero_cuotas=df['nro_cuotas'][i]  
+		dias_mora= df['dias_mora'][i]  
+		tramo= df['tramo'][i]  
+		rango_dias= df['rango_dias'][i]  
+		segmento= df['segmento'][i]  
+		grupo= df['grupo'][i]  
+		ciclo= df['ciclo'][i]  
+		imp_capital= df ['imp_capital'][i]  
+		imp_interes= df['imp_interes'][i]  
+		imp_mora= df['imp_mora'][i]  
+		imp_otros= df['imp_otros'][i]  
+		imp_total= df['imp_total'][i]  
+		imp_vencido= df ['imp_vencido'][i]  
+		imp_minimo= df['imp_minimo'][i]  
+		imp_descuento= df['imp_descuento'][i]  
+		imp_campania= df['imp_campania'][i]  
+		imp_cap_original= df['imp_cap_original'][i]  
+		imp_prox_pago= df['imp_prox_pago'][i]  
+		fecha_prox_pago= df ['fecha_prox_pago'][i]  
+		observacion01= df['observacion01'][i]  
+		observacion02= df ['observacion02'][i]  
+		observacion03=df ['observacion03'][i]  
+		nro_tarjeta= df['nro_tarjeta'][i]  
+		id_gestor= df['id_gestor'][i]
+		fecha_deuda = df['fecha_deuda'][i]
+
+
 		print('daniellllllll',estado)
 
 		print('?????????????????',cartera_id )
 		print('?????????????????',idcliente )
 
-		Cuentas(idcliente=idcliente,moneda=moneda,producto=producto,cartera_id=cartera_id,tipo_credito=tipo_credito,tipo_clasificacion=tipo_clasificacion,estado=estado,fecha_vencimiento=fecha_vencimiento).save()
+		Cuentas(idcliente=idcliente,moneda=moneda,producto=producto,cartera_id=cartera_id,tipo_credito=tipo_credito,
+		tipo_clasificacion=tipo_clasificacion,estado=estado,fecha_vencimiento=fecha_vencimiento,
+		fecha_concecion=fecha_concecion,nuemero_cuotas=nuemero_cuotas,dias_mora=dias_mora,tramo=tramo, 
+		rango_dias=rango_dias,segmento =segmento,grupo=grupo,ciclo=ciclo,imp_capital=imp_capital, 
+		imp_interes =imp_interes,imp_mora = imp_mora,imp_otros=imp_otros,imp_total=imp_total, 
+		imp_vencido = imp_vencido, imp_minimo=imp_minimo , imp_descuento =imp_descuento,
+		imp_campania=imp_campania, imp_cap_original = imp_cap_original,imp_prox_pago=imp_prox_pago,
+		fecha_prox_pago= fecha_prox_pago,observacion01  =observacion01  , observacion02= observacion02,
+		observacion03 = observacion03,nro_tarjeta= nro_tarjeta, id_gestor=id_gestor,fecha_deuda=fecha_deuda ).save()
 
 	return render(request, 'agentes.html',{})
 
