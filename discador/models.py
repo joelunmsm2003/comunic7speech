@@ -188,6 +188,7 @@ class ScoreProveedor(models.Model):
 	subresultado = models.ForeignKey(Subresultado, blank=True)
 	peso_subresultado = models.CharField(max_length=1,default=0)
 	estado = models.CharField(max_length=1,default=0)
+	
 
 class Tipo_persona(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
