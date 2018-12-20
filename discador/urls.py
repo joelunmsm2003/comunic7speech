@@ -61,5 +61,7 @@ urlpatterns = [
     url(r'^api_resultados_negocio/(\d+)', api_resultados_negocio),
     url(r'^subescores/', subescores),
     url(r'^subecuentas/', subecuentas),
+    url(r'^subetelefonos/', subetelefonos),
+    url(r'^subeclientes/', subeclientes),
 
 ]

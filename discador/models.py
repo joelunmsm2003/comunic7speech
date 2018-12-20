@@ -199,10 +199,18 @@ class Tipo_direccion(models.Model):
 class Tipo_telefono(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 
+
+
+class Fuente_telefono(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+
+
+
+
 class Cliente(models.Model):
 	user=models.CharField(max_length=100,blank=True,null=True)
-	dni  =models.CharField(max_length=100,blank=True,null=True)
-	operacion  =models.CharField(max_length=100,blank=True,null=True)
+	dni=models.CharField(max_length=100,blank=True,null=True)
+	operacion=models.CharField(max_length=100,blank=True,null=True)
 	telefono=models.CharField(max_length=100,blank=True,null=True)
 	razon_social=models.CharField(max_length=100,blank=True,null=True)
 	tipo_persona=models.CharField(max_length=100,blank=True,null=True)
@@ -213,10 +221,26 @@ class Cliente(models.Model):
 	fecha =models.CharField(max_length=100,blank=True,null=True)
 	estado =models.CharField(max_length=100,blank=True,null=True)
 	#fecha = models.DateTimeField(db_column='fecha', default=datetime.datetime.today()) 
+	def __unicode__(self):
+		return self.numero_documento
 
+class Telefonos(models.Model):	
+	
+	numero_documento=models.ForeignKey(Cliente,blank=True, null=True,related_name='cliente')
+	discado=models.CharField(max_length=100,blank=True,null=True)
+	numero_telefono=models.CharField(max_length=100,blank=True,null=True)
+	observacion=models.CharField(max_length=100,blank=True,null=True)
+	tipo_contacto=models.CharField(max_length=100,blank=True,null=True)
+	tipo_telefono= models.ForeignKey(Tipo_telefono,blank=True, null=True,related_name='tipo_telefono')
+	fuente_telefono= models.ForeignKey(Fuente_telefono, blank=True, null=True,related_name='fuente_telefono')
+	estado=models.CharField(max_length=100,blank=True,null=True)
+	cliente= models.CharField(max_length=100,blank=True,null=True)
+	def __unicode__(self):
+		return self.numero_documento
+	
 
 class Direcciones(models.Model):
-	cliente= models.ForeignKey(Cliente, blank=True, null=True,related_name='cliente')
+	cliente= models.ForeignKey(Cliente, blank=True, null=True,related_name='clientes')
 	ubigeo=models.CharField(max_length=100,blank=True,null=True)
 	direccion=models.CharField(max_length=100,blank=True,null=True)
 	observacion=models.CharField(max_length=100,blank=True,null=True)
@@ -242,24 +266,6 @@ class Agente(models.Model):
 	t_fin_espera=models.CharField(max_length=100,blank=True,null=True)
 	contactadas=models.CharField(max_length=100,blank=True,null=True)
 	contactadas=models.CharField(max_length=100,blank=True,null=True)
-
-
-
-class Fuente_telefono(models.Model):
-	nombre=models.CharField(max_length=100,blank=True,null=True)
-
-class Telefonos(models.Model):	
-	numero_documento=models.CharField(max_length=100,blank=True,null=True)
-	discado=models.CharField(max_length=100,blank=True,null=True)
-	numero_telefono=models.CharField(max_length=100,blank=True,null=True)
-	observacion=models.CharField(max_length=100,blank=True,null=True)
-	tipo_contacto=models.CharField(max_length=100,blank=True,null=True)
-	tipo_telefono= models.ForeignKey(Tipo_telefono,blank=True, null=True,related_name='tipo_telefono')
-	fuente_telefono= models.ForeignKey(Fuente_telefono, blank=True, null=True,related_name='fuente_telefono')
-	estado=models.CharField(max_length=100,blank=True,null=True)
-	cliente= models.ForeignKey(Cliente, blank=True, null=True,related_name='nombre')
-	
-
 
 
 

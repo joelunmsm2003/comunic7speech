@@ -17,37 +17,85 @@ from django.dispatch import receiver
 from discador.admin import *
 
 
-
 @csrf_exempt
-def subeclientes(request):
+def subetelefonos(request):
 
-	df = pd.read_csv('/home/jose/Descargas/clientes.csv')
-	Cliengtesobjects.all().delete()
+	df = pd.read_csv('/home/jose/Descargas/Telefonos.csv')
+	Telefonos.objects.all().delete()
+	# sheet = excel_document.get_sheet_by_name('TELEFONOS')
+	# print sheet['A2'].value
 
 	for i in range(df.shape[0]):
 
 
-		print df['TIPO GESTION'][i]
+		# print df['TIPO GESTION'][i]
 
-		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
-		print df['IDGESTION'][i]
-		id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+		# gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+		# print df['IDGESTION'][i]
+		# id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
 
-		print df['RESULTADO'][i]
-		resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
-		print df['JUSTIFICACION'][i]
-		subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+		# print df['RESULTADO'][i]
+		# resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+		# print df['JUSTIFICACION'][i]
+		# subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
 
-		peso_subresultado = df['PESO JUSTIFICACION'][i]
-		peso_tipo_gestion = df['PESO TIPO GESTION'][i]
-		peso_id_gestion = df['PESO IDGESTION'][i]
-		peso_resultado = df['PESO RESULTADO'][i]
-		print('?????????????????',id_gestion_id)
+		print df['NUMERO_DOCUMENTO'][i]
+		numero_documento_id=Cliente.objects.get(numero_documento=df['NUMERO_DOCUMENTO'][i]).id
+		print df['DISCADO'][i]
+		discado = df['DISCADO'][i]
 
-		Score(negocio_id=1,gestion_id=gestion_id,id_gestion_id=id_gestion_id,
-		resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,
-		peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,
-		peso_subresultado=peso_subresultado).save()
+		cliente = df['NOMBRE'][i]
+		
+		print df['NUMERO DE TELEFONO'][i]
+		numero_telefono= df['NUMERO DE TELEFONO'][i]
+		observacion = df['OBSERVACION'][i]
+		tipo_contacto= df['TIPO CONTACTO'][i]
+		tipo_telefono = df['TIPO TELEFONO'][i]
+		fuente_telefono= df['FUENTE'][i]
+		estado = df['ESTADO'][i]
+
+
+		Telefonos(numero_documento_id=numero_documento_id,numero_telefono=numero_telefono,discado=discado,
+		cliente=cliente,observacion=observacion,tipo_contacto=tipo_contacto,
+		tipo_telefono=tipo_telefono,fuente_telefono=fuente_telefono,estado=estado
+		).save()
+
+	return render(request, 'agentes.html',{})
+
+
+
+
+
+@csrf_exempt
+def subeclientes(request):
+
+	df = pd.read_csv('/home/jose/Descargas/Clientes.csv')
+	Cliente.objects.all().delete()
+
+	for i in range(df.shape[0]):
+
+
+		# print df['TIPO GESTION'][i]
+
+		# gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+		# print df['IDGESTION'][i]
+		# id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+
+		# print df['RESULTADO'][i]
+		# resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+		# print df['JUSTIFICACION'][i]
+		# subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+
+		tipo_persona = df['TIPO_PERSONA'][i]
+		tipo_documento = df['TIPO_DOCUMENTO'][i]
+		numero_documento= df['NUMERO_DOCUMENTO'][i]
+		nombres = df['NOMBRE'][i]
+		observacion = df['OBSERVACIONES'][i]
+		fecha = df['FECHA_NACIMIENTO'][i]
+		estado = df['ESTADO'][i]
+
+		Cliente(tipo_persona=tipo_persona,tipo_documento=tipo_documento,numero_documento=numero_documento,
+		nombres=nombres,observacion=observacion,fecha=fecha,estado=estado).save()
 
 	return render(request, 'agentes.html',{})
 
