@@ -17,6 +17,41 @@ from django.dispatch import receiver
 from discador.admin import *
 
 
+
+@csrf_exempt
+def subeclientes(request):
+
+	df = pd.read_csv('/home/jose/Descargas/clientes.csv')
+	Cliengtesobjects.all().delete()
+
+	for i in range(df.shape[0]):
+
+
+		print df['TIPO GESTION'][i]
+
+		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+		print df['IDGESTION'][i]
+		id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+
+		print df['RESULTADO'][i]
+		resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+		print df['JUSTIFICACION'][i]
+		subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+
+		peso_subresultado = df['PESO JUSTIFICACION'][i]
+		peso_tipo_gestion = df['PESO TIPO GESTION'][i]
+		peso_id_gestion = df['PESO IDGESTION'][i]
+		peso_resultado = df['PESO RESULTADO'][i]
+		print('?????????????????',id_gestion_id)
+
+		Score(negocio_id=1,gestion_id=gestion_id,id_gestion_id=id_gestion_id,
+		resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,
+		peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,
+		peso_subresultado=peso_subresultado).save()
+
+	return render(request, 'agentes.html',{})
+
+
 @csrf_exempt
 def subecuentas(request):
 
