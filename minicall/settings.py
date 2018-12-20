@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'discador',
+    'comunica7',
     'app',
     'callcenter',
     'speech',
