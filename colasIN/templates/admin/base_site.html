@@ -1,0 +1,27 @@
+
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+
+
+<style type="text/css">
+
+</style>
+{% extends "admin/base.html" %}
+
+{% block title %}
+
+{{ title }}
+
+
+{% endblock %}
+
+{% block branding %}
+
+
+<h1 id="site-name" class='animated  flipInX' ><a href="{% url 'admin:index' %}" class='animated infinite bounce'>{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

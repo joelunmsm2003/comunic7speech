@@ -1,0 +1,67 @@
+      <!-- Main Navbar-->
+      <header class="header">
+        <nav class="navbar">
+          <!-- Search Box-->
+          <div class="search-box">
+            <button class="dismiss"><i class="icon-close"></i></button>
+            <form id="searchForm" action="#" role="search">
+              <input type="search" placeholder="What are you looking for..." class="form-control">
+            </form>
+          </div>
+          <div class="container-fluid">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+              <!-- Navbar Header-->
+              <div class="navbar-header">
+                <!-- Navbar Brand --><a href="/dashboard" class="navbar-brand">
+                  <div class="brand-text brand-big hidden-lg-down"><strong>Baterias Altoque</strong></div>
+                  <div class="brand-text brand-small"><strong>HR</strong></div></a>
+                <!-- Toggle Button--><a id="toggle-btn" href="/dashboard/" class="menu-btn active"><span></span><span></span><span></span></a>
+                <button type="button" class="btn btn-outline-success"href="/reporte"><a href="/reporte">reporte</a></button>
+                <button type="button" class="btn btn-danger" value="" > <a href="/admin/app/produccion/?usuario__id={{user.id}}"> Datos</a></button>
+                
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open</button> -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button> -->
+
+          </div>
+
+             
+          
+              <!-- Navbar Menu -->
+            <!--   <ul class="nav-menu list-unstyled d-flex flex-md-row  align-items-md-center">
+            
+                   <a class="navbar-brand" href="#">Bienvenido {{user}}<img style='height: 50px;'src=""></a>
+            
+
+                  <li class="nav-item"><a href="/login" class="nav-link logout">Salir<i class="fa fa-sign-out"></i></a></li>
+
+
+ -->
+              </ul>
+            </div>
+
+            <div class="d-flex flex-row-reverse">
+             
+              <ul class="nav-menu list-unstyled d-flex flex-md-row  align-items-md-center">
+            
+                   <a class="navbar-brand" href="#">Bienvenido {{user}}<img style='height: 50px;'src=""></a>
+                  <li class="nav-item"><a href="/login" class="nav-link logout">Salir<i class="fa fa-sign-out"></i></a></li>
+              </ul>
+          </div>
+
+
+
+          </div>
+
+        </nav>
+
+
+      </header>
+
+
+<style type="text/css">
+  
+.nav-tabs {
+    border-bottom: 1px solid transparent !important;
+}
+
+</style>
