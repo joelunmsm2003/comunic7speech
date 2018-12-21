@@ -11,9 +11,9 @@ class ProductosAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre','prefijo')
 
 
-# @admin.register( Usuarios_Productos)
-# class  Usuarios_ProductosAdmin(admin.ModelAdmin):
-# 	list_display = ('id','nombre',' usuarios')
+@admin.register( Usuarios_Productos)
+class  Usuarios_ProductosAdmin(admin.ModelAdmin):
+ 	list_display = ('id','usuario','producto')
    
 
     

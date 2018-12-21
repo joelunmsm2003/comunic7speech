@@ -24,7 +24,7 @@
 
 
 
-              window.location.href = "/agente/"+msg.split('-')[1]
+              window.location.href = "/colasIN/monitor_agente/"+msg.split('-')[1]+'/0'
 
       
         }
@@ -37,7 +37,7 @@
 
   
 
-  <div style='height: 20px'></div>
+<div style='height: 20px'></div>
 <div class='container'>
 
   <div class='row'>
@@ -46,15 +46,17 @@
 
     <div class='col-10'>
 
-    <h1>{{agente.estado.nombre}}</h1>
+    
+
+    <h4>{{agente.estado.nombre}}</h4>
 
     </div>
 
     {% else %}
 
-    <div class='col-10'>
+    <div class='col-md-10'>
 
-    {% include "gestion.html" %}
+    {% include "colasIN/gestion.html" %}
 
     </div>
 
@@ -62,7 +64,7 @@
 
 
 
-    <div class='col-2'>
+    <div class='col-md-2'>
 
       <form style='background: #1073ea;
     color: #fff;
@@ -70,10 +72,10 @@
     padding-top: 18px;
     border-radius: 13px;height: 100%;'>
     
+    <h6>Agente</h6>
+    <h6>{{agente.nombre}} </h6>
 
-    <h4>{{agente.user.first_name}} {{agente.user.last_name}} </h4>
-
-     <p>{{agente.estado.nombre}}</p>
+     
 
       {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
 
@@ -87,8 +89,12 @@
          {% if agente.estado.nombre == 'Disponible' %}
         <a class="flex-sm-fill text-sm-center nav-link   " style='color:#fff;' href="/agente/0?estado=1">Pausa</a>
         <a class="flex-sm-fill text-sm-center nav-link active " style='color:#fff;' href="/agente/0?estado=2">Disponible</a>
+        
+
+       
         {% endif %}
 
+       
         
 
       </nav>
@@ -96,8 +102,16 @@
       {% else %}
 
       <p>{{agente.estado.nombre}}</p>
+
+
+ 
+          
       
       {% endif %}
+
+
+      <a class="flex-sm-fill text-sm-center nav-link" href='/comunica7/ingresar'>Salir</a>
+
 
     
      </form>

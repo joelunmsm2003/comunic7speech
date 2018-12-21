@@ -8,7 +8,7 @@ from django.conf.urls import include
 urlpatterns = [
 
 	url(r'^agente/(\d+)', m_agente),
-	url(r'^ingresar/', ingresar),
+	#url(r'^ingresar/', ingresar),
 	url(r'^monitor/', monitor),
 	url(r'^api_agentes/', api_agentes),
     url(r'^actualiza_resultado/', actualiza_resultado),

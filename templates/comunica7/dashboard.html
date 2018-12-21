@@ -1,0 +1,71 @@
+
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<div class='container'>
+
+
+        <div style='height:20px;'></div>
+        <h1>Productos</h1>
+        <div style='height:20px;'></div>
+        <div class='row'>
+                
+                
+
+                {% for p in productos %}
+
+                <div class='col-md-3'>
+               
+
+                    <a href='/colasIN/monitor_agente/980729169/0'><div class="circle" > {{p.producto.nombre}}
+
+                    </div></a>
+
+                </div>
+                       
+                {% endfor %}
+          
+                       
+                
+                </div>
+
+</div>
+
+
+<style>
+
+.circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #fff;
+  line-height: 200px;
+  text-align: center;
+  background: rgb(133, 164, 193);
+  cursor:pointer;
+  transition: 1s all;
+}
+
+.circle:hover{
+
+    
+    transition: 2s all;
+    border-radius: 4%;
+    background: rgb(89, 25, 194);
+    
+}
+</style>
+
+
+{% endblock %}
+
+
+
+
+
+
+

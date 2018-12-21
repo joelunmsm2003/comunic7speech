@@ -16,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 import xlrd
 from django.db.models import Count,Sum
 from colasIN.models import *
+
 from app.serializers import *
 from django.db.models import Count,Sum
 from django.http import HttpResponse
@@ -45,7 +46,7 @@ from django.contrib.auth.models import User
 import datetime
 from datetime import datetime,timedelta
 from django.utils import timezone
-
+from colasIN.forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -63,6 +64,8 @@ from django.views.generic import View
 #from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 from io import BytesIO
+from ws4redis.publisher import RedisPublisher
+from ws4redis.redis_store import RedisMessage
 
 
 
@@ -94,82 +97,6 @@ def reportes(request):
 	# for d in datos:
  #    	   writer.writerow(d)
 	return response
-
-
-# def simple_upload(request):
-#     if request.method == 'POST':
-#         person_resource = PersonResource()
-#         dataset = Dataset()
-#         new_persons = request.FILES['myfile']
-
-#         imported_data = dataset.load(new_persons.read())
-#         result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
-
-#         if not result.has_errors():
-#             person_resource.import_data(dataset, dry_run=False)  # Actually import now
-
-#     return render(request, 'core/simple_upload.html')
-
-# def export(request):
-#     person_resource = PersonResource()
-#     dataset = person_resource.export()
-#     response = HttpResponse(dataset.csv, content_type='text/csv')
-#     response['Content-Disposition'] = 'attachment; filename="persons.csv"'
-#     return response
-    
-# def hello_pdf(request):
-#     # Create the HttpResponse object with the appropriate PDF headers.
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = 'attachment; filename=hello.pdf'
-#     buffer = BytesIO()
- 
-#     # Create the PDF object, using the response object as its "file."
-#     p = canvas.Canvas(buffer)
-
-#     a= User=request.user
-#     datos =Produccion.objects.filter(usuario_id=a).values_list('fecha','status','marca_vehiculo','modelo','anio','color__nombre','cilindrada', 'placa','cantidad','marca_producto','modelo_bateria','id','usuario__username','telefono_1','telefono_2','cliente','apellido_p','apellido_m')
-#     for d in datos:
-    	
-#     	print 'rafa_rafrra',d[3]
-#     	print 'rafa_rafa',d
-    	
-
-
-#     # Draw things on the PDF. Here's where the PDF generation happens.
-#     # See the ReportLab documentation for the full list of functionality.
-#     	p.drawString(80,800,d[2])
-#     	p.drawString(80,830,d[3])
-    	
-#     	p.drawString(80,790,d[5])
-#     	p.drawString(80,760,d[6])
-#     	p.drawString(80,730,d[7])
-#     	p.drawString(80,700,d[8])
-#     	p.drawString(80,670,d[9])
-#     	p.drawString(80,650,d[10])
-#     	#p.drawString(80,630,d[11])
-#     	p.drawString(80,600,d[12])
-#     	p.drawString(80,570,d[13])
-#     	p.drawString(80,550,d[14])
-#     	p.drawString(80,520,d[15])
-#     	p.drawString(80,500,d[16])
-#     	p.drawString(80,450,d[17])
-    	
-#     	p.drawString(80,480,'hora_instalacion')
- 	
-#     	#writer.writerow(d)
-   
-    	
-#     # Close the PDF object cleanly, and we're done.
-
-#     p.showPage()
-#     p.save()
-#     pdf = buffer.getvalue()
-#     buffer.close()
-#     response.write(pdf)
-#     return response
-
-
-
 
 
 
@@ -423,43 +350,45 @@ def color(request):
 
 def ingresar(request):
 
-	user = request.user.id
-	print 'usuario, q svr',user
+	if  request.method == 'POST':
 
 
-	
+		print 'ACAAAA'
 
 
-	username = request.POST['username']
-	password = request.POST['password']
+	if  request.method == 'GET':
 
-	print username,password
+		user = request.user.id
+		print 'usuario, q svr',user
 
-	user = authenticate(username=username, password=password)
-	if user is not None:
+		username = request.POST['username']
+		password = request.POST['password']
 
-		login(request, user)
+		print username,password
+
+		user = authenticate(username=username, password=password)
+		if user is not None:
+
+			login(request, user)
+
+			print 'INGRESE ACA...'
 
 
-		return HttpResponseRedirect('/dashboard/')
+			a =Agente.objects.get(user_id=request.user.id)
+			a.estado_id=1
+			a.save()
 
+			return HttpResponseRedirect('/dashboard/')
+
+
+
+		else:
+
+			return render(request, 'login.html',{'error': 'No existe este usuario'})
+
+
+			
 		
-
-		
-
-
-	else:
-
-
-		
-		
-
-
-		return render(request, 'login.html',{'error': 'No existe este usuario'})
-
-
-		
-	
 
 
  
@@ -595,9 +524,6 @@ def dashboard(request):
 		bateria= Bateria.objects.values('marca').annotate(Count('marca'))
 		anios= Anio_v.objects.all().order_by('-id')
 		colores=Colores_v.objects.all()
-		print 'coloeres de vehiculossssmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm' ,colores
-		print 'mmmmmmmmmmmmmmmmmmmmmmmmm',anios
-
 		distritos= Distrito.objects.all()
 		print'heyyy  aquiir estan los distrito,,...',distritos
 		pagos= Pago.objects.all()
@@ -830,7 +756,7 @@ def dashboard(request):
 			
 		
 
-		return render(request, 'dashboard.html',{'status_uni':status_uni,'times':times,'hora_i':hora_i,'modelo_v':modelo_v,'colorrecibido':color,'aniorecibido':anio,'descuento':descuento,'precio':precio,'modelo_bat':modelo_bat,'pre':pre,'User':User,'cilindrada':cilindrada,'cant_ba':cant_ba,'placa':placa,'kilometraje':kilometraje,'color':colores,'anio':anios,'version':version,'distrito':distritos,'bateriasform':baterias,'vehiculoform':v,'bateria':bateria,'status':status,'atiende':atiende,'almacen':almacen,'pagos':pagos,'telefono_2':telefono_2,'telefono_1':telefono_1,'dni':dni,'cliente':cliente,'apellido_p':apellido_p,'apellido_m':apellido_m,'modelos':modelos,'marcas':marcas,'marca':marca,'marca_b':marca_b,'modelos_baterias':models_b})
+		return render(request, 'comunica7/dashboard.html',{'status_uni':status_uni,'times':times,'hora_i':hora_i,'modelo_v':modelo_v,'colorrecibido':color,'aniorecibido':anio,'descuento':descuento,'precio':precio,'modelo_bat':modelo_bat,'pre':pre,'User':User,'cilindrada':cilindrada,'cant_ba':cant_ba,'placa':placa,'kilometraje':kilometraje,'color':colores,'anio':anios,'version':version,'distrito':distritos,'bateriasform':baterias,'vehiculoform':v,'bateria':bateria,'status':status,'atiende':atiende,'almacen':almacen,'pagos':pagos,'telefono_2':telefono_2,'telefono_1':telefono_1,'dni':dni,'cliente':cliente,'apellido_p':apellido_p,'apellido_m':apellido_m,'modelos':modelos,'marcas':marcas,'marca':marca,'marca_b':marca_b,'modelos_baterias':models_b})
 
 
 def album(request):
@@ -852,6 +778,50 @@ def paciente(request):
 	return render(request, 'paciente.html')
 
 
+def lanzallamada(request,base,agente_id):
+
+
+	if Agente.objects.filter(id=agente_id).count()==0:
+
+		a= simplejson.dumps('No existe el agente con ID '+agente_id)
+		return HttpResponse(a, content_type="application/json")
+
+
+	_agente = Agente.objects.get(id=agente_id)
+	_agente.estado_id=2
+	_agente.save()
+
+	print 'lanzallamada',_agente.user.username
+
+	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username])
+
+	message = RedisMessage('llamada-'+str(base))
+
+
+	redis_publisher.publish_message(message)
+
+	a= simplejson.dumps('Se lanzo la llamada')
+	return HttpResponse(a, content_type="application/json")
+
+def lanzafinllamada(request,base,agente):
+
+	_agente = Agente.objects.get(id=agente)
+
+	_agente.estado_id=4
+	_agente.save()
+
+
+	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username])
+
+	message = RedisMessage('llamada-'+str(base))
+
+
+	redis_publisher.publish_message(message)
+
+
+	_data = Agente.objects.filter(id=agente)
+	serializer =  AgentesSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
 
 
 
@@ -957,4 +927,56 @@ def traesemana(fecha_inicio):
 		return HttpResponse(a, content_type="application/json")
 
 
+
+@login_required(login_url="/ingresar")
+
+def m_agente(request,cliente,id_incidencia):
+
+	print request.user.id
+
+	_agente=Agente.objects.get(user=request.user.id)
+
+	ven = Produccion.objects.filter(telefono_1=cliente)
+
+
+	if request.method=='GET':
+
+		for r in request.GET:
+
+			if r=='estado':
+
+				cambia_estado = request.GET['estado']
+
+				_agente.estado_id=cambia_estado
+				_agente.save()
+
+				
+		_estado=EstadoAgente.objects.filter(id__in=[1,2])
+
+		#agenda = AgendarForm()
+
+		redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username])
+
+		message = RedisMessage('hola')
+
+
+		redis_publisher.publish_message(message)
+
+
+
+		agenteform = AgenteForm(instance=_agente)
+
+		incidencia={}
+
+		if int(id_incidencia)>0:
+
+			incidencia = Produccion.objects.get(id=id_incidencia)
+
+			incidenciaform = ProduccionForm(instance=incidencia)
+
+			print 'incidenciaform',incidenciaform
+
+
+
+		return render(request, 'colasIN/agente.html',{'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
 

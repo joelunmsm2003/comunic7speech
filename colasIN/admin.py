@@ -28,6 +28,16 @@ from import_export.admin import ImportExportModelAdmin
 from django.contrib import admin
 import time
 
+
+@admin.register(EstadoAgente)
+class EstadoAgenteAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+@admin.register(Agente)
+class AgenteAdmin(admin.ModelAdmin):
+	list_display = ('id','anexo')
+
+
 # @admin.register(Person)
 # class PersonAdmin(ImportExportModelAdmin):
 #     list_display = ('id','name','email','birth_date','location')
@@ -118,6 +128,11 @@ class Colores_vAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 	list_filter=('nombre',)
 
+@admin.register(Clientes)
+class ClientesAdmin(admin.ModelAdmin):
+	list_display = ('id','nombres')
+	list_filter=('nombres',)
+
 
 @admin.register(Anio_v)
 class Anio_vAdmin(admin.ModelAdmin):
@@ -143,7 +158,8 @@ class ProduccionAdmin(admin.ModelAdmin):
     search_fields=('id','cliente','dni')
     #a= User=request.user
     list_editable =('atiende',)
-    list_filter = (('fecha', DateRangeFilter),'usuario','marca_vehiculo','modelo')
+    #list_filter = (('fecha', DateRangeFilter),'usuario','marca_vehiculo','modelo')
+    
     actions = [export_books,'enviar_whatssap' ]
 
     def enviar_whatssap(modeladmin, request, queryset):

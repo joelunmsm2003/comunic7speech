@@ -1,0 +1,89 @@
+    
+      {% if error %}
+
+      <div  class="alert alert-primary animated fadeIn" role="alert">
+        {{error}}
+      </div>
+
+{% endif %}
+
+
+<h3></h3>
+
+
+
+<table class="table table-default responsive">
+    <thead>
+      <tr>
+        <th scope="col">Telefono</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Vehiculo</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for c in ventas %}
+      <tr>
+       
+        <td>{{c.telefono_1}}</td>
+        <td>{{c.cliente }}</td>
+        <td>{{c.marca_vehiculo}}</td>
+        <td>{{c.modelo}}</td>
+        <td><a class='btn btn-sm btn-light' href='/colasIN/monitor_agente/{{c.telefono_1}}/{{c.id}}'>Ir</a></td>
+      </tr>
+
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+
+   <h3>Detalle de Venta</h3>
+  
+   <form method="POST" class="post-form">
+
+  {% csrf_token %}
+
+  
+
+
+  {% for hidden in form.hidden_fields %}
+  {{ hidden }}
+  {% endfor %}
+  <div class='row'>
+  {% for field in incidenciaform.visible_fields %}
+
+  
+  <div class="col-md-3">
+        
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+    </div>
+  
+    {% endfor %}
+ 
+  </div>
+
+
+    <button type="submit" class="save btn btn-default">Save</button>
+
+
+  </form>
+
+
+
+      
+        
+          
+         
+
+
+
+
+
+
+
+
+

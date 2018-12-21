@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from app.views import *
 from django.conf.urls import include
 
 admin.site.site_header = 'Comunica7'
@@ -25,9 +24,10 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
     url(r'^', admin.site.urls),
-    url(r'^ingresar/', ingresar),
     url(r'^callcenter/', include('callcenter.urls')),
+    url(r'^comunica7/', include('comunica7.urls')),
     url(r'^speech/', include('speech.urls')),
     url(r'^discador/', include('discador.urls')),
     url(r'^colasIN/', include('colasIN.urls')),
+    
 ]

@@ -25,6 +25,10 @@ urlpatterns = [
     url(r'^nuevopaciente/$', nuevopaciente),
     url(r'^guardar$', guardar),
     url(r'^api_motorisado/', api_motorisado),
+    url(r'^api_motorisado/', api_motorisado),
+    url(r'^monitor_agente/(\d+)/(\d+)/', m_agente),
+    url(r'^lanzallamada/(\d+)/(\d+)', lanzallamada),
+    url(r'^lanzafinllamada/(\d+)/(\d+)', lanzafinllamada),
 
 
 ]

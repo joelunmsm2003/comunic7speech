@@ -17,9 +17,6 @@ from ws4redis.redis_store import RedisMessage
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
-
-
-
 # Create your views here.
 def ingresar(request):
 
@@ -37,17 +34,11 @@ def ingresar(request):
 
 				login(request, user)
 
-				print 'llege aquis'
-
-
 				_grupo = Group.objects.filter(user = request.user)[0]
-
-				print _grupo
 
 				if str(_grupo) =='Admin':
 
 					return HttpResponseRedirect("/callcenter/admin")
-
 
 				if str(_grupo)=='Agente':
 
