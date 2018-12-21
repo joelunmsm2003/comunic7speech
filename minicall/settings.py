@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'colasIN',
     'discador',
+    'comunica7',
     'app',
     'callcenter',
     'speech',
