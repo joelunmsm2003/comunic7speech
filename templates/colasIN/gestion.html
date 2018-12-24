@@ -10,39 +10,13 @@
 
 <h3></h3>
 
+<h4>Celular {{telefono}}</h4>
 
+{% if incidenciaform %}
 
-<table class="table table-default responsive">
-    <thead>
-      <tr>
-        <th scope="col">Telefono</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Marca</th>
-        <th scope="col">Vehiculo</th>
-        <th>Accion</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      {% for c in ventas %}
-      <tr>
-       
-        <td>{{c.telefono_1}}</td>
-        <td>{{c.cliente }}</td>
-        <td>{{c.marca_vehiculo}}</td>
-        <td>{{c.modelo}}</td>
-        <td><a class='btn btn-sm btn-light' href='/colasIN/monitor_agente/{{c.telefono_1}}/{{c.id}}'>Ir</a></td>
-      </tr>
-
-      {% endfor %}
-
-    </tbody>
-  </table>
-
-
-   <h3>Detalle de Venta</h3>
+  <h3>Detalle de Venta</h3>
   
-   <form method="POST" class="post-form">
+  <form method="POST" class="post-form">
 
   {% csrf_token %}
 
@@ -56,7 +30,7 @@
   {% for field in incidenciaform.visible_fields %}
 
   
-  <div class="col-md-3">
+  <div class="col-md-2">
         
             {{ field.errors }}
             {{ field.label_tag }} {{ field }}
@@ -67,12 +41,71 @@
   </div>
 
 
-    <button type="submit" class="save btn btn-default">Save</button>
+    <button type="submit" class="save btn btn-default">Guardar</button>
 
 
   </form>
 
+  {% endif %}
 
+
+  <a onclick="nuevaventa('/colasIN/dashboard')" target="_blank"  class="btn btn-primary">Crear Nueva Venta para {{telefono}}</a>
+
+ <div style='height:20px'></div>
+  {% if ventas %}
+
+
+  <h5>Historial de Ventas</h5>
+
+
+
+<table class="table table-default responsive">
+    <thead>
+      <tr>
+        <th scope="col">Telefono</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">DNI</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Version</th>
+        <th scope="col">Anio</th>
+        <th scope="col">Placa</th>
+        <th scope="col">Marca Bat.</th>
+        <th scope="col">Modelo Bat.</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Descuento</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for c in ventas %}
+      <tr>
+       
+        <td>{{c.telefono_1}}</td>
+        <td>{{c.cliente }}</td>
+        <td>{{c.dni }}</td>
+        <td>{{c.marca_vehiculo}}</td>
+        <td>{{c.modelo}}</td>
+        <td>{{c.version}}</td>
+        <td>{{c.anio}}</td>
+        <td>{{c.placa}}</td>
+        <td>{{c.marca_producto}}</td>
+        <td>{{c.modelo_bateria}}</td>
+        <td>{{c.precio}}</td>
+        <td>{{c.descuento}}</td>
+        <td><a class='btn btn-sm btn-light' href='/colasIN/monitor_agente/{{c.telefono_1}}/{{c.id}}'>Detalle</a></td>
+      </tr>
+
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+  {% else %}
+
+<h5>No hay registros para este numero</h5>
+  {% endif %}
 
       
         

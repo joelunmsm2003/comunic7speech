@@ -14,13 +14,14 @@ class AgenteForm(ModelForm):
         fields = ('estado',)
 
 
+
 class ProduccionForm(ModelForm):
     class Meta:
         model = Produccion
         fields = '__all__'
+        exclude =('venta','usuario')
         widgets = {
             'nombre':TextInput(attrs={'class':'form-control'}),
-            'venta':Select(attrs={'class':'form-control'}),
             'fecha':TextInput(attrs={'class':'form-control'}),
             'telefono_1':TextInput(attrs={'class':'form-control'}),
             'telefono_2':TextInput(attrs={'class':'form-control'}),
@@ -44,8 +45,8 @@ class ProduccionForm(ModelForm):
             'cantidad_bu':TextInput(attrs={'class':'form-control'}),
             'descuento':TextInput(attrs={'class':'form-control'}),
             'precio_total':TextInput(attrs={'class':'form-control'}),
-            'fecha_atencion':TextInput(attrs={'class':'form-control'}),
-            'hora_instalacion':TextInput(attrs={'class':'form-control'}),
+            'fecha_atencion':TextInput(attrs={'class':'form-control','type':'date'}),
+            'hora_instalacion':TextInput(attrs={'class':'form-control','type':'date'}),
             'misma_direccion':TextInput(attrs={'class':'form-control'}),
             'direccion_atencion':TextInput(attrs={'class':'form-control'}),
             'distrito':TextInput(attrs={'class':'form-control'}),

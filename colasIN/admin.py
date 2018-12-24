@@ -22,6 +22,25 @@ from django.shortcuts import redirect
 #from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 
+from import_export import resources
+
+from import_export.admin import ImportExportModelAdmin
+from django.contrib import admin
+import time
+
+
+
+class VehiculosResource(resources.ModelResource):
+
+    class Meta:
+        model = Vehiculo
+
+
+class AniosResource(resources.ModelResource):
+
+    class Meta:
+        model = Anio_v
+
 
 
 from import_export.admin import ImportExportModelAdmin
@@ -123,10 +142,16 @@ admin_site = MyAdminSite(name='myadmin')
 # Register your models here.
 
 
+class ColoresResource(resources.ModelResource):
+    class Meta:
+        model = Colores_v
+
 @admin.register(Colores_v)
-class Colores_vAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre')
-	list_filter=('nombre',)
+class Colores_vAdmin(ImportExportModelAdmin):
+    list_display = ('id','nombre')
+    list_filter=('nombre',)
+    resource_class=ColoresResource
+
 
 @admin.register(Clientes)
 class ClientesAdmin(admin.ModelAdmin):
@@ -135,21 +160,32 @@ class ClientesAdmin(admin.ModelAdmin):
 
 
 @admin.register(Anio_v)
-class Anio_vAdmin(admin.ModelAdmin):
+class Anio_vAdmin(ImportExportModelAdmin):
+    list_display = ('id','nombre')
+    list_filter=('nombre',)
+    resource_class = AniosResource
+
+class DistritoResource(resources.ModelResource):
+
+    class Meta:
+        model = Distrito
+
+
+@admin.register(Distrito)
+class DistritoAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre')
 	list_filter=('nombre',)
 
-@admin.register(Distrito)
-class DistritoAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre')
-	list_filter=('nombre',)
 
 
 
 @admin.register(Vehiculo)
-class VehiculoAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre','modelo')
-	list_filter=('nombre',)
+class VehiculoAdmin(ImportExportModelAdmin):
+    list_display = ('id','nombre','modelo')
+    list_filter=('nombre',)
+    resource_class = VehiculosResource
+
+
 
 @admin.register(Produccion)
 class ProduccionAdmin(admin.ModelAdmin):
@@ -203,34 +239,19 @@ class ProduccionAdmin(admin.ModelAdmin):
 
 
 
-# @admin.register(Modelo_Auto)
-# class Modelo_AutoAdmin(admin.ModelAdmin):
-#     list_display = ('id','nombre')
-#     search_fields=('nombre',)
+class BateriasResource(resources.ModelResource):
+
+    class Meta:
+        model = Bateria
 
 
 @admin.register(Bateria)
-class BateriaAdmin(admin.ModelAdmin):
-
-# <<<<<<< HEAD
-# 	list_display = ('id','cantidad','marca','modelo','codigo')
-# 	search_fields=('cantidad',)
-# 	list_filter=('marca','modelo')
-# =======
+class BateriaAdmin(ImportExportModelAdmin):
 
     list_display = ('id','codigo','marca','modelo','precio','descuento','equivalencia')
-
     search_fields=('cantidad',)
     list_filter = (('marca', DropdownFilter),)
-# >>>>>>> d12f7021f54bc55a19d5a9a00a197b535ac89a33
-#('a_charfield',, DropdownFilter)
-    
-
-# @admin.register(Pago)
-# class PagooAdmin(admin.ModelAdmin):
-#     list_display = ('id','nombre')
-#     search_fields=('nombre',)
-
+    resource_class = BateriasResource
 
 @admin.register(Pago)
 class PagoAdmin(ImportExportModelAdmin):

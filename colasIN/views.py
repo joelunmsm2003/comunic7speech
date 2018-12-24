@@ -489,15 +489,23 @@ def guardar(request):
 			t = time.mktime(t)
 			hora=time.strftime("%H:%M:%S", time.gmtime(t))
 			hora_instalacion=hora
-		#ruc=ruc,direc_rs=razon_socia,direc_rs=direccion_rs,correo=correo,atiende=atiende,almacen=almacen,gmail=gmail,status=estado,obserbaciones=obserbaciones
 
 		
 		hora_instalacion = request.POST['inputime']
 
-		#ruc = request.POST['ruc']
+		redis_publisher = RedisPublisher(facility='foobar', users=[request.user.username])
+
+		message = RedisMessage('llamada-'+str(telefono_1))
+
+		redis_publisher.publish_message(message)
+
+
+
+
 		Produccion(hora_instalacion=hora_instalacion,usuario_id=user,modelo_bateria=modelo_bateria,telefono_1=telefono_1,telefono_2=telefono_2,cliente=cliente,apellido_p=apellido_p,apellido_m=apellido_m,dni=dni,marca_vehiculo=marca_vehiculo,modelo=modelo,version=version,anio_id=anio,cilindrada=cilindrada,color_id=color,kilometraje=kilometraje,placa=placa,cantidad=cantidad,marca_producto=marca_producto,precio=precio,descuento=descuento,precio_total=precio_total,cantidad_bu=cantidad_bu,fecha_atencion=fecha_atencion,direccion_atencion=direccion_atencion,distrito_id=distrito,referencia=referencia,pago_id=pago,ruc=ruc,razon_social=razon_social,direccion_rs=direccion_rs,correo=correo,atiende_id=atiende,almacen_id=almacen,gmail=gmail,status_id=status,observaciones=observaciones,nombre_boleta=nombre_boleta,m_apellido_p=m_apellido_p,m_apellido_m=m_apellido_m,dni_c=dni_c).save()
-		#print 'telefonoooo',tlf1,
-	return HttpResponseRedirect("/dashboard")
+
+	return render(request, 'colasIN/exito.html',{})
+
 #referencia=referencia,
 
 
@@ -508,13 +516,12 @@ def dashboard(request):
 
 		if request.method=='POST':
 
-
-
 			form = BateriasForm(request.POST)
 	
 			if form.is_valid():
 
 				form.save()
+
 			return HttpResponseRedirect("/dashboard/")
 
 
@@ -756,7 +763,7 @@ def dashboard(request):
 			
 		
 
-		return render(request, 'comunica7/dashboard.html',{'status_uni':status_uni,'times':times,'hora_i':hora_i,'modelo_v':modelo_v,'colorrecibido':color,'aniorecibido':anio,'descuento':descuento,'precio':precio,'modelo_bat':modelo_bat,'pre':pre,'User':User,'cilindrada':cilindrada,'cant_ba':cant_ba,'placa':placa,'kilometraje':kilometraje,'color':colores,'anio':anios,'version':version,'distrito':distritos,'bateriasform':baterias,'vehiculoform':v,'bateria':bateria,'status':status,'atiende':atiende,'almacen':almacen,'pagos':pagos,'telefono_2':telefono_2,'telefono_1':telefono_1,'dni':dni,'cliente':cliente,'apellido_p':apellido_p,'apellido_m':apellido_m,'modelos':modelos,'marcas':marcas,'marca':marca,'marca_b':marca_b,'modelos_baterias':models_b})
+		return render(request, 'colasIN/dashboard.html',{'status_uni':status_uni,'times':times,'hora_i':hora_i,'modelo_v':modelo_v,'colorrecibido':color,'aniorecibido':anio,'descuento':descuento,'precio':precio,'modelo_bat':modelo_bat,'pre':pre,'User':User,'cilindrada':cilindrada,'cant_ba':cant_ba,'placa':placa,'kilometraje':kilometraje,'color':colores,'anio':anios,'version':version,'distrito':distritos,'bateriasform':baterias,'vehiculoform':v,'bateria':bateria,'status':status,'atiende':atiende,'almacen':almacen,'pagos':pagos,'telefono_2':telefono_2,'telefono_1':telefono_1,'dni':dni,'cliente':cliente,'apellido_p':apellido_p,'apellido_m':apellido_m,'modelos':modelos,'marcas':marcas,'marca':marca,'marca_b':marca_b,'modelos_baterias':models_b})
 
 
 def album(request):
@@ -936,10 +943,26 @@ def m_agente(request,cliente,id_incidencia):
 
 	_agente=Agente.objects.get(user=request.user.id)
 
-	ven = Produccion.objects.filter(telefono_1=cliente)
+	ven = Produccion.objects.filter(telefono_1=cliente).order_by('-id')
+
+	if request.method=='POST':
+
+		instance = Produccion.objects.get(id=id_incidencia)
+
+		form = ProduccionForm(request.POST or None, instance=instance)
+
+		if form.is_valid():
+
+				form.save()
+
+				return redirect('next_view')
+
+		return render(request, 'colasIN/agente.html',{})
 
 
 	if request.method=='GET':
+
+		telefono=cliente
 
 		for r in request.GET:
 
@@ -952,6 +975,8 @@ def m_agente(request,cliente,id_incidencia):
 
 				
 		_estado=EstadoAgente.objects.filter(id__in=[1,2])
+
+		incidenciaform=None
 
 		#agenda = AgendarForm()
 
@@ -978,5 +1003,5 @@ def m_agente(request,cliente,id_incidencia):
 
 
 
-		return render(request, 'colasIN/agente.html',{'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
+		return render(request, 'colasIN/agente.html',{'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
 

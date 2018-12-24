@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'speech',
     'import_export',
     'rest_framework',
-    'ws4redis'
+    'ws4redis',
+    'django_admin_listfilter_dropdown'
     
 ]
 
