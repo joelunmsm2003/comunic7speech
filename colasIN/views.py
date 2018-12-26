@@ -349,7 +349,7 @@ def disponible(request,id_agente):
 	ag.estado_id=1
 	ag.save()
 
-	return HttpResponseRedirect('/pausar/')
+	return HttpResponseRedirect('/colasIN/monitor_agente/980729169/0/')
 
 def pausar(request,id_agente):
 
@@ -357,7 +357,7 @@ def pausar(request,id_agente):
 	ag.estado_id=4
 	ag.save()
 
-	return HttpResponseRedirect('/pausar/')
+	return HttpResponseRedirect('/colasIN/monitor_agente/980729169/0/')
 
 def ingresar(request):
 

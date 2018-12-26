@@ -54,7 +54,7 @@ class EstadoAgenteAdmin(admin.ModelAdmin):
 
 @admin.register(Agente)
 class AgenteAdmin(admin.ModelAdmin):
-	list_display = ('id','anexo')
+	list_display = ('id','anexo','estado')
 
 
 # @admin.register(Person)
