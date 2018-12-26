@@ -45338,7 +45338,7 @@ function (_React$Component) {
       this.car = window.location.href.split('/')[6];
       this.neg = window.location.href.split('/')[7];
       __WEBPACK_IMPORTED_MODULE_6_axios___default.a.get("/discador/api_detalle_proveedor_cartera_negocio/" + this.pro + '/' + this.car + '/' + this.neg).then(function (response) {
-        console.log(response.data);
+        console.log('data,,,,', response.data);
 
         _this2.setState({
           scoreproveedores: response.data,
