@@ -187,53 +187,53 @@ class VehiculoAdmin(ImportExportModelAdmin):
 
 
 
-@admin.register(Produccion)
-class ProduccionAdmin(admin.ModelAdmin):
+# @admin.register(Produccion)
+# class ProduccionAdmin(admin.ModelAdmin):
 
-    list_display = ('id','fecha','atiende','fecha_atencion','cliente','apellido_p','ruc','marca_vehiculo','modelo')
-    search_fields=('id','cliente','dni')
-    #a= User=request.user
-    list_editable =('atiende',)
-    #list_filter = (('fecha', DateRangeFilter),'usuario','marca_vehiculo','modelo')
+#     list_display = ('id','fecha','atiende','fecha_atencion','cliente','apellido_p','ruc','marca_vehiculo','modelo')
+#     search_fields=('id','cliente','dni')
+#     #a= User=request.user
+#     list_editable =('atiende',)
+#     #list_filter = (('fecha', DateRangeFilter),'usuario','marca_vehiculo','modelo')
     
-    actions = [export_books,'enviar_whatssap' ]
+#     actions = [export_books,'enviar_whatssap' ]
 
-    def enviar_whatssap(modeladmin, request, queryset):
-    #queryset.update(status='p')
-        for q in queryset:
+#     def enviar_whatssap(modeladmin, request, queryset):
+#     #queryset.update(status='p')
+#         for q in queryset:
 
-            print q.cliente
-            ## representacion del tiempo
-            print "Fecha FORMAO "  + time.strftime("%x")
-            print "LA HORAAA.....",(time.strftime("%d/%m/%y"))
+#             print q.cliente
+#             ## representacion del tiempo
+#             print "Fecha FORMAO "  + time.strftime("%x")
+#             print "LA HORAAA.....",(time.strftime("%d/%m/%y"))
 
-            return redirect('https://wa.me/'+str(q.atiende.celular)+'?text=FECHA INSTALACION++++++++:++++++++'+str(q.fecha_atencion.strftime("%d/%m/%y"))+'%0D%0A'+
-            '%20HORA++++++++:++++++++'+str(q.hora_instalacion.strftime("%I :%M %p"))+'%0D%0A'+
-            '%20SERVICIO++++++++:++++++++'+str(q.status)+'%0D%0A'+
-            '%20VEHICULO++++++++:++++++++'+str(q.marca_vehiculo)+'%0D%0A'+
-            '%20MODELO++++++++:++++++++'+str(q.modelo)+'%0D%0A'+
-            '%20ANIO++++++++:++++++++'+str(q.anio.nombre)+'%0D%0A'+
-            '%20COLOR++++++++:++++++++'+str(q.color.nombre)+'%0D%0A'+
-            '%20MOTOR++++++++:++++++++'+str(q.cilindrada)+'%0D%0A'+
-            '%20PLACA++++++++:++++++++'+str(q.placa)+'%0D%0A'+
-            '%20CANTIDAD++++++++:++++++++'+str(q.cantidad)+'%0D%0A'+
-            '%20BATERIA++++++++:++++++++'+str(q.marca_producto)+'%0D%0A'+
-            '%20MODELO++++++++:++++++++'+str(q.modelo_bateria)+'%0D%0A'+
-            '%20PRECIO++++++++:++++++++'+str(q.precio)+'%0D%0A'+
-            '%20CLIENTE++++++++:++++++++'+str(q.cliente)+'%20  %20'+str(q.apellido_p)+'%20  %20'+str(q.apellido_m)+'%0D%0A'+
-            '%20DNI++++++++:++++++++'+str(q.dni)+'%0D%0A'+
-            '%20TELEFONOS++++++++:++++++++'+str(q.telefono_1)+'%20  %20'+str(q.telefono_2)+'%0D%0A'+
-            '%20DIRECCION++++++++:++++++++'+str(q.direccion)+'%0D%0A'+
-            '%20REFERENCIA++++++++:++++++++'+str(q.referencia)+'%0D%0A'+
-            '%20PAGO++++++++:++++++++'+str(q.pago)+'%0D%0A'+
-            #'%20DOCUMENTO++++++++:++++++++'+str(q.documento)+'%0D%0A'+
-            '%20RUC++++++++:++++++++'+str(q.ruc)+'%0D%0A'+
-            '%20RAZON+SOCIAL++++++++:++++++++'+str(q.razon_social)+'%0D%0A'+
-            '%20DIRECCION_RAZON_SOCIAL++++++++'+str(q.direccion_rs)+'%0D%0A'+
-            # '%20DIRECCION++++++++:++++++++'+str(q.direccion1)+'%0D%0A'+
-            '%20CLIENTE++++++++:++++++++'+str(q.nombre_boleta)+'%20  %20'+str(q.m_apellido_p)+'%20  %20'+str(q.dni_c)+'%0D%0A'+
-            '%20GMAP++++++++:++++++++'+str(q.gmail)+'%0D%0A'+
-            '%20ATIENDE++++++++:++++++++'+str(q.atiende.nombre)+'%0D%0A')
+#             return redirect('https://wa.me/'+str(q.atiende.celular)+'?text=FECHA INSTALACION++++++++:++++++++'+str(q.fecha_atencion.strftime("%d/%m/%y"))+'%0D%0A'+
+#             '%20HORA++++++++:++++++++'+str(q.hora_instalacion.strftime("%I :%M %p"))+'%0D%0A'+
+#             '%20SERVICIO++++++++:++++++++'+str(q.status)+'%0D%0A'+
+#             '%20VEHICULO++++++++:++++++++'+str(q.marca_vehiculo)+'%0D%0A'+
+#             '%20MODELO++++++++:++++++++'+str(q.modelo)+'%0D%0A'+
+#             '%20ANIO++++++++:++++++++'+str(q.anio.nombre)+'%0D%0A'+
+#             '%20COLOR++++++++:++++++++'+str(q.color.nombre)+'%0D%0A'+
+#             '%20MOTOR++++++++:++++++++'+str(q.cilindrada)+'%0D%0A'+
+#             '%20PLACA++++++++:++++++++'+str(q.placa)+'%0D%0A'+
+#             '%20CANTIDAD++++++++:++++++++'+str(q.cantidad)+'%0D%0A'+
+#             '%20BATERIA++++++++:++++++++'+str(q.marca_producto)+'%0D%0A'+
+#             '%20MODELO++++++++:++++++++'+str(q.modelo_bateria)+'%0D%0A'+
+#             '%20PRECIO++++++++:++++++++'+str(q.precio)+'%0D%0A'+
+#             '%20CLIENTE++++++++:++++++++'+str(q.cliente)+'%20  %20'+str(q.apellido_p)+'%20  %20'+str(q.apellido_m)+'%0D%0A'+
+#             '%20DNI++++++++:++++++++'+str(q.dni)+'%0D%0A'+
+#             '%20TELEFONOS++++++++:++++++++'+str(q.telefono_1)+'%20  %20'+str(q.telefono_2)+'%0D%0A'+
+#             '%20DIRECCION++++++++:++++++++'+str(q.direccion)+'%0D%0A'+
+#             '%20REFERENCIA++++++++:++++++++'+str(q.referencia)+'%0D%0A'+
+#             '%20PAGO++++++++:++++++++'+str(q.pago)+'%0D%0A'+
+#             #'%20DOCUMENTO++++++++:++++++++'+str(q.documento)+'%0D%0A'+
+#             '%20RUC++++++++:++++++++'+str(q.ruc)+'%0D%0A'+
+#             '%20RAZON+SOCIAL++++++++:++++++++'+str(q.razon_social)+'%0D%0A'+
+#             '%20DIRECCION_RAZON_SOCIAL++++++++'+str(q.direccion_rs)+'%0D%0A'+
+#             # '%20DIRECCION++++++++:++++++++'+str(q.direccion1)+'%0D%0A'+
+#             '%20CLIENTE++++++++:++++++++'+str(q.nombre_boleta)+'%20  %20'+str(q.m_apellido_p)+'%20  %20'+str(q.dni_c)+'%0D%0A'+
+#             '%20GMAP++++++++:++++++++'+str(q.gmail)+'%0D%0A'+
+#             '%20ATIENDE++++++++:++++++++'+str(q.atiende.nombre)+'%0D%0A')
 
 
 
