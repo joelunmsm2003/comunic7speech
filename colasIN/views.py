@@ -343,10 +343,21 @@ def color(request):
 
 	return render(request, 'login.html',{})
 
+def disponible(request,id_agente):
 
+	ag = Agente.objects.get(id=id_agente)
+	ag.estado_id=1
+	ag.save()
 
+	return HttpResponseRedirect('/pausar/')
 
+def pausar(request,id_agente):
 
+	ag = Agente.objects.get(id=id_agente)
+	ag.estado_id=4
+	ag.save()
+
+	return HttpResponseRedirect('/pausar/')
 
 def ingresar(request):
 
@@ -387,16 +398,6 @@ def ingresar(request):
 			return render(request, 'login.html',{'error': 'No existe este usuario'})
 
 
-			
-		
-
-
- 
-
-
-
-
-
 def guardar(request):
 
 	if request.method == 'POST':
@@ -429,7 +430,7 @@ def guardar(request):
 		direccion_atencion= request.POST['direccion_atencion']
 		distrito=request.POST['distrito']
 		referencia= request.POST['referencia']
-			#factura
+		#factura
 		ruc =request.POST['ruc']
 		razon_social=request.POST['razon_social']
 		direccion_rs=request.POST['direccion_rs']
@@ -494,6 +495,8 @@ def guardar(request):
 		hora_instalacion = request.POST['inputime']
 
 		redis_publisher = RedisPublisher(facility='foobar', users=[request.user.username])
+
+		print 'telefono1',telefono_1
 
 		message = RedisMessage('llamada-'+str(telefono_1))
 
@@ -577,11 +580,6 @@ def dashboard(request):
 		
 		for r in request.GET:
 
-			
-
-
-
-
 			if r=='marca':
 
 				marca= request.GET['marca']
@@ -589,15 +587,13 @@ def dashboard(request):
 				modelos = Vehiculo.objects.filter(nombre=marca)
 			
 			if r=='modelo_v':
+
 				modelo_v=request.GET['modelo_v']
-				print 'modelo de vehiculo',modelo_v
 
 
 			if r=='marca_b':
 
 				marca_b= request.GET['marca_b']
-
-				print 'yyyyyyyy',marca_b
 
 				models_b = Bateria.objects.filter(marca=marca_b)
 
@@ -785,6 +781,79 @@ def paciente(request):
 	return render(request, 'paciente.html')
 
 
+def nueva_venta(request,id_produccion):
+
+	if request.method=='POST':
+
+		instance = Produccion()
+
+		telefono = request.POST['telefono_1']
+
+		form = ProduccionForm(request.POST or None, instance=instance)
+
+		if form.is_valid():
+
+			form.save()
+
+			redis_publisher = RedisPublisher(facility='foobar', users=[request.user.username])
+
+			message = RedisMessage('llamada-'+str(telefono))
+
+			redis_publisher.publish_message(message)
+
+		return render(request, 'colasIN/exito.html',{})
+
+	if request.method=='GET':
+
+		instance = Produccion.objects.get(id=id_produccion)
+
+		incidenciaform = ProduccionForm(instance=instance)
+
+		return render(request, 'colasIN/nueva_venta.html',{'incidenciaform':incidenciaform})
+
+
+def detalle_venta(request,id_produccion):
+
+	if request.method=='POST':
+
+		instance = Produccion()
+
+		telefono = request.POST['telefono_1']
+
+		instance = Produccion.objects.get(id=id_produccion)
+
+		form = ProduccionForm(request.POST or None, instance=instance)
+
+		if form.is_valid():
+
+				form.save()
+
+		redis_publisher = RedisPublisher(facility='foobar', users=[request.user.username])
+
+		message = RedisMessage('llamada-'+str(telefono))
+
+		redis_publisher.publish_message(message)
+
+
+		return render(request, 'colasIN/exito.html',{})
+
+	
+	if request.method=='GET':
+
+		incidencia = Produccion.objects.get(id=id_produccion)
+
+		incidenciaform = ProduccionForm(instance=incidencia)
+
+		return render(request, 'colasIN/detalle_venta.html',{'incidenciaform':incidenciaform})
+
+
+		
+
+				
+
+
+
+
 def lanzallamada(request,base,agente_id):
 
 
@@ -803,7 +872,6 @@ def lanzallamada(request,base,agente_id):
 	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username])
 
 	message = RedisMessage('llamada-'+str(base))
-
 
 	redis_publisher.publish_message(message)
 
@@ -943,7 +1011,7 @@ def m_agente(request,cliente,id_incidencia):
 
 	_agente=Agente.objects.get(user=request.user.id)
 
-	ven = Produccion.objects.filter(telefono_1=cliente).order_by('-id')
+	
 
 	if request.method=='POST':
 
@@ -955,9 +1023,7 @@ def m_agente(request,cliente,id_incidencia):
 
 				form.save()
 
-				return redirect('next_view')
-
-		return render(request, 'colasIN/agente.html',{})
+		return HttpResponseRedirect("/colasIN/monitor_agente/"+cliente+"/"+id_incidencia)
 
 
 	if request.method=='GET':
@@ -966,14 +1032,20 @@ def m_agente(request,cliente,id_incidencia):
 
 		for r in request.GET:
 
+			if r =='numero':
+
+				telefono=request.GET['numero']
+
 			if r=='estado':
 
 				cambia_estado = request.GET['estado']
 
 				_agente.estado_id=cambia_estado
+
 				_agente.save()
 
-				
+		ven = Produccion.objects.filter(telefono_1=telefono).order_by('-id')
+
 		_estado=EstadoAgente.objects.filter(id__in=[1,2])
 
 		incidenciaform=None
@@ -984,10 +1056,7 @@ def m_agente(request,cliente,id_incidencia):
 
 		message = RedisMessage('hola')
 
-
 		redis_publisher.publish_message(message)
-
-
 
 		agenteform = AgenteForm(instance=_agente)
 
@@ -998,10 +1067,6 @@ def m_agente(request,cliente,id_incidencia):
 			incidencia = Produccion.objects.get(id=id_incidencia)
 
 			incidenciaform = ProduccionForm(instance=incidencia)
-
-			print 'incidenciaform',incidenciaform
-
-
 
 		return render(request, 'colasIN/agente.html',{'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
 

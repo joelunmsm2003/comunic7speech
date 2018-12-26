@@ -10,7 +10,8 @@
 
 <h3></h3>
 
-<h4>Celular {{telefono}}</h4>
+<h4>Llamada entrante...</h4>
+<h6>{{telefono}}</h6>
 
 {% if incidenciaform %}
 
@@ -49,15 +50,42 @@
   {% endif %}
 
 
-  <a onclick="nuevaventa('/colasIN/dashboard')" target="_blank"  class="btn btn-primary">Crear Nueva Venta para {{telefono}}</a>
+  <a onclick="nuevaventa('/colasIN/dashboard')" target="_blank"  class="btn btn-primary" style='color:#fff;'>Crear Nueva Venta</a>
 
+ <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Buscar Venta
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <form method='GET' action='/colasIN/monitor_agente/0/0'>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ingrese Numero</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input class='form-control' placeholder='Telefono' name='numero'>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button  type="submit" class="btn btn-primary" >Buscar</button>
+          </div>
+
+          </form>
+      </div>
+    </div>
+  </div>
+ 
  <div style='height:20px'></div>
+
   {% if ventas %}
 
-
-  <h5>Historial de Ventas</h5>
-
-
+  <h5>Historial de Ventas con el numero {{telefono}}</h5>
 
 <table class="table table-default responsive">
     <thead>
@@ -67,7 +95,7 @@
         <th scope="col">DNI</th>
         <th scope="col">Marca</th>
         <th scope="col">Modelo</th>
-        <th scope="col">Version</th>
+       
         <th scope="col">Anio</th>
         <th scope="col">Placa</th>
         <th scope="col">Marca Bat.</th>
@@ -87,14 +115,21 @@
         <td>{{c.dni }}</td>
         <td>{{c.marca_vehiculo}}</td>
         <td>{{c.modelo}}</td>
-        <td>{{c.version}}</td>
+        
         <td>{{c.anio}}</td>
         <td>{{c.placa}}</td>
         <td>{{c.marca_producto}}</td>
         <td>{{c.modelo_bateria}}</td>
         <td>{{c.precio}}</td>
         <td>{{c.descuento}}</td>
-        <td><a class='btn btn-sm btn-light' href='/colasIN/monitor_agente/{{c.telefono_1}}/{{c.id}}'>Detalle</a></td>
+        <td>
+        <div class='row'>
+          
+        <div class='col-md-4'> <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/detalle_venta/{{c.id}}')" target="_blank">Detalle</a></div>
+        <div class='col-md-4'> <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/nueva_venta/{{c.id}}')" target="_blank">Nueva Venta</a></td></div>
+       
+        
+        </div>
       </tr>
 
       {% endfor %}
