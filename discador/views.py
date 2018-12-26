@@ -159,12 +159,6 @@ def subecuentas(request):
 		id_gestor= df['id_gestor'][i]
 		fecha_deuda = df['fecha_deuda'][i]
 
-
-		print('daniellllllll',estado)
-
-		print('?????????????????',cartera_id )
-		print('?????????????????',idcliente )
-
 		Cuentas(idcliente=idcliente,moneda=moneda,producto=producto,cartera_id=cartera_id,tipo_credito=tipo_credito,
 		tipo_clasificacion=tipo_clasificacion,estado=estado,fecha_vencimiento=fecha_vencimiento,
 		fecha_concecion=fecha_concecion,nuemero_cuotas=nuemero_cuotas,dias_mora=dias_mora,tramo=tramo, 
@@ -193,8 +187,13 @@ def api_detalle_proveedor_cartera_negocio(request,proveedor,cartera,negocio):
 
 	_data = ScoreProveedor.objects.filter(proveedor_id=proveedor,cartera_id=cartera,negocio_id=negocio)
 
+
 	serializer =  ScoreProveedorSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
+
+
+
+
 
 @csrf_exempt
 def api_telefonos(request):
@@ -253,13 +252,62 @@ def opcion_score(request):
 @csrf_exempt
 def subescores(request):
 
-	df = pd.read_csv('/home/jose/Descargas/Libro1.csv')
-	Score.objects.all().delete()
+	xls = pd.ExcelFile('/Users/xiencias/score.xls') 
+	
+	# df = pd.read_excel(xls, 'MARKETING') 
+
+	# Score.objects.filter(negocio_id=2).delete()
+
+	# for i in range(df.shape[0]):
+
+	# 	print 'gestion',df['TIPO GESTION'][i]
+
+	# 	gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+	# 	print 'id_gestion',df['IDGESTION'][i]
+	# 	id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+
+	# 	print 'resultado',df['RESULTADO'][i]
+	# 	resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+	# 	print 'jsutificacion',df['JUSTIFICACION'][i]
+	# 	subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+
+	# 	peso_subresultado = df['PESO JUSTIFICACION'][i]
+	# 	peso_tipo_gestion = df['PESO TIPO GESTION'][i]
+	# 	peso_id_gestion = df['PESO IDGESTION'][i]
+	# 	peso_resultado = df['PESO RESULTADO'][i]
+
+
+	# 	Score(negocio_id=2,gestion_id=gestion_id,id_gestion_id=id_gestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
+
+	
+	# df = pd.read_excel(xls, 'ATENCION_CLIENTE') 
+
+	# Score.objects.filter(negocio_id=1).delete()
+
+	# for i in range(df.shape[0]):
+
+	# 	gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+	# 	print df['IDGESTION'][i]
+	# 	id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+
+	# 	print df['RESULTADO'][i]
+	# 	resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+	# 	print df['JUSTIFICACION'][i]
+	# 	subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+
+	# 	peso_subresultado = df['PESO JUSTIFICACION'][i]
+	# 	peso_tipo_gestion = df['PESO TIPO GESTION'][i]
+	# 	peso_id_gestion = df['PESO IDGESTION'][i]
+	# 	peso_resultado = df['PESO RESULTADO'][i]
+	# 	print('?????????????????',id_gestion_id)
+
+	# 	Score(negocio_id=1,gestion_id=gestion_id,id_gestion_id=id_gestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
+
+	df = pd.read_excel(xls, 'COBRANZA') 
+
+	Score.objects.filter(negocio_id=3).delete()
 
 	for i in range(df.shape[0]):
-
-
-		print df['TIPO GESTION'][i]
 
 		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
 		print df['IDGESTION'][i]
@@ -276,7 +324,10 @@ def subescores(request):
 		peso_resultado = df['PESO RESULTADO'][i]
 		print('?????????????????',id_gestion_id)
 
-		Score(negocio_id=1,gestion_id=gestion_id,id_gestion_id=id_gestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
+		Score(negocio_id=3,gestion_id=gestion_id,id_gestion_id=id_gestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
+
+
+
 
 	return render(request, 'agentes.html',{})
 
@@ -549,13 +600,20 @@ def guardaproveedor(request):
 
 		data = json.loads(request.body)
 
-		print data['proveedor_id']
+		print 'Guardando Score...',data
 
 		ProveedorCarteras(**data).save()
 
+		print data['negocio_id']
+
 		sc = Score.objects.filter(negocio_id=data['negocio_id'])
 
+		print 'Socre Negocios...',sc
+
 		for s in sc:
+
+
+			print data['proveedor_id']
 
 			ScoreProveedor(
 			cartera_id=data['cartera_id']

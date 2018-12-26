@@ -46,7 +46,7 @@ class AsignaScoreProveedor extends React.Component {
         .then(response=>{
 
 
-              console.log(response.data)
+              console.log('data,,,,',response.data)
 
               this.setState({
 
@@ -72,7 +72,9 @@ class AsignaScoreProveedor extends React.Component {
         <div> 
          <Header/>
 
-         <div class='container'>              
+         <div class='container'> 
+           
+                        
 
           <h3> {proveedor_cartera_negocio.proveedor ? proveedor_cartera_negocio.proveedor.nombre : 'No tiene'}</h3>
            <h4>  {proveedor_cartera_negocio.cartera ? proveedor_cartera_negocio.cartera.nombre : 'No tiene'}</h4>
