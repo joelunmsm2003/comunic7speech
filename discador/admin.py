@@ -122,8 +122,9 @@ class Tipo_contactoAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 
 @admin.register(Resultado)
-class ResultadoAdmin(admin.ModelAdmin):
+class ResultadoAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre')
+	pass
 
 # @admin.register(Score)
 # class ScoreAdmin(admin.ModelAdmin):
