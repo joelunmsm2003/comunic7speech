@@ -133,9 +133,12 @@ class ResultadoAdmin(admin.ModelAdmin):
 
 
 @admin.register(Score)
-class ScoreAdmin(admin.ModelAdmin):
+class ScoreAdmin(ImportExportModelAdmin):
 	list_display = ('id','negocio','gestion','id_gestion','resultado','subresultado')
 	list_filter = ('negocio',)
+	pass
+
+
 	
 
 @admin.register(Tipo_persona)
