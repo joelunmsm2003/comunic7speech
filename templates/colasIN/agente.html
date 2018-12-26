@@ -35,7 +35,7 @@
 
     function nuevaventa(url){
 
-        var strWindowFeatures = "location=yes,height=800,width=1500,scrollbars=yes,status=yes";
+        var strWindowFeatures = "location=yes,height=800,width=1300,scrollbars=yes,status=yes";
         var URL = url ;
         var win = window.open(URL, "_blank", strWindowFeatures);
 
@@ -45,10 +45,126 @@
 
 </script>
 
-  
+
 
 <div style='height: 20px'></div>
 <div class='container-fluid'>
+
+
+  <div class='discador'>
+
+
+    <img src='/static/callcenter.png'>
+
+    
+
+    <h6>{{agente.nombre}} </h6>
+
+    <div style="height:20px;"></div>
+
+
+    
+    {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
+
+    <div style="padding:20px;">
+      {% if agente.estado.nombre == 'Pausa' %}
+
+      <a class='btn btn-primary' href='colasIN/pausar/{{agente.id}}'>
+          Disponible
+      </a>
+
+      {% endif %}
+
+       {% if agente.estado.nombre == 'Disponible' %}
+
+        <a class='btn btn-primary' href='colasIN/disponible/{{agente.id}}'>
+        Pausar
+        </a>
+      
+
+     
+      {% endif %}
+
+    </div>
+
+     
+      
+
+    {% else %}
+
+    <img src='/static/llamada.png'>
+
+    
+
+    <a class="btn btn-light" href='/comunica7/ingresar'>Salir</a>
+
+
+
+  
+    
+    {% endif %}
+
+  </div>
+
+
+  <style>
+
+
+    .cajita{
+      background: #fff;
+      padding: 6px;
+      color: #234;border:1px solid #234;
+      margin-bottom: 10px;
+    }
+
+      .discador{
+    
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background: #1086fb;
+        transition:all .5s;
+        height: 1000px;
+        z-index: 1000;
+        width:120px;
+        padding-top: 20px;
+       
+        color:#fff;
+        text-align: center;
+    }
+    
+      
+      .discador:hover{
+    
+        position: absolute;
+        top: 0px;
+        background: #1086fb;
+        transition:all .5s;
+        width:140px;
+        
+    }
+
+    .discador img{
+
+      width: 40px;
+
+      cursor:pointer;
+    }
+
+   
+
+    .discador:hover .cajita{
+
+    
+    border: 1px solid #1086fb;
+
+
+    }
+    
+    
+    
+      
+    </style>
 
   <div class='row'>
 
@@ -56,6 +172,7 @@
 
     <div class='col-10'>
 
+    <h6>Estado Actual </h6>
     <h4>{{agente.estado.nombre}}</h4>
 
 
@@ -64,7 +181,7 @@
 
     {% else %}
 
-    <div class='col-md-10'>
+    <div class='col-md-11'>
 
 
     <!-- <iframe src="http://localhost:8000/colasIN/dashboard/" width='1500' height='500' style="border:0px;">
@@ -81,7 +198,7 @@
 
 
 
-    <div class='col-md-2'>
+    <!--<div class='col-md-1'>
 
       <form style='background: #1073ea;
     color: #fff;
@@ -132,7 +249,7 @@
 
     
      </form>
-    </div>
+    </div>-->
 
 
   </div>

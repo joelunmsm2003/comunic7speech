@@ -21,6 +21,7 @@ class Usuarios(models.Model):
 class Productos(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 	prefijo=models.CharField(max_length=100,blank=True,null=True)
+	url=models.CharField(max_length=100,blank=True,null=True)
 
 	
 	def __unicode__(self):
