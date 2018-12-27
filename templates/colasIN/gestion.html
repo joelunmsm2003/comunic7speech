@@ -42,6 +42,7 @@
 
 
     <button type="submit" class="save btn btn-default">Guardar</button>
+    <button type="submit" class="save btn btn-default">Limpiar</button>
 
 
   </form>
@@ -51,7 +52,7 @@
 
   <!-- <a onclick="nuevaventa('/colasIN/dashboard')" target="_blank"  class="btn btn-primary" style='color:#fff;'>Crear Nueva Venta</a> -->
 
-  <a onclick="nuevaventa('/colasIN/nueva_venta')" target="_blank"  class="btn btn-primary" style='color:#fff;'>Crear Nueva Venta</a>
+  <a onclick="nuevaventa('/colasIN/nueva_venta/')" target="_blank"  class="btn btn-primary" style='color:#fff;'>Crear Nueva Venta</a>
 
 
 
@@ -101,7 +102,7 @@
         <div class='row'>
           
         <div class='col-md-4'> <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/detalle_venta/{{c.id}}')" target="_blank">Detalle</a></div>
-        <div class='col-md-4'> <a class='btn btn-sm btn-light' onclick="nuevocaso('/colasIN/nuevo_caso/{{c.id}}')" target="_blank">Nueva Venta</a></td></div>
+        <div class='col-md-4'> <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/nueva_venta/{{c.id}}')" target="_blank">Nueva Venta</a></td></div>
        
         
         </div>

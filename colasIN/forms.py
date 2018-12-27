@@ -75,11 +75,12 @@ class ProduccionForm(ModelForm):
 class NuevoCAsoForm(ModelForm):
     class Meta:
         model = Produccion
-        fields = ('tipo_caso', 'sub_tipo_caso')
+        fields = ('tipo_caso', 'sub_tipo_caso','detalle')
        
         widgets = {
             'tipo_caso':TextInput(attrs={'class':'form-control'}),
             'sub_tipo_caso':TextInput(attrs={'class':'form-control'}),
+            'detalle':Textarea(attrs={'class':'form-control'}),
 
             
    }
