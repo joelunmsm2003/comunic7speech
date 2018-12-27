@@ -67,12 +67,52 @@ from io import BytesIO
 from ws4redis.publisher import RedisPublisher
 from ws4redis.redis_store import RedisMessage
 
-
-
 #from app.resources import ProduccionResource
-
-
 from tablib import Dataset
+
+
+@csrf_exempt
+def subetelefonos(request):
+
+	df = pd.read_csv('/home/jose/Descargas/Casos.csv')
+	Casos.objects.all().delete()
+	# sheet = excel_document.get_sheet_by_name('TELEFONOS')
+	# print sheet['A2'].value
+
+	for i in range(df.shape[0]):
+
+
+		# print df['TIPO GESTION'][i]
+
+		# gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+		# print df['IDGESTION'][i]
+		# id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+
+		# print df['RESULTADO'][i]
+		# resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+		# print df['JUSTIFICACION'][i]
+		# subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+
+		print df['NUMERO_DOCUMENTO'][i]
+		numero_documento_id=Cliente.objects.get(numero_documento=df['NUMERO_DOCUMENTO'][i]).id
+		print df['DISCADO'][i]
+		discado = df['DISCADO'][i]
+
+		cliente = df['NOMBRE'][i]
+		
+		print df['NUMERO DE TELEFONO'][i]
+		numero_telefono= df['NUMERO DE TELEFONO'][i]
+		observacion = df['OBSERVACION'][i]
+		tipo_contacto= df['TIPO CONTACTO'][i]
+		tipo_telefono = df['TIPO TELEFONO'][i]
+		fuente_telefono= df['FUENTE'][i]
+		estado = df['ESTADO'][i]
+
+
+		Telefonos(numero_documento_id=numero_documento_id,numero_telefono=numero_telefono).save()
+
+	return render(request, 'agentes.html',{})
+
 
 
 def importar(request):
