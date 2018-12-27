@@ -185,6 +185,21 @@ class Clientes(models.Model):
 
 
 
+
+
+
+
+class Caso(models.Model):
+    tipo = models.CharField(max_length=1000,blank=True, null=True)
+    sub_tipo= models.CharField(max_length=1000,blank=True, null=True)
+   
+
+    def __unicode__(self):
+
+        return self.tipo
+
+
+
 class Produccion(models.Model):
 
     numero_caso= models.CharField(max_length=1000,blank=True, null=True)

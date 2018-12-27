@@ -1,0 +1,505 @@
+{% extends 'base.html' %}
+
+
+
+  {% block content %}
+
+
+  <script type="text/javascript" src="/static/colasIN/dashboard.js"></script>
+
+<script>
+
+function cerrar(){
+
+console.log('dataaa')
+
+}
+
+
+</script>
+
+		<div class='container-fluid'>
+				<div class="page home-page">
+						<!-- Main Navbar-->
+					
+
+								<!-- Side Navbar -->
+
+									<!-- {% include "sidenav.html" %jj}kk -->
+
+								
+										<!-- Page Header-->
+										
+
+										<header class="page-header">
+
+												<div class="container-fluid">
+
+
+  
+
+                  
+    <form  action="/colasIN/guardar" class="text-dark" id="formulario" style="  border-radius: 20px;" method='POST' >
+      {% csrf_token %}
+
+
+
+  
+  <div class="form-row  m-1">
+    
+    <div class="form-group col-md-2">
+      <label for="inputPassword4" class="text-dark" >Nombre del Cliente</label>
+      
+      <input type="text" class="form-control rounded text-dark"  required="True"name="cliente" id="cliente" placeholder="Ingrese Nombre"  value='{{cliente}}'>
+    </div>
+
+    <div class="form-group col-md-2 ">
+      <label for="apellido_p" class="text-dark" >Primer Apellido </label>
+      
+      <input type="text" class="form-control rounded text-dark"  value='{{apellido_p}}' name="apellido_p" id="apellido_p" placeholder="Ingrese Nombre">
+    </div>
+
+    <div class="form-group col-md-2 ">
+      <label for="apellido_m" class="text-dark" > Segundo Apellido
+
+      </label>
+      
+      <input type="text" class="form-control rounded text-dark"  value='{{apellido_m}}' name="apellido_m" id="apellido_m" placeholder="Ingrese Nombre">
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="dni" class="text-dark">DNI-Cliente</label>
+      <input type="text" class="form-control rounded" name="dni"  value='{{dni}}' id="dni" placeholder="DNI">
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="telefono_1" class="text-dark" >Telefono1</label>
+      <input type="text" class="form-control rounded" name="telefono_1"  value='{{telefono_1}}' id="telefono_1" placeholder="Telefono">
+    </div>
+    <div class="form-group col-md-2">
+    <label for="telefono2" class="text-dark">Telefono2</label>
+    <input type="text" class="form-control rounded" name="telefono_2" value="{{telefono_2}}" id="telefono_2" placeholder="Telefono">
+    </div>
+
+ 
+
+  </div>
+
+ 
+
+
+  <div class="form-row  m-1">
+
+ 
+<div class="form-group col-md-2">
+  
+    <label for="inputime" class="text-dark">Hora</label>
+    <div class="input-group">
+    <div class="input-group-prepend">
+    <input type="time"  required="true"  name="inputime" value="{{hora_i}}" id="inputime">
+    <div class="input-group-text" id="boton"><i class="fa fa-plus-square" aria-hidden="true"></i></div>
+  </div>
+</div>
+  </div>
+
+
+  <div class="form-group col-md-4">
+    <label for="inputRF" class="text-dark">Direccion de Atencion </label>
+    <input type="text" class="form-control"  name="direccion_atencion" id="inpuguardatRF" onchange='guardadireccion()'  placeholder="Direccion">
+  </div>
+
+
+
+  <div class="form-group col-md-3">
+    <label for="inputMarca" class="text-dark">Distrito</label>
+
+    <select name='distrito' id="distrito" class="form-control" >
+
+      
+        {% for d in distrito%}
+
+        <option value='{{d.id}}'>{{d.nombre}}</option>
+
+
+        {% endfor %}
+
+          
+
+            
+    </select>
+    
+
+
+
+  </div>
+
+
+
+  <div class="form-group col-md-5">
+    <label for="inputRef" class="text-dark">Referencia</label>
+    <input type="text" class="form-control"  name="referencia" id="inputRef" placeholder="Referencia">
+  </div>
+
+  <div class="form-group col-md-12">
+      <label for="inputRef" class="text-dark">Gmaps</label>
+      <div class="input-group-prepend">
+
+    <input type="text" class="form-control" name="Map" id="Map" placeholder="Map">
+    <div class="input-group-text" id="boton"><a id="llmapa" target="_blank" href=""><i class="fa fa-plus-square" aria-hidden="true"></i></a></div>
+  </div>
+
+
+</div>
+
+
+
+
+  </div>
+
+
+
+
+  <div class="form-row m-1" id="bboleta1" style="display: none">
+
+
+        
+   
+    <div class="form-check col-md-12 m-2 ">
+
+      <input class="form-check-input" type="checkbox" id="gridCheck" >
+      <label class="form-check-label" for="gridCheck">
+        ¿Mismo Cliente?
+      </label>
+    </div>
+
+      
+   
+
+    <div class="form-group col-md-3">
+      <label for="inputNombre" class="text-dark" >Nombre</label>
+      <input type="text" class="form-control rounded" id="inputNombre" name="nombre_boleta" placeholder="Nombre del Cliente" value=''>
+    </div>
+     <div class="form-group col-md-3">
+      <label for="inputApellido_p" class="text-dark" >Primer Apellido</label>
+      <input type="text" class="form-control rounded" id="inputApellido_p" name="m_apellido_p" placeholder="Nombre del Cliente">
+    </div>
+
+     <div class="form-group col-md-3">
+      <label for="inputApellido_m" class="text-dark" >Segundo Apellido</label>
+      <input type="text" class="form-control rounded" id="inputApellido_m" name="m_apellido_m">
+    </div>
+
+
+    <div class="form-group col-md-3">
+      <label for="inputDNI" class="text-dark" >DNI del Cliente</label>
+
+      <input type="text" class="form-control rounded" id="inputDNI" name="dni_c" placeholder="Ingrese DNI">
+    </div>
+
+  </div>
+
+  <div class="form-row m-1" id="ffactura1" style="display:none;">
+            <div class="form-group col-md-4">
+      <label for="inputRUC" class="text-dark">RUC Cliente</label>
+      <input type="text" class="form-control rounded rounded" name="ruc" id="inputRUC" placeholder="Ruc">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputRazon" class="text-dark">Razon social</label>
+      <input type="text" class="form-control rounded" name="razon_social" id="inputRazon" placeholder="Razon Social">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputDrs" class="text-dark">Direccion R.S.</label>
+      <input type="text" class="form-control rounded" name="direccion_rs" id="inputDrs" placeholder="Direccion de R.S">
+    </div>
+
+  </div>
+
+     <div class="form-row  m-1" id="descripcion">
+    
+
+    <div class="form-group col-md-2">
+      <label for="inputState" class="text-dark">Pago</label>
+
+
+
+         <select name='comprobante'  id='comprobante'class="form-control">
+
+        {% for p in pagos %}
+
+
+        <option value='{{p.id}}'>{{p.nombre}}</option>
+
+        {% endfor %}
+
+
+    </select>
+
+
+
+
+    </div>
+
+
+<div class="form-group col-md-3">
+      <label for="inputEmail" class="text-dark">Correo Electronico</label>
+      <input type="email" class="form-control rounded" name="correo" id="inputEmail" placeholder="ejemplo@gmail.com">
+    </div>
+
+
+    <div class="form-group col-md-2">
+      <label for="inputSta" class="text-dark" >Atiende{{motorisado}}</label>
+
+          <select name='atiende'  id="atiende" class="form-control" onchange='traeinfomoto()'>
+
+        {% for mm in atiende %}
+
+
+        <option value='{{mm.celular}}'>{{mm.nombre}}</option>
+
+        {% endfor %}
+
+
+    </select>
+
+
+
+
+    </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputS" class="text-dark">Almacen</label>
+ 
+        
+         <select name='almacen' id='almacen' class="form-control">
+
+        {% for a in almacen %}
+
+
+        <option value='{{a.id}}'>{{a.nombre}}</option>
+
+        {% endfor %}
+
+      </select>
+    </div>
+
+
+
+
+ <div class="form-group col-md-3">
+      <label for="inputS" class="text-dark">Status</label>
+    
+
+        
+         <select name='status' id='status' class="form-control">
+
+        {% for s in status %}
+
+
+        <option value='{{s.id}}'>{{s.nombre}}</option>
+
+        {% endfor %}
+
+      </select>
+    </div>
+
+
+
+    <div class="form-group col-md-5">
+      <label for="inputObs" class="text-dark" >Observaciones</label>
+      <input type="text" class="form-control for rounded" name="observaciones" id="inputObs" placeholder="Obserbaciones">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputObs" class="text-dark" >Numero-WhatsApp</label>
+      <div class="input-group">
+      <div class="input-group-prepend">
+      
+      <input type="text" class="form-control for rounded" name="wnumero" id="wnumero" placeholder="+51992644267">
+      <div  id="boton" onclick="whatsApp()"><img src="/static/whatsapp.png" style='max-width: 35px;'></div>
+      <div>
+        
+      </div>
+      </div>
+      </div>
+
+      
+      
+
+    </div>
+
+   
+     
+  </div>
+
+
+    
+    
+      <center><button type="submit"  onclick='cerrar()' class="btn btn-dark" id="modal" Onclick="alerta()">GUARDAR</button></center>
+
+       
+        
+                
+
+</script>
+
+
+<div>
+  
+</div>
+
+</form>
+
+
+<div>
+
+</div>
+
+
+
+			</div>
+		</div>
+										</header>
+
+
+
+								
+						
+				</div>
+
+
+
+      </div>
+
+
+
+<!--MODAL NUMERO #1-->
+
+
+
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">MARCA/MODELO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+
+
+             <form id='formula' method='POST' action='/vehiculos/'>
+
+
+    {% csrf_token %}
+    
+
+      <div class='row'>
+                
+
+
+            {% for field in vehiculoform %}
+                  
+              <div class="form-group col-md-12">
+
+
+                  {{ field.label_tag }} {{ field }}
+                  
+
+                  
+              </div>
+            {% endfor %}
+
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      <button type="sumit" class="btn btn-danger"  value='Guardar'>GUARDAR</button>
+      <!-- <p><input class='btn btn-dark' type='submit' value='Guardar'/></p> -->
+       </div>
+  </form>
+
+
+
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--MODAL NUMERO #2-->
+
+
+<!-- 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+ -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">MARCA/MODELO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+
+
+             <form id='formula' method='POST' action='/dashboard/'>
+
+
+    {% csrf_token %}
+    
+
+      <div class='row'>
+                
+
+
+            {% for field in bateriasform %}
+                  
+              <div class="form-group col-md-12">
+
+
+                  {{ field.label_tag }} {{ field }}
+                  
+
+                  
+              </div>
+            {% endfor %}
+
+
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+
+      <button type="submit" class="btn btn-success"  value='Guardar'>GUARDAR</button>
+      <!-- <p><input class='btn btn-dark' type='submit' value='Guardar'/></p> -->
+
+       </div>
+  </form>
+  
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

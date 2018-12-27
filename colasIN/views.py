@@ -72,14 +72,30 @@ from ws4redis.redis_store import RedisMessage
 #from app.resources import ProduccionResource
 
 
+
+
+
 from tablib import Dataset
 
+
+
+
+
+def reporte_casos(request):
+
+	
+
+	return render(request, 'colasIN/reporte_casos.html',{})
+
+
+	
 
 def importar(request):
 
 	
 
 	return render(request, 'import.html',{})
+
 
 
 
