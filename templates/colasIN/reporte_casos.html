@@ -1,0 +1,84 @@
+    
+    {% extends 'base.html' %}
+
+
+
+    {% block content %}
+
+
+    <div class='container-fluid'>
+
+
+      {% if error %}
+
+      <div  class="alert alert-primary animated fadeIn" role="alert">
+        {{error}}
+      </div>
+
+{% endif %}
+
+
+<h3></h3>
+
+<h6>{{telefono}}</h6>
+
+{% if incidenciaform %}
+
+  <h3>Nuevo Caso </h3>
+  
+  <form method="POST" class="post-form">
+
+  {% csrf_token %}
+
+  
+
+
+  {% for hidden in form.hidden_fields %}
+  {{ hidden }}
+  {% endfor %}
+  <div class='row'>
+  {% for field in incidenciaform.visible_fields %}
+
+  
+  <div class="col-md-2">
+        
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+    </div>
+  
+    {% endfor %}
+ 
+  </div>
+
+
+    <button type="submit" class="save btn btn-primary">Guardar</button>
+
+
+  </form>
+
+  {% endif %}
+
+
+</div>
+
+
+
+
+
+
+
+  {% endblock %}
+
+
+  
+          
+         
+
+
+
+
+
+
+
+
+

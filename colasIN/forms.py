@@ -72,6 +72,25 @@ class ProduccionForm(ModelForm):
 
 
 
+class NuevoCasoForm(ModelForm):
+    class Meta:
+        model = Casos
+        fields = '__all__'
+       
+        widgets = {
+            'caso':Select(attrs={'class':'form-control'}),
+            'sub_caso':Select(attrs={'class':'form-control'}),
+            'detalle':Textarea(attrs={'class':'form-control','height':'20'}),
+
+            
+   }
+
+
+
+
+
+
+
 
 class VehiculosForm(ModelForm):
     class Meta:

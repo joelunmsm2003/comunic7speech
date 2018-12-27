@@ -175,6 +175,7 @@ class Estados(models.Model):
     sub_estado =models.CharField(max_length=100,blank=True,null=True)
 
 
+
 class Casos(models.Model):
 
     
@@ -221,6 +222,8 @@ class Produccion(models.Model):
     situacion= models.CharField(max_length=1000,blank=True, null=True)
     accion_tomada= models.CharField(max_length=1000,blank=True, null=True)
     unidad_reportante= models.CharField(max_length=1000,blank=True, null=True)
+    detalle= models.CharField(max_length=1000,blank=True, null=True)
+
     venta= models.ForeignKey(Venta,help_text='Codigo Venta',max_length=1000,blank=True, null=True)
     fecha = models.DateTimeField(help_text=u'Fecha de recepción de la llamada (No se puede modificar)',default=datetime.datetime.today())
     telefono_1 = models.CharField(help_text=u'Número de teléfono desde donde llama el cliente',max_length=1000,blank=True, null=True)

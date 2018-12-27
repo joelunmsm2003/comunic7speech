@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^detalle_venta/(\d+)/', detalle_venta),
     url(r'^pausar/(\d+)/', pausar),
     url(r'^disponible/(\d+)/', disponible),
-
+    url(r'^subir_casos/$', subir_casos),
+    url(r'^nuevo_caso/$', nuevo_caso),
 
 ]
