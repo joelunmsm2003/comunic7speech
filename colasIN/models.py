@@ -168,6 +168,25 @@ class Venta(models.Model):
     fecha = models.DateTimeField(default=datetime.datetime.today())
 
 
+class Estados(models.Model):
+
+    
+    estado =models.CharField(max_length=100,blank=True,null=True)
+    sub_estado =models.CharField(max_length=100,blank=True,null=True)
+
+
+class Casos(models.Model):
+
+    
+    caso =models.CharField(max_length=100,blank=True,null=True)
+    sub_caso =models.CharField(max_length=100,blank=True,null=True)
+
+
+class Zona(models.Model):
+
+    
+    nombre =models.CharField(max_length=100,blank=True,null=True)
+
 # Create your models here.
 class Clientes(models.Model):
 
@@ -186,6 +205,17 @@ class Clientes(models.Model):
 
 
 class Produccion(models.Model):
+
+    numero_caso= models.CharField(max_length=1000,blank=True, null=True)
+    estado= models.ForeignKey(Estados,max_length=1000,blank=True, null=True, related_name='_estados')
+    sub_estado= models.CharField(max_length=1000,blank=True, null=True)
+    fecha_atencion= models.DateField(max_length=1000,blank=True, null=True,)#,input_formats=settings.DATE_INPUT_FORMATS
+    dispositivo_origen= models.CharField(max_length=1000,blank=True, null=True)
+    tipo_caso= models.CharField(max_length=1000,blank=True, null=True)
+    sub_tipo_caso= models.CharField(max_length=1000,blank=True, null=True)
+    situacion= models.CharField(max_length=1000,blank=True, null=True)
+    zona=models.ForeignKey(Zona,help_text='Distrito',max_length=1000,blank=True, null=True,related_name='_zona')
+
 
     venta= models.ForeignKey(Venta,help_text='Codigo Venta',max_length=1000,blank=True, null=True)
     fecha = models.DateTimeField(help_text=u'Fecha de recepción de la llamada (No se puede modificar)',default=datetime.datetime.today(),editable=False)
