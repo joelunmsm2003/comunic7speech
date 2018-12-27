@@ -170,9 +170,10 @@ class Venta(models.Model):
 
 class Estados(models.Model):
 
-    
     estado =models.CharField(max_length=100,blank=True,null=True)
     sub_estado =models.CharField(max_length=100,blank=True,null=True)
+
+
 
 
 
@@ -187,6 +188,21 @@ class Zona(models.Model):
 
     
     nombre =models.CharField(max_length=100,blank=True,null=True)
+
+
+class EstadoIncidencia(models.Model):
+    nombre =models.CharField(max_length=100,blank=True,null=True)
+
+    def __unicode__(self):
+
+        return self.nombre
+
+class SubEstadoIncidencia(models.Model):
+    nombre =models.CharField(max_length=100,blank=True,null=True)
+
+    def __unicode__(self):
+
+        return self.nombre
 
 # Create your models here.
 class Clientes(models.Model):
@@ -209,8 +225,8 @@ class Produccion(models.Model):
 
     numero_caso= models.CharField(max_length=1000,blank=True, null=True)
     estado= models.ForeignKey(Estados,max_length=1000,blank=True, null=True, related_name='_estados')
-    estado_incidencia= models.CharField(max_length=1000,blank=True, null=True)
-    sub_estado= models.CharField(max_length=1000,blank=True, null=True)
+    estado_incidencia= models.ForeignKey(EstadoIncidencia,max_length=1000,blank=True, null=True, related_name='_estadoincidencia')
+    sub_estado= models.ForeignKey(SubEstadoIncidencia,max_length=1000,blank=True, null=True, related_name='_sub_estados')
     fecha_atencion= models.DateField(max_length=1000,blank=True, null=True,)#,input_formats=settings.DATE_INPUT_FORMATS
     dispositivo_origen= models.CharField(max_length=1000,blank=True, null=True)
     tipo_caso= models.CharField(max_length=1000,blank=True, null=True)

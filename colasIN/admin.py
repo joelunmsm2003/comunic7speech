@@ -56,6 +56,14 @@ class CasosAdmin(admin.ModelAdmin):
 class EstadoAgenteAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')
 
+@admin.register(EstadoIncidencia)
+class EstadoIncidenciaAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
+@admin.register(SubEstadoIncidencia)
+class SubEstadoIncidenciaAdmin(admin.ModelAdmin):
+	list_display = ('id','nombre')
+
 @admin.register(Agente)
 class AgenteAdmin(admin.ModelAdmin):
 	list_display = ('id','anexo','estado')

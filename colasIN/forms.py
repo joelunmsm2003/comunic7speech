@@ -80,16 +80,8 @@ class NuevoCasoForm(ModelForm):
         widgets = {
             'caso':Select(attrs={'class':'form-control'}),
             'sub_caso':Select(attrs={'class':'form-control'}),
-            'detalle':Textarea(attrs={'class':'form-control','height':'20'}),
-
-            
-   }
-
-
-
-
-
-
+            'detalle':Textarea(attrs={'class':'form-control','height':'20'}),    
+        }
 
 
 class VehiculosForm(ModelForm):
