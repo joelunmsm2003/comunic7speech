@@ -23,6 +23,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from colasIN.forms import *
+from colasIN.forms_reporte import *
 from django.contrib.auth import authenticate
 import time
 from django.db.models import Func
@@ -67,12 +68,52 @@ from io import BytesIO
 from ws4redis.publisher import RedisPublisher
 from ws4redis.redis_store import RedisMessage
 
-
-
 #from app.resources import ProduccionResource
-
-
 from tablib import Dataset
+
+
+@csrf_exempt
+def subetelefonos(request):
+
+	df = pd.read_csv('/home/jose/Descargas/Casos.csv')
+	Casos.objects.all().delete()
+	# sheet = excel_document.get_sheet_by_name('TELEFONOS')
+	# print sheet['A2'].value
+
+	for i in range(df.shape[0]):
+
+
+		# print df['TIPO GESTION'][i]
+
+		# gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+		# print df['IDGESTION'][i]
+		# id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+
+		# print df['RESULTADO'][i]
+		# resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+		# print df['JUSTIFICACION'][i]
+		# subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+
+		print df['NUMERO_DOCUMENTO'][i]
+		numero_documento_id=Cliente.objects.get(numero_documento=df['NUMERO_DOCUMENTO'][i]).id
+		print df['DISCADO'][i]
+		discado = df['DISCADO'][i]
+
+		cliente = df['NOMBRE'][i]
+		
+		print df['NUMERO DE TELEFONO'][i]
+		numero_telefono= df['NUMERO DE TELEFONO'][i]
+		observacion = df['OBSERVACION'][i]
+		tipo_contacto= df['TIPO CONTACTO'][i]
+		tipo_telefono = df['TIPO TELEFONO'][i]
+		fuente_telefono= df['FUENTE'][i]
+		estado = df['ESTADO'][i]
+
+
+		Telefonos(numero_documento_id=numero_documento_id,numero_telefono=numero_telefono).save()
+
+	return render(request, 'agentes.html',{})
+
 
 
 def importar(request):
@@ -789,7 +830,7 @@ def nueva_venta(request,id_produccion):
 
 		telefono = request.POST['telefono_1']
 
-		form = ProduccionForm(request.POST or None, instance=instance)
+		form = IncidenciaForm(request.POST or None, instance=instance)
 
 		if form.is_valid():
 
@@ -807,7 +848,7 @@ def nueva_venta(request,id_produccion):
 
 		instance = Produccion.objects.get(id=id_produccion)
 
-		incidenciaform = ProduccionForm(instance=instance)
+		incidenciaform = IncidenciaForm(instance=instance)
 
 		return render(request, 'colasIN/nueva_venta.html',{'incidenciaform':incidenciaform})
 
@@ -822,7 +863,7 @@ def detalle_venta(request,id_produccion):
 
 		instance = Produccion.objects.get(id=id_produccion)
 
-		form = ProduccionForm(request.POST or None, instance=instance)
+		form = IncidenciaForm(request.POST or None, instance=instance)
 
 		if form.is_valid():
 
@@ -842,7 +883,7 @@ def detalle_venta(request,id_produccion):
 
 		incidencia = Produccion.objects.get(id=id_produccion)
 
-		incidenciaform = ProduccionForm(instance=incidencia)
+		incidenciaform = IncidenciaForm(instance=incidencia)
 
 		return render(request, 'colasIN/detalle_venta.html',{'incidenciaform':incidenciaform})
 
@@ -1003,6 +1044,7 @@ def traesemana(fecha_inicio):
 
 
 
+
 @login_required(login_url="/ingresar")
 
 def m_agente(request,cliente,id_incidencia):
@@ -1010,8 +1052,6 @@ def m_agente(request,cliente,id_incidencia):
 	print request.user.id
 
 	_agente=Agente.objects.get(user=request.user.id)
-
-	
 
 	if request.method=='POST':
 
@@ -1026,15 +1066,21 @@ def m_agente(request,cliente,id_incidencia):
 		return HttpResponseRedirect("/colasIN/monitor_agente/"+cliente+"/"+id_incidencia)
 
 
+
 	if request.method=='GET':
+
+		
 
 		telefono=cliente
 
+		filter={}
+
 		for r in request.GET:
 
-			if r =='numero':
+			if request.GET[r]!='':
 
-				telefono=request.GET['numero']
+				filter[r]=request.GET[r]
+
 
 			if r=='estado':
 
@@ -1044,7 +1090,9 @@ def m_agente(request,cliente,id_incidencia):
 
 				_agente.save()
 
-		ven = Produccion.objects.filter(telefono_1=telefono).order_by('-id')
+		print 'filter',filter
+
+		ven = Produccion.objects.filter(**filter).order_by('-id')
 
 		_estado=EstadoAgente.objects.filter(id__in=[1,2])
 
@@ -1068,5 +1116,7 @@ def m_agente(request,cliente,id_incidencia):
 
 			incidenciaform = ProduccionForm(instance=incidencia)
 
-		return render(request, 'colasIN/agente.html',{'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
+		reportefiltro = IncidenciaForm()
+
+		return render(request, 'colasIN/agente.html',{'reportefiltro':reportefiltro,'telefono':filter,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
 

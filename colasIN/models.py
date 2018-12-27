@@ -168,6 +168,25 @@ class Venta(models.Model):
     fecha = models.DateTimeField(default=datetime.datetime.today())
 
 
+class Estados(models.Model):
+
+    
+    estado =models.CharField(max_length=100,blank=True,null=True)
+    sub_estado =models.CharField(max_length=100,blank=True,null=True)
+
+
+class Casos(models.Model):
+
+    
+    caso =models.CharField(max_length=100,blank=True,null=True)
+    sub_caso =models.CharField(max_length=100,blank=True,null=True)
+
+
+class Zona(models.Model):
+
+    
+    nombre =models.CharField(max_length=100,blank=True,null=True)
+
 # Create your models here.
 class Clientes(models.Model):
 
@@ -187,8 +206,23 @@ class Clientes(models.Model):
 
 class Produccion(models.Model):
 
+    numero_caso= models.CharField(max_length=1000,blank=True, null=True)
+    estado= models.ForeignKey(Estados,max_length=1000,blank=True, null=True, related_name='_estados')
+    estado_incidencia= models.CharField(max_length=1000,blank=True, null=True)
+    sub_estado= models.CharField(max_length=1000,blank=True, null=True)
+    fecha_atencion= models.DateField(max_length=1000,blank=True, null=True,)#,input_formats=settings.DATE_INPUT_FORMATS
+    dispositivo_origen= models.CharField(max_length=1000,blank=True, null=True)
+    tipo_caso= models.CharField(max_length=1000,blank=True, null=True)
+    sub_tipo_caso= models.CharField(max_length=1000,blank=True, null=True)
+    situacion= models.CharField(max_length=1000,blank=True, null=True)
+    zona=models.ForeignKey(Zona,help_text='Distrito',max_length=1000,blank=True, null=True,related_name='_zona')
+    subestado= models.CharField(max_length=1000,blank=True, null=True)
+    detalle_lugar= models.CharField(max_length=1000,blank=True, null=True)
+    situacion= models.CharField(max_length=1000,blank=True, null=True)
+    accion_tomada= models.CharField(max_length=1000,blank=True, null=True)
+    unidad_reportante= models.CharField(max_length=1000,blank=True, null=True)
     venta= models.ForeignKey(Venta,help_text='Codigo Venta',max_length=1000,blank=True, null=True)
-    fecha = models.DateTimeField(help_text=u'Fecha de recepción de la llamada (No se puede modificar)',default=datetime.datetime.today(),editable=False)
+    fecha = models.DateTimeField(help_text=u'Fecha de recepción de la llamada (No se puede modificar)',default=datetime.datetime.today())
     telefono_1 = models.CharField(help_text=u'Número de teléfono desde donde llama el cliente',max_length=1000,blank=True, null=True)
     telefono_2= models.CharField(help_text=u'Otro nmero de teléfono de contacto',max_length=1000,blank=True, null=True) 
     cliente = models.CharField(help_text=u"Nombre del Cliente",max_length=1000,blank=True, null=True)
@@ -211,7 +245,7 @@ class Produccion(models.Model):
     cantidad_bu= models.CharField(help_text='Cantidad de baterias usadas',max_length=1000,blank=True, null=True)
     descuento= models.CharField(max_length=1000,blank=True, null=True)
     precio_total= models.CharField(max_length=1000,blank=True, null=True)
-    fecha_atencion= models.DateField(max_length=1000,blank=True, null=True,)#,input_formats=settings.DATE_INPUT_FORMATS
+    fecha_atencion= models.DateTimeField(blank=True, null=True,)#,input_formats=settings.DATE_INPUT_FORMATS
     hora_instalacion= models.TimeField(max_length=1000,blank=True, null=True) 
     misma_direccion= models.CharField(max_length=1000,blank=True, null=True)
     direccion_atencion= models.CharField(max_length=1000,blank=True, null=True)
@@ -238,6 +272,7 @@ class Produccion(models.Model):
     observaciones= models.CharField(max_length=1000,blank=True, null=True)
     usuario=models.ForeignKey(User,help_text='Usuarios',max_length=1000,blank=True, null=True,related_name='_modelo')
 
+    
     def __unicode__(self):
         return self.cliente
         

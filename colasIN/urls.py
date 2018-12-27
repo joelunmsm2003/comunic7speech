@@ -35,6 +35,4 @@ urlpatterns = [
     url(r'^disponible/(\d+)/', disponible),
 
 
-
-
 ]

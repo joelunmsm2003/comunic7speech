@@ -133,7 +133,7 @@
         right: 0px;
         background: #1086fb;
         transition:all .5s;
-        height: 1000px;
+        height: 300px;
         z-index: 1000;
         width:120px;
         padding-top: 20px;
@@ -175,120 +175,82 @@
       
     </style>
 
-  <div class='row'>
-
-    {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
-
-    <div class='col-10'>
-
-    <h6>Estado Actual </h6>
-    <h4>{{agente.estado.nombre}}</h4>
-
-           <!-- Button trigger modal -->
-           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Buscar Venta
-            </button>
-            
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form method='GET' action='/colasIN/monitor_agente/0/0'>
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Ingrese Numero</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <input class='form-control' placeholder='Telefono' name='numero'>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button  type="submit" class="btn btn-primary" >Buscar</button>
-                    </div>
-    
-                    </form>
-                </div>
-              </div>
-            </div>
 
 
-          
+      <h6>Estado Actual </h6>
+      <h4>{{agente.estado.nombre}}</h4>
+  
+             <!-- Button trigger modal -->
+             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Buscar Incidencia
+              </button>
 
 
-
-    </div>
-
-    {% else %}
-
-
-
-    {% endif %}
-
-    <div class='container-fluid'>
-
-    {% include "colasIN/gestion.html" %}
-
-  </div>
-
-    <!--<div class='col-md-1'>
-
-      <form style='background: #1073ea;
-    color: #fff;
-    padding: 23px;
-    padding-top: 18px;
-    border-radius: 13px;height: 100%;'>
-    
-    <h6>Agente</h6>
-    <h6>{{agente.nombre}} </h6>
 
      
-
-      {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
-
-      <nav class="nav nav-pills flex-column flex-sm-row">
-
-        {% if agente.estado.nombre == 'Pausa' %}
-        <a class="flex-sm-fill text-sm-center nav-link active " style='color:#fff;' href="/agente/0?estado=1">Pausa</a>
-        <a class="flex-sm-fill text-sm-center nav-link " style='color:#fff;' href="/agente/0?estado=2">Disponible</a>
-        {% endif %}
-
-         {% if agente.estado.nombre == 'Disponible' %}
-        <a class="flex-sm-fill text-sm-center nav-link   " style='color:#fff;' href="/agente/0?estado=1">Pausa</a>
-        <a class="flex-sm-fill text-sm-center nav-link active " style='color:#fff;' href="/agente/0?estado=2">Disponible</a>
-        
-
-       
-        {% endif %}
-
-       
-        
-
-      </nav>
-
-      {% else %}
-
-      <p>{{agente.estado.nombre}}</p>
-
-
- 
-          
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                     
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ingrese Datos de Busqueda</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form method='GET' action='/colasIN/monitor_agente/0/0'>
+                      <div class="modal-body">
+                        
+  
+                              
+                            
+                            
+                              {% for hidden in form.hidden_fields %}
+                              {{ hidden }}
+                              {% endfor %}
+                              <div class='row'>
+                              {% for field in reportefiltro.visible_fields %}
+                            
+                              
+                              <div class="col-md-4">
+                                    
+                                        {{ field.errors }}
+                                        {{ field.label_tag }} {{ field }}
+                                </div>
+                              
+                                {% endfor %}
+                             
+                              </div>
+                            
+                            
+                                
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button  type="submit" class="btn btn-primary" >Buscar</button>
+                      </div>
       
-      {% endif %}
+                      </form>
+                  </div>
+                </div>
 
 
-      <a class="flex-sm-fill text-sm-center nav-link" href='/comunica7/ingresar'>Salir</a>
+
+
 
 
     
-     </form>
-    </div>-->
 
 
   </div>
 
 </div>
 
+<div class='container-fluid'>
+
+{% include "colasIN/gestion.html" %}
+
+</div>
 
   {% endblock %}

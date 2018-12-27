@@ -1,15 +1,9 @@
-    
-      {% if error %}
 
-      <div  class="alert alert-primary animated fadeIn" role="alert">
-        {{error}}
-      </div>
-
-{% endif %}
 
 
 <h3></h3>
 
+<h6>{{telefono}}</h6>
 
 <style>
 th{
@@ -21,44 +15,6 @@ td{
 
 </style>
 
-{% if incidenciaform %}
-
-  <h3>Detalle de Venta</h3>
-  
-  <form method="POST" class="post-form">
-
-  {% csrf_token %}
-
-  
-
-
-  {% for hidden in form.hidden_fields %}
-  {{ hidden }}
-  {% endfor %}
-  <div class='row'>
-  {% for field in incidenciaform.visible_fields %}
-
-  
-  <div class="col-md-2">
-        
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
-    </div>
-  
-    {% endfor %}
- 
-  </div>
-
-
-    <button type="submit" class="save btn btn-default">Guardar</button>
-
-
-  </form>
-
-  {% endif %}
-
-
-  <a onclick="nuevaventa('/colasIN/dashboard')" target="_blank"  class="btn btn-primary" style='color:#fff;'>Crear Nueva Incidencia</a>
 
 
  
@@ -66,26 +22,7 @@ td{
 
   {% if ventas %}
 
-  <h5>Historial de Incidencias </h5>
-
-  
-  <h6>Resultados de Busqueda</h6>
-{{telefono.numero_caso}}
-{{telefono.tipo_caso}}
-{{telefono.sub_tipo_caso}}
-{{telefono.estado_incidencia}}
-{{telefono.subestado}}
-{{telefono.detalle_lugar}}
-{{telefono.fecha_atencion}}
-{{telefono.unidad_reportante}}
-{{telefono.dispositivo_origen}}
-{{telefono.telefono_1}}
-{{telefono.zona}}
-{{telefono.accion_tomada}}
-{{telefono.situacion}}
-  
-  
- 
+  <h5>Resultados de Busqueda</h5>
 
 <table class="table table-default responsive">
     <thead>
