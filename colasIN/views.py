@@ -840,7 +840,11 @@ def nuevo_caso(request):
 
 		casos = Casos.objects.values('caso').annotate(Count('caso'))
 
+		
 		subcaso = Casos.objects.values('subcaso').annotate(Count('subcaso'))
+
+
+
 
 		return render(request, 'colasIN/nuevo_caso.html',{'casos':casos,'subcaso':subcaso})
 
