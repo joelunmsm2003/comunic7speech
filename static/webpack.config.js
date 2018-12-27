@@ -4,8 +4,10 @@ module.exports = {
   entry: {
     'index.js': './index.js',
     'cartera.js': './cartera.js', 
+    'proveedorscore.js':'./proveedorscore.js',
     'agentes.js':'./agentes.js',
     'marcador.js':'./marcador.js',
+    'asignascore.js':'./asignascore.js',
     'style':'./scss/main.scss'
   },
   output: {
@@ -13,7 +15,6 @@ module.exports = {
   },
   module: {
     rules: [
-
       {
         test: /\.js$/,
         exclude: /node_modules/,

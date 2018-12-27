@@ -173,6 +173,16 @@ const trae_telefonos = (state=[],action) => {
 
 }
 
+const proveedor_cartera_negocio = (state=[],action) => {
+
+    if(action.type==='TRAE_PROVEEDOR_CARTERA_NEGOCIO'){
+        return action.proveedor_cartera_negocio;
+    } 
+
+    return state;
+
+}
+
 
 const logger = store => next => action => {
     console.log('dispatching', action)
@@ -182,4 +192,4 @@ const logger = store => next => action => {
   }
 
 
-export default createStore(combineReducers({trae_telefonos,negocios,carteras,cart,proveedores,gestiones,total_carteras,trae_cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados,detalle_cuentas}),applyMiddleware(logger,thunk));
+export default createStore(combineReducers({proveedor_cartera_negocio,trae_telefonos,negocios,carteras,cart,proveedores,gestiones,total_carteras,trae_cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados,detalle_cuentas}),applyMiddleware(logger,thunk));

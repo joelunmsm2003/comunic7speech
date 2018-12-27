@@ -1,0 +1,9 @@
+<script type="text/javascript">
+	Date.prototype.sumar = function(){
+  this.setHours(this.getHours() + 1);
+  return this.getHours();
+};
+ 
+alert(new Date().sumar());
+</script>
+

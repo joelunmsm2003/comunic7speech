@@ -1,0 +1,129 @@
+    
+      {% if error %}
+
+      <div  class="alert alert-primary animated fadeIn" role="alert">
+        {{error}}
+      </div>
+
+{% endif %}
+
+
+<h3></h3>
+
+<h6>{{telefono}}</h6>
+
+{% if incidenciaform %}
+
+  <h3>Detalle de Venta</h3>
+  
+  <form method="POST" class="post-form">
+
+  {% csrf_token %}
+
+  
+
+
+  {% for hidden in form.hidden_fields %}
+  {{ hidden }}
+  {% endfor %}
+  <div class='row'>
+  {% for field in incidenciaform.visible_fields %}
+
+  
+  <div class="col-md-2">
+        
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+    </div>
+  
+    {% endfor %}
+ 
+  </div>
+
+
+    <button type="submit" class="save btn btn-default">Guardar</button>
+
+
+  </form>
+
+  {% endif %}
+
+
+  <a onclick="nuevaventa('/colasIN/dashboard')" target="_blank"  class="btn btn-primary" style='color:#fff;'>Crear Nueva Venta</a>
+
+
+ 
+ <div style='height:20px'></div>
+
+  {% if ventas %}
+
+  <h5>Historial de Ventas con el numero {{telefono}}</h5>
+
+<table class="table table-default responsive">
+    <thead>
+      <tr>
+      
+        <th scope="col">Nombre</th>
+        <th scope="col">DNI</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+       
+        <th scope="col">Anio</th>
+        <th scope="col">Placa</th>
+        <th scope="col">Marca Bat.</th>
+        <th scope="col">Modelo Bat.</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Descuento</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for c in ventas %}
+      <tr>
+       
+      
+        <td>{{c.cliente }}</td>
+        <td>{{c.dni }}</td>
+        <td>{{c.marca_vehiculo}}</td>
+        <td>{{c.modelo}}</td>
+        
+        <td>{{c.anio}}</td>
+        <td>{{c.placa}}</td>
+        <td>{{c.marca_producto}}</td>
+        <td>{{c.modelo_bateria}}</td>
+        <td>{{c.precio}}</td>
+        <td>{{c.descuento}}</td>
+        <td>
+        <div class='row'>
+          
+        <div class='col-md-4'> <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/detalle_venta/{{c.id}}')" target="_blank">Detalle</a></div>
+        <div class='col-md-4'> <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/nueva_venta/{{c.id}}')" target="_blank">Nueva Venta</a></td></div>
+       
+        
+        </div>
+      </tr>
+
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+  {% else %}
+
+<h5>No hay registros para este numero</h5>
+  {% endif %}
+
+      
+        
+          
+         
+
+
+
+
+
+
+
+
+

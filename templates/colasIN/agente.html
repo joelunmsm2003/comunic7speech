@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+
+
+
+  {% block content %}
+
+
+
+<script type="text/javascript" src="/static/ws4.js"></script>
+
+<script type="text/javascript">
+
+     var ws4redis = WS4Redis({
+      uri: '{{ WEBSOCKET_URI }}foobar?subscribe-user',
+      receive_message: receiveMessage,
+      heartbeat_msg: {{ WS4REDIS_HEARTBEAT }}
+    });
+
+    function receiveMessage(msg) {
+
+        console.log(msg.split('-')[0])
+
+          if(msg.split('-')[0]=='llamada'){
+
+
+
+              window.location.href = "/colasIN/monitor_agente/"+msg.split('-')[1]+'/0'
+
+      
+        }
+       
+
+    }
+
+
+    function nuevaventa(url){
+
+        var strWindowFeatures = "location=yes,height=800,width=1300,scrollbars=yes,status=yes";
+        var URL = url ;
+        var win = window.open(URL, "_blank", strWindowFeatures);
+
+
+    }
+
+
+</script>
+
+
+
+<div style='height: 20px'></div>
+<div class='container-fluid'>
+
+
+  <div class='discador'>
+
+
+    <img src='/static/callcenter.png'>
+
+    
+    
+    <h6>{{agente.nombre}} </h6>
+
+
+
+    <div style="height:20px;"></div>
+
+  
+    
+    {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
+
+    <div style="padding:20px;">
+
+      {% if agente.estado.nombre == 'Pausa' %}
+
+      <a class='btn btn-primary' href='/colasIN/disponible/{{agente.id}}'>
+          Disponible
+      </a>
+
+      {% endif %}
+
+       {% if agente.estado.nombre == 'Disponible' %}
+
+
+
+
+        <a class='btn btn-primary' href='/colasIN/pausar/{{agente.id}}'>
+        Pausar
+        </a>
+
+      {% endif %}
+
+    </div>
+
+     
+      
+
+    {% else %}
+
+    
+
+    <img src='/static/llamada.png'>
+    <br>
+
+    <h6>En Llamada</h6>
+
+   <br>
+
+
+  
+    
+    {% endif %}
+
+    <a class="btn btn-primary" href='/comunica7/ingresar'>Salir</a>
+
+
+  </div>
+
+
+  <style>
+
+
+    .cajita{
+      background: #fff;
+      padding: 6px;
+      color: #234;border:1px solid #234;
+      margin-bottom: 10px;
+    }
+
+      .discador{
+    
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background: #1086fb;
+        transition:all .5s;
+        height: 1000px;
+        z-index: 1000;
+        width:120px;
+        padding-top: 20px;
+       
+        color:#fff;
+        text-align: center;
+    }
+    
+      
+      .discador:hover{
+    
+        position: absolute;
+        top: 0px;
+        background: #1086fb;
+        transition:all .5s;
+        width:140px;
+        
+    }
+
+    .discador img{
+
+      width: 40px;
+
+      cursor:pointer;
+    }
+
+   
+
+    .discador:hover .cajita{
+
+    
+    border: 1px solid #1086fb;
+
+
+    }
+    
+    
+    
+      
+    </style>
+
+  <div class='row'>
+
+    {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
+
+    <div class='col-10'>
+
+    <h6>Estado Actual </h6>
+    <h4>{{agente.estado.nombre}}</h4>
+
+           <!-- Button trigger modal -->
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Buscar Venta
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form method='GET' action='/colasIN/monitor_agente/0/0'>
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Ingrese Numero</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <input class='form-control' placeholder='Telefono' name='numero'>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button  type="submit" class="btn btn-primary" >Buscar</button>
+                    </div>
+    
+                    </form>
+                </div>
+              </div>
+            </div>
+
+
+          
+
+
+
+    </div>
+
+    {% else %}
+
+
+
+    {% endif %}
+
+    <div class='container-fluid'>
+
+    {% include "colasIN/gestion.html" %}
+
+  </div>
+
+    <!--<div class='col-md-1'>
+
+      <form style='background: #1073ea;
+    color: #fff;
+    padding: 23px;
+    padding-top: 18px;
+    border-radius: 13px;height: 100%;'>
+    
+    <h6>Agente</h6>
+    <h6>{{agente.nombre}} </h6>
+
+     
+
+      {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
+
+      <nav class="nav nav-pills flex-column flex-sm-row">
+
+        {% if agente.estado.nombre == 'Pausa' %}
+        <a class="flex-sm-fill text-sm-center nav-link active " style='color:#fff;' href="/agente/0?estado=1">Pausa</a>
+        <a class="flex-sm-fill text-sm-center nav-link " style='color:#fff;' href="/agente/0?estado=2">Disponible</a>
+        {% endif %}
+
+         {% if agente.estado.nombre == 'Disponible' %}
+        <a class="flex-sm-fill text-sm-center nav-link   " style='color:#fff;' href="/agente/0?estado=1">Pausa</a>
+        <a class="flex-sm-fill text-sm-center nav-link active " style='color:#fff;' href="/agente/0?estado=2">Disponible</a>
+        
+
+       
+        {% endif %}
+
+       
+        
+
+      </nav>
+
+      {% else %}
+
+      <p>{{agente.estado.nombre}}</p>
+
+
+ 
+          
+      
+      {% endif %}
+
+
+      <a class="flex-sm-fill text-sm-center nav-link" href='/comunica7/ingresar'>Salir</a>
+
+
+    
+     </form>
+    </div>-->
+
+
+  </div>
+
+</div>
+
+
+  {% endblock %}

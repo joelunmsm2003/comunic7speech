@@ -5,13 +5,16 @@ import Header from "./Header";
 import Gestion from "./Gestion";
 import Cuentas from "./Cuentas";
 import Alerta from "./Alerta";
-import AsignaScore from "./AsignaScore"
+import AsignaScore from "./AsignaScore";
+import Carteras from "./AsignaScore"
 import store from "../store";
 import { Provider } from "react-redux";
-import {cargaproveedores,total_carteras,proveedores, loadCarteras,loadNegocios, loadGestiones} from "../actionCreators";
+import {proveedor_cartera_negocio,cargaproveedores,total_carteras,proveedores, loadCarteras,loadNegocios, loadGestiones} from "../actionCreators";
 import AppRouter from "./Rutas"
 import axios from 'axios';
 import AgregaProveedor from "./AgregaProveedor";
+import ProveedorCarteraNegocio from "./ProveedorCarteraNegocio";
+import AgregaProveedorCarteraNegocio from "./AgregaProveedorCarteraNegocio";
 var $ = require ('jquery')
 
 const divStyle = {
@@ -49,6 +52,8 @@ class App extends React.Component {
         store.dispatch(loadCarteras())
 
         store.dispatch(loadNegocios())
+
+        store.dispatch(proveedor_cartera_negocio())
 
         //store.dispatch(proveedores())
 
@@ -167,39 +172,17 @@ class App extends React.Component {
 
      onTextChange(data) {
 
+
+          console.log(data.target.name,data.target.value)
+
       
-       
-          const name_select = data.target.name+'_name';
           const name = data.target.name;
           const value = data.target.value
-          const select_option = data.target.options[event.target.selectedIndex].text
 
           this.setState({
-            [name]: value,
-            [name_select]: select_option
+            [name]: value
           });
 
-
-          if (name=='negocio'){
-
-            console.log('entre')
-
-            axios.get("/discador/api_resultados_negocio/"+value)
-                  .then(response=>{
-
-
-                    this.setState({
-                      score_negocios: response.data,
-                      
-                    });  
-
-        
-              });
-
-            }
-
-  
- 
     }
 
 
@@ -210,13 +193,12 @@ class App extends React.Component {
 
       axios.post('/discador/guardaproveedor/', {
         proveedor_id: this.state.proveedor,
-        cartera_id:this.state.cartera
+        cartera_id:this.state.cartera,
+        negocio_id:this.state.negocio
       })
       .then(function (response) {
 
-        $('.modal-backdrop').hide(); // for black background
-        $('body').removeClass('modal-open'); // For scroll run
-        $('#exampleModal').modal('hide'); 
+        window.location.reload()
 
       })
       .catch(function (error) {
@@ -230,7 +212,7 @@ class App extends React.Component {
 
     render() {
 
-      const { mensaje,proveedor,proveedor_name,cartera_name,negocio_name,score_negocios } = this.state;
+      const { carteras,mensaje,proveedor,proveedor_name,cartera_name,negocio_name,score_negocios } = this.state;
 
       return (
 
@@ -243,35 +225,21 @@ class App extends React.Component {
 
             <div class='container'>
 
-              
-                <h4>Asignacion del Score</h4>
 
-              
+                <h5>Asigne una cartera/negocio a su Proveedor</h5>
+
                 { mensaje ? <Alerta mensaje={mensaje}/> : <div></div>}
                 
 
-                <AgregaProveedor guarda={this.handleSubmit.bind(this)}  selectcartera={this.onTextChange.bind(this)}/>
+                <AgregaProveedorCarteraNegocio guarda={this.handleSubmit.bind(this)}  selectcartera={this.onTextChange.bind(this)}/>
 
                 <div style={divStyle}></div>
 
-                <h3>{negocio_name}</h3>
+
+                 <ProveedorCarteraNegocio/>
+
 
               
-
-
-
-                <AsignaScore score_negocios={score_negocios} activascore={(e,item)=>this.activascore(e,item)}/>
-
-
-    
-                <input type='text' onChange={this.busca_proveedor.bind(this)} className='form-control' placeholder='Buscar Proveedor'></input>
-                
-
-                {proveedor_name.proveedor ? proveedor_name.proveedor.nombre : '' } 
-
-
-                <Proveedores/>
-
 
 
             </div>
