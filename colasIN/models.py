@@ -215,7 +215,7 @@ class Produccion(models.Model):
     sub_tipo_caso= models.CharField(max_length=1000,blank=True, null=True)
     situacion= models.CharField(max_length=1000,blank=True, null=True)
     zona=models.ForeignKey(Zona,help_text='Distrito',max_length=1000,blank=True, null=True,related_name='_zona')
-
+    detalle= models.CharField(max_length=1000,blank=True, null=True)
 
     venta= models.ForeignKey(Venta,help_text='Codigo Venta',max_length=1000,blank=True, null=True)
     fecha = models.DateTimeField(help_text=u'Fecha de recepción de la llamada (No se puede modificar)',default=datetime.datetime.today(),editable=False)

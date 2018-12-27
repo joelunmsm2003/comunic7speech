@@ -72,7 +72,7 @@ from tablib import Dataset
 
 
 @csrf_exempt
-def subetelefonos(request):
+def subir_casos(request):
 
 	df = pd.read_csv('/home/jose/Descargas/Casos.csv')
 	Casos.objects.all().delete()
@@ -93,23 +93,15 @@ def subetelefonos(request):
 		# print df['JUSTIFICACION'][i]
 		# subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
 
-		print df['NUMERO_DOCUMENTO'][i]
-		numero_documento_id=Cliente.objects.get(numero_documento=df['NUMERO_DOCUMENTO'][i]).id
-		print df['DISCADO'][i]
-		discado = df['DISCADO'][i]
-
-		cliente = df['NOMBRE'][i]
-		
-		print df['NUMERO DE TELEFONO'][i]
-		numero_telefono= df['NUMERO DE TELEFONO'][i]
-		observacion = df['OBSERVACION'][i]
-		tipo_contacto= df['TIPO CONTACTO'][i]
-		tipo_telefono = df['TIPO TELEFONO'][i]
-		fuente_telefono= df['FUENTE'][i]
-		estado = df['ESTADO'][i]
+	
+				
+		print df['TIPOS DE CASOS'][i]
+		caso= df['TIPOS DE CASOS'][i]
+		sub_caso = df['SUBTIPO DE CASOS'][i]
 
 
-		Telefonos(numero_documento_id=numero_documento_id,numero_telefono=numero_telefono).save()
+
+		Casos(caso=caso,sub_caso=sub_caso).save()
 
 	return render(request, 'agentes.html',{})
 
@@ -821,6 +813,12 @@ def paciente(request):
 	return render(request, 'paciente.html')
 
 
+
+
+
+
+
+
 def nueva_venta(request,id_produccion):
 
 	if request.method=='POST':
@@ -829,7 +827,7 @@ def nueva_venta(request,id_produccion):
 
 		telefono = request.POST['telefono_1']
 
-		form = ProduccionForm(request.POST or None, instance=instance)
+		form = NuevoCAsoForm(request.POST or None, instance=instance)
 
 		if form.is_valid():
 
@@ -847,7 +845,7 @@ def nueva_venta(request,id_produccion):
 
 		instance = Produccion.objects.get(id=id_produccion)
 
-		incidenciaform = ProduccionForm(instance=instance)
+		incidenciaform = NuevoCAsoForm(instance=instance)
 
 		return render(request, 'colasIN/nueva_venta.html',{'incidenciaform':incidenciaform})
 

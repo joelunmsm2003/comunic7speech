@@ -48,6 +48,10 @@ from django.contrib import admin
 import time
 
 
+@admin.register(Casos)
+class CasosAdmin(admin.ModelAdmin):
+	list_display = ('id','caso','sub_caso')
+
 @admin.register(EstadoAgente)
 class EstadoAgenteAdmin(admin.ModelAdmin):
 	list_display = ('id','nombre')

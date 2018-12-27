@@ -72,6 +72,24 @@ class ProduccionForm(ModelForm):
 
 
 
+class NuevoCAsoForm(ModelForm):
+    class Meta:
+        model = Produccion
+        fields = ('tipo_caso', 'sub_tipo_caso')
+       
+        widgets = {
+            'tipo_caso':TextInput(attrs={'class':'form-control'}),
+            'sub_tipo_caso':TextInput(attrs={'class':'form-control'}),
+
+            
+   }
+
+
+
+
+
+
+
 
 class VehiculosForm(ModelForm):
     class Meta:
