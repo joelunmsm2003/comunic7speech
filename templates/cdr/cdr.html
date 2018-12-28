@@ -1,0 +1,163 @@
+
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+
+		<div class="container">
+
+				<h1>Reporte CDR</h1> 
+					
+					
+
+
+				
+
+				<form>
+					<fieldset class="form-group">
+						
+						<div class="row">
+
+
+						<div class="col-md-3">
+						<label for="exampleInputEmail1">Buscar audios entre</label>
+						<input type="date" class="form-control" name='fechainicio' placeholder="Fecha Inicio"></div>
+						<div class="col-md-3">
+						<label for="exampleInputEmail1">Inicio/Fin</label>
+						<input type="date" class="form-control" name='fechafin' placeholder="Fecha Fin"></div>
+
+						<div class="col-md-3"><label for="exampleInputPassword1">Ingrese numero de anexo</label>
+						<input type="number" class="form-control" name='anexo' id="exampleInputPassword1" placeholder="Numero de anexo">
+						</div>
+						<div class="col-md-3">
+							<label for="exampleInputPassword1">Ingrese numero de destino</label>
+						<input type="number" class="form-control" name='destino' id="exampleInputPassword1" placeholder="Numero de destino">
+						</div>
+						</div>
+
+
+						
+						
+					</fieldset>
+		
+					<button type="submit" class="btn btn-default">Buscar</button>
+				</form>
+			
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <button class='prevp btn btn-default' onclick="prevp()">{{contacts.previous_page_number}}</button>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ contacts.number }} de {{contacts.paginator.num_pages}}.
+        </span>
+
+        {% if contacts.has_next %}
+            <button class='nextp btn btn-default' onclick="nextp()">{{contacts.next_page_number }}</button>
+        {% endif %}
+    </span>
+</div>
+
+<table class="table table-responsive table-inverse">
+
+	<thead>
+		<tr>
+			<th><a id="btn" >Fecha</a></th>
+
+			<th>Anexo</th>
+			<th>Destino</th>
+			<th>Duracion</th>
+			<th>Acciones</th>
+		</tr>
+	</thead>
+
+{% for b in contacts %}
+
+		<tr>
+			<td>{{ b.calldate }}</td>
+
+			<td>{{ b.src }}</td>
+			<td>{{ b.dst }}</td>
+			<td>{{ b.duration }}</td>
+
+			<td><a class='btn btn-default btn-sm' href='{{b.url}}'>Audio</a></td>
+
+		</tr>
+     
+{% endfor %}
+
+
+</table>
+
+
+</div>
+
+{% endblock %}
+
+
+
+<script type="text/javascript">
+nextp1 = $('.nextp').innerText;
+if (nextp1 > 2){
+	prevp1 = $('.prevp').innerText;
+}
+function nextp(){
+    url = document.location.href
+    console.log(url.length)
+    if (url.length > 30){
+	window.location.href = url+'&page='+nextp1
+	
+	}
+	else{
+	window.location.href = url+'?page='+nextp1
+	
+	}
+}
+function prevp(){
+    url = document.location.href
+    console.log(url.length)
+    if (url.length > 30){
+	window.location.href = url+'&page='+prevp1
+	
+	}
+	else{
+	window.location.href = url+'?page='+prevp1
+	
+	}
+}
+function endp(){
+    url = document.location.href
+    console.log(url)
+    
+    window.location.href = url+'&page='+endp1
+}
+	
+function $(elemento) {
+  return document.querySelector(elemento);
+}
+$('#btn').addEventListener('click', function() {
+  $('#btn').setAttribute('href', window.location.href + "?orderfecha=-{{orderfecha}}");
+});
+</script>
+
+
+<style type="text/css">
+	
+	.jumbotron{background: #16171b;
+    color: #fff;}
+    .navbar-default {
+    background-color: #16171b;
+    border-color: #88bd30;
+    /* color: #fff; */
+}
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+.navbar-default .navbar-nav>li>a:hover{
+    color: #fff;
+}
+</style>

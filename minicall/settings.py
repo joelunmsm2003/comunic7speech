@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'discador',
     'comunica7',
     'app',
+    'cdr',
     'callcenter',
     'speech',
     'import_export',
@@ -119,8 +120,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.datos'),
+    },
+    'cdr': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.cdr'),
     }
 }
+
+
 
 # DATABASES = {
 #     'default': {
@@ -176,3 +183,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+DATABASE_ROUTERS = ['cdr.router.CdrRouter',]

@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^speech/', include('speech.urls')),
     url(r'^discador/', include('discador.urls')),
     url(r'^colasIN/', include('colasIN.urls')),
+    url(r'^cdr/', include('cdr.urls')),
     
 ]
