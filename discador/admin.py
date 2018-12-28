@@ -205,18 +205,10 @@ class TelefonosAdmin(admin.ModelAdmin):
 
 
 @admin.register(Proveedor)
-class ProveedorAdmin(admin.ModelAdmin):
+class ProveedorAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre','cartera')
+	pass
 
-
-	def cartera(self, obj):
-
-		print self
-		print '.....'
-		print obj.id
-		return format_html(
-			'<a class="button"  href="/admin/discador/proveedorcarteras/?proveedor__id__exact='+str(obj.id)+'">Cartera</a>'
-		)
 
 
 
