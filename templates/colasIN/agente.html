@@ -57,19 +57,22 @@
     <img src='/static/callcenter.png'>
 
     
-
+    
     <h6>{{agente.nombre}} </h6>
+
+
 
     <div style="height:20px;"></div>
 
-
+  
     
     {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
 
     <div style="padding:20px;">
+
       {% if agente.estado.nombre == 'Pausa' %}
 
-      <a class='btn btn-primary' href='colasIN/pausar/{{agente.id}}'>
+      <a class='btn btn-primary' href='/colasIN/disponible/{{agente.id}}'>
           Disponible
       </a>
 
@@ -77,12 +80,13 @@
 
        {% if agente.estado.nombre == 'Disponible' %}
 
-        <a class='btn btn-primary' href='colasIN/disponible/{{agente.id}}'>
+
+
+
+        <a class='btn btn-primary' href='/colasIN/pausar/{{agente.id}}'>
         Pausar
         </a>
-      
 
-     
       {% endif %}
 
     </div>
@@ -92,17 +96,22 @@
 
     {% else %}
 
-    <img src='/static/llamada.png'>
-
     
 
-    <a class="btn btn-light" href='/comunica7/ingresar'>Salir</a>
+    <img src='/static/llamada.png'>
+    <br>
 
+    <h6>En Llamada</h6>
+
+   <br>
 
 
   
     
     {% endif %}
+
+    <a class="btn btn-primary" href='/comunica7/ingresar'>Salir</a>
+
 
   </div>
 
@@ -175,28 +184,53 @@
     <h6>Estado Actual </h6>
     <h4>{{agente.estado.nombre}}</h4>
 
+           <!-- Button trigger modal -->
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Buscar Venta
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form method='GET' action='/colasIN/monitor_agente/0/0'>
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Ingrese Numero</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <input class='form-control' placeholder='Telefono' name='numero'>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button  type="submit" class="btn btn-primary" >Buscar</button>
+                    </div>
+    
+                    </form>
+                </div>
+              </div>
+            </div>
+
+
+          
+
 
 
     </div>
 
     {% else %}
 
-    <div class='col-md-11'>
 
-
-    <!-- <iframe src="http://localhost:8000/colasIN/dashboard/" width='1500' height='500' style="border:0px;">
-      <p>Your browser does not support iframes.</p>
-    </iframe> -->
-
-    {% include "colasIN/gestion.html" %}
-
-
-
-    </div>
 
     {% endif %}
 
+    <div class='container-fluid'>
 
+    {% include "colasIN/gestion.html" %}
+
+  </div>
 
     <!--<div class='col-md-1'>
 

@@ -34,6 +34,17 @@ STATUS_CHOICES = (
 
 class EstadoAgente(models.Model):
     nombre= models.CharField(max_length=1000,blank=True, null=True)
+    id_estado = models.IntegerField(blank=True, null=True)
+
+    def __unicode__(self):
+        return self.nombre
+
+
+
+class LogEstadoAgente(models.Model):
+    nombre = models.CharField(max_length=1000,blank=True, null=True)
+    estado = models.ForeignKey(EstadoAgente, db_column='estado', blank=True, null=True)
+    fecha = models.DateTimeField(db_column='fecha', default=datetime.datetime.today())
 
     def __unicode__(self):
         return self.nombre
@@ -49,10 +60,12 @@ class Agente(models.Model):
     atendidas = models.IntegerField(blank=True, null=True)
     contactadas = models.IntegerField(blank=True, null=True)
     estado = models.ForeignKey('EstadoAgente', db_column='estado', blank=True, null=True,related_name='_estadorelated')
+    id_estado = models.IntegerField(blank=True, null=True)
     est_ag_predictivo = models.IntegerField(blank=True, null=True)
     canal = models.CharField(max_length=100, blank=True)
     user = models.ForeignKey(User, db_column='user', blank=True, null=True,related_name='userrelated')
     fecha = models.DateTimeField(db_column='fecha', default=datetime.datetime.today())
+    t_estado = models.DateTimeField(db_column='t_estado', default=datetime.datetime.today())
 
 
 

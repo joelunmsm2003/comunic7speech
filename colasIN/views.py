@@ -347,17 +347,24 @@ def disponible(request,id_agente):
 
 	ag = Agente.objects.get(id=id_agente)
 	ag.estado_id=1
+	ag.id_estado=2
+	ag.t_estado=datetime.today()
 	ag.save()
 
-	return HttpResponseRedirect('/pausar/')
+	LogEstadoAgente(fecha=datetime.today(),estado_id=1).save()
+
+	return HttpResponseRedirect('/colasIN/monitor_agente/980729169/0/')
 
 def pausar(request,id_agente):
 
 	ag = Agente.objects.get(id=id_agente)
 	ag.estado_id=4
+	ag.id_estado=1
+	ag.t_estado=datetime.today()
 	ag.save()
+	LogEstadoAgente(fecha=datetime.today(),estado_id=4).save()
 
-	return HttpResponseRedirect('/pausar/')
+	return HttpResponseRedirect('/colasIN/monitor_agente/980729169/0/')
 
 def ingresar(request):
 

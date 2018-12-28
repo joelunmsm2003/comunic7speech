@@ -38,39 +38,6 @@ def ingresar(request):
 
 				print 'llege aquis'
 
-				try:
-
-					_grupo = Group.objects.filter(user = request.user)[0]
-
-					print _grupo
-
-					if str(_grupo) =='Discador':
-
-						return HttpResponseRedirect("/admin")
-
-
-					if str(_grupo)=='Agente':
-
-						_agente = Agente.objects.get(user=request.user)
-						_agente.estado_id=1
-						_agente.save()
-
-						return HttpResponseRedirect("/agente/5268")
-
-					if str(_grupo)=='Admin':
-
-
-						return HttpResponseRedirect("/discador/marcador")
-
-
-
-
-
-				except:
-
-					
-
-					return render(request, 'ingresar.html',{'error':'Consultar al admin'})
 
 		return render(request, 'ingresar.html',{'error':'Usuario no existe'})
 

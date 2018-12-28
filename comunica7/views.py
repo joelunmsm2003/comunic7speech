@@ -18,6 +18,7 @@ from ws4redis.publisher import RedisPublisher
 from ws4redis.redis_store import RedisMessage
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from datetime import datetime
 
 
 
@@ -38,9 +39,15 @@ def ingresar(request):
 
 				login(request, user)
 
-				a =Agente.objects.get(user_id=request.user.id)
-				a.estado_id=1
-				a.save()
+				age = Agente.objects.get(user_id=request.user.id)
+				age.estado_id=4
+				age.id_estado=1
+				age.t_estado=datetime.today()
+				age.save()
+
+				LogEstadoAgente(fecha=datetime.today(),estado_id=4).save()
+
+
 
 				return HttpResponseRedirect("/comunica7/dashboard")
 

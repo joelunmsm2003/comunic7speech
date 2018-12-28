@@ -10,7 +10,6 @@
 
 <h3></h3>
 
-<h4>Llamada entrante...</h4>
 <h6>{{telefono}}</h6>
 
 {% if incidenciaform %}
@@ -52,34 +51,7 @@
 
   <a onclick="nuevaventa('/colasIN/dashboard')" target="_blank"  class="btn btn-primary" style='color:#fff;'>Crear Nueva Venta</a>
 
- <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Buscar Venta
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <form method='GET' action='/colasIN/monitor_agente/0/0'>
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ingrese Numero</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <input class='form-control' placeholder='Telefono' name='numero'>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button  type="submit" class="btn btn-primary" >Buscar</button>
-          </div>
 
-          </form>
-      </div>
-    </div>
-  </div>
  
  <div style='height:20px'></div>
 
@@ -90,7 +62,7 @@
 <table class="table table-default responsive">
     <thead>
       <tr>
-        <th scope="col">Telefono</th>
+      
         <th scope="col">Nombre</th>
         <th scope="col">DNI</th>
         <th scope="col">Marca</th>
@@ -110,7 +82,7 @@
       {% for c in ventas %}
       <tr>
        
-        <td>{{c.telefono_1}}</td>
+      
         <td>{{c.cliente }}</td>
         <td>{{c.dni }}</td>
         <td>{{c.marca_vehiculo}}</td>

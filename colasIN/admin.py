@@ -50,13 +50,16 @@ import time
 
 @admin.register(EstadoAgente)
 class EstadoAgenteAdmin(admin.ModelAdmin):
-	list_display = ('id','nombre')
+    list_display = ('id','nombre','id_estado')
+    list_editable = ('id_estado',)
 
 @admin.register(Agente)
 class AgenteAdmin(admin.ModelAdmin):
-	list_display = ('id','anexo')
+	list_display = ('id','anexo','estado')
 
-
+@admin.register(LogEstadoAgente)
+class LogEstadoAgenteAdmin(admin.ModelAdmin):
+    list_display = ('id','estado','fecha')
 # @admin.register(Person)
 # class PersonAdmin(ImportExportModelAdmin):
 #     list_display = ('id','name','email','birth_date','location')
