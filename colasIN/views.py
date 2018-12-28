@@ -819,9 +819,9 @@ def nuevo_caso(request):
 
 	if request.method=='POST':
 
-		instance = Produccion()
+		instance = Casos()
 
-		form = IncidenciaForm(request.POST or None, instance=instance)
+		form = NuevoCasoForm(request.POST or None, instance=instance)
 
 		if form.is_valid():
 
@@ -839,11 +839,12 @@ def nuevo_caso(request):
 
 
 		casos = Casos.objects.values('caso').annotate(Count('caso'))
+		print 'exitosamente......',casos
 
 		
-		subcaso = Casos.objects.values('subcaso').annotate(Count('subcaso'))
-
-
+		subcaso = Casos.objects.values('sub_caso').annotate(Count('sub_caso'))
+		print 'exitosamente......qqqqqqqq',subcaso
+		
 
 
 		return render(request, 'colasIN/nuevo_caso.html',{'casos':casos,'subcaso':subcaso})

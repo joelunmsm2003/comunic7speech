@@ -50,43 +50,12 @@
  
   </div>
 
-
-  <div class="form-row m-1">
-
-    <div class="form-group col-md-2">
-      <label for="inputMarca" class="text-dark">Marca del vehiculo</label>
-  
-      <select name='marca_vehiculo' id="marca" class="form-control" onchange='traemodelos()' >
-  
-          <option >Seleccionar</option>
-  
-          {% for m in casos %}
-  
-              {% if caso == m.caso %}
-  
-                <option value='{{m.caso}}' selected>{{m.caso}}</option>
-  
-              {% else %}
-  
-                <option  value='{{m.caso}}'>{{m.caso}}</option>
-  
-              {% endif %}
-  
-  
-          {% endfor %}
-          <option >OTROS</option>
-  
-      </select>
-      
-  
-  
-  
-    </div>
+  {{ casos }}
+ 
 
 
 
  
-
 
     <button type="submit" class="save btn btn-primary">Guardar</button>
 

@@ -1,66 +1,93 @@
-    
-    {% extends 'base.html' %}
+{% load static %}
+<html>
+    <head>
+        <title>Django Girls blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
 
+    <script src="../../static/colasIN/dashboard.js"></script>
+    <body>
+        <div class="container">
+                    {% block content %}
+                    <h1>Nuevo Caso</h1>
 
+    <form method="POST" class="post-form">{% csrf_token %}
 
-    {% block content %}
+  <div class="form-group col-sm-1-md-2">
+   <label for="inputMarca" class="text-dark">TIPO DE CASO</label>
 
+    <select name='caso' id="caso" class="form-control" onchange='traemodelos()' >
 
-    <div class='container-fluid'>
+        <option >Seleccionar</option>
 
+        {% for m in casos %}
 
-      {% if error %}
+            {% if caso == m.caso %}
 
-      <div  class="alert alert-primary animated fadeIn" role="alert">
-        {{error}}
-      </div>
+              <option value='{{m.caso}}' selected>{{m.caso}}</option>
 
-{% endif %}
+            {% else %}
 
+              <option  value='{{m.caso}}'>{{m.caso}}</option>
 
-<h3></h3>
+            {% endif %}
+        {% endfor %}
+        <option >OTROS</option>
 
-<h6>{{telefono}}</h6>
-
-{% if incidenciaform %}
-
-  <h3>Nueva Caso  </h3>
-  
-  <form method="POST" class="post-form">
-
-  {% csrf_token %}
-
-  
-
-
-  {% for hidden in form.hidden_fields %}
-  {{ hidden }}
-  {% endfor %}
-  <div class='row'>
-  {% for field in incidenciaform.visible_fields %}
-
-  
-  <div class="col-md-2">
-        
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
-    </div>
-  
-    {% endfor %}
- 
+    </select>
   </div>
+        <div class="form-group col-sm-1-md-2">
+            <label for="inputModelo" class="text-dark">TIPO DE SUBCASO</label>
+            <div class="input-group">
+            <div class="input-group-prepend">
+        
+             <select name='subcaso' class="form-control" id='sub_caso'>
+              <option >Seleccionar</option>
+        
+                {% for m in subcaso %}
+        
+                   {% if sub_caso == m.sub_caso %}
+      
+                    <option value='{{m.sub_caso}}' selected> {{m.sub_caso}}</option>
+                  {% else %}
+                    <option  value='{{m.sub_caso}}'>{{m.sub_caso}}</option>
+        
+                    {% endif %}
+        
+                {% endfor %}
+                <option >OTROS</option>
+               </select>
+             
+            <!--   <div class="input-group-text" id="btnGroupAddon" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-plus-square" aria-hidden="true"></i></div> -->
+        
+            </div>
+          </div>
+          
+          </div>
+
+          <div class="form-group">
+              <label for="exampleFormControlTextarea1">Example textarea</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          
+
+        <button type="submit" class="save btn btn-default">Save</button>
+        <button type="submit" class="save btn btn-default">Limpiar</button>
 
 
-    <button type="submit" class="save btn btn-primary">Guardar</button>
+     
+    </form>
+  </div>
+                    {% endblock %}
+
+ 
+        </div>
+      </div>
+    </body>
+</html>
 
 
-  </form>
 
-  {% endif %}
-
-
-</div>
-
-
-  {% endblock %}
-  
