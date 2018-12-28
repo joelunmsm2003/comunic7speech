@@ -103,6 +103,8 @@
 
     <h6>En Llamada</h6>
 
+    
+
    <br>
 
 
@@ -175,19 +177,42 @@
       
     </style>
 
-
-
-      <h6>Estado Actual </h6>
-      <h4>{{agente.estado.nombre}}</h4>
-  
-             <!-- Button trigger modal -->
-             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Buscar Incidencia
-              </button>
-
+      
 
 
      
+      <h6>Estado Actual </h6>
+      <h4>{{agente.estado.nombre}}</h4>
+
+
+      
+    {% if llamada_entrante == '0' %}
+
+
+
+    {% else %}
+
+    <h6>Llamada entrante... {{llamada_entrante}}</h6>
+
+    
+    {% endif %}
+
+
+
+          <div class="btn-group" role="group" aria-label="Basic example">
+           <!-- Button trigger modal -->
+           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Buscar Incidencia
+            </button>
+
+            <a onclick="nuevaventa('/colasIN/nuevo_caso')" target="_blank"  class="btn btn-secondary" style='color:#fff;'>Crear Nueva Incidencia</a>
+            <a href='/colasIN/monitor_agente/0/0/'   class="btn btn-dark" style='color:#fff;'>Mostrar Todas las Incidencias</a>
+
+
+          </div>
+
+          <div style='height:20px;'></div>
+
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
@@ -201,11 +226,7 @@
                       </div>
                       <form method='GET' action='/colasIN/monitor_agente/0/0'>
                       <div class="modal-body">
-                        
-  
-                              
-                            
-                            
+
                               {% for hidden in form.hidden_fields %}
                               {{ hidden }}
                               {% endfor %}
@@ -236,18 +257,78 @@
                 </div>
 
 
-
-
-
-
-    
-
-
   </div>
 
 </div>
 
 <div class='container-fluid'>
+
+    {% if historial_llamada %}
+
+  
+
+    <h5>Historial de incidencias con el numero {{llamada_entrante}}</h5>
+
+    <table class="table table-default responsive">
+        <thead>
+          <tr>
+          
+            <th scope="col">Numero Caso</th>
+            <th scope="col">Tipo Caso</th>
+            <th scope="col">Sub Tipo Caso</th>
+            <th scope="col">Estado</th>
+           
+            <th scope="col">Subestado</th>
+            <th scope="col">Detalles del Lugar</th>
+            <th scope="col">Fechas de Notificacion</th>
+            <th scope="col">Unidad Reportante</th>
+            <th scope="col">Dispositivo Origen</th>
+            <th scope="col">Reportante</th>
+            <th>Zona</th>
+            <th>Accion Tomada</th>
+            <th>Situacion</th>
+          </tr>
+        </thead>
+        <tbody>
+    
+    
+    
+          {% for c in historial_llamada %}
+          <tr>
+           
+          
+            <td>{{c.numero_caso }}</td>
+            <td>{{c.tipo_caso }}</td>
+            <td>{{c.sub_tipo_caso}}</td>
+            <td>{{c.estado_incidencia.nombre}}</td>
+            <td>{{c.subestado.nombre}}</td>
+            
+            <td>{{c.detalle_lugar}}</td>
+            <td>{{c.fecha_atencion}}</td>
+            <td>{{c.unidad_reportante}}</td>
+            <td>{{c.dispositivo_origen}}</td>
+            <td>{{c.telefono_1}}</td>
+            <td>{{c.zona}}</td>
+            <td>{{c.accion_tomada}}</td>
+            <td>{{c.situacion}}</td>
+            <td>
+            <div class='row'>
+              
+            
+            <div class='col-md-6'> <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/detalle_venta/{{c.id}}')" target="_blank">Detalle</a></div>
+            <div class='col-md-6'> <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/nueva_venta/{{c.id}}')" target="_blank">Nueva</a></td></div>
+           
+            
+            </div>
+          </tr>
+    
+          {% endfor %}
+    
+        </tbody>
+      </table>
+    
+      
+    {% endif %}
 
 {% include "colasIN/gestion.html" %}
 

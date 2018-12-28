@@ -842,7 +842,7 @@ def nuevo_caso(request):
 
 		subcaso = Casos.objects.values('subcaso').annotate(Count('subcaso'))
 
-		return render(request, 'colasIN/nuevo_caso.html',{'casos':casos,'subcaso':subcaso})
+		return render(request, 'colasIN/nuevo_caso.html',{'casos':incidenciaform,'subcaso':subcaso})
 
 
 
@@ -1097,8 +1097,7 @@ def m_agente(request,cliente,id_incidencia):
 
 	if request.method=='GET':
 
-		
-
+	
 		telefono=cliente
 
 		filter={}
@@ -1108,6 +1107,8 @@ def m_agente(request,cliente,id_incidencia):
 			if request.GET[r]!='':
 
 				filter[r]=request.GET[r]
+
+			
 
 
 			if r=='estado':
@@ -1119,6 +1120,8 @@ def m_agente(request,cliente,id_incidencia):
 				_agente.save()
 
 		print 'filter',filter
+
+		historial_llamada = Produccion.objects.filter(telefono_1=telefono).order_by('-id')
 
 		ven = Produccion.objects.filter(**filter).order_by('-id')
 
@@ -1146,5 +1149,5 @@ def m_agente(request,cliente,id_incidencia):
 
 		reportefiltro = IncidenciaForm()
 
-		return render(request, 'colasIN/agente.html',{'reportefiltro':reportefiltro,'telefono':filter,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
+		return render(request, 'colasIN/agente.html',{'historial_llamada':historial_llamada,'llamada_entrante':str(cliente),'reportefiltro':reportefiltro,'telefono':filter,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
 
