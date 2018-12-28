@@ -50,33 +50,15 @@ function traeinfomoto(){
    function traemodelos() {
    
    
-         var x = document.getElementById("marca").value;
-         var modelo_v = document.getElementById("modelo").value;      
-         var cliente = document.getElementById("cliente").value;
-         var apellido_p = document.getElementById("apellido_p").value;
-         var apellido_m = document.getElementById("apellido_m").value;
-         var dni = document.getElementById("dni").value;
-         var telefono_1 = document.getElementById("telefono_1").value;
-         var telefono_2 = document.getElementById("telefono_2").value;
-         var version = document.getElementById("inputVersion").value;
-         
-         var anio = document.getElementById("inputAnio").value;
-         var color = document.getElementById("inputColor").value;
-   
-         var cilindrada = document.getElementById("inputCili").value;
-         var kilom = document.getElementById("inputkilo").value;
-         var placa = document.getElementById("inputZip").value;
-         var cant_ba = document.getElementById("inputP").value;
-         var modelo = document.getElementById("modelo_b").value;
-         var marca_b = document.getElementById("marca_b").value;
-         var status = document.getElementById("status").value;
-         var mapa = document.getElementById("Map").value;
+         var x = document.getElementById("caso").value;
+         var subcaso = document.getElementById("subcaso").value;      
+
         
          // var direccion = document.getElementById("direccion").value;
    
         
    
-       window.location.href = "/colasIN/dashboard/?marca="+x+'&modelo_v='+modelo_v+'&cliente='+cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+'&marca_b='+marca_b+'&version='+version+'&anio='+anio+'&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+'&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+'&mapa='+mapa
+       window.location.href = "/colasIN/dashboard/?caso="+x+'&subcaso='+subcaso
    
    
        }

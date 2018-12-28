@@ -20,9 +20,10 @@ class ReporteForm(ModelForm):
 class IncidenciaForm(ModelForm):
     class Meta:
         model = Produccion
-        fields = ('numero_caso','estado_incidencia','sub_estado','detalle_lugar','fecha_atencion','unidad_reportante','dispositivo_origen','telefono_1','zona','accion_tomada','situacion')
+        fields = ('tipo_caso','sub_tipo_caso','estado_incidencia','sub_estado','detalle_lugar','fecha_atencion','unidad_reportante','dispositivo_origen','telefono_1','zona','accion_tomada','situacion')
         widgets = {
-                'numero_caso':TextInput(attrs={'class':'form-control'}),
+                'tipo_caso':TextInput(attrs={'class':'form-control'}),
+                'sub_tipo_caso':TextInput(attrs={'class':'form-control'}),
                 'estado_incidencia':Select(attrs={'class':'form-control'}),
                 'sub_estado':Select(attrs={'class':'form-control'}),
                 'detalle_lugar':TextInput(attrs={'class':'form-control'}),

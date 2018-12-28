@@ -1,66 +1,108 @@
-    
-    {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 
 
-    {% block content %}
 
+{% block content %}
 
-    <div class='container-fluid'>
+<script>
+        function traesubcasos(){
+            
+            var caso = document.getElementById("caso").value;
+            //var subcaso = document.getElementById("subcaso").value; 
+            
+            console.log('{{telefono}}')
 
-
-      {% if error %}
-
-      <div  class="alert alert-primary animated fadeIn" role="alert">
-        {{error}}
-      </div>
-
-{% endif %}
-
-
-<h3></h3>
-
-<h6>{{telefono}}</h6>
-
-{% if incidenciaform %}
-
-  <h3>Nueva Caso  </h3>
-  
-  <form method="POST" class="post-form">
-
-  {% csrf_token %}
-
-  
-
-
-  {% for hidden in form.hidden_fields %}
-  {{ hidden }}
-  {% endfor %}
-  <div class='row'>
-  {% for field in incidenciaform.visible_fields %}
-
-  
-  <div class="col-md-2">
+            window.location.href = "/colasIN/nuevo_caso/?caso="+caso+'&telefono='+'{{telefono}}'
+   
+            
+        }
         
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
+        
+</script>
+
+<div class='container-fluid'>
+<h1>Nuevo Caso</h1>
+
+    <form method="POST" class="post-form">
+        
+        
+    {% csrf_token %}
+
+  <div class="form-group">
+
+            <label for="inputMarca" class="text-dark">Telefono</label>
+
+            <input name='telefono' class='form-control' value='{{telefono}}'/>
+
+            <label for="inputMarca" class="text-dark">Tipo de Caso</label>
+
+                <select name='caso' id="caso"  class="form-control" onchange="traesubcasos()" >
+
+                    <option >Seleccionar</option>
+
+                    {% for m in casos %}
+
+                    {% if caso == m.caso %}
+
+                    <option value='{{m.caso}}' selected>{{m.caso}}</option>
+
+                    {% else %}
+
+                    <option  value='{{m.caso}}'>{{m.caso}}</option>
+
+                    {% endif %}
+                    {% endfor %}
+                    <option >OTROS</option>
+
+                </select>
+
+            <label for="inputModelo" class="text-dark">Tipo de Subcaso</label>
+            
+                    <select name='subcaso' class="form-control" id='sub_caso'>
+                    <option >Seleccionar</option>
+                
+                        {% for m in subcaso %}
+                
+                       
+            
+                            <option value='{{m.sub_caso}}' selected> {{m.sub_caso}}</option>
+                     
+                        {% endfor %}
+                        <option >OTROS</option>
+                    </select>
+             
+            <!--   <div class="input-group-text" id="btnGroupAddon" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-plus-square" aria-hidden="true"></i></div> -->
+        
+            <label for="exampleFormControlTextarea1">Fecha de Incidencia</label>
+            <input name ='fecha' class="form-control" type='date' id="exampleFormControlTextarea1" />
+                    
+                <label for="exampleFormControlTextarea1">Detalle del Reporte</label>
+                <textarea name='detalle' class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                    <div style="height:20px;"></div>
+                <button type="submit" class="save btn btn-primary">Guardar</button>
+                
+
+
+
     </div>
-  
-    {% endfor %}
- 
+    
+
+        
+     
+    </form>
   </div>
 
 
-    <button type="submit" class="save btn btn-primary">Guardar</button>
+
+        
 
 
-  </form>
+                    {% endblock %}
 
-  {% endif %}
-
-
-</div>
+ 
+        
 
 
-  {% endblock %}
-  
+

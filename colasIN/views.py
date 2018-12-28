@@ -819,30 +819,67 @@ def nuevo_caso(request):
 
 	if request.method=='POST':
 
-		instance = Produccion()
+		fecha=datetime.today()
 
-		form = IncidenciaForm(request.POST or None, instance=instance)
+		for r in request.POST:
 
-		if form.is_valid():
+			if r =='telefono':
 
-			form.save()
+				telefono= request.POST['telefono']
 
-			redis_publisher = RedisPublisher(facility='foobar', users=[request.user.username])
+			if r=='caso':
 
-			message = RedisMessage('llamada-'+str(telefono))
+				tipo_caso= request.POST['caso']
 
-			redis_publisher.publish_message(message)
+			if r=='subcaso':
+
+				sub_tipo_caso= request.POST['subcaso']
+
+			if r=='fecha':
+
+				fecha= request.POST['fecha']
+
+		Produccion(fecha=datetime.today(),telefono_1=telefono,tipo_caso=tipo_caso,sub_tipo_caso=sub_tipo_caso,fecha_atencion=fecha).save()
+
+		redis_publisher = RedisPublisher(facility='foobar', users=[request.user.username])
+
+		message = RedisMessage('llamada-'+str(telefono))
+
+		redis_publisher.publish_message(message)
 
 		return render(request, 'colasIN/exito.html',{})
 
 	if request.method=='GET':
 
+		subcaso={}
 
+		caso=''
+
+		telefono=''
+
+		for r in request.GET:
+
+			if r=='caso':
+
+				caso=request.GET['caso']
+
+				subcaso = Casos.objects.filter(caso=request.GET['caso']).values('sub_caso').annotate(Count('sub_caso'))
+
+			if r=='telefono':
+
+				telefono=request.GET['telefono']
+		
+		
 		casos = Casos.objects.values('caso').annotate(Count('caso'))
+		print 'exitosamente......',casos
 
-		subcaso = Casos.objects.values('subcaso').annotate(Count('subcaso'))
+		
+		
+		print 'exitosamente......qqqqqqqq',subcaso
+		
+		
 
-		return render(request, 'colasIN/nuevo_caso.html',{'casos':incidenciaform,'subcaso':subcaso})
+		return render(request, 'colasIN/nuevo_caso.html',{'casos':casos,'caso':caso,'subcaso':subcaso,'telefono':telefono})
 
 
 
@@ -1073,7 +1110,7 @@ def traesemana(fecha_inicio):
 
 
 
-@login_required(login_url="/ingresar")
+@login_required(login_url="/comunica7/ingresar")
 
 def m_agente(request,cliente,id_incidencia):
 

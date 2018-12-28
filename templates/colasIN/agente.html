@@ -42,6 +42,17 @@
 
     }
 
+       function nuevocaso(url){
+
+        var strWindowFeatures = "location=yes,height=700,width=500,scrollbars=yes,status=yes";
+        var URL = url ;
+        var win = window.open(URL+'?telefono='+'{{llamada_entrante}}', "_blank", strWindowFeatures);
+
+        console.log('{{llamada_entrante}}')
+
+
+        }
+
 
 </script>
 
@@ -205,7 +216,7 @@
               Buscar Incidencia
             </button>
 
-            <a onclick="nuevaventa('/colasIN/nuevo_caso')" target="_blank"  class="btn btn-secondary" style='color:#fff;'>Crear Nueva Incidencia</a>
+            <a onclick="nuevocaso('/colasIN/nuevo_caso')" target="_blank"  class="btn btn-secondary" style='color:#fff;'>Crear Nueva Incidencia</a>
             <a href='/colasIN/monitor_agente/0/0/'   class="btn btn-dark" style='color:#fff;'>Mostrar Todas las Incidencias</a>
 
 
@@ -297,7 +308,7 @@
           <tr>
            
           
-            <td>{{c.numero_caso }}</td>
+            <td>{{c.id }}</td>
             <td>{{c.tipo_caso }}</td>
             <td>{{c.sub_tipo_caso}}</td>
             <td>{{c.estado_incidencia.nombre}}</td>
