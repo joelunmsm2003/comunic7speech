@@ -206,7 +206,7 @@ class TelefonosAdmin(admin.ModelAdmin):
 
 @admin.register(Proveedor)
 class ProveedorAdmin(ImportExportModelAdmin):
-	list_display = ('id','nombre','cartera')
+	list_display = ('id','nombre')
 	pass
 
 

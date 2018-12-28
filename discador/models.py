@@ -149,8 +149,8 @@ class ProveedorCarteras(models.Model):
 	cartera=models.ForeignKey(Cartera, blank=True, null=True)
 	negocio=models.ForeignKey(Negocio, blank=True, null=True)
 
-	def __unicode__(self):
-		return self.proveedor.nombre+' - '+self.cartera.nombre
+	# def __unicode__(self):
+	# 	return self.proveedor.nombre+' - '+self.cartera.nombre
 		
 	
 
