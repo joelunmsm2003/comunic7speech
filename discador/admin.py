@@ -34,17 +34,20 @@ class SubresultadoAdmin(ImportExportModelAdmin):
 # 	list_display = ('id','nombre')
 
 @admin.register(Negocio)
-class NegocioAdmin(admin.ModelAdmin):
+class NegocioAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre')
+	pass
 
 @admin.register(Industria)
-class IndustriaAdmin(admin.ModelAdmin):
+class IndustriaAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre')
+	pass
 
 
 @admin.register(Gestion)
-class GestionAdmin(admin.ModelAdmin):
+class GestionAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre')
+	pass
 
 # Register your models here.
 @admin.register(Sexo)
@@ -68,25 +71,29 @@ class SexoAdmin(admin.ModelAdmin):
 
 
 @admin.register(Cartera)
-class CarteraAdmin(admin.ModelAdmin):
+class CarteraAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre')
+	pass
 
 @admin.register(IDGestion)
-class IDGestionAdmin(admin.ModelAdmin):
+class IDGestionAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre')
+	pass
 
 
 
 @admin.register(ProveedorCarteras)
-class ProveedorCarterasAdmin(admin.ModelAdmin):
+class ProveedorCarterasAdmin(ImportExportModelAdmin):
 	list_display = ('id','cartera','proveedor','negocio')
 	list_display_links = ('cartera',)
 	list_filter = ('proveedor',)
+	pass
 
 
 @admin.register(Tipo_cartera)
-class Tipo_carteraAdmin(admin.ModelAdmin):
+class Tipo_carteraAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre','cod_dpto','cod_prov','cod_dist','dpto','provincia')
+	pass
 
 @admin.register(Ubigeo)
 class UbigeoAdmin(admin.ModelAdmin):
