@@ -35,9 +35,12 @@
 
     function nuevaventa(url){
 
+
+        console.log('{{telefono}}')
+
         var strWindowFeatures = "location=yes,height=800,width=1300,scrollbars=yes,status=yes";
         var URL = url ;
-        var win = window.open(URL, "_blank", strWindowFeatures);
+        var win = window.open(URL+'?telefono_1='+'{{telefono}}', "_blank", strWindowFeatures);
 
 
     }
@@ -45,78 +48,11 @@
 
 </script>
 
+<style>
 
-
-<div style='height: 20px'></div>
-<div class='container-fluid'>
-
-
-  <div class='discador'>
-
-
-    <img src='/static/callcenter.png'>
-
-    
-    
-    <h6>{{agente.nombre}} </h6>
-
-
-
-    <div style="height:20px;"></div>
-
-  
-    
-    {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
-
-    <div style="padding:20px;">
-
-      {% if agente.estado.nombre == 'Pausa' %}
-
-      <a class='btn btn-primary' href='/colasIN/disponible/{{agente.id}}'>
-          Disponible
-      </a>
-
-      {% endif %}
-
-       {% if agente.estado.nombre == 'Disponible' %}
-
-
-
-
-        <a class='btn btn-primary' href='/colasIN/pausar/{{agente.id}}'>
-        Pausar
-        </a>
-
-      {% endif %}
-
-    </div>
-
-     
-      
-
-    {% else %}
-
-    
-
-    <img src='/static/llamada.png'>
-    <br>
-
-    <h6>En Llamada</h6>
-
-   <br>
-
-
-  
-    
-    {% endif %}
-
-    <a class="btn btn-primary" href='/comunica7/ingresar'>Salir</a>
-
-
-  </div>
-
-
-  <style>
+    body,th,td{
+      font-size:13px;
+    }
 
 
     .cajita{
@@ -128,36 +64,52 @@
 
       .discador{
     
-        position: absolute;
-        top: 0px;
-        right: 0px;
+        position: fixed;
+        top: 5px;
+        right: 20px;
         background: #1086fb;
         transition:all .5s;
-        height: 1000px;
+        height: 250px;
         z-index: 1000;
         width:120px;
         padding-top: 20px;
+        border-radius:10px;
+
        
         color:#fff;
         text-align: center;
-    }
-    
-      
-      .discador:hover{
-    
-        position: absolute;
-        top: 0px;
+        
+       
         background: #1086fb;
         transition:all .5s;
         width:140px;
-        
     }
+    
+      
+    
 
     .discador img{
 
       width: 40px;
 
       cursor:pointer;
+    }
+
+    .Pausa{
+
+      background: #d62068;
+    }
+
+    .Disponible{
+
+      background: #61c766;
+
+    }
+
+    .Gestion{
+
+      background: #dbe045;
+
     }
 
    
@@ -175,19 +127,126 @@
       
     </style>
 
-  <div class='row'>
 
-    {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
 
-    <div class='col-10'>
+
+<div style='height: 20px'></div>
+<div class='container-fluid'>
+
+
+  <div class='discador {{agente.estado.nombre}}' >
+
+
+    <img src='/static/callcenter.png'>
+
+    
+    
+    <h6>{{agente.nombre}} </h6>
+
+
+
+
+  
+    
+    {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible' or agente.estado.nombre == 'Gestion'   %}
+
+    <div style="padding:20px;">
+
+      {% if agente.estado.nombre == 'Pausa' %}
+
+      <a class='btn btn-light' href='/colasIN/disponible/{{agente.id}}'>
+          Disponible
+      </a>
+
+      {% endif %}
+
+       {% if agente.estado.nombre == 'Disponible' %}
+
+
+
+
+        <a class='btn btn-light' href='/colasIN/pausar/{{agente.id}}'>
+        Pausar
+        </a>
+
+      {% endif %}
+
+       {% if agente.estado.nombre == 'Gestion' %}
+
+
+        Gestion
+        </a>
+
+      {% endif %}
+
+    </div>
+
+     <a class="btn btn-light" href='/comunica7/ingresar'>Salir</a>
+
+      
+
+    {% else %}
+
+    <div style="height:20px;"></div>
+
+    <img src='/static/llamada.png'>
+    <br>
+
+    <h6>En Llamada</h6>
+
+   <br>
+   <a class='btn btn-light' href='/colasIN/disponible/{{agente.id}}'>
+          Disponible
+      </a>
+
+
+  
+    
+    {% endif %}
+
+    
+
+  </div>
+
+
+  
+
+
+    {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible' or agente.estado.nombre == 'Gestion'   %}
+
+ 
 
     <h6>Estado Actual </h6>
     <h4>{{agente.estado.nombre}}</h4>
 
+
+
+          
+
+    {% else %}
+
+
+    <h5>Llamada entrante...{{telefono}}</h5>
+
+
+
+    {% endif %}
+
+  
+
+
            <!-- Button trigger modal -->
-           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Buscar Venta
-            </button>
+           
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                  Buscar Venta
+                </button>
+                <a onclick="nuevaventa('/colasIN/dashboard')" target="_blank"  class="btn btn-primary" style='color:#fff;'>Crear Nueva Venta</a>
+
+
+            </div>
             
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -213,82 +272,76 @@
               </div>
             </div>
 
+            {% include "colasIN/gestion.html" %}
 
-          
+            {% if total_llamadas %}
 
+            <h5>Historial de Todas las Ventas</h5>
+
+            <table class="table table-default responsive">
+                <thead>
+                      <tr>
+
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Telefono</th>
+                      <th scope="col">DNI</th>
+                      <th scope="col">Marca</th>
+                      <th scope="col">Modelo</th>
+
+                      <th scope="col">Anio</th>
+                      <th scope="col">Placa</th>
+                      <th scope="col">Marca Bat.</th>
+                      <th scope="col">Modelo Bat.</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Descuento</th>
+                      <th scope="col">Direccion</th>
+                      <th>Accion</th>
+                      <th></th>
+                      </tr>
+                </thead>
+                <tbody>
+
+                {% for c in total_llamadas %}
+                        <tr>
+
+
+                        <td>{{c.cliente }}</td>
+                        <td><a style='color:#67da75;' target="_blank" href='https://wa.me/51{{c.telefono_1}}?text=Hola'>{{c.telefono_1 }}</a></td>
+                        <td>{{c.dni }}</td>
+                        <td>{{c.marca_vehiculo}}</td>
+                        <td>{{c.modelo}}</td>
+
+                        <td>{{c.anio}}</td>
+                        <td>{{c.placa}}</td>
+                        <td>{{c.marca_producto}}</td>
+                        <td>{{c.modelo_bateria}}</td>
+                        <td>{{c.precio}}</td>
+                        <td>{{c.descuento}}</td>
+                        <td><a class='btn btn-sm btn-dark' href='https://www.google.com/maps/search/{{c.direccion_atencion}}' target="_blank">Ir</a></td>
+                        <td>
+                        
+                         <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/detalle_venta/{{c.id}}')" target="_blank">Detalle</a>
+
+                        </td>
+
+                        <td>
+                         <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/nueva_venta/{{c.id}}')" target="_blank">Nueva Venta</a></td>
+
+
+                        </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+            {% else %}
+
+              <h5>No hay registros para este numero</h5>
+
+            {% endif %}
 
 
     </div>
-
-    {% else %}
-
-
-
-    {% endif %}
-
-    <div class='container-fluid'>
-
-    {% include "colasIN/gestion.html" %}
-
-  </div>
-
-    <!--<div class='col-md-1'>
-
-      <form style='background: #1073ea;
-    color: #fff;
-    padding: 23px;
-    padding-top: 18px;
-    border-radius: 13px;height: 100%;'>
-    
-    <h6>Agente</h6>
-    <h6>{{agente.nombre}} </h6>
-
-     
-
-      {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible'   %}
-
-      <nav class="nav nav-pills flex-column flex-sm-row">
-
-        {% if agente.estado.nombre == 'Pausa' %}
-        <a class="flex-sm-fill text-sm-center nav-link active " style='color:#fff;' href="/agente/0?estado=1">Pausa</a>
-        <a class="flex-sm-fill text-sm-center nav-link " style='color:#fff;' href="/agente/0?estado=2">Disponible</a>
-        {% endif %}
-
-         {% if agente.estado.nombre == 'Disponible' %}
-        <a class="flex-sm-fill text-sm-center nav-link   " style='color:#fff;' href="/agente/0?estado=1">Pausa</a>
-        <a class="flex-sm-fill text-sm-center nav-link active " style='color:#fff;' href="/agente/0?estado=2">Disponible</a>
-        
-
-       
-        {% endif %}
-
-       
-        
-
-      </nav>
-
-      {% else %}
-
-      <p>{{agente.estado.nombre}}</p>
-
-
- 
-          
-      
-      {% endif %}
-
-
-      <a class="flex-sm-fill text-sm-center nav-link" href='/comunica7/ingresar'>Salir</a>
-
-
-    
-     </form>
-    </div>-->
-
-
-  </div>
-
-</div>
-
 
   {% endblock %}

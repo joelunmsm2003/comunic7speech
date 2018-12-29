@@ -250,6 +250,7 @@ class Produccion(models.Model):
     status= models.ForeignKey(Status,max_length=1000,blank=True, null=True, related_name='_status')
     observaciones= models.CharField(max_length=1000,blank=True, null=True)
     usuario=models.ForeignKey(User,help_text='Usuarios',max_length=1000,blank=True, null=True,related_name='_modelo')
+    cierre= models.BooleanField(default=0)
 
     def __unicode__(self):
         return self.cliente

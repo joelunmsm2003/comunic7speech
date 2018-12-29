@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'discador',
     'comunica7',
     'app',
+    'cdr',
     'callcenter',
     'speech',
     'import_export',
@@ -115,6 +116,8 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -130,7 +133,15 @@ DATABASES = {
         'PASSWORD': 'app01c7c0m2019',
         'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
-    }
+    },
+    'cdr': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'cdr',
+        'USER': 'root',
+        'PASSWORD': 'd4t4B4$3*',
+        'HOST': 'xiencias.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+    },
 }
 
 
@@ -163,16 +174,19 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Lima'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+DATABASE_ROUTERS = ['cdr.router.CdrRouter',]

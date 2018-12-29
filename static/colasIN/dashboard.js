@@ -149,6 +149,7 @@ function traeinfomoto(){
    
    
    //CON ESTO ASE Q CILINDRADA TE DE PUNTOS DE  SEPARADOR DE MILL
+$(document).ready(function(){
    $("#inputCili").on({
      "focus": function(event) {
        $(event.target).select();
@@ -161,8 +162,10 @@ function traeinfomoto(){
        });
      }
    });
-   
-   
+   });
+
+
+$(document).ready(function(){   
    $("#inputkilo").on({
      "focus": function(event) {
        $(event.target).select();
@@ -176,7 +179,7 @@ function traeinfomoto(){
      }
    });
    
-   
+ });  
    $(document).ready(function(){
      $('#boton').click(function() {
      var a =(document.getElementById("inputime").value);
@@ -256,7 +259,8 @@ function traeinfomoto(){
    
    
    
-   $(document).ready(function(){
+   $(document).ready(function(){     
+
    $("#llmapa").click(function(){
    var mapa=document.getElementById("Map").value
       
@@ -274,17 +278,7 @@ function traeinfomoto(){
    //fechasssss
    // Para este script funcione debe útilizar las últimas librerías de jquery y jquery UI
    //CON ESTE ESCRIP ISE PARA PONER LA FECHA ACTUAL  EN UN IMPUT
-   var d= new Date();
-   
-   var dia = (d.getDate()); 
-   var mes =  ((d.getMonth() + 1));
-   var anio = d.getFullYear(); 
-   
-   var fechatotal = dia + "/"+ mes+"/" + anio
-   
-   $("#fechaalta").html('fechatotal');
-   
-   $('#t').html("<span>Fecha Actual: </span>" + fechatotal);
+  
    
     //$( "#inputFI" ).datepicker().val(fechatotal);
    // FINN CON ESTE ESCRIP ISE PARA PONER LA FECHA ACTUAL  EN UN IMPUT
@@ -292,10 +286,10 @@ function traeinfomoto(){
    
    
    
-   
+$(document).ready(function(){
    $( "#gridCheck" ).click(function() {
    
-     console.log('putitos')
+     
      var nombre=document.getElementById("cliente").value;
      var apellido_1=document.getElementById("apellido_p").value;
      var apellido_2=document.getElementById("apellido_m").value;
@@ -312,28 +306,16 @@ function traeinfomoto(){
      $( "#inputApellido_m" ).val(apellido_2);
      //$( "#inputDNI" ).val("{{dni}}");
      $( "#inputDNI" ).val(dni_1);
-   
+   console.log('patitos',nombre)
    });
+  });
    
    
    
    
-   //············#####################
-   $( "#gridCheckdireccion" ).click(function() {
-       var direccion=document.getElementById("inpuguardatRF").value
-      // var rr = $( '#inpuguardatRF').text();
-       console.log(direccion,'esto traigo')
-       console.log('entre putitas')
-     
-       $( "#inputDirec" ).val(direccion);
-   
-   
-   });
-   
-   
-   
-   
-   //············#####################
+  
+ 
+
      $(document).ready(function(){
        $("#boleta").click(function(){
            $('#factura1').hide()
@@ -345,7 +327,6 @@ function traeinfomoto(){
      });
    
    
-   //············#####################
    $(document).ready(function(){
        $("#botom").click(function(){
    

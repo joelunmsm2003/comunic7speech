@@ -72,7 +72,6 @@ from ws4redis.redis_store import RedisMessage
 #from app.resources import ProduccionResource
 
 
-from tablib import Dataset
 
 
 def importar(request):
@@ -763,6 +762,13 @@ def dashboard(request):
 			horas=time.strftime("%H:%M", time.gmtime(t))
 			hora_i=horas
 			print 'Hora de hora_instalacion_111',hora_i
+
+
+
+		_agente = Agente.objects.get(user_id=request.user.id)
+		_agente.estado_id=1
+		_agente.id_estado=2
+		_agente.save()
 			
 		
 
@@ -849,9 +855,11 @@ def detalle_venta(request,id_produccion):
 
 		incidencia = Produccion.objects.get(id=id_produccion)
 
+
+
 		incidenciaform = ProduccionForm(instance=incidencia)
 
-		return render(request, 'colasIN/detalle_venta.html',{'incidenciaform':incidenciaform})
+		return render(request, 'colasIN/detalle_venta.html',{'incidenciaform':incidenciaform,'incidencia':incidencia})
 
 
 		
@@ -872,6 +880,7 @@ def lanzallamada(request,base,agente_id):
 
 	_agente = Agente.objects.get(id=agente_id)
 	_agente.estado_id=2
+	_agente.id_estado=3
 	_agente.save()
 
 	print 'lanzallamada',_agente.user.username
@@ -889,7 +898,8 @@ def lanzafinllamada(request,base,agente):
 
 	_agente = Agente.objects.get(id=agente)
 
-	_agente.estado_id=4
+	_agente.estado_id=3
+	_agente.id_estado=4
 	_agente.save()
 
 
@@ -901,9 +911,8 @@ def lanzafinllamada(request,base,agente):
 	redis_publisher.publish_message(message)
 
 
-	_data = Agente.objects.filter(id=agente)
-	serializer =  AgentesSerializer(_data,many=True)
-	return JsonResponse(serializer.data, safe=False)
+	a= simplejson.dumps('Se lanzo FIN  llamada')
+	return HttpResponse(a, content_type="application/json")
 
 
 
@@ -1051,7 +1060,9 @@ def m_agente(request,cliente,id_incidencia):
 
 				_agente.save()
 
-		ven = Produccion.objects.filter(telefono_1=telefono).order_by('-id')
+		ven = Produccion.objects.filter(telefono_1__contains=telefono).order_by('-id')
+
+		total_llamadas = Produccion.objects.all().order_by('-id')
 
 		_estado=EstadoAgente.objects.filter(id__in=[1,2])
 
@@ -1075,5 +1086,5 @@ def m_agente(request,cliente,id_incidencia):
 
 			incidenciaform = ProduccionForm(instance=incidencia)
 
-		return render(request, 'colasIN/agente.html',{'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
+		return render(request, 'colasIN/agente.html',{'total_llamadas':total_llamadas,'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
 

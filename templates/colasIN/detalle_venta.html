@@ -37,6 +37,7 @@
   {{ hidden }}
   {% endfor %}
   <div class='row'>
+
   {% for field in incidenciaform.visible_fields %}
 
   
@@ -46,12 +47,24 @@
             {{ field.label_tag }} {{ field }}
     </div>
   
-    {% endfor %}
+  {% endfor %}
  
   </div>
+  
+
+    <div style='height:20px;'></div>
+
+    
+
+    {% if incidencia.cierre %}
+
+
+     {% else %}
 
 
     <button type="submit" class="save btn btn-primary">Guardar</button>
+
+    {% endif %}
 
 
   </form>
