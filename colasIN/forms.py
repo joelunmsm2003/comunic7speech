@@ -19,7 +19,7 @@ class ProduccionForm(ModelForm):
     class Meta:
         model = Produccion
         fields = '__all__'
-        exclude =('venta','usuario')
+        exclude =('venta','usuario','agente')
         widgets = {
             'nombre':TextInput(attrs={'class':'form-control'}),
             'fecha':TextInput(attrs={'class':'form-control'}),
@@ -30,8 +30,8 @@ class ProduccionForm(ModelForm):
             'apellido_m':TextInput(attrs={'class':'form-control'}),
             'dni':TextInput(attrs={'class':'form-control'}),
             'direccion':TextInput(attrs={'class':'form-control'}),
-            'marca_vehiculo':TextInput(attrs={'class':'form-control','disabled':'True'}),
-            'modelo':TextInput(attrs={'class':'form-control','disabled':'True'}),
+            'marca_vehiculo':TextInput(attrs={'class':'form-control'}),
+            'modelo':TextInput(attrs={'class':'form-control'}),
             'version':TextInput(attrs={'class':'form-control'}),
             'anio':TextInput(attrs={'class':'form-control'}),
             'cilindrada':TextInput(attrs={'class':'form-control'}),
@@ -39,8 +39,8 @@ class ProduccionForm(ModelForm):
             'kilometraje':TextInput(attrs={'class':'form-control'}),
             'placa':TextInput(attrs={'class':'form-control'}),
             'cantidad':TextInput(attrs={'class':'form-control'}),
-            'marca_producto':TextInput(attrs={'class':'form-control','disabled':'True'}),
-            'modelo_bateria':TextInput(attrs={'class':'form-control','disabled':'True'}),
+            'marca_producto':TextInput(attrs={'class':'form-control'}),
+            'modelo_bateria':TextInput(attrs={'class':'form-control'}),
             'precio':TextInput(attrs={'class':'form-control'}),
             'cantidad_bu':TextInput(attrs={'class':'form-control'}),
             'descuento':TextInput(attrs={'class':'form-control'}),
@@ -67,7 +67,8 @@ class ProduccionForm(ModelForm):
             'almacen':TextInput(attrs={'class':'form-control'}),
             'gmail':TextInput(attrs={'class':'form-control'}),
             'status':TextInput(attrs={'class':'form-control'}),
-            'observaciones':TextInput(attrs={'class':'form-control'})
+            'observaciones':TextInput(attrs={'class':'form-control'}),
+            
         }
 
 

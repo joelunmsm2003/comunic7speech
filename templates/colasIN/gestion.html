@@ -57,13 +57,21 @@
 
   {% if ventas %}
 
-  <h5>Historial de Ventas con el numero <a style='color:#67da75;' target="_blank" href='https://wa.me/51{{telefono}}?text=Hola'>{{telefono}}</a></h5>
+  <h5>Historial de Ventas con el numero 
+
+    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/480px-WhatsApp.svg.png' style='width: 30px;'>
+    <a style='color:#67da75;' target="_blank" href='https://wa.me/51{{telefono}}?text=Hola'>{{telefono}}</a>
+
+
+
+  </h5>
 
 
 <table class="table table-default responsive">
     <thead>
       <tr>
       
+        <th scope="col">Fecha</th>
         <th scope="col">Nombre</th>
         <th scope="col">DNI</th>
         <th scope="col">Marca</th>
@@ -83,9 +91,19 @@
     <tbody>
 
       {% for c in ventas %}
-      <tr>
+
+        {% if c.cierre %}
+        
+        <tr style='background: #dde3e8;
+    color: #585252;'>
+
+        {% else %}
+
+        <tr>
+
+        {% endif %}
        
-      
+       <td>{{c.fecha_atencion}}</td>
         <td>{{c.cliente }}</td>
         <td>{{c.dni }}</td>
         <td>{{c.marca_vehiculo}}</td>
