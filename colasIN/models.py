@@ -198,6 +198,9 @@ class Clientes(models.Model):
 
 
 
+
+
+
 class Produccion(models.Model):
 
     venta= models.ForeignKey(Venta,help_text='Codigo Venta',max_length=1000,blank=True, null=True)
@@ -251,7 +254,14 @@ class Produccion(models.Model):
     observaciones= models.CharField(max_length=1000,blank=True, null=True)
     usuario=models.ForeignKey(User,help_text='Usuarios',max_length=1000,blank=True, null=True,related_name='_modelo')
     cierre= models.BooleanField(default=0)
+    agente= models.ForeignKey(Agente,max_length=1000,blank=True, null=True,related_name='_agente')
 
     def __unicode__(self):
         return self.cliente
         
+
+
+class ProduccionAudio(models.Model):
+
+    produccion= models.ForeignKey(Produccion,help_text='Produccion',max_length=1000,blank=True, null=True)
+    audio= models.CharField(max_length=1000,blank=True, null=True)  
