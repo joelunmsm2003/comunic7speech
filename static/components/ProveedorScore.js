@@ -165,6 +165,12 @@ class ProveedorScore extends React.Component {
 
      }
 
+
+     buscascore(data){
+
+      console.log('buscascore',data)
+     }
+
      onTextChange(data) {
 
       
@@ -257,10 +263,7 @@ class ProveedorScore extends React.Component {
                 <h3>{negocio_name}</h3>
 
               
-
-
-
-                <AsignaScore score_negocios={score_negocios} activascore={(e,item)=>this.activascore(e,item)}/>
+                <AsignaScore score_negocios={score_negocios} activascore={(e,item)=>this.activascore(e,item)} buscascore={(e,item)=>this.buscascore(item)}/>
 
 
     

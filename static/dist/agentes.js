@@ -37625,9 +37625,6 @@ var Header = function Header() {
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
     href: "/discador/opcion_proveedor"
-  }, "Proveedor"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
-    class: "dropdown-item",
-    href: "/discador/opcion_score"
   }, "Score"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
     href: "/discador/agentes"

@@ -37720,9 +37720,6 @@ var Header = function Header() {
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
     href: "/discador/opcion_proveedor"
-  }, "Proveedor"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
-    class: "dropdown-item",
-    href: "/discador/opcion_score"
   }, "Score"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
     href: "/discador/agentes"
@@ -45959,6 +45956,8 @@ var matchPath = function matchPath(pathname) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(3);
+var _this = this;
+
 
 
 var divStyle = {
@@ -45968,8 +45967,14 @@ var divStyle = {
 
 var AsignaScore = function AsignaScore(_ref) {
   var score_negocios = _ref.score_negocios,
-      activascore = _ref.activascore;
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
+      activascore = _ref.activascore,
+      buscascore = _ref.buscascore;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+    value: _this.item,
+    onChange: function onChange(e) {
+      return buscascore(e, _this.item);
+    }
+  }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("table", {
     class: "table"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("thead", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("tr", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("th", {
     scope: "col"

@@ -591,7 +591,39 @@ def opcion_asigna_score(request,proveedor,cartera,negocio):
 	#serializer =  ScoreSerializer(_data,many=True)
 	#return JsonResponse(serializer.data, safe=False)
 
-	return render(request, 'opcion_asigna_score.html',{})
+	x = request.GET
+
+	print x
+
+	for r in x:
+
+		if r=='scoreproveedor':
+
+			scoreproveedor = x['scoreproveedor']
+
+		if r=='activar':
+
+			estado = x['activar']
+
+	try:
+
+		sc=ScoreProveedor.objects.get(id=scoreproveedor)
+		sc.estado=x['activar']
+		sc.save()
+
+	except:
+
+		print 'Error'
+
+
+
+	proveedor=Proveedor.objects.get(id=proveedor)
+	cartera=Cartera.objects.get(id=cartera)
+	negocio=Negocio.objects.get(id=negocio)
+
+	sc=ScoreProveedor.objects.filter(proveedor_id=proveedor,cartera_id=cartera,negocio_id=negocio)
+
+	return render(request, 'opcion_asigna_score.html',{'scoreproveedor':sc,'proveedor':proveedor,'cartera':cartera,'negocio':negocio})
 
 @csrf_exempt
 def guardaproveedor(request):

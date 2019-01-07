@@ -67,4 +67,12 @@ urlpatterns = [
     url(r'^subetelefonos/', subetelefonos),
     url(r'^subeclientes/', subeclientes),
 
+
+
+    ############
+
+    url(r'^opcion_asigna_score/(\d+)/(\d+)/(\d+)',opcion_asigna_score),
+
+
+
 ]
