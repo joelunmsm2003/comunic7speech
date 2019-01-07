@@ -21,9 +21,6 @@ class CdrRouter(object):
         return None
  
     def allow_syncdb(self, db, model):
-        """
-        Make sure the 'myapp2' app only appears on the 'other' db
-        """
         if db == 'cdr':
             return model._meta.app_label == 'cdr'
         elif model._meta.app_label == 'cdr':

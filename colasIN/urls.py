@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^monitor_agente/(\d+)/(\d+)/', m_agente),
     url(r'^lanzallamada/(\d+)/(\d+)', lanzallamada),
     url(r'^lanzafinllamada/(\d+)/(\d+)', lanzafinllamada),
+    url(r'^lanzadisponible/(\d+)', lanzadisponible),
     url(r'^nueva_venta/(\d+)/', nueva_venta),
     url(r'^detalle_venta/(\d+)/', detalle_venta),
     url(r'^pausar/(\d+)/', pausar),

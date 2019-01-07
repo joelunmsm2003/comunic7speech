@@ -111,6 +111,13 @@
 
     }
 
+    .Llamada{
+
+      background: #1086fb;
+      color:#fff;
+
+    }
+
    
 
     .discador:hover .cajita{
@@ -174,7 +181,10 @@
 
 
         Gestion
-        </a>
+
+        <a class='btn btn-light' href='/colasIN/disponible/{{agente.id}}'>
+          Disponible
+      </a>
 
       {% endif %}
 
@@ -259,7 +269,7 @@
               cursor: pointer;
               box-shadow: 2px 3px 11px 2px #98abbd;
               border-radius: 6px;
-              padding: 17px;
+              
               text-align: center;
               z-index: 1000;
                   opacity: .85;
@@ -267,6 +277,8 @@
                -moz-user-select: none;     /* Mozilla */
                -khtml-user-select: none;   /* Chrome */    
                -o-user-select: none;       /* Opera */
+               padding-top: 16px;
+               padding-bottom: 17px;
             }
         </style>
         <script type="text/javascript">

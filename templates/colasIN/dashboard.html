@@ -18,6 +18,42 @@ console.log('dataaa')
 
 </script>
 
+
+<body>
+
+
+
+
+<script  type="text/javascript">
+     
+    var bPreguntar = true;
+     
+    
+     
+    function preguntarAntesDeSalir()
+    {
+
+      console.log('shshshshshs')
+
+      var url = '/colasIN/lanzadisponible/1';
+ 
+      fetch( url )
+        .then( r => r.json() )
+        .then( data => console.dir( data ) )
+        .catch( e => console.error( 'Something went wrong' ) );
+    
+
+      if (bPreguntar)
+        return "¿Seguro que quieres salir.....?";
+    
+    }
+
+    window.onbeforeunload = preguntarAntesDeSalir;
+
+
+</script>
+
+
 		<div class='container-fluid'>
 				<div class="page home-page">
 						<!-- Main Navbar-->

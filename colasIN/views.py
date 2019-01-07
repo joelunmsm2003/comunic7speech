@@ -888,13 +888,20 @@ def detalle_venta(request,id_produccion):
 def lanzallamada(request,base,agente_id):
 
 
-	if Agente.objects.filter(id=agente_id).count()==0:
 
-		a= simplejson.dumps('No existe el agente con ID '+agente_id)
+
+	if Agente.objects.filter(anexo=agente_id).count()==0:
+
+		a= simplejson.dumps('No existe el agente con el anexo '+agente_id)
+		return HttpResponse(a, content_type="application/json")
+
+	if Agente.objects.filter(anexo=agente_id).count()>1:
+
+		a= simplejson.dumps('Existe muchos agentes agente con el anexo '+agente_id)
 		return HttpResponse(a, content_type="application/json")
 
 
-	_agente = Agente.objects.get(id=agente_id)
+	_agente = Agente.objects.get(anexo=agente_id)
 	_agente.estado_id=2
 	_agente.id_estado=3
 	_agente.save()
@@ -907,12 +914,25 @@ def lanzallamada(request,base,agente_id):
 
 	redis_publisher.publish_message(message)
 
-	a= simplejson.dumps('Se lanzo la llamada')
+	a= simplejson.dumps('Se lanzo la llamada al agente con anexo '+ agente_id)
 	return HttpResponse(a, content_type="application/json")
 
 def lanzafinllamada(request,base,agente):
 
-	_agente = Agente.objects.get(id=agente)
+
+	if Agente.objects.filter(anexo=agente).count()>1:
+
+		a= simplejson.dumps('Existe muchos agentes agente con el anexo '+agente)
+		return HttpResponse(a, content_type="application/json")
+
+
+	if Agente.objects.filter(anexo=agente).count()==0:
+
+		a= simplejson.dumps('No existe el agente con anexo '+agente)
+		return HttpResponse(a, content_type="application/json")
+
+
+	_agente = Agente.objects.get(anexo=agente)
 
 	_agente.estado_id=3
 	_agente.id_estado=4
@@ -927,7 +947,28 @@ def lanzafinllamada(request,base,agente):
 	redis_publisher.publish_message(message)
 
 
-	a= simplejson.dumps('Se lanzo FIN  llamada')
+	a= simplejson.dumps('Se lanzo FIN  llamada al agente con el anexo '+ agente)
+	return HttpResponse(a, content_type="application/json")
+
+@csrf_exempt
+def lanzadisponible(request,agente):
+
+	_agente = Agente.objects.get(id=agente)
+
+	_agente.estado_id=1
+	_agente.id_estado=2
+	_agente.save()
+
+
+	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username])
+
+	message = RedisMessage('llamada-'+str(0))
+
+
+	redis_publisher.publish_message(message)
+
+
+	a= simplejson.dumps('Se lanzo  disponible')
 	return HttpResponse(a, content_type="application/json")
 
 
