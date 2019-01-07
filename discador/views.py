@@ -15,7 +15,7 @@ from ws4redis.redis_store import RedisMessage
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from discador.admin import *
-
+from django.db.models import Count
 
 @csrf_exempt
 def subetelefonos(request):
@@ -254,54 +254,54 @@ def subescores(request):
 
 	xls = pd.ExcelFile('/Users/xiencias/score.xls') 
 	
-	# df = pd.read_excel(xls, 'MARKETING') 
+	df = pd.read_excel(xls, 'MARKETING') 
 
-	# Score.objects.filter(negocio_id=2).delete()
+	Score.objects.filter(negocio_id=2).delete()
 
-	# for i in range(df.shape[0]):
+	for i in range(df.shape[0]):
 
-	# 	print 'gestion',df['TIPO GESTION'][i]
+		print 'gestion',df['TIPO GESTION'][i]
 
-	# 	gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
-	# 	print 'id_gestion',df['IDGESTION'][i]
-	# 	id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+		print 'id_gestion',df['IDGESTION'][i]
+		id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
 
-	# 	print 'resultado',df['RESULTADO'][i]
-	# 	resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
-	# 	print 'jsutificacion',df['JUSTIFICACION'][i]
-	# 	subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+		print 'resultado',df['RESULTADO'][i]
+		resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+		print 'jsutificacion',df['JUSTIFICACION'][i]
+		subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
 
-	# 	peso_subresultado = df['PESO JUSTIFICACION'][i]
-	# 	peso_tipo_gestion = df['PESO TIPO GESTION'][i]
-	# 	peso_id_gestion = df['PESO IDGESTION'][i]
-	# 	peso_resultado = df['PESO RESULTADO'][i]
+		peso_subresultado = df['PESO JUSTIFICACION'][i]
+		peso_tipo_gestion = df['PESO TIPO GESTION'][i]
+		peso_id_gestion = df['PESO IDGESTION'][i]
+		peso_resultado = df['PESO RESULTADO'][i]
 
 
-	# 	Score(negocio_id=2,gestion_id=gestion_id,id_gestion_id=id_gestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
+		Score(negocio_id=2,gestion_id=gestion_id,id_gestion_id=id_gestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
 
 	
-	# df = pd.read_excel(xls, 'ATENCION_CLIENTE') 
+	df = pd.read_excel(xls, 'ATENCION_CLIENTE') 
 
-	# Score.objects.filter(negocio_id=1).delete()
+	Score.objects.filter(negocio_id=1).delete()
 
-	# for i in range(df.shape[0]):
+	for i in range(df.shape[0]):
 
-	# 	gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
-	# 	print df['IDGESTION'][i]
-	# 	id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
+		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
+		print df['IDGESTION'][i]
+		id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
 
-	# 	print df['RESULTADO'][i]
-	# 	resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
-	# 	print df['JUSTIFICACION'][i]
-	# 	subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+		print df['RESULTADO'][i]
+		resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
+		print df['JUSTIFICACION'][i]
+		subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
 
-	# 	peso_subresultado = df['PESO JUSTIFICACION'][i]
-	# 	peso_tipo_gestion = df['PESO TIPO GESTION'][i]
-	# 	peso_id_gestion = df['PESO IDGESTION'][i]
-	# 	peso_resultado = df['PESO RESULTADO'][i]
-	# 	print('?????????????????',id_gestion_id)
+		peso_subresultado = df['PESO JUSTIFICACION'][i]
+		peso_tipo_gestion = df['PESO TIPO GESTION'][i]
+		peso_id_gestion = df['PESO IDGESTION'][i]
+		peso_resultado = df['PESO RESULTADO'][i]
+		print('?????????????????',id_gestion_id)
 
-	# 	Score(negocio_id=1,gestion_id=gestion_id,id_gestion_id=id_gestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
+		Score(negocio_id=1,gestion_id=gestion_id,id_gestion_id=id_gestion_id,resultado_id=resultado_id,subresultado_id=subresultado_id,peso_resultado=peso_resultado,peso_tipo_gestion=peso_tipo_gestion,peso_id_gestion=peso_id_gestion,peso_subresultado=peso_subresultado).save()
 
 	df = pd.read_excel(xls, 'COBRANZA') 
 
@@ -595,6 +595,9 @@ def opcion_asigna_score(request,proveedor,cartera,negocio):
 
 	print x
 
+	sc=ScoreProveedor.objects.filter(proveedor_id=proveedor,cartera_id=cartera,negocio_id=negocio)
+
+
 	for r in x:
 
 		if r=='scoreproveedor':
@@ -604,6 +607,13 @@ def opcion_asigna_score(request,proveedor,cartera,negocio):
 		if r=='activar':
 
 			estado = x['activar']
+
+		if r=='gestion':
+
+			gestion= x['gestion']
+
+			sc=ScoreProveedor.objects.filter(proveedor_id=proveedor,cartera_id=cartera,negocio_id=negocio,gestion_id=gestion)
+
 
 	try:
 
@@ -621,9 +631,13 @@ def opcion_asigna_score(request,proveedor,cartera,negocio):
 	cartera=Cartera.objects.get(id=cartera)
 	negocio=Negocio.objects.get(id=negocio)
 
-	sc=ScoreProveedor.objects.filter(proveedor_id=proveedor,cartera_id=cartera,negocio_id=negocio)
+	_gestion = Score.objects.all().values('gestion_id','gestion__nombre').annotate(Count('gestion'))
 
-	return render(request, 'opcion_asigna_score.html',{'scoreproveedor':sc,'proveedor':proveedor,'cartera':cartera,'negocio':negocio})
+	print _gestion
+
+
+	
+	return render(request, 'opcion_asigna_score.html',{'gestion':_gestion,'scoreproveedor':sc,'proveedor':proveedor,'cartera':cartera,'negocio':negocio})
 
 @csrf_exempt
 def guardaproveedor(request):
