@@ -1,2 +1,3 @@
-import App from "./components/Score";
+import App from "./components/Scoreproveedor";
+
 import 'bootstrap';

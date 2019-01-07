@@ -11,7 +11,7 @@
         </button>
       </div>
       <div class="modal-body">
-          <select name='gestion' class='form-control'>
+          <select name='gestion' id='gestion' class='form-control'  onchange='traescores()'>
 
           <option>Seleccionar</option>
           {% for g in gestion %}
