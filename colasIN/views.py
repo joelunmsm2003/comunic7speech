@@ -1200,20 +1200,20 @@ def m_agente(request,cliente,id_incidencia):
 
 			audios = ProduccionAudio.objects.filter(telefono=a.telefono_1)
 
-			for au in audios:
+			# for au in audios:
 
-				dia = au.audio.split('-')[2][0:2]
+			# 	dia = au.audio.split('-')[2][0:2]
 
-				mes = au.audio.split('-')[2][2:4]
+			# 	mes = au.audio.split('-')[2][2:4]
 
-				anio = au.audio.split('-')[2][4:7]
+			# 	anio = au.audio.split('-')[2][4:7]
 
-				print dia,mes,anio
+			# 	print dia,mes,anio
 
-				a.ruta = 'http://join.xiencias.com/B@tAlt0k4ud/2019/01/09/'+str(au.audio).gsm
+			# 	a.ruta = 'http://join.xiencias.com/B@tAlt0k4ud/2019/01/09/'+str(au.audio).gsm
 
 
-			a.audios = audios
+			# a.audios = audios
 
 
 
