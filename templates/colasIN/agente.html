@@ -45,6 +45,18 @@
 
     }
 
+    function traeaudios(url,telefono,agente){
+
+
+        console.log('agente...',agente)
+
+        var strWindowFeatures = "location=yes,top=300,left=200,height=500,width=800,scrollbars=yes,status=yes";
+        var URL = url ;
+        var win = window.open(URL+'?telefono='+telefono+'&agente='+agente, "_blank", strWindowFeatures);
+
+
+    }
+
 
 </script>
 
@@ -385,6 +397,9 @@
               </div>
             </div>
 
+
+          
+
             {% include "colasIN/gestion.html" %}
 
             {% if total_llamadas %}
@@ -408,6 +423,7 @@
                       <th scope="col">Precio</th>
                       <th scope="col">Descuento</th>
                       <th scope="col">Direccion</th>
+                      <th>Audio</th>
                       <th>Accion</th>
                       <th></th>
                       </tr>
@@ -439,8 +455,21 @@
                         <td>{{c.modelo_bateria}}</td>
                         <td>{{c.precio}}</td>
                         <td>{{c.descuento}}</td>
+
+                        
                         <td><a class='btn btn-sm btn-dark' href='https://www.google.com/maps/search/{{c.direccion_atencion}}' target="_blank">Ir</a></td>
+
                         <td>
+
+
+                        
+
+                        <a class='btn btn-sm btn-primary' onclick="traeaudios('/colasIN/traeaudios/{{c.telefono_1}}',{{c.telefono_1}},{{c.agente.id}})" target="_blank" style='color:#fff;'>Audios #{{c.audios}}</a>
+
+                        </td>
+                        <td>
+
+
                         
                          <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/detalle_venta/{{c.id}}')" target="_blank">Detalle</a>
 

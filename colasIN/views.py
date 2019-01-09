@@ -883,6 +883,38 @@ def nueva_venta(request,id_produccion):
 
 		return render(request, 'colasIN/nueva_venta.html',{'incidenciaform':incidenciaform})
 
+def traeaudios(request,telefono):
+
+
+	if request.method=='GET':
+
+
+		agente = request.GET['agente']
+
+		telefono = request.GET['telefono']
+
+		instance = ProduccionAudio.objects.filter(telefono=telefono,agente_id=agente)
+
+		for a in instance:
+
+			try:
+
+				dia = a.audio.split('-')[2][0:2]
+				mes = a.audio.split('-')[2][2:4]
+				anio = a.audio.split('-')[2][4:8]
+
+				a.anio=anio
+				a.mes=mes
+				a.dia= dia
+
+			except:
+
+				pass
+
+
+		return render(request, 'colasIN/audios.html',{'audios':instance})
+
+
 
 def detalle_venta(request,id_produccion):
 
@@ -1193,27 +1225,30 @@ def m_agente(request,cliente,id_incidencia):
 
 		incidencia={}
 
-
 		for a in total_llamadas:
 
-
-
-			audios = ProduccionAudio.objects.filter(telefono=a.telefono_1)
+			audios = ProduccionAudio.objects.filter(telefono=str(a.telefono_1))
 
 			for au in audios:
 
-				dia = au.audio.split('-')[2][0:2]
 
-				mes = au.audio.split('-')[2][2:4]
+				try: 
 
-				anio = au.audio.split('-')[2][4:7]
+					dia = au.audio.split('-')[2][0:2]
 
-				print dia,mes,anio
+					mes = au.audio.split('-')[2][2:4]
 
-				a.ruta = 'http://join.xiencias.com/B@tAlt0k4ud/2019/01/09/'+str(au.audio).gsm
+					anio = au.audio.split('-')[2][4:7]
 
+					print dia,mes,anio
 
-			a.audios = audios
+					a.ruta = 'http://join.xiencias.com/B@tAlt0k4ud/2019/01/09/'+str(au.audio)+'.gsm'
+				
+				except:
+
+					a.ruta=''
+
+			a.audios = audios.count()
 
 
 
