@@ -35,6 +35,8 @@ console.log('dataaa')
 
       console.log('shshshshshs')
 
+
+
       var url = '/colasIN/lanzadisponible/1';
  
       fetch( url )
@@ -42,13 +44,16 @@ console.log('dataaa')
         .then( data => console.dir( data ) )
         .catch( e => console.error( 'Something went wrong' ) );
     
+    window.close();
 
       if (bPreguntar)
         return "¿Seguro que quieres salir.....?";
+
+
     
     }
 
-    window.onbeforeunload = preguntarAntesDeSalir;
+    //window.onbeforeunload = preguntarAntesDeSalir;
 
 
 </script>
@@ -699,9 +704,9 @@ console.log('dataaa')
   </div>
 
 
+      <center><button type="button" class="btn btn-success" onclick='preguntarAntesDeSalir()' data-dismiss="modal">CERRAR</button>
     
-    
-      <center><button type="submit"  onclick='cerrar()' class="btn btn-dark" id="modal" Onclick="alerta()">GUARDAR</button></center>
+      <button type="submit"  onclick='cerrar()' class="btn btn-dark" id="modal" Onclick="alerta()">GUARDAR</button></center>
 
        
         
@@ -787,7 +792,7 @@ console.log('dataaa')
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      <button type="sumit" class="btn btn-danger"  value='Guardar'>GUARDAR</button>
+      <button type="submit" class="btn btn-danger"  value='Guardar'>GUARDAR</button>
       <!-- <p><input class='btn btn-dark' type='submit' value='Guardar'/></p> -->
        </div>
   </form>
@@ -853,7 +858,7 @@ console.log('dataaa')
 
       </div>
       <div class="modal-footer">
-      <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+      
 
       <button type="submit" class="btn btn-success"  value='Guardar'>GUARDAR</button>
       <!-- <p><input class='btn btn-dark' type='submit' value='Guardar'/></p> -->

@@ -66,11 +66,32 @@ from django.http import HttpResponse
 from io import BytesIO
 from ws4redis.publisher import RedisPublisher
 from ws4redis.redis_store import RedisMessage
-
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 
 
 #from app.resources import ProduccionResource
 
+
+@login_required(login_url="/comunica7/ingresar/")
+def supervisor(request):
+
+	agentes= Agente.objects.all()
+
+	print 'traes la daata?', agentes
+
+	colas = ColasinAcd.objects.all()
+
+	redis_publisher = RedisPublisher(facility='foobar', users=['root'])
+
+
+	message = RedisMessage('hola')
+
+	redis_publisher.publish_message(message)
+
+	
+	return render(request, 'colasIN/supervisor.html',{'agentes':agentes,'colas':colas})
 
 
 
@@ -120,6 +141,7 @@ def reporte(request):
 	'distrito','referencia','nombre_boleta','m_apellido_p','m_apellido_m','dni_c',
     'ruc','razon_social','direccion_rs','pago','correo',' atiende','almacen','gmail','status',
     'observaciones','usuario' ])
+
     a= User=request.user
 	
 
@@ -222,11 +244,17 @@ def vehiculos(request):
 
 def salir(request):
 
+	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat'])
+	message = RedisMessage('llamada-'+str(0))
+	redis_publisher.publish_message(message)
+
+
 
 	age = Agente.objects.get(user_id=request.user.id)
 	age.estado_id=5
 	age.id_estado=0
 	age.save()
+	logout(request)
 
 
 	return HttpResponseRedirect('/comunica7/ingresar')
@@ -357,6 +385,13 @@ def color(request):
 
 def disponible(request,id_agente):
 
+	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat'])
+
+	message = RedisMessage('llamada-'+str(0))
+
+	redis_publisher.publish_message(message)
+
+
 	ag = Agente.objects.get(id=id_agente)
 	ag.estado_id=1
 	ag.id_estado=2
@@ -368,6 +403,14 @@ def disponible(request,id_agente):
 	return HttpResponseRedirect('/colasIN/monitor_agente/980729169/0/')
 
 def pausar(request,id_agente):
+
+
+	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat'])
+
+	message = RedisMessage('llamada-'+str(0))
+
+	redis_publisher.publish_message(message)
+
 
 	ag = Agente.objects.get(id=id_agente)
 	ag.estado_id=4
@@ -888,27 +931,40 @@ def detalle_venta(request,id_produccion):
 def lanzallamada(request,base,agente_id):
 
 
+	print 'request',request.GET
+
+	audio=''
 
 
-	if Agente.objects.filter(anexo=agente_id).count()==0:
+
+	if Agente.objects.filter(anexo=int(agente_id)).count()==0:
 
 		a= simplejson.dumps('No existe el agente con el anexo '+agente_id)
 		return HttpResponse(a, content_type="application/json")
 
-	if Agente.objects.filter(anexo=agente_id).count()>1:
+
+	for r in request.GET:
+
+		if r =='audio':
+
+			audio = request.GET['audio']
+
+			ProduccionAudio(audio=audio,telefono=base,agente_id=Agente.objects.get(anexo=int(agente_id)).id).save()
+
+	if Agente.objects.filter(anexo=int(agente_id)).count()>1:
 
 		a= simplejson.dumps('Existe muchos agentes agente con el anexo '+agente_id)
 		return HttpResponse(a, content_type="application/json")
 
 
-	_agente = Agente.objects.get(anexo=agente_id)
+	_agente = Agente.objects.get(anexo=int(agente_id))
 	_agente.estado_id=2
 	_agente.id_estado=3
 	_agente.save()
 
 	print 'lanzallamada',_agente.user.username
 
-	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username])
+	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username,'edeamat'])
 
 	message = RedisMessage('llamada-'+str(base))
 
@@ -920,26 +976,26 @@ def lanzallamada(request,base,agente_id):
 def lanzafinllamada(request,base,agente):
 
 
-	if Agente.objects.filter(anexo=agente).count()>1:
+	if Agente.objects.filter(anexo=int(agente)).count()>1:
 
 		a= simplejson.dumps('Existe muchos agentes agente con el anexo '+agente)
 		return HttpResponse(a, content_type="application/json")
 
 
-	if Agente.objects.filter(anexo=agente).count()==0:
+	if Agente.objects.filter(anexo=int(agente)).count()==0:
 
 		a= simplejson.dumps('No existe el agente con anexo '+agente)
 		return HttpResponse(a, content_type="application/json")
 
 
-	_agente = Agente.objects.get(anexo=agente)
+	_agente = Agente.objects.get(anexo=int(agente))
 
 	_agente.estado_id=3
 	_agente.id_estado=4
 	_agente.save()
 
 
-	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username])
+	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username,'edeamat'])
 
 	message = RedisMessage('llamada-'+str(base))
 
@@ -960,7 +1016,7 @@ def lanzadisponible(request,agente):
 	_agente.save()
 
 
-	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username])
+	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username,'edeamat'])
 
 	message = RedisMessage('llamada-'+str(0))
 
@@ -1076,11 +1132,11 @@ def traesemana(fecha_inicio):
 
 
 
-@login_required(login_url="/ingresar")
+@login_required(login_url="/comunica7/ingresar/")
 
 def m_agente(request,cliente,id_incidencia):
 
-	print request.user.id
+	print 'Entre',request.user.id
 
 	_agente=Agente.objects.get(user=request.user.id)
 
@@ -1136,6 +1192,32 @@ def m_agente(request,cliente,id_incidencia):
 		agenteform = AgenteForm(instance=_agente)
 
 		incidencia={}
+
+
+		for a in total_llamadas:
+
+
+
+			audios = ProduccionAudio.objects.filter(telefono=a.telefono_1)
+
+			for au in audios:
+
+				dia = au.audio.split('-')[2][0:2]
+
+				mes = au.audio.split('-')[2][2:4]
+
+				anio = au.audio.split('-')[2][4:7]
+
+				print dia,mes,anio
+
+				a.ruta = 'http://join.xiencias.com/B@tAlt0k4ud/2019/01/09/'+str(au.audio).gsm
+
+
+			a.audios = audios
+
+
+
+
 
 		if int(id_incidencia)>0:
 

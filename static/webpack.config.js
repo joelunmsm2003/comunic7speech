@@ -4,6 +4,7 @@ module.exports = {
   entry: {
     'index.js': './index.js',
     'cartera.js': './cartera.js', 
+    'score.js':'./score.js',
     'proveedorscore.js':'./proveedorscore.js',
     'agentes.js':'./agentes.js',
     'marcador.js':'./marcador.js',

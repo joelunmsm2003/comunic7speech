@@ -35,7 +35,7 @@ urlpatterns = [
     url(r'^pausar/(\d+)/', pausar),
     url(r'^disponible/(\d+)/', disponible),
     url(r'^salir/', salir),
-
+    url(r'^supervisor/', supervisor),
 
 
 

@@ -1,0 +1,240 @@
+ 
+<!DOCTYPE html>
+
+<html>
+<head>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/static/ws4.js"></script>
+<script type="text/javascript">
+  
+  
+
+
+     var ws4redis = WS4Redis({
+      uri: '{{ WEBSOCKET_URI }}foobar?subscribe-user',
+      receive_message: receiveMessage,
+      heartbeat_msg: {{ WS4REDIS_HEARTBEAT }}
+    });
+
+    function receiveMessage(msg) {
+
+        console.log(msg.split('-')[0])
+
+
+          if(msg.split('-')[0]=='llamada'){
+
+
+          window.location.href = "/colasIN/supervisor/"
+
+      
+        }
+       
+
+    }
+
+
+</script>
+
+</head>
+<body>
+
+
+  <style>
+    
+  th,td,body{
+
+    font-size:13px;
+  }
+
+  </style>
+
+<nav class="navbar navbar-dark bg-dark">
+  <!-- Navbar content -->
+  <a class="navbar-brand" href="#">Navbar</a>
+  
+  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Navbar</a>
+ 
+  <a class="navbar-brand" href="#">Salir</a>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+
+
+
+<div class='container'>
+
+  <h2>Supervisor</h2>
+
+  <h3>Monitoreo de Agentes</h3>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Anexo</th>
+      <th scope="col">Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+
+{% for a in agentes %}
+
+
+
+  {% if a.estado.nombre == 'Disponible' %}
+
+
+<tr  style="background:#28a745" >
+ {% elif a.estado.nombre == 'Pausa' %}
+<tr  style="background:#ffc107" >
+{% elif a.estado.nombre == 'En Llamada' %}
+<tr  style="background:#dc3545" >
+{% elif a.estado.nombre == 'Gestion' %}
+<tr  style="background: #dbe045" >
+{% elif a.estado.nombre == 'Deslogueado' %}
+<tr  style="background: #BCB5B3" >
+
+
+{% endif %}
+ 
+  <td>{{a.id}} </td>
+  <td>{{a.nombre}} </td>
+
+  
+  <td >{{a.anexo}} </td>
+  <td>{{a.estado.nombre}} </td>
+ 
+
+</tr>
+
+  {% endfor %}
+</tbody>
+</table>
+
+
+
+
+  <h3>Monitoreo de Llamadas</h3>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+
+      
+      <th scope="col">ID</th>
+      <th scope="col">Anexo</th>
+      <th scope="col">Entrante</th>
+      <th scope="col">Llamado</th>
+      <th scope="col">Estado</th>
+      <!-- <th scope="col">Flag</th> -->
+      <th scope="col">Unique ID</th>
+      <!-- <th scope="col">Tipo</th> -->
+      <!-- <th scope="col">Vez</th> -->
+
+      <th scope="col">Fin</th>
+      <th scope="col">Duracion</th>
+      <th scope="col">Bill</th>
+     <!--  <th scope="col">Cam</th> -->
+      <th scope="col">Audio</th>
+      <th scope="col">Fecha Origen</th>
+      <th scope="col">Fecha Discado</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+<tr>
+
+ {% for a in colas %}
+
+
+
+    <td >{{a.id_acd}} </td>
+    <td >{{a.anexo}} </td>
+    <td >{{a.numero_entrante}} </td>
+    <td >{{a.numero_llamado}} </td>
+
+{% if a.llam_estado == 0 %}
+
+
+
+
+    <td style="background:#28a745; text-align:center;">{{a.llam_estado}} </td>
+
+
+{% else %}
+
+{% endif %}
+
+   <!--  <td>{{a.flag}} </td> -->
+    <td >{{a.uniqueid}}</td>
+    <!-- <td >{{a.sql}}</td> -->
+    
+   <!--  <td >{{a.vez}} </td> -->
+
+{% if a.fin == 1 %}
+
+    <td style="background:#28a745; text-align:center;">{{a.fin}} </td>
+
+{% else %}
+
+{% endif %}
+
+    <td >{{a.duration}} </td>
+    <td >{{a.bill}} </td>
+
+    <!-- <td >{{a.cam}} </td> -->
+    <td >Audio </td>
+    <td >{{a.tie_ing}} </td>
+
+    <td >{{a.tie_fin}} </td>
+
+
+
+
+</tr>
+  {% endfor %}
+</tbody>
+</table>
+
+
+</div>
+
+
+</body>
+</html>
+

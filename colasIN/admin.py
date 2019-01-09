@@ -179,6 +179,11 @@ class DistritoAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre')
 	list_filter=('nombre',)
 
+@admin.register(ProduccionAudio)
+class ProduccionAudioAdmin(ImportExportModelAdmin):
+    list_display = ('audio','fecha','telefono','agente')
+    list_filter=('fecha',)
+
 
 
 

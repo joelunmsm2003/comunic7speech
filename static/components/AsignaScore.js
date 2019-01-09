@@ -10,14 +10,14 @@ const divStyle = {
 
 
 
-const AsignaScore = ({score_negocios,activascore}) =>{
+const AsignaScore = ({score_negocios,activascore,buscascore}) =>{
 
       return (
 
          <div>
            
 
-                   
+                   <input value={this.item}  onChange={(e)=>buscascore(e,this.item)} />
 
                     <table class="table">
                         <thead>

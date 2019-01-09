@@ -96,12 +96,12 @@
 
     .Pausa{
 
-      background: #d62068;
+      background: #ffee06;
     }
 
     .Disponible{
 
-      background: #61c766;
+      background: #38d84f;
 
     }
 
@@ -113,8 +113,10 @@
 
     .Llamada{
 
-      background: #1086fb;
+      
       color:#fff;
+
+      background: red;
 
     }
 
@@ -137,6 +139,7 @@
 
 
 <div style='height: 20px'></div>
+
 <div class='container-fluid'>
 
 
@@ -149,11 +152,9 @@
     
     <h6>{{agente.nombre}} </h6>
 
+    <center><div class="numberCircle">{{agente.acd}} </div></center>
 
 
-
-  
-    
     {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible' or agente.estado.nombre == 'Gestion'   %}
 
     <div style="padding:20px;">
@@ -190,7 +191,7 @@
 
     </div>
 
-     <a class="btn btn-light" href='/comunica7/ingresar'>Salir</a>
+     <a class="btn btn-light" href='/colasIN/salir'>Salir</a>
 
       
 
@@ -223,14 +224,8 @@
 
     {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible' or agente.estado.nombre == 'Gestion'   %}
 
- 
-
     <h6>Estado Actual </h6>
     <h4>{{agente.estado.nombre}}</h4>
-
-
-
-          
 
     {% else %}
 
@@ -260,7 +255,21 @@
    
        
         <style>
-            .estiloCuadro {
+
+
+
+
+              .numberCircle {
+                      width: 40px;
+                      line-height: 32px;
+                      border-radius: 50%;
+                      text-align: center;
+                      font-size: 18px;
+                      border: 4px solid #fff;
+                      text-align: center;
+                      color: #fff;
+              }
+               .estiloCuadro {
                width: 10em;
               /* border: solid red; */
               position: absolute;
@@ -272,7 +281,7 @@
               
               text-align: center;
               z-index: 1000;
-                  opacity: .85;
+                  opacity: .7;
                /*Deshabilitar selección de texto*/
                -moz-user-select: none;     /* Mozilla */
                -khtml-user-select: none;   /* Chrome */    

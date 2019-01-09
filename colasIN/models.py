@@ -66,9 +66,55 @@ class Agente(models.Model):
     user = models.ForeignKey(User, db_column='user', blank=True, null=True,related_name='userrelated')
     fecha = models.DateTimeField(db_column='fecha', default=datetime.datetime.today())
     t_estado = models.DateTimeField(db_column='t_estado', default=datetime.datetime.today())
+    acd = models.CharField(max_length=100, blank=True)
 
+class ColasinAcd(models.Model):
+    id_acd = models.AutoField(primary_key=True)
+    did_campana = models.CharField(db_column='DID_Campana', max_length=45)  # Field name made lowercase.
+    numero_llamado = models.CharField(db_column='Numero_Llamado', max_length=45)  # Field name made lowercase.
+    numero_entrante = models.CharField(db_column='Numero_Entrante', max_length=45)  # Field name made lowercase.
+    channel_entrante = models.CharField(db_column='Channel_Entrante', max_length=50)  # Field name made lowercase.
+    tiempo = models.IntegerField(db_column='Tiempo')  # Field name made lowercase.
+    flag = models.IntegerField()
+    uniqueid = models.CharField(max_length=30)
+    fin = models.IntegerField()
+    age_nombre = models.CharField(max_length=100, blank=True, null=True)
+    tie_ing = models.DateTimeField()
+    tie_acd = models.DateTimeField()
+    tie_tra = models.DateTimeField()
+    tie_con = models.DateTimeField()
+    tie_fin = models.DateTimeField()
+    tie_acw = models.DateTimeField()
+    id_ori_campana = models.IntegerField()
+    sql = models.IntegerField()
+    codhu = models.IntegerField(db_column='CodHU')  # Field name made lowercase.
+    bill = models.IntegerField()
+    asterisk = models.IntegerField()
+    audio = models.CharField(unique=True, max_length=100)
+    valorllamada = models.CharField(max_length=200)
+    id_ori_usuario = models.IntegerField()
+    llam_estado = models.IntegerField()
+    anexo = models.IntegerField()
+    duration = models.IntegerField()
+    espera = models.IntegerField()
+    pais = models.CharField(max_length=10)
+    g_id1 = models.CharField(max_length=100)
+    g_id2 = models.CharField(max_length=100)
+    g_id3 = models.CharField(max_length=100)
+    g_id4 = models.CharField(max_length=100)
+    g_id5 = models.CharField(max_length=100)
+    g_id6 = models.CharField(max_length=100)
+    g_id7 = models.CharField(max_length=100)
+    g_id8 = models.CharField(max_length=100)
+    g_id9 = models.CharField(max_length=100)
+    g_id10 = models.CharField(max_length=100)
+    accountcode = models.CharField(max_length=50)
 
+    class Meta:
+        managed = False
+        db_table = 'colasIN_acd'
 
+        
 class Article(models.Model):
     title = models.CharField(max_length=100)
     body = models.TextField()
@@ -264,4 +310,8 @@ class Produccion(models.Model):
 class ProduccionAudio(models.Model):
 
     produccion= models.ForeignKey(Produccion,help_text='Produccion',max_length=1000,blank=True, null=True)
-    audio= models.CharField(max_length=1000,blank=True, null=True)  
+    audio= models.CharField(max_length=1000,blank=True, null=True) 
+    fecha = models.DateTimeField(db_column='fecha', default=datetime.datetime.today()) 
+    telefono = models.CharField(max_length=1000,blank=True, null=True) 
+    agente= models.ForeignKey(Agente,max_length=1000,blank=True, null=True,related_name='_agente_produccion_audio')
+
