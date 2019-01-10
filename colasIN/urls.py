@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^lanzafinllamada/(\d+)/(\d+)', lanzafinllamada),
     url(r'^lanzadisponible/(\d+)', lanzadisponible),
     url(r'^nueva_venta/(\d+)/', nueva_venta),
+    url(r'^traeaudios/(\d+)/', traeaudios),
     url(r'^detalle_venta/(\d+)/', detalle_venta),
     url(r'^pausar/(\d+)/', pausar),
     url(r'^disponible/(\d+)/', disponible),
