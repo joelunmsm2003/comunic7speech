@@ -10,6 +10,10 @@ class CdrRouter(object):
         """
         if model._meta.app_label == 'cdr':
             return 'cdr'
+
+        if model._meta.app_label == 'discador':
+            return 'discador'
+
         return None
  
     def db_for_write(self, model, **hints):
@@ -18,10 +22,16 @@ class CdrRouter(object):
         """
         if model._meta.app_label == 'cdr':
             return 'cdr'
+
+        if model._meta.app_label == 'discador':
+            return 'discador'
         return None
  
     def allow_syncdb(self, db, model):
         if db == 'cdr':
             return model._meta.app_label == 'cdr'
+
+        if db == 'discador':
+            return model._meta.app_label == 'discador'
         elif model._meta.app_label == 'cdr':
             return False

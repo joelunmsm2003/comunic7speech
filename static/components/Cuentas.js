@@ -20,7 +20,7 @@ const Cuentas = ({trae_cuentas}) =>{
 
            <ul class="list-group">
                 <div class="form-group col-md-12">
-                    <h3>información de Cuentas</h3>
+                    <h3>Información de Cuentas</h3>
                
                     <table class="table">
                         <thead>

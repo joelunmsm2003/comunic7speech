@@ -72,6 +72,7 @@
       <tr>
       
         <th scope="col">Fecha</th>
+        <th scope="col">Agente</th>
         <th scope="col">Nombre</th>
         <th scope="col">DNI</th>
         <th scope="col">Marca</th>
@@ -82,7 +83,6 @@
         <th scope="col">Marca Bat.</th>
         <th scope="col">Modelo Bat.</th>
         <th scope="col">Precio</th>
-        <th scope="col">Descuento</th>
         <th scope="col">Direccion</th>
         <th>Accion</th>
         <th></th>
@@ -104,6 +104,7 @@
         {% endif %}
        
        <td>{{c.fecha_atencion}}</td>
+       <td>{{c.agente.nombre}}</td>
         <td>{{c.cliente }}</td>
         <td>{{c.dni }}</td>
         <td>{{c.marca_vehiculo}}</td>
@@ -114,7 +115,7 @@
         <td>{{c.marca_producto}}</td>
         <td>{{c.modelo_bateria}}</td>
         <td>{{c.precio}}</td>
-        <td>{{c.descuento}}</td>
+       
         <td><a class='btn btn-sm btn-dark' href='https://www.google.com/maps/search/{{c.direccion_atencion}}' target="_blank">Ir</a></td>
 
 

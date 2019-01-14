@@ -6,6 +6,36 @@
 
 
 
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Baterias Al Toque</a>
+   <a class="navbar-brand" href="http://call.comunica7.com:8000/comunica7/dashboard/">Inicio</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li> -->
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+   
+       <!-- <a class="navbar-brand" href="#">Salir</a>
+        <a class="navbar-brand" href="#">Salir</a>
+         <a class="navbar-brand" href="#">Salir</a> -->
+          <!-- <a class="navbar-brand" href="http://call.comunica7.com:8000/comunica7/dashboard/">Inicio</a>
+            <a class="btn btn-light" href='/comunica7/ingresar'>Salir</a> -->
+    </form>
+  </div>
+</nav>
 <script type="text/javascript" src="/static/ws4.js"></script>
 
 <script type="text/javascript">
@@ -18,13 +48,22 @@
 
     function receiveMessage(msg) {
 
-        console.log(msg.split('-')[0])
+        audio=''
+
+        if(msg.split('-')[2]){
+
+          audio = msg.split('-')[2]
+
+        }
+
+
+        
 
           if(msg.split('-')[0]=='llamada'){
 
 
 
-              window.location.href = "/colasIN/monitor_agente/"+msg.split('-')[1]+'/0'
+              window.location.href = "/colasIN/monitor_agente/"+msg.split('-')[1]+'/0?audio='+audio
 
       
         }
@@ -40,19 +79,19 @@
 
         var strWindowFeatures = "location=yes,height=800,width=1300,scrollbars=yes,status=yes";
         var URL = url ;
-        var win = window.open(URL+'?telefono_1='+'{{telefono}}', "_blank", strWindowFeatures);
+        var win = window.open(URL+'?telefono_1='+'{{telefono}}&audio='+'{{audio}}', "_blank", strWindowFeatures);
 
 
     }
 
-    function traeaudios(url,telefono,agente){
+    function traeaudios(url,id,agente){
 
 
         console.log('agente...',agente)
 
         var strWindowFeatures = "location=yes,top=300,left=200,height=500,width=800,scrollbars=yes,status=yes";
         var URL = url ;
-        var win = window.open(URL+'?telefono='+telefono+'&agente='+agente, "_blank", strWindowFeatures);
+        var win = window.open(URL+'?id='+id+'&agente='+agente, "_blank", strWindowFeatures);
 
 
     }
@@ -151,7 +190,6 @@
 
 
 <div style='height: 20px'></div>
-
 <div class='container-fluid'>
 
 
@@ -160,7 +198,7 @@
 
     <img src='/static/callcenter.png'>
 
-    
+  
     
     <h6>{{agente.nombre}} </h6>
 
@@ -233,7 +271,6 @@
 
   
 
-
     {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible' or agente.estado.nombre == 'Gestion'   %}
 
     <h6>Estado Actual </h6>
@@ -243,6 +280,8 @@
 
 
     <h5>Llamada entrante...{{telefono}} </h5>
+
+
 
 
 
@@ -373,6 +412,8 @@
 
 
 
+
+
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -464,7 +505,7 @@
 
                         
 
-                        <a class='btn btn-sm btn-primary' onclick="traeaudios('/colasIN/traeaudios/{{c.telefono_1}}',{{c.telefono_1}},{{c.agente.id}})" target="_blank" style='color:#fff;'>Audios #{{c.audios}}</a>
+                        <a class='btn btn-sm btn-primary' onclick="traeaudios('/colasIN/traeaudios/{{c.telefono_1}}',{{c.id}},{{c.agente.id}})" target="_blank" style='color:#fff;'>Audios #{{c.audios}}</a>
 
                         </td>
                         <td>

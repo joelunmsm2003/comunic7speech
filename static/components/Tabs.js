@@ -9,7 +9,7 @@ const Tabs = () =>{
       return (
 
          <div >
-
+         < div className="container">
          <div class="card" >
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
@@ -29,7 +29,7 @@ const Tabs = () =>{
                         <a class="nav-link" id="pills-email-tab" data-toggle="pill" href="#pills-email" role="tab" aria-controls="pills-email" aria-selected="false">Email</a>
                     </li>
             </ul>
-
+            </div>
 
 
             <div class="tab-content" id="pills-tabContent">

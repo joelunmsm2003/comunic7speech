@@ -83,7 +83,7 @@ def supervisor(request):
 
 	colas = ColasinAcd.objects.all()
 
-	redis_publisher = RedisPublisher(facility='foobar', users=['root'])
+	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat','scondezo'])
 
 
 	message = RedisMessage('hola')
@@ -244,7 +244,7 @@ def vehiculos(request):
 
 def salir(request):
 
-	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat'])
+	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat','scondezo'])
 	message = RedisMessage('llamada-'+str(0))
 	redis_publisher.publish_message(message)
 
@@ -385,7 +385,7 @@ def color(request):
 
 def disponible(request,id_agente):
 
-	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat'])
+	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat','scondezo'])
 
 	message = RedisMessage('llamada-'+str(0))
 
@@ -400,12 +400,12 @@ def disponible(request,id_agente):
 
 	LogEstadoAgente(fecha=datetime.today(),estado_id=1).save()
 
-	return HttpResponseRedirect('/colasIN/monitor_agente/980729169/0/')
+	return HttpResponseRedirect('/colasIN/monitor_agente/333/0/')
 
 def pausar(request,id_agente):
 
 
-	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat'])
+	redis_publisher = RedisPublisher(facility='foobar', users=['edeamat','scondezo'])
 
 	message = RedisMessage('llamada-'+str(0))
 
@@ -419,7 +419,7 @@ def pausar(request,id_agente):
 	ag.save()
 	LogEstadoAgente(fecha=datetime.today(),estado_id=4).save()
 
-	return HttpResponseRedirect('/colasIN/monitor_agente/980729169/0/')
+	return HttpResponseRedirect('/colasIN/monitor_agente/333/0/')
 
 def ingresar(request):
 
@@ -499,6 +499,10 @@ def guardar(request):
 		pago= request.POST['comprobante']
 		correo= request.POST['correo']
 		atiende= request.POST['atiende']
+		audio = request.POST['audio']
+
+		
+
 
 		print 'atiende',atiende
 		try :
@@ -564,13 +568,19 @@ def guardar(request):
 
 		redis_publisher.publish_message(message)
 
-
 		id_agente=Agente.objects.get(user_id=request.user.id).id
 
-
-
-
 		Produccion(agente_id=id_agente,hora_instalacion=hora_instalacion,usuario_id=user,modelo_bateria=modelo_bateria,telefono_1=telefono_1,telefono_2=telefono_2,cliente=cliente,apellido_p=apellido_p,apellido_m=apellido_m,dni=dni,marca_vehiculo=marca_vehiculo,modelo=modelo,version=version,anio_id=anio,cilindrada=cilindrada,color_id=color,kilometraje=kilometraje,placa=placa,cantidad=cantidad,marca_producto=marca_producto,precio=precio,descuento=descuento,precio_total=precio_total,cantidad_bu=cantidad_bu,fecha_atencion=fecha_atencion,direccion_atencion=direccion_atencion,distrito_id=distrito,referencia=referencia,pago_id=pago,ruc=ruc,razon_social=razon_social,direccion_rs=direccion_rs,correo=correo,atiende_id=atiende,almacen_id=almacen,gmail=gmail,status_id=status,observaciones=observaciones,nombre_boleta=nombre_boleta,m_apellido_p=m_apellido_p,m_apellido_m=m_apellido_m,dni_c=dni_c).save()
+
+		id_produccion = Produccion.objects.all().order_by('-id')[0].id
+
+		print 'ID Produccion',id_produccion,audio
+
+		if audio!='':
+		
+			ProduccionAudio(audio=audio,produccion_id=id_produccion).save()
+
+
 
 	return render(request, 'colasIN/exito.html',{})
 
@@ -642,8 +652,13 @@ def dashboard(request):
 		anio=''
 		status_uni=''
 		motorisado=''
+		audio=''
 		
 		for r in request.GET:
+
+			if r=='audio':
+
+				audio= request.GET['audio']
 
 			if r=='marca':
 
@@ -829,9 +844,9 @@ def dashboard(request):
 		_agente.id_estado=2
 		_agente.save()
 			
-		
+		print 'audio.....',audio
 
-		return render(request, 'colasIN/dashboard.html',{'status_uni':status_uni,'times':times,'hora_i':hora_i,'modelo_v':modelo_v,'colorrecibido':color,'aniorecibido':anio,'descuento':descuento,'precio':precio,'modelo_bat':modelo_bat,'pre':pre,'User':User,'cilindrada':cilindrada,'cant_ba':cant_ba,'placa':placa,'kilometraje':kilometraje,'color':colores,'anio':anios,'version':version,'distrito':distritos,'bateriasform':baterias,'vehiculoform':v,'bateria':bateria,'status':status,'atiende':atiende,'almacen':almacen,'pagos':pagos,'telefono_2':telefono_2,'telefono_1':telefono_1,'dni':dni,'cliente':cliente,'apellido_p':apellido_p,'apellido_m':apellido_m,'modelos':modelos,'marcas':marcas,'marca':marca,'marca_b':marca_b,'modelos_baterias':models_b})
+		return render(request, 'colasIN/dashboard.html',{'audio':audio,'status_uni':status_uni,'times':times,'hora_i':hora_i,'modelo_v':modelo_v,'colorrecibido':color,'aniorecibido':anio,'descuento':descuento,'precio':precio,'modelo_bat':modelo_bat,'pre':pre,'User':User,'cilindrada':cilindrada,'cant_ba':cant_ba,'placa':placa,'kilometraje':kilometraje,'color':colores,'anio':anios,'version':version,'distrito':distritos,'bateriasform':baterias,'vehiculoform':v,'bateria':bateria,'status':status,'atiende':atiende,'almacen':almacen,'pagos':pagos,'telefono_2':telefono_2,'telefono_1':telefono_1,'dni':dni,'cliente':cliente,'apellido_p':apellido_p,'apellido_m':apellido_m,'modelos':modelos,'marcas':marcas,'marca':marca,'marca_b':marca_b,'modelos_baterias':models_b})
 
 
 def album(request):
@@ -891,25 +906,28 @@ def traeaudios(request,telefono):
 
 		agente = request.GET['agente']
 
-		telefono = request.GET['telefono']
+		id = request.GET['id']
 
-		instance = ProduccionAudio.objects.filter(telefono=telefono,agente_id=agente)
+		instance = ProduccionAudio.objects.filter(produccion_id=id)
+
+		print 'traeaudios...',instance
 
 		for a in instance:
 
-			try:
+			print 'audio',a.audio
 
-				dia = a.audio.split('-')[2][0:2]
-				mes = a.audio.split('-')[2][2:4]
-				anio = a.audio.split('-')[2][4:8]
 
-				a.anio=anio
-				a.mes=mes
-				a.dia= dia
+			dia = a.audio.split('x')[2][0:2]
+			mes = a.audio.split('x')[2][2:4]
+			anio = a.audio.split('x')[2][4:8]
 
-			except:
+			a.audio = a.audio.replace('x','-')
 
-				pass
+			a.anio=anio
+			a.mes=mes
+			a.dia= dia
+
+
 
 
 		return render(request, 'colasIN/audios.html',{'audios':instance})
@@ -981,7 +999,7 @@ def lanzallamada(request,base,agente_id):
 
 			audio = request.GET['audio']
 
-			ProduccionAudio(audio=audio,telefono=base,agente_id=Agente.objects.get(anexo=int(agente_id)).id).save()
+			#ProduccionAudio(audio=audio,telefono=base,agente_id=Agente.objects.get(anexo=int(agente_id)).id).save()
 
 	if Agente.objects.filter(anexo=int(agente_id)).count()>1:
 
@@ -996,9 +1014,9 @@ def lanzallamada(request,base,agente_id):
 
 	print 'lanzallamada',_agente.user.username
 
-	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username,'edeamat'])
+	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username,'edeamat','scondezo'])
 
-	message = RedisMessage('llamada-'+str(base))
+	message = RedisMessage('llamada-'+str(base)+'-'+str(audio))
 
 	redis_publisher.publish_message(message)
 
@@ -1027,7 +1045,7 @@ def lanzafinllamada(request,base,agente):
 	_agente.save()
 
 
-	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username,'edeamat'])
+	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username,'edeamat','scondezo'])
 
 	message = RedisMessage('llamada-'+str(base))
 
@@ -1048,7 +1066,7 @@ def lanzadisponible(request,agente):
 	_agente.save()
 
 
-	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username,'edeamat'])
+	redis_publisher = RedisPublisher(facility='foobar', users=[_agente.user.username,'edeamat','scondezo'])
 
 	message = RedisMessage('llamada-'+str(0))
 
@@ -1187,11 +1205,18 @@ def m_agente(request,cliente,id_incidencia):
 		return HttpResponseRedirect("/colasIN/monitor_agente/"+cliente+"/"+id_incidencia)
 
 
+	audio=''
+
 	if request.method=='GET':
 
 		telefono=cliente
 
 		for r in request.GET:
+
+
+			if r=='audio':
+
+				audio =request.GET['audio']
 
 			if r =='numero':
 
@@ -1231,7 +1256,6 @@ def m_agente(request,cliente,id_incidencia):
 
 			for au in audios:
 
-
 				try: 
 
 					dia = au.audio.split('-')[2][0:2]
@@ -1248,6 +1272,7 @@ def m_agente(request,cliente,id_incidencia):
 
 					a.ruta=''
 
+
 			a.audios = audios.count()
 
 
@@ -1260,5 +1285,5 @@ def m_agente(request,cliente,id_incidencia):
 
 			incidenciaform = ProduccionForm(instance=incidencia)
 
-		return render(request, 'colasIN/agente.html',{'total_llamadas':total_llamadas,'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven})
+		return render(request, 'colasIN/agente.html',{'total_llamadas':total_llamadas,'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven,'audio':audio})
 
