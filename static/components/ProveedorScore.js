@@ -8,13 +8,11 @@ import Alerta from "./Alerta";
 import AsignaScore from "./AsignaScore"
 import store from "../store";
 import { Provider } from "react-redux";
-import {cargaproveedores,total_carteras,proveedores, loadCarteras,loadNegocios, loadGestiones} from "../actionCreators";
-import AppRouter from "./Rutas"
 import axios from 'axios';
-import AgregaProveedor from "./AgregaProveedor";
+
 var $ = require ('jquery')
 
-const divStyle = {
+const espacio = {
   height: '12px',
 
 };
@@ -24,19 +22,23 @@ class ProveedorScore extends React.Component {
         super(props);
 
         this.state = {
-            value: "",
-            editar:[],
-            carteras:[],
-            proveedor:"",
-            cartera:"",
-            negocio:"",
-            proveedor_name:"",
-            cartera_name:"",
-            negocio_name:"",
-            score_negocios:[],
-            mensaje:""
-
-
+       
+          proveedores:[],
+          proveedor:"",
+          carteras:[],
+          muestraproveedor:false,
+          muestracartera:false,
+          negocios:[],
+          muestracartera:false,
+          gestiones:[],
+          gestion:false,
+          muestragestiones:false,
+          negocio:false,
+          resultados:[],
+          cartera:false,
+          muestranegocio:false,
+          muestraresultado:false,
+          scores:[]
 
         };
 
@@ -45,94 +47,223 @@ class ProveedorScore extends React.Component {
 
       componentDidMount() {
 
+        axios.get("/discador/api_proveedor")
+        .then(response=>{
+    
+          this.setState({
 
-        store.dispatch(loadCarteras())
+          proveedores:response.data
+           
+          })
+    
+        });
 
-        store.dispatch(loadNegocios())
 
-        //store.dispatch(proveedores())
+        axios.get("/discador/api_gestiones")
+        .then(response=>{
+
+          console.log('gestiones',response.data)
+    
+          this.setState({
+
+          gestiones:response.data
+           
+          })
+    
+        });
 
 
-        this.listaproveedores()
+        axios.get("/discador/api_resultados")
+        .then(response=>{
+
+    
+          this.setState({
+
+          resultados:response.data
+           
+          })
+    
+        });
+
+
+
 
         
       }
 
 
-      listaproveedores(){
-        axios.get("/discador/api_proveedor")
+      seleccionaproveedor(e,data){
+
+        this.setState({
+          proveedor:data
+        })
+  
+        axios.get("/discador/api_carteras_proveedor/"+data.id)
         .then(response=>{
     
-          console.log(response.data)
-
           this.setState({
-            proveedores:response.data,
-            filterproveedores:response.data
+            carteras:response.data,
+            muestraproveedor:false,
+            muestracartera:false,
+            negocios:[],
+            cartera:false
+           
           })
-
-          
-
-          this.contador = this.contador_carteras(response.data)
-
-          store.dispatch(cargaproveedores(response.data,this.contador))
-
-  
-
     
         });
-      }
 
-      
 
-      contador_carteras(data){
 
-          this.contador=0
-
-          for (this.i = 0; this.i < data.length; this.i++) { 
-
-            this.contador=this.contador+data[this.i].contar_carteras
-
-          }
-
-          return this.contador
 
       }
 
+      seleccionacartera(e,proveedor,cartera){
 
-      activascore(data,item){
 
-
-        console.log(item.gestion)
-
+        console.log(proveedor,cartera)
 
         this.setState({
 
-          mensaje:data.target.options[event.target.selectedIndex].text+' '+item.gestion.nombre
+          cartera:cartera,
+          muestracartera:false
 
+         
+        
         })
 
 
-      
-
-
-
-
-        this.setState({
-
-          mensaje:""
-        })
+        
   
+        axios.get("/discador/api_carteras_negocios/"+proveedor.id+'/'+cartera.cartera.id)
+        .then(response=>{
+    
+          this.setState({
+            negocios:response.data
+         
+          })
+    
+        });
 
 
-        axios.post('/discador/api_asigna_score/', {
-          item,
-          estado:data.target.value,
-          proveedor:{
-          proveedor_id:this.state.proveedor,
-          cartera_id:this.state.cartera,
-          negocio_id:this.state.negocio}
+
+        
+
+
+      }
+
+
+      seleccionanegocio(e,negocio){
+
+
+
+        this.setState({
+
+          negocio:negocio,
+         
+
+        })
+
+
+      }
+
+      showproveedor(){
+
+        this.setState({
+
+          muestraproveedor:true
+           
+          })
+
+      }
+
+      showcartera(){
+
+        this.setState({
+
+          muestracartera:true
+           
+          })
+
+      }
+
+      showgestion(){
+
+        this.setState({
+
+          muestragestiones:true
+           
+          })
+
+      }
+
+      showresultado(){
+
+        this.setState({
+
+          muestraresultado:true
+           
+          })
+
+      }
+
+      seleccionagestion(e,data){
+
+
+
+
+        this.setState({
+
+          gestion:data,
+          muestragestiones:false,
+          resultado:false
+          
+           
+          })
+
+
+          
+        
+      }
+
+
+      seleccionaresultado(e,data){
+
+
+        console.log(data)
+
+
+        this.setState({
+
+          resultado:data,
+          muestraresultado:false
+          
+           
+          })
+        
+      }
+
+
+      buscar(){
+
+        console.log('data...')
+
+        let currentComponent = this;
+
+        axios.post('/discador/api_busca_score/', {
+      
+          data:this.state,
+          
         })
         .then(function (response) {
+
+
+          console.log(response.data)
+
+          currentComponent.setState({
+
+            scores:response.data
+
+          })
   
           
         
@@ -140,144 +271,273 @@ class ProveedorScore extends React.Component {
         .catch(function (error) {
           console.log(error);
         });
+        
+      }
+
+      
 
 
+    
+     
+
+          
+        
+      
+    
+
+    render() {
+
+      const {scores,muestraresultado,resultados,resultado,muestragestiones,proveedores,carteras,cartera,muestraproveedor,muestracartera,proveedor,negocios,gestiones,gestion,negocio} = this.state;
+
+      let todo =''
+      let todocartera
+      let todogestiones=''
+      let todoresultados=''
+      let todoscores=''
+      let botones=''
+
+      const sinestilo = "list-group-item d-flex justify-content-between align-items-center"
+
+      const conestilo = "list-group-item d-flex justify-content-between align-items-center list-group-item-primary"
+
+      if(muestraproveedor){
+
+        todo=proveedores.map(item=>
+            
+          <li className= {item.contar_carteras>0 ? sinestilo : conestilo} onClick={(e) => this.seleccionaproveedor(e,item)}>
+            
+            
+            {item.nombre}
+            
+            <span class="badge badge-primary badge-pill">{item.contar_carteras}</span>
+            </li>
+
+          )
+
+         
+
+      }
+      else{
+
+       todo= <li class="list-group-item list-group-item-action"  onClick={(e) => this.showproveedor(e)} >{proveedor ? proveedor.nombre : 'Selecciona proveedor' }</li>
 
       }
 
 
 
-     busca_proveedor(data){
-
-          this.state.filterproveedores = this.state.proveedores.filter((poet) => {
-
-            let poetName = poet.nombre
-          
-            return poetName.indexOf(
-              data.target.value) !== -1
-          })
-
-          this.contador = this.contador_carteras(this.state.filterproveedores)
-
-          store.dispatch(cargaproveedores(this.state.filterproveedores,this.contador))
-
-          
-
-     }
+                
+        
+              
 
 
-     buscascore(data){
+     
 
-      console.log('buscascore',data)
-     }
 
-     onTextChange(data) {
+      if(muestracartera){
 
+        todocartera = carteras.map(item=>
+
+                  <li class="list-group-item list-group-item-action"  onClick={(e) => this.seleccionacartera(e,proveedor,item)}>{item.cartera.nombre}</li>
+
+                  )
+
+      }
+      else{
+
+
+        todocartera=<li class="list-group-item list-group-item-action" onClick={(e) => this.showcartera(e)}  >{cartera ? cartera.cartera.nombre : 'Selecciona cartera' }</li>
+
+      }
+
+      if(muestragestiones){
+
+        todogestiones = 
       
-       
-          const name_select = data.target.name+'_name';
-          const name = data.target.name;
-          const value = data.target.value
-          const select_option = data.target.options[event.target.selectedIndex].text
+          gestiones.map(item=>
+            
+          <li className= "list-group-item" onClick={(e) => this.seleccionagestion(e,item)} >
+            
+    
+            {item.nombre}
+            
+            </li>
 
-          this.setState({
-            [name]: value,
-            [name_select]: select_option
-          });
+          )
+        }
 
-
-          if (name=='negocio'){
-
-            console.log('entre')
-
-            axios.get("/discador/api_resultados_negocio/"+value)
-                  .then(response=>{
+        else{
 
 
-                    this.setState({
-                      score_negocios: response.data,
-                      
-                    });  
+          todogestiones = <li className= "list-group-item" onClick={(e) => this.showgestion(e)}>{gestion ? gestion.nombre : 'Seleccione gestion'}     
+          </li>
+        }
+
+
+        if(muestraresultado){
+
+          todoresultados =  resultados.map(item=>
+            
+            <li className= "list-group-item" onClick={(e) => this.seleccionaresultado(e,item)} >
+              
+      
+              {item.nombre}
+              
+              </li>
+  
+            )
+
+        }
+
+        else{
+
+          todoresultados = <li className= "list-group-item" onClick={(e) => this.showresultado(e)}>{resultado ? resultado.nombre : 'Seleccione resultado'}     
+          </li>
+
+        }
 
         
-              });
 
-            }
+          console.log('entres a ascore...')
 
-  
  
-    }
-
-
-    
-
-    handleSubmit(data){
-
-
-      axios.post('/discador/guardaproveedor/', {
-        proveedor_id: this.state.proveedor,
-        cartera_id:this.state.cartera
-      })
-      .then(function (response) {
-
-        $('.modal-backdrop').hide(); // for black background
-        $('body').removeClass('modal-open'); // For scroll run
-        $('#exampleModal').modal('hide'); 
-
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-      data.preventDefault()
-    
-
-    }
-
-    render() {
-
-      const { mensaje,proveedor,proveedor_name,cartera_name,negocio_name,score_negocios } = this.state;
 
       return (
 
         <div>
 
+             
+
             <Header/>
 
             
-            <div style={divStyle}></div>
+
 
             <div class='container'>
 
-              
-                <h4>Asignacion del Score</h4>
+            <h4>Score</h4>
+
+            <div class='row'>
+
+            <div class='col-md-4'>
+
+
+               
+
+                <div class="list-group">
+
+                {todo}
+
+                </div>
+ 
+
+            </div>
+            <div class='col-md-4'>
+
+                  <div class="list-group">
 
               
-                { mensaje ? <Alerta mensaje={mensaje}/> : <div></div>}
-                
-
-                <AgregaProveedor guarda={this.handleSubmit.bind(this)}  selectcartera={this.onTextChange.bind(this)}/>
-
-                <div style={divStyle}></div>
-
-                <h3>{negocio_name}</h3>
-
-              
-                <AsignaScore score_negocios={score_negocios} activascore={(e,item)=>this.activascore(e,item)} buscascore={(e,item)=>this.buscascore(item)}/>
+                    {todocartera}
 
 
-    
-                <input type='text' onChange={this.busca_proveedor.bind(this)} className='form-control' placeholder='Buscar Proveedor'></input>
-                
+                    </div>
 
-                {proveedor_name.proveedor ? proveedor_name.proveedor.nombre : '' } 
+            </div>
+            <div class='col-md-4'>
 
 
-                <Proveedores/>
+                {negocios.map(item=>
+
+
+                <li class="list-group-item list-group-item-action"  onClick={(e) => this.seleccionanegocio(e,item)}>{item.negocio.nombre}</li>
+
+                )}
+                </div>
+
+
 
 
 
             </div>
+
+              <div style={espacio}></div>
+            <div class='row'>
+
+                <div class='col-md-4'>
+
+
+                      
+                      <h4>{gestion ? 'Gestiones': ''}</h4>
+                      {todogestiones}
+
+                     
+
+                </div>
+
+
+                <div class='col-md-4'>
+                  
+                  <h4>{negocio ? 'Resultados': ''}</h4>
+                  {todoresultados}</div>
+
+
+            </div>
+
+            
+            <div style={espacio}></div>
+
+            <button class='btn btn-primary' onClick={(e) => this.buscar(e)}>Buscar</button>
+
+            <div style={espacio}></div>
+            
+            <table class='table'>
+
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Gestion</th>
+                <th scope="col">Resultado</th>
+                <th scope="col">Justificacion</th>
+               
+              </tr>
+            </thead>
+
+            <tbody>
+            {scores.map(item=>
+            <tr>
+
+              <td>
+              
+
+              {item.gestion.nombre}
+              
+              </td>
+              <td>
+              
+
+              {item.resultado.nombre}
+              
+              </td>
+            <td>
+              
+
+              {item.subresultado.nombre}
+              
+              </td>
+            </tr>
+
+            )}
+
+            </tbody>
+            </table>
+
+            
+            
+            
+            </div>
+
+
+            
+
+        
         </div>
       );
     }

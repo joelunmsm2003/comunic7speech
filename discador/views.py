@@ -703,6 +703,14 @@ def carteras(request,id_proveedor):
 	return render(request, 'cartera.html',{'proveedor':pro})
 
 @csrf_exempt
+def api_carteras_negocios(request,id_proveedor,id_cartera):
+
+	_data= ProveedorCarteras.objects.filter(proveedor_id=id_proveedor,cartera_id=id_cartera)
+
+	serializer =  ProveedorCarterasSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
 def api_carteras_proveedor(request,id_proveedor):
 
 	_data= ProveedorCarteras.objects.filter(proveedor_id=id_proveedor)
@@ -730,27 +738,54 @@ def api_id_gestion(request,id_gestion):
 	return JsonResponse(serializer.data, safe=False)
 
 @csrf_exempt
-def api_resultados(request,id_gestion):
+def api_resultados(request):
 
-	id_res=[]
 
-	sc = Score.objects.filter(id_gestion_id=id_gestion)
 
-	print sc.count()
-
-	for s in sc:
-
-		print 'entre...',s.id
-
-		id_res.append(s.resultado.id)
-
-	_data = Resultado.objects.filter(id__in=id_res)
+	_data = Resultado.objects.all()
 	serializer =  ResultadoSerializer(_data,many=True)
 	return JsonResponse(serializer.data, safe=False)
 
 
 @csrf_exempt
-def menu_proveedor(request):
+def api_busca_score(request):
+
+	data =  json.loads(request.body)['data']
+
+	print data
+
+	my_filter = {}
+
+	for r in data:
+
+		if r=='resultado' and data['resultado']!= False:
+			
+			my_filter['resultado_id'] = data['resultado']['id']
+
+		if r=='cartera':
+
+			my_filter['cartera_id']  = data['cartera']['cartera']['id']
+		
+		if r=='proveedor':
+
+			my_filter['proveedor_id'] = data['proveedor']['id']
+
+		if r=='negocio':
+
+			my_filter['negocio_id'] = data['negocio']['negocio']['id']
+
+		if r=='gestion':
+
+			my_filter['gestion_id'] = data['gestion']['id']
+
+
+	_score = ScoreProveedor.objects.filter(**my_filter)
+
+	serializer =  ScoreProveedorSerializer(_score,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def proveedor_score(request):
 
 
 	discador = Proveedor.objects.all()
@@ -772,12 +807,12 @@ def menu_proveedor(request):
 			r=Score.objects.filter(cartera_id=id)
 
 
-		return render(request, 'proveedor.html',{'discador': discador,'carteras':x,'resultado':r})
+		return render(request, 'proveedor_score.html',{'discador': discador,'carteras':x,'resultado':r})
 
 	except:
 
 
-		return render(request, 'proveedor.html',{'discador': discador})
+		return render(request, 'proveedor_score.html',{'discador': discador})
 
 	
 

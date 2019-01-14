@@ -21,10 +21,10 @@ from discador.views import *
 urlpatterns = [
 
 
-    url(r'^menu_proveedor/', proveedor),
+    url(r'^proveedor_score/', proveedor_score),
 
     url(r'^menu_proveedor_1/', menu_proveedor_1),
-    url(r'^menu_proveedor/', menu_proveedor),
+
     url(r'^api_proveedor/', api_proveedores),
     url(r'^api_estadocliente/', api_estadocliente),
     url(r'^api_tipocontacto/', api_tipo_contacto),
@@ -32,8 +32,9 @@ urlpatterns = [
     url(r'^api_cartera/(\w+)', api_cartera),
     url(r'^api_carteras/', api_carteras),
     url(r'^api_carteras_proveedor/(\d+)', api_carteras_proveedor),
+    url(r'^api_carteras_negocios/(\d+)/(\d+)', api_carteras_negocios),
     url(r'^api_id_gestion/(\d+)', api_id_gestion),
-    url(r'^api_resultados/(\d+)', api_resultados),
+    url(r'^api_resultados/', api_resultados),
     url(r'^api_proveedor_detalle/(\d+)', api_proveedor),
     url(r'^api_detalle_cartera/(\d+)', api_detalle_cartera),
     url(r'^api_detalle_proveedor_cartera_negocio/(\d+)/(\d+)/(\d+)', api_detalle_proveedor_cartera_negocio),
@@ -45,6 +46,7 @@ urlpatterns = [
     url(r'^api_plano/', api_plano),
     url(r'^api_gestiones/', api_gestion),
     url(r'^api_cuentas/', api_cuentas),
+    url(r'^api_busca_score/', api_busca_score),
     url(r'^api_negocios/', api_negocios),
     url(r'^api_proveedor_cartera_negocio/', api_proveedor_cartera_negocio),
     url(r'^usuarios/', usuarios),
