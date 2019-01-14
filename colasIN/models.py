@@ -303,7 +303,7 @@ class Produccion(models.Model):
     agente= models.ForeignKey(Agente,max_length=1000,blank=True, null=True,related_name='_agente')
 
     def __unicode__(self):
-        return self.cliente
+        return str(self.id)
         
 
 

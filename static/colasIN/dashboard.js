@@ -59,7 +59,7 @@ function traeinfomoto(){
          var telefono_1 = document.getElementById("telefono_1").value;
          var telefono_2 = document.getElementById("telefono_2").value;
          var version = document.getElementById("inputVersion").value;
-         
+         var audio = document.getElementById("audio").value;
          var anio = document.getElementById("inputAnio").value;
          var color = document.getElementById("inputColor").value;
    
@@ -76,7 +76,7 @@ function traeinfomoto(){
    
         
    
-       window.location.href = "/colasIN/dashboard/?marca="+x+'&modelo_v='+modelo_v+'&cliente='+cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+'&marca_b='+marca_b+'&version='+version+'&anio='+anio+'&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+'&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+'&mapa='+mapa
+       window.location.href = "/colasIN/dashboard/?marca="+x+'&modelo_v='+modelo_v+'&cliente='+cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+'&marca_b='+marca_b+'&version='+version+'&anio='+anio+'&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+'&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+'&mapa='+mapa+'&audio='+audio
    
    
        }

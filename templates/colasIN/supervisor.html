@@ -1,17 +1,20 @@
- 
-<!DOCTYPE html>
-
-<html>
-<head>
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% extends 'base.html' %}
 
 
 
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  {% block content %}
 
+
+  <style>
+
+  th,.agentes td{
+    color:#fff;
+  }
+
+  </style>
 <script type="text/javascript" src="/static/ws4.js"></script>
+
+
 <script type="text/javascript">
   
   
@@ -61,7 +64,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#"><h2>Monitoreo Supervisor</h2></a>
+  <a class="navbar-brand" href="#">Monitoreo Supervisor</a>
   <a class="navbar-brand" href="http://call.comunica7.com:8000/comunica7/dashboard/">Inicio</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -78,11 +81,12 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
    
-       <!-- <a class="navbar-brand" href="#">Salir</a>
+     <!-- <a class="navbar-brand" href="#">Salir</a>
         <a class="navbar-brand" href="#">Salir</a>
          <a class="navbar-brand" href="#">Salir</a> -->
           
             <a class="btn btn-light" href='/comunica7/ingresar'>Salir</a>
+
     </form>
   </div>
 </nav>
@@ -93,11 +97,11 @@
 
 <div class='container'>
 
-  
+  <div style='height:20px;'></div>
 
   <h3>Monitoreo de Agentes</h3>
-<table class="table">
-  <thead class="thead-dark">
+<table class="table agentes">
+  <thead class="thead-light">
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
@@ -148,7 +152,7 @@
 
   <h3>Monitoreo de Llamadas</h3>
 <table class="table">
-  <thead class="thead-dark">
+  <thead class="thead-light">
     <tr>
 
       
@@ -231,7 +235,5 @@
 
 </div>
 
-
-</body>
-</html>
+  {% endblock %}
 

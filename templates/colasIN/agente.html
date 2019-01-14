@@ -11,7 +11,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#"><h2>ColasIN</h2></a>
+  <a class="navbar-brand" href="#">Baterias Al Toque</a>
    <a class="navbar-brand" href="http://call.comunica7.com:8000/comunica7/dashboard/">Inicio</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -48,13 +48,22 @@
 
     function receiveMessage(msg) {
 
-        console.log(msg.split('-')[0])
+        audio=''
+
+        if(msg.split('-')[2]){
+
+          audio = msg.split('-')[2]
+
+        }
+
+
+        
 
           if(msg.split('-')[0]=='llamada'){
 
 
 
-              window.location.href = "/colasIN/monitor_agente/"+msg.split('-')[1]+'/0'
+              window.location.href = "/colasIN/monitor_agente/"+msg.split('-')[1]+'/0?audio='+audio
 
       
         }
@@ -70,7 +79,19 @@
 
         var strWindowFeatures = "location=yes,height=800,width=1300,scrollbars=yes,status=yes";
         var URL = url ;
-        var win = window.open(URL+'?telefono_1='+'{{telefono}}', "_blank", strWindowFeatures);
+        var win = window.open(URL+'?telefono_1='+'{{telefono}}&audio='+'{{audio}}', "_blank", strWindowFeatures);
+
+
+    }
+
+    function traeaudios(url,id,agente){
+
+
+        console.log('agente...',agente)
+
+        var strWindowFeatures = "location=yes,top=300,left=200,height=500,width=800,scrollbars=yes,status=yes";
+        var URL = url ;
+        var win = window.open(URL+'?id='+id+'&agente='+agente, "_blank", strWindowFeatures);
 
 
     }
@@ -220,7 +241,7 @@
 
     </div>
 
-     <a class="btn btn-light" href='/comunica7/ingresar'>Salir</a>
+     <a class="btn btn-light" href='/colasIN/salir'>Salir</a>
 
       
 
@@ -250,7 +271,6 @@
 
   
 
-
     {% if agente.estado.nombre == 'Pausa' or agente.estado.nombre == 'Disponible' or agente.estado.nombre == 'Gestion'   %}
 
     <h6>Estado Actual </h6>
@@ -260,6 +280,8 @@
 
 
     <h5>Llamada entrante...{{telefono}} </h5>
+
+
 
 
 
@@ -416,6 +438,9 @@
               </div>
             </div>
 
+
+          
+
             {% include "colasIN/gestion.html" %}
 
             {% if total_llamadas %}
@@ -439,6 +464,7 @@
                       <th scope="col">Precio</th>
                       <th scope="col">Descuento</th>
                       <th scope="col">Direccion</th>
+                      <th>Audio</th>
                       <th>Accion</th>
                       <th></th>
                       </tr>
@@ -470,8 +496,21 @@
                         <td>{{c.modelo_bateria}}</td>
                         <td>{{c.precio}}</td>
                         <td>{{c.descuento}}</td>
+
+                        
                         <td><a class='btn btn-sm btn-dark' href='https://www.google.com/maps/search/{{c.direccion_atencion}}' target="_blank">Ir</a></td>
+
                         <td>
+
+
+                        
+
+                        <a class='btn btn-sm btn-primary' onclick="traeaudios('/colasIN/traeaudios/{{c.telefono_1}}',{{c.id}},{{c.agente.id}})" target="_blank" style='color:#fff;'>Audios #{{c.audios}}</a>
+
+                        </td>
+                        <td>
+
+
                         
                          <a class='btn btn-sm btn-light' onclick="nuevaventa('/colasIN/detalle_venta/{{c.id}}')" target="_blank">Detalle</a>
 

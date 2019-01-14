@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+
+  {% block content %}
+
+
+            <table class="table table-default responsive">
+                <thead>
+                      <tr>
+                      <th scope="col">Audio</th>
+                      
+                      </tr>
+                </thead>
+                <tbody>
+
+                {% for c in audios %}
+                       
+        
+                          <tr>
+
+                        
+
+
+                        <td>
+                        	
+                        	<a href='http://join.xiencias.com/B@tAlt0k4ud/{{c.anio}}/{{c.mes}}/{{c.dia}}/AN_{{c.audio}}.gsm'>Audio AN </a>
+                        </td>
+
+                        <td>
+                        	
+                        </td>
+
+                
+                        </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+ {% endblock %}
