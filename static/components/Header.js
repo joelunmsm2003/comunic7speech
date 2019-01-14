@@ -39,7 +39,10 @@ const Header = ()=> {
                     <a class="nav-link" href="#">Importador</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Salir</a>
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/comunica7/ingresar">Salir</a>
                 </li>
                 </ul>
                 

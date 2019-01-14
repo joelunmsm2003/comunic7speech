@@ -45089,7 +45089,12 @@ var Header = function Header() {
     class: "nav-item"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "nav-link",
-    href: "#"
+    href: "/admin"
+  }, "Admin")), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+    class: "nav-item"
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
+    class: "nav-link",
+    href: "/comunica7/ingresar"
   }, "Salir")))));
 };
 
