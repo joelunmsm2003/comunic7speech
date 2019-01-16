@@ -3,7 +3,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: {
     'index.js': './index.js',
-    'cartera.js': './cartera.js', 
+    'cartera.js': './cartera.js',
+    'traeAgentes.js': './traeAgentes.js', 
     'proveedorscore.js':'./proveedorscore.js',
     'agentes.js':'./agentes.js',
     'marcador.js':'./marcador.js',

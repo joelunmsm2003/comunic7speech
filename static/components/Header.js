@@ -29,6 +29,7 @@ const Header = ()=> {
                     <a class="dropdown-item" href="#">Something else here</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Separated link</a>
+                    <a class="dropdown-item" href="/discador/traeagentes">Agentes</a>
                 </div>
                 </div>
                 </li>

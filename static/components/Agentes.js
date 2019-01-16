@@ -35,10 +35,11 @@ class App extends React.Component {
     
       }
 
-    render() {
+    render() {                                                                                                       
 
-      
+      console.log("kkkkkk")
       const {detalle_cuentas} = this.state
+      console.log("kkkkkk")
 
       return (
 
@@ -50,6 +51,7 @@ class App extends React.Component {
         <Tabs/>
        
         <div class="form-group row">
+        
         
               <div class="form-group col-md-6">
               <div class="card" >

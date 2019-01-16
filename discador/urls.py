@@ -66,6 +66,12 @@ urlpatterns = [
     url(r'^subecuentas/', subecuentas),
     url(r'^subetelefonos/', subetelefonos),
     url(r'^subeclientes/', subeclientes),
+    url(r'^traeagentes/',traeagentes),
+    url(r'^api_agentes/',api_agentes),
+    url(r'^borrar/', borrar),
+
+
+    
 
 
 

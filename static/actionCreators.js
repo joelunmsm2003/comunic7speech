@@ -11,7 +11,7 @@ export const cargaproveedores = (data,total)=>{
             
         })
 
-        dispatch({
+        dispatch({ 
             type:"TOTAL_CONTADOR",
             total_carteras:total,
             
@@ -19,6 +19,57 @@ export const cargaproveedores = (data,total)=>{
 
     }
  
+}
+
+
+export const cargaagentes = (data,total)=>{
+
+
+    return dispatch =>{
+
+        dispatch({
+            type:"TRAE_TODOS_AGENTES",
+            todoAgentes:data,
+            
+        })
+    }
+ 
+}
+
+
+
+export const loadCarteras = ()=>{
+
+    return dispatch =>{
+
+         return axios.get("/discador/api_carteras")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_CARTERAS",
+                carteras:response.data
+            })
+        });
+    };
+
+}
+
+
+
+export const load_Agentes = ()=>{
+
+    return dispatch =>{
+        console.log('puchi-----:(',)
+
+         return axios.get("/discador/api_agentes")
+        .then(response=>{
+            console.log(response)
+            dispatch({
+                type:"TRAE_AGENTES",
+                traeAgentes:response.data
+            })
+        });
+    };
 }
 
 
@@ -146,24 +197,6 @@ export const loadGestiones = ()=>{
 
 }
 
-
-
-export const loadCarteras = ()=>{
-
-    return dispatch =>{
-
-         return axios.get("/discador/api_carteras")
-        .then(response=>{
-            console.log(response)
-            dispatch({
-                type:"TRAE_CARTERAS",
-                carteras:response.data
-            })
-        });
-    };
-
-}
-
 export const loadNegocios = ()=>{
 
     return dispatch =>{
@@ -196,6 +229,11 @@ export const loadNegocios = ()=>{
 //         };
 
 // }
+
+
+
+
+
 
 export const loadScore = ()=>{
 
@@ -281,6 +319,9 @@ export const proveedores = ()=>{
             })
         });
     };
+
+
+
 
 
 

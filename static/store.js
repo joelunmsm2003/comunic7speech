@@ -26,6 +26,19 @@ if(action.type==='PROVEEDORES'){
 
 
 
+const todoAgentes = (state=[],action) => {
+
+    if(action.type==='TRAE_TODOS_AGENTES'){
+        return action.todoAgentes;
+    }
+    return state;
+
+}
+
+
+
+
+
 
 const trae_carteras_proveedor = (state=[],action) => {
 
@@ -111,6 +124,7 @@ const score = (state=[],action) => {
 
 
 
+
 const score_negocios = (state=[],action) => {
 
     if(action.type==='TRAE_DATOS_NEGOCIOS_SCORE'){
@@ -141,6 +155,16 @@ const carteras = (state=[],action) => {
     return state;
 
 }
+
+const traeAgentes = (state=[],action) => {
+
+    if(action.type==='TRAE_AGENTES'){
+        return action.traeAgentes;
+    }
+    return state;
+
+}
+
 
 const negocios = (state=[],action) => {
 
@@ -192,4 +216,4 @@ const logger = store => next => action => {
   }
 
 
-export default createStore(combineReducers({proveedor_cartera_negocio,trae_telefonos,negocios,carteras,cart,proveedores,gestiones,total_carteras,trae_cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados,detalle_cuentas}),applyMiddleware(logger,thunk));
+export default createStore(combineReducers({todoAgentes,traeAgentes,proveedor_cartera_negocio,trae_telefonos,negocios,carteras,cart,proveedores,gestiones,total_carteras,trae_cuentas,score,trae_carteras_proveedor,id_gestiones,resultados,subresultados,detalle_cuentas}),applyMiddleware(logger,thunk));

@@ -20,7 +20,7 @@ const Historial_agente = ({detalle_cuentas}) =>{
 
            <ul class="list-group">
                 <div class="form-group col-md-12">
-                    <h3>historial deGestión</h3>
+                    <h3>Historial de Gestión</h3>
                
                     <table class="table">
                         <thead>
