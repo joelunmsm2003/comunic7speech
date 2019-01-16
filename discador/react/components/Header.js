@@ -29,7 +29,7 @@ const Header = ()=> {
                   <a class="dropdown-item" href="/discador/agentes">Provedores</a>
                   <a class="dropdown-item" href="/discador/opcion_score">Score</a>
                   <a class="dropdown-item" href="#">Usuarios</a>
-                  <div class="dropdown-divider"></div>
+                 
                   
     </div>
     </div>
@@ -47,7 +47,7 @@ const Header = ()=> {
                         
                         <a class="dropdown-item" href="/discador/agentes">Procesos Masivos de cuenta</a>
                         <a class="dropdown-item" href="#">Usuarios</a>
-                        <div class="dropdown-divider"></div>
+                        
                         
                     </div>
                     </div>

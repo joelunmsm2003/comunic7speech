@@ -57,7 +57,8 @@ urlpatterns = [
     url(r'^agentes/',agentes),
     url(r'^opcion_score/',opcion_score),
     url(r'^opcion_clientes/',opcion_clientes),
- 
+
+    url(r'^editar_cliente/(\d+)',editar_cliente),
     url(r'^carteras/(\d+)',carteras),
     url(r'^guardaproveedor/',guardaproveedor),
     url(r'^api_detalle_cuentas/(\d+)', api_detalle_cuentas),

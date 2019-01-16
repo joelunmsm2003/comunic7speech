@@ -16,7 +16,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from discador.admin import *
 from django.db.models import Count
-
+from discador.forms import *
 @csrf_exempt
 def subetelefonos(request):
 
@@ -752,10 +752,66 @@ def opcion_clientes(request):
 
 	_data = Cliente.objects.all()
 
-	#serializer =  ScoreSerializer(_data,many=True)
-	#return JsonResponse(serializer.data, safe=False)
+	nuevocliente =  ClientesForm()
 
-	return render(request, 'opcion_clientes.html',{'clientes':_data})
+	if request.POST:
+
+		form = ClientesForm(request.POST)
+	
+		if form.is_valid():
+
+			form.save()
+
+	if request.GET:
+
+		filtro = {}
+
+		for r in request.GET:
+
+			if r=='nombres' and request.GET['nombres']!= '':
+				filtro['nombres'] = request.GET['nombres']
+			if r=='dni' and request.GET['dni']!= '' :
+				filtro['dni'] = request.GET['dni']
+			if r=='telefono' and request.GET['telefono']!= '':
+				filtro['telefono'] = request.GET['telefono']
+			if r=='numero_documento' and request.GET['numero_documento']!= '':
+				filtro['numero_documento'] = request.GET['numero_documento']
+
+		print filtro
+
+		_data=Cliente.objects.filter(**filtro)
+
+		
+		return render(request, 'opcion_clientes.html',{'clientes':_data,'nuevocliente':nuevocliente})
+
+	return render(request, 'opcion_clientes.html',{'clientes':_data,'nuevocliente':nuevocliente})
+
+
+@csrf_exempt
+def editar_cliente(request,cliente_id):
+	
+	if request.method == 'POST':
+
+		cliente_id = Cliente.objects.get(id=cliente_id)
+
+		form = ClientesForm(request.POST,instance=cliente_id)
+	
+		if form.is_valid():
+
+			form.save()
+
+		return render(request, 'discador.exito.html',{})
+
+
+	if request.method == 'GET':
+
+
+
+		cli = Cliente.objects.get(id=cliente_id)
+
+		editarcliente = ClientesForm(instance=cli)
+
+		return render(request, 'discador.editar_cliente.html',{'editarcliente':editarcliente})
 
 
 @csrf_exempt

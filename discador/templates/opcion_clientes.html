@@ -6,7 +6,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
   <title>Clientes</title>
   <link href="https://fonts.googleapis.com/css?family=Exo+2:100|Kanit:200" rel="stylesheet">
- 
+  <script>
+  
+  function abrirmodal(url){
+
+
+
+var strWindowFeatures = "location=yes,right=20,height=500,width=500,scrollbars=yes,status=yes";
+var URL = url ;
+var win = window.open(URL, "_blank", strWindowFeatures);
+
+
+}
+  
+  
+  </script>
 
 </head>
 <body>
@@ -20,12 +34,51 @@
     <div class=container>
     <h1>Clientes</h1>
 
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#añadir">Añadir</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#buscar">Buscar</button>
+        <a  class="btn btn-secondary" href='/discador/opcion_clientes'>Todos</a>
+        
+      </div>
+
+
+    <table class='table'>
+
+    <thead>
+      
+      <th>ID</th>
+      <th>Nombres</th>
+      <th>DNI</th>
+      <th>Telefono</th>
+      <th>DNI</th>
+      
+      <th>Fecha</th>
+    
+    
+    </thead>
+
+    <tbody>
     {% for c in clientes %}
+    <tr>
+      
+    <td>{{c.id}}</td>
+    <td>{{c.nombres}}</td>
+    <td>{{c.dni}}</td>
+    <td>{{c.telefono}}</td>
+    <td>{{c.numero_documento}}</td>
+    
+    <td>{{c.fecha}}</td>
+    <td><button type="button" class="btn btn-info btn-sm" onclick="abrirmodal('/discador/editar_cliente/{{c.id}}')" >Editar</button></td>
 
 
-        {{ c.id|upper }}
+
+    </tr>
 
     {% endfor %}
+  </tbody>
+
+
+    </table>
 
 
 
@@ -33,7 +86,116 @@
 
 
 
-   
+  
+  <!-- Modal -->
+  <div class="modal fade" id="añadir" tabindex="-1" role="dialog" aria-labelledby="añadir" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Añadir Cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form method="POST" class="post-form" >
+        <div class="modal-body">
+            
+
+                {% csrf_token %}
+              
+
+                {% for hidden in nuevocliente.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                <div class='row'>
+              
+                {% for field in nuevocliente.visible_fields %}
+              
+                
+                <div class="col-md-6">
+                      
+                          {{ field.errors }}
+                          {{ field.label_tag }} {{ field }}
+                  </div>
+                
+                {% endfor %}
+               
+                </div>
+                
+              
+                  <div style='height:20px;'></div>
+              
+                  
+              
+              
+              
+                
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+      </form>
+      </div>
+    </div>
+  </div>
+
+     
+  <!-- Modal -->
+  <div class="modal fade" id="buscar" tabindex="-1" role="dialog" aria-labelledby="buscar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Buscar Cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form method="GET" class="post-form" >
+        <div class="modal-body">
+            
+
+              
+
+                {% for hidden in nuevocliente.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                <div class='row'>
+              
+                {% for field in nuevocliente.visible_fields %}
+              
+                
+                <div class="col-md-6">
+                      
+                          {{ field.errors }}
+                          {{ field.label_tag }} {{ field }}
+                  </div>
+                
+                {% endfor %}
+               
+                </div>
+                
+              
+                  <div style='height:20px;'></div>
+              
+                  
+              
+              
+              
+                
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+
+      </form>
+      </div>
+    </div>
+  </div>
 
     
 </body>

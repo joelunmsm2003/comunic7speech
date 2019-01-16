@@ -37497,9 +37497,7 @@ var Header = function Header() {
   }, "Score"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
     href: "#"
-  }, "Usuarios"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    class: "dropdown-divider"
-  })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+  }, "Usuarios")))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
     class: "nav-item active"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "btn-group"
@@ -37520,9 +37518,7 @@ var Header = function Header() {
   }, "Procesos Masivos de cuenta"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
     href: "#"
-  }, "Usuarios"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-    class: "dropdown-divider"
-  })))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
+  }, "Usuarios")))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
     class: "nav-item active"
   }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
     class: "btn-group"
