@@ -26,9 +26,9 @@ const Header = ()=> {
               <div class="dropdown-menu">
                   <a class="dropdown-item" href="/discador/opcion_clientes">Clientes</a>
                   
-                  <a class="dropdown-item" href="/discador/agentes">Provedores</a>
-                  <a class="dropdown-item" href="/discador/opcion_score">Score</a>
-                  <a class="dropdown-item" href="#">Usuarios</a>
+                  <a class="dropdown-item" href="/discador/opcion_provedor">Provedores</a>
+                  <a class="dropdown-item" href="/discador/opcion_score">Score</a>  
+                  <a class="dropdown-item" href="/discador/opcion_usuarios">Usuarios</a>
                   <div class="dropdown-divider"></div>
                   
     </div>
@@ -45,8 +45,8 @@ const Header = ()=> {
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/discador/opcion_proveedor">Panel General del Cliente</a>
                         
-                        <a class="dropdown-item" href="/discador/agentes">Procesos Masivos de cuenta</a>
-                        <a class="dropdown-item" href="#">Usuarios</a>
+                        <a class="dropdown-item" href="/discador/proseso_masivo">Procesos Masivos de cuenta</a>
+                       
                         <div class="dropdown-divider"></div>
                         
                     </div>
@@ -62,32 +62,33 @@ const Header = ()=> {
                                 Gestiones
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/discador/opcion_proveedor">Gestion Telefonia</a>
+                            <a class="dropdown-item" href="/discador/gestion_telefonia">Gestion Telefonia</a>
                             
-                            <a class="dropdown-item" href="/discador/agentes">Gestion de campo</a>
-                            <a class="dropdown-item" href="#">Usuarios</a>
+                            <a class="dropdown-item" href="/discador/gestion_campo">Gestion de campo</a>
+                            
                             
                            
                         </div>
                         </div>
                         </li>
 
-    <li class="nav-item active">
-              
-               
-                            <div class="btn-group">
+
+                            <li class="nav-item active">
                             <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Reportes
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/discador/opcion_proveedor">Importador</a>
-                                
-                                <a class="dropdown-item" href="/discador/agentes">Monitoreo</a>
-                           
-                                
-                               
-                            </div>
-                            </div>
+                                Reportes
+                        </button>
+                            </li>
+
+                            <li class="nav-item active">
+                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Importador
+                        </button>
+                            </li>
+
+                            <li class="nav-item active">
+                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Monitoreo
+                        </button>
                             </li>
     </ul>
     
