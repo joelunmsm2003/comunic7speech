@@ -56,6 +56,7 @@ urlpatterns = [
     url(r'^opcion_asigna_score/(\d+)/(\d+)/(\d+)',opcion_asigna_score),
     url(r'^agentes/',agentes),
     url(r'^opcion_score/',opcion_score),
+    url(r'^opcion_clientes/',opcion_clientes),
  
     url(r'^carteras/(\d+)',carteras),
     url(r'^guardaproveedor/',guardaproveedor),

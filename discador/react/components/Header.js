@@ -24,9 +24,10 @@ const Header = ()=> {
                   Mantenimiento
               </button>
               <div class="dropdown-menu">
-                  <a class="dropdown-item" href="/discador/opcion_proveedor">Clientes</a>
+                  <a class="dropdown-item" href="/discador/opcion_clientes">Clientes</a>
                   
                   <a class="dropdown-item" href="/discador/agentes">Provedores</a>
+                  <a class="dropdown-item" href="/discador/opcion_score">Score</a>
                   <a class="dropdown-item" href="#">Usuarios</a>
                   <div class="dropdown-divider"></div>
                   

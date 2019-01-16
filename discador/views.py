@@ -747,7 +747,15 @@ def guardaproveedor(request):
 	return JsonResponse(serializer.data, safe=False)
 
 
+@csrf_exempt
+def opcion_clientes(request):
 
+	_data = Cliente.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'opcion_clientes.html',{'clientes':_data})
 
 
 @csrf_exempt

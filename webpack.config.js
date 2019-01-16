@@ -10,7 +10,9 @@ module.exports = {
     'discador.proveedorscore.js':'./discador/react/components/ProveedorScore.js',
     'discador.agentes.js':'./discador/react/components/Agentes.js',
     'discador.marcador.js':'./discador/react/components/Agentes.js',
-    'discador.asignascore.js':'./discador/react/components/AsignaScoreProveedor.js'
+    'discador.asignascore.js':'./discador/react/components/AsignaScoreProveedor.js',
+    'discador.opcion_clientes.js':'./discador/react/components/opcion_clientes.js',
+    'style':'./scss/main.scss'
   },
   output: {
     filename: './static/dist/[name]'
