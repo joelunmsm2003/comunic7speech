@@ -813,6 +813,63 @@ def editar_cliente(request,cliente_id):
 
 		return render(request, 'discador.editar_cliente.html',{'editarcliente':editarcliente})
 
+@csrf_exempt
+def opcion_provedor(request):
+
+	_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'opcion_provedor.html',{'provedor':_data})
+
+
+@csrf_exempt
+def opcion_usuarios(request):
+
+	_data = User.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'opcion_usuarios.html',{'usuarios':_data})
+
+@csrf_exempt
+def proseso_masivo(request):
+
+	_data = Cuentas.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+
+	return render(request, 'proseso_masivo.html',{'cuentas':_data})
+
+
+@csrf_exempt
+
+def gestion_telefonia(request):
+
+	_data = Telefonos.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+	
+
+	return render(request, 'gestion_telefonia.html',{'telefonos':_data})
+
+
+@csrf_exempt
+
+def gestion_campo(request):
+
+	_data = Telefonos.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+	
+
+	return render(request, 'gestion_campo.html',{'telefonos':_data})
 
 @csrf_exempt
 def opcion_proveedor(request):

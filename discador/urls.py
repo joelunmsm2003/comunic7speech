@@ -59,6 +59,14 @@ urlpatterns = [
     url(r'^opcion_clientes/',opcion_clientes),
 
     url(r'^editar_cliente/(\d+)',editar_cliente),
+    url(r'^opcion_provedor/',opcion_provedor),
+    url(r'^opcion_usuarios/',opcion_usuarios),
+
+    url(r'^proseso_masivo/',proseso_masivo),
+    url(r'^gestion_telefonia/',gestion_telefonia),
+    url(r'^gestion_campo',gestion_campo),
+ 
+ 
     url(r'^carteras/(\d+)',carteras),
     url(r'^guardaproveedor/',guardaproveedor),
     url(r'^api_detalle_cuentas/(\d+)', api_detalle_cuentas),

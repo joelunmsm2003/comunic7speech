@@ -12,7 +12,12 @@ module.exports = {
     'discador.marcador.js':'./discador/react/components/Agentes.js',
     'discador.asignascore.js':'./discador/react/components/AsignaScoreProveedor.js',
     'discador.opcion_clientes.js':'./discador/react/components/opcion_clientes.js',
-    'style':'./scss/main.scss'
+    'discador.opcion_provedor.js':'./discador/react/components/opcion_provedor.js',
+    'discador.opcion_usuarios.js':'./discador/react/components/opcion_usuarios.js',
+    'discador.proseso_masivo.js':'./discador/react/components/proseso_masivo.js',
+    'discador.gestion_telefonia.js':'./discador/react/components/gestion_telefonia.js',
+    'discador.gestion_campo.js':'./discador/react/components/gestion_campo.js',
+    /*'style':'./scss/main.scss' */
   },
   output: {
     filename: './static/dist/[name]'

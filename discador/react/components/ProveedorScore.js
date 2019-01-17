@@ -414,7 +414,7 @@ class ProveedorScore extends React.Component {
 
             <div class='container'>
 
-            <h4>Score</h4>
+            <h1>Score</h1>
 
             <div class='row'>
 
@@ -424,7 +424,8 @@ class ProveedorScore extends React.Component {
                
 
                 <div class="list-group">
-
+                
+                <h6>Proveedores</h6>
                 {todo}
 
                 </div>
@@ -435,7 +436,7 @@ class ProveedorScore extends React.Component {
 
                   <div class="list-group">
 
-              
+                    <h6>Carteras</h6>
                     {todocartera}
 
 
@@ -444,7 +445,7 @@ class ProveedorScore extends React.Component {
             </div>
             <div class='col-md-4'>
 
-
+                <h6>Negocios</h6>
                 {negocios.map(item=>
 
 
@@ -466,7 +467,7 @@ class ProveedorScore extends React.Component {
 
 
                       
-                      <h4>{gestion ? 'Gestiones': ''}</h4>
+                      <h6>Gestiones</h6>
                       {todogestiones}
 
                      
@@ -476,7 +477,7 @@ class ProveedorScore extends React.Component {
 
                 <div class='col-md-4'>
                   
-                  <h4>{negocio ? 'Resultados': ''}</h4>
+                  <h6>Resultados</h6>
                   {todoresultados}</div>
 
 
