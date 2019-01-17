@@ -125,26 +125,26 @@ TEMPLATES = [
 # }
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql', 
-    #     'NAME': 'comunica7',
-    #     'USER': 'root',
-    #     'PASSWORD': 'app01c7c0m2019',
-    #     'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
-    #     'PORT': '3306',
-    # },
-    # 'cdr': {
-    #     'ENGINE': 'django.db.backends.mysql', 
-    #     'NAME': 'cdr',
-    #     'USER': 'root',
-    #     'PASSWORD': 'd4t4B4$3*',
-    #     'HOST': 'xiencias.com',   # Or an IP Address that your DB is hosted on
-    #     'PORT': '3306',
-    # },
     'default': {
-      'ENGINE': 'django.db.backends.sqlite3',
-      'NAME': os.path.join(BASE_DIR, 'db.datos'),
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'comunica7',
+        'USER': 'root',
+        'PASSWORD': 'app01c7c0m2019',
+        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     },
+    'cdr': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'cdr',
+        'USER': 'root',
+        'PASSWORD': 'd4t4B4$3*',
+        'HOST': 'xiencias.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+    },
+    # 'default': {
+    #   'ENGINE': 'django.db.backends.sqlite3',
+    #   'NAME': os.path.join(BASE_DIR, 'db.datos'),
+    # },
     'discador': {
       'ENGINE': 'django.db.backends.sqlite3',
       'NAME': os.path.join(BASE_DIR, 'db.datos'),
