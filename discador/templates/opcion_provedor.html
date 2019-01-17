@@ -18,7 +18,7 @@
     <div id='app'></div>
 
     <div class=container>
-    <h1>Provedor</h1>
+    <h1>Proveedor</h1>
 
     <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#añadir">Añadir</button>
@@ -27,12 +27,43 @@
         
       </div>
 
-    {% for c in clientes %}
+      <table class='table'>
 
-
-        {{ c.id }}
-
-    {% endfor %}
+        <thead>
+          
+          <th>ID</th>
+          <th>Nombres</th>
+          <th>DNI</th>
+          <th>Telefono</th>
+          <th>Direccion</th>
+          
+          <th>Industria</th>
+        
+        
+        </thead>
+    
+        <tbody>
+        {% for p in provedor %}
+        <tr>
+          
+        <td>{{p.id}}</td>
+        <td>{{p.nombre}}</td>
+        <td>{{p.dni}}</td>
+        <td>{{p.telefono}}</td> 
+        <td>{{p.direccion}}</td>
+        
+        <td>{{p.industria}}</td>
+        <td><button type="button" class="btn btn-info btn-sm" onclick="abrirmodal('/discador/editar_cliente/{{p.id}}')" >Editar</button></td>
+    
+    
+    
+        </tr>
+    
+        {% endfor %}
+      </tbody>
+    
+    
+        </table>
 
 
 

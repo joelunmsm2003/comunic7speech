@@ -1,7 +1,19 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 
+
+class Distrito(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+	ubigeo=models.CharField(max_length=100,blank=True,null=True)
+class Provincia(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+	ubigeo=models.CharField(max_length=100,blank=True,null=True)
+
+class Departamento(models.Model):
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+	ubigeo=models.CharField(max_length=100,blank=True,null=True)
 
 
 class Negocio(models.Model):
@@ -21,6 +33,21 @@ class Industria(models.Model):
 class Proveedor(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
 	industria=models.ForeignKey(Industria,max_length=100,blank=True,null=True)
+	direccion=models.CharField(max_length=100,blank=True,null=True)
+	telefono=models.CharField(max_length=100,blank=True,null=True)
+	email=models.CharField(max_length=100,blank=True,null=True)
+	contacto=models.CharField(max_length=100,blank=True,null=True)
+	obserbaciones=models.CharField(max_length=100,blank=True,null=True)
+	estado=models.CharField(max_length=100,blank=True,null=True)
+
+	nombre_documento=models.CharField(max_length=100,blank=True,null=True)
+	tipo_personal=models.CharField(max_length=100,blank=True,null=True)
+	tipo_documento=models.CharField(max_length=100,blank=True,null=True)
+	industria=models.ForeignKey(Industria,max_length=100,blank=True,null=True)
+	departamento= models.ForeignKey(Departamento, blank=True, null=True)
+	provincia= models.ForeignKey(Provincia, blank=True, null=True)
+	distrito= models.ForeignKey(Distrito, blank=True, null=True)	
+
 
 	@property
 	def contar_carteras(self):
@@ -84,6 +111,7 @@ class Tipo_contacto(models.Model):
 
 class Resultado(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
+
 	def __unicode__(self):
 		return self.nombre
 
@@ -118,6 +146,10 @@ class Subresultado(models.Model):
 
 class Cartera(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
+	estado=models.CharField(max_length=100,blank=True,null=True)
+	acw=models.CharField(max_length=100,blank=True,null=True)
+
+
 
 	def __unicode__(self):
 		return self.nombre
@@ -231,6 +263,9 @@ class Cliente(models.Model):
 	observacion =models.CharField(max_length=100,blank=True,null=True)
 	fecha =models.CharField(max_length=100,blank=True,null=True)
 	estado =models.CharField(max_length=100,blank=True,null=True)
+	cargo_laboral =models.CharField(max_length=100,blank=True,null=True)
+	fecha_nacimiento =models.CharField(max_length=100,blank=True,null=True)
+	deuda_empresa =models.CharField(max_length=100,blank=True,null=True)
 	#fecha = models.DateTimeField(db_column='fecha', default=datetime.datetime.today()) 
 	def __unicode__(self):
 		return self.numero_documento
@@ -263,12 +298,46 @@ class Direcciones(models.Model):
 	tipo_domicilio= models.ForeignKey(Tipo_domicilio, blank=True, null=True,related_name='tipo_domicilio')
 
 	
+# class Agente(models.Model):	
+# 	nombre=models.CharField(max_length=100,blank=True,null=True)
+# 	supervisor=models.CharField(max_length=100,blank=True,null=True)
+# 	anexo=models.CharField(max_length=100,blank=True,null=True)
+# 	estado=models.CharField(max_length=100,blank=True,null=True)
+# 	user=models.CharField(max_length=100,blank=True,null=True)
+# 	t_inicio_gestion=models.CharField(max_length=100,blank=True,null=True)
+# 	t_fin_gestion=models.CharField(max_length=100,blank=True,null=True)
+# 	t_inicio_llamada=models.CharField(max_length=100,blank=True,null=True)
+# 	t_fin_llamada=models.CharField(max_length=100,blank=True,null=True)
+# 	t_inicio_espera=models.CharField(max_length=100,blank=True,null=True)
+# 	t_fin_espera=models.CharField(max_length=100,blank=True,null=True)
+# 	contactadas=models.CharField(max_length=100,blank=True,null=True)
+
 class Agente(models.Model):	
 	nombre=models.CharField(max_length=100,blank=True,null=True)
+	tipo_documento=models.CharField(max_length=100,blank=True,null=True)
+	numero_documento=models.CharField(max_length=100,blank=True,null=True)
+	fecha_nacimiento=models.CharField(max_length=100,blank=True,null=True)
+	departamento= models.ForeignKey(Departamento, blank=True, null=True)
+	provincia= models.ForeignKey(Provincia, blank=True, null=True)
+	distrito= models.ForeignKey(Distrito, blank=True, null=True)
+	direccion=models.CharField(max_length=100,blank=True,null=True)
+	telefono=models.CharField(max_length=100,blank=True,null=True)
+	grupor=models.CharField(max_length=100,blank=True,null=True)
+	user= models.ForeignKey(User, blank=True, null=True,related_name="user_agente")
+	sexo=models.CharField(max_length=100,blank=True,null=True)
+	fecha_ingreso=models.CharField(max_length=100,blank=True,null=True)
+	fecha_cese=models.CharField(max_length=100,blank=True,null=True)
+	motivo_cese=models.CharField(max_length=100,blank=True,null=True)
+	monto_basico=models.CharField(max_length=100,blank=True,null=True)
+	obserbacion=models.CharField(max_length=100,blank=True,null=True)
+	modalidad=models.CharField(max_length=100,blank=True,null=True)
+	turno=models.CharField(max_length=100,blank=True,null=True)
+	horario=models.CharField(max_length=100,blank=True,null=True)
+	estado=models.CharField(max_length=100,blank=True,null=True)
+
 	supervisor=models.CharField(max_length=100,blank=True,null=True)
 	anexo=models.CharField(max_length=100,blank=True,null=True)
 	estado=models.CharField(max_length=100,blank=True,null=True)
-	user=models.CharField(max_length=100,blank=True,null=True)
 	t_inicio_gestion=models.CharField(max_length=100,blank=True,null=True)
 	t_fin_gestion=models.CharField(max_length=100,blank=True,null=True)
 	t_inicio_llamada=models.CharField(max_length=100,blank=True,null=True)
@@ -276,9 +345,6 @@ class Agente(models.Model):
 	t_inicio_espera=models.CharField(max_length=100,blank=True,null=True)
 	t_fin_espera=models.CharField(max_length=100,blank=True,null=True)
 	contactadas=models.CharField(max_length=100,blank=True,null=True)
-	contactadas=models.CharField(max_length=100,blank=True,null=True)
-
-
 
 class Cuentas(models.Model):
 	cliente= models.ForeignKey(Cliente, blank=True, null=True)
