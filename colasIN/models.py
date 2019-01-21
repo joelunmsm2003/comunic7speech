@@ -135,6 +135,9 @@ class Anio_v(models.Model):
         return self.nombre
 
 
+
+
+
 class Colores_v(models.Model):
     nombre= models.CharField(max_length=1000,blank=True, null=True)
 
