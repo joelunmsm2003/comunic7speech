@@ -46,7 +46,7 @@ class ProduccionForm(ModelForm):
             'descuento':TextInput(attrs={'class':'form-control'}),
             'precio_total':TextInput(attrs={'class':'form-control'}),
             'fecha_atencion':TextInput(attrs={'class':'form-control','type':'date'}),
-            'hora_instalacion':TextInput(attrs={'class':'form-control','type':'date'}),
+            'hora_instalacion':TextInput(attrs={'class':'form-control','type':'time'}),
             'misma_direccion':TextInput(attrs={'class':'form-control'}),
             'direccion_atencion':TextInput(attrs={'class':'form-control'}),
             'distrito':TextInput(attrs={'class':'form-control'}),
