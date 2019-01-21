@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from django import forms
 from django.forms import *
 from colasIN.models import *
@@ -16,6 +19,7 @@ class AgenteForm(ModelForm):
 
 
 class ProduccionForm(ModelForm):
+
     class Meta:
         model = Produccion
         fields = '__all__'
@@ -33,7 +37,7 @@ class ProduccionForm(ModelForm):
             'marca_vehiculo':TextInput(attrs={'class':'form-control'}),
             'modelo':TextInput(attrs={'class':'form-control'}),
             'version':TextInput(attrs={'class':'form-control'}),
-            'anio':TextInput(attrs={'class':'form-control'}),
+            'anio':Select(attrs={'class':'form-control'}),
             'cilindrada':TextInput(attrs={'class':'form-control'}),
             'color':TextInput(attrs={'class':'form-control'}),
             'kilometraje':TextInput(attrs={'class':'form-control'}),
@@ -49,7 +53,7 @@ class ProduccionForm(ModelForm):
             'hora_instalacion':TextInput(attrs={'class':'form-control','type':'time'}),
             'misma_direccion':TextInput(attrs={'class':'form-control'}),
             'direccion_atencion':TextInput(attrs={'class':'form-control'}),
-            'distrito':TextInput(attrs={'class':'form-control'}),
+            'distrito':Select(attrs={'class':'form-control'}),
             'referencia':TextInput(attrs={'class':'form-control'}),
             'boleta':TextInput(attrs={'class':'form-control'}),
             'mismo_cliente':TextInput(attrs={'class':'form-control'}),
@@ -69,6 +73,9 @@ class ProduccionForm(ModelForm):
             'status':TextInput(attrs={'class':'form-control'}),
             'observaciones':TextInput(attrs={'class':'form-control'}),
             
+        }
+        labels = {
+            'anio':u'Año',
         }
 
 
