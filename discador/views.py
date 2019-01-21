@@ -16,7 +16,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from discador.admin import *
 from django.db.models import Count
-
+from discador.forms import *
 @csrf_exempt
 def subetelefonos(request):
 
@@ -59,6 +59,7 @@ def subetelefonos(request):
 		cliente=cliente,observacion=observacion,tipo_contacto=tipo_contacto,
 		tipo_telefono=tipo_telefono,fuente_telefono=fuente_telefono,estado=estado
 		).save()
+
 
 	return render(request, 'agentes.html',{})
 
@@ -228,6 +229,16 @@ def api_detalle_cuentas(request,id):
 
 
 
+
+@csrf_exempt
+def api_agentes(request):
+
+	_data = Agente.objects.all()
+
+	serializer =  AgenteSerializer(_data,many=True)
+	return JsonResponse(serializer.data, safe=False)
+
+	
 @csrf_exempt
 def agentes(request):
 
@@ -238,6 +249,18 @@ def agentes(request):
 
 	return render(request, 'agentes.html',{})
 
+@csrf_exempt
+def traeagentes(request):
+
+	#_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'traeagentes.html',{})
+
+
+
 
 @csrf_exempt
 def opcion_score(request):
@@ -247,12 +270,23 @@ def opcion_score(request):
 	#serializer =  ScoreSerializer(_data,many=True)
 	#return JsonResponse(serializer.data, safe=False)
 
+
 	return render(request, 'opcion_score.html',{})
+
+
+
+
+@csrf_exempt
+def borrar(request):
+
+	Subresultado.objects.all().delete()
+
+	return render(request, 'importador.html',{})
 
 @csrf_exempt
 def subescores(request):
 
-	xls = pd.ExcelFile('/Users/xiencias/score.xls') 
+	xls = pd.ExcelFile('/home/jose/Descargas/Libro1.xlsx') 
 	
 	df = pd.read_excel(xls, 'MARKETING') 
 
@@ -260,15 +294,18 @@ def subescores(request):
 
 	for i in range(df.shape[0]):
 
-		print 'gestion',df['TIPO GESTION'][i]
+		subresultado=df['TIPO GESTION'][i]
 
 		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
-		print 'id_gestion',df['IDGESTION'][i]
+		
 		id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
 
 		print 'resultado',df['RESULTADO'][i]
 		resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
 		print 'jsutificacion',df['JUSTIFICACION'][i]
+		nombre=df['JUSTIFICACION'][i]
+
+		
 		subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
 
 		peso_subresultado = df['PESO JUSTIFICACION'][i]
@@ -285,19 +322,36 @@ def subescores(request):
 	Score.objects.filter(negocio_id=1).delete()
 
 	for i in range(df.shape[0]):
+		print 'gestion',df['TIPO GESTION'][i]
 
 		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
-		print df['IDGESTION'][i]
+		print 'id-gestion', df['IDGESTION'][i]
 		id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
 
-		print df['RESULTADO'][i]
+		print 'resultado',df['RESULTADO'][i]
 		resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
-		print df['JUSTIFICACION'][i]
-		subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+		print 'justificacion1',df['JUSTIFICACION'][i]
+		nombre=df['JUSTIFICACION'][i]
 
+
+		# try :
+		# 	Subresultado(nombre=nombre).save()
+		# except:
+
+		subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
+		
+
+		print 'PESO-justificacion0n',df['JUSTIFICACION'][i]
 		peso_subresultado = df['PESO JUSTIFICACION'][i]
+
+
+		print 'PESO-TIPO-justificacion0n',df['PESO TIPO GESTION'][i]
 		peso_tipo_gestion = df['PESO TIPO GESTION'][i]
+
+		print 'PESO-ID-GESTION',df['PESO IDGESTION'][i]
 		peso_id_gestion = df['PESO IDGESTION'][i]
+
+		print 'PESO-RESULTADO',df['PESO RESULTADO'][i]
 		peso_resultado = df['PESO RESULTADO'][i]
 		print('?????????????????',id_gestion_id)
 
@@ -308,19 +362,30 @@ def subescores(request):
 	Score.objects.filter(negocio_id=3).delete()
 
 	for i in range(df.shape[0]):
-
+	
+		print('tipo-gestion')
+		print 'PESO-Tipo-gestion', df['TIPO GESTION'][i]
 		gestion_id=Gestion.objects.get(nombre=df['TIPO GESTION'][i]).id
-		print df['IDGESTION'][i]
+		
+		print 'id-gestion', df['IDGESTION'][i]
 		id_gestion_id=IDGestion.objects.get(nombre=df['IDGESTION'][i]).id
-
-		print df['RESULTADO'][i]
+		
+		print 'Resultadoo',df['RESULTADO'][i]
 		resultado_id=Resultado.objects.get(nombre=df['RESULTADO'][i]).id
-		print df['JUSTIFICACION'][i]
+
+		
+		print 'Justificacionn',df['JUSTIFICACION'][i]
+		
 		subresultado_id=Subresultado.objects.get(nombre=df['JUSTIFICACION'][i]).id
 
+		
 		peso_subresultado = df['PESO JUSTIFICACION'][i]
+		
 		peso_tipo_gestion = df['PESO TIPO GESTION'][i]
+		
 		peso_id_gestion = df['PESO IDGESTION'][i]
+
+		print('')
 		peso_resultado = df['PESO RESULTADO'][i]
 		print('?????????????????',id_gestion_id)
 
@@ -682,8 +747,129 @@ def guardaproveedor(request):
 	return JsonResponse(serializer.data, safe=False)
 
 
+@csrf_exempt
+def opcion_clientes(request):
+
+	_data = Cliente.objects.all()
+
+	nuevocliente =  ClientesForm()
+
+	if request.POST:
+
+		form = ClientesForm(request.POST)
+	
+		if form.is_valid():
+
+			form.save()
+
+	if request.GET:
+
+		filtro = {}
+
+		for r in request.GET:
+
+			if r=='nombres' and request.GET['nombres']!= '':
+				filtro['nombres'] = request.GET['nombres']
+			if r=='dni' and request.GET['dni']!= '' :
+				filtro['dni'] = request.GET['dni']
+			if r=='telefono' and request.GET['telefono']!= '':
+				filtro['telefono'] = request.GET['telefono']
+			if r=='numero_documento' and request.GET['numero_documento']!= '':
+				filtro['numero_documento'] = request.GET['numero_documento']
+
+		print filtro
+
+		_data=Cliente.objects.filter(**filtro)
+
+		
+		return render(request, 'opcion_clientes.html',{'clientes':_data,'nuevocliente':nuevocliente})
+
+	return render(request, 'opcion_clientes.html',{'clientes':_data,'nuevocliente':nuevocliente})
 
 
+@csrf_exempt
+def editar_cliente(request,cliente_id):
+	
+	if request.method == 'POST':
+
+		cliente_id = Cliente.objects.get(id=cliente_id)
+
+		form = ClientesForm(request.POST,instance=cliente_id)
+	
+		if form.is_valid():
+
+			form.save()
+
+		return render(request, 'discador.exito.html',{})
+
+
+	if request.method == 'GET':
+
+
+
+		cli = Cliente.objects.get(id=cliente_id)
+
+		editarcliente = ClientesForm(instance=cli)
+
+		return render(request, 'discador.editar_cliente.html',{'editarcliente':editarcliente})
+
+@csrf_exempt
+def opcion_provedor(request):
+
+	_data = Proveedor.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'opcion_provedor.html',{'provedor':_data})
+
+
+@csrf_exempt
+def opcion_usuarios(request):
+
+	_data = User.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'opcion_usuarios.html',{'usuarios':_data})
+
+@csrf_exempt
+def proseso_masivo(request):
+
+	_data = Cuentas.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+
+	return render(request, 'proseso_masivo.html',{'cuentas':_data})
+
+
+@csrf_exempt
+
+def gestion_telefonia(request):
+
+	_data = Telefonos.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+	
+
+	return render(request, 'gestion_telefonia.html',{'telefonos':_data})
+
+
+@csrf_exempt
+
+def gestion_campo(request):
+
+	_data = Telefonos.objects.all()
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+	
+
+	return render(request, 'gestion_campo.html',{'telefonos':_data})
 
 @csrf_exempt
 def opcion_proveedor(request):
