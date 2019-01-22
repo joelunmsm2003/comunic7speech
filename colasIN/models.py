@@ -68,6 +68,9 @@ class Agente(models.Model):
     t_estado = models.DateTimeField(db_column='t_estado', default=datetime.datetime.today())
     acd = models.CharField(max_length=100, blank=True)
 
+    def __unicode__(self):
+        return self.nombre
+
 class ColasinAcd(models.Model):
     id_acd = models.AutoField(primary_key=True)
     did_campana = models.CharField(db_column='DID_Campana', max_length=45)  # Field name made lowercase.
@@ -287,6 +290,7 @@ class Produccion(models.Model):
     nombre_boleta= models.CharField(max_length=1000,blank=True, null=True)
     m_apellido_p= models.CharField(max_length=1000,blank=True, null=True)
     m_apellido_m= models.CharField(max_length=1000,blank=True, null=True)
+    agente= models.ForeignKey(Agente,max_length=1000,blank=True, null=True,related_name='_agente')
     dni_c= models.CharField(max_length=1000,blank=True, null=True)
     factura= models.BooleanField(max_length=1000,blank=True, default=True)
     ruc= models.CharField(max_length=1000,blank=True, null=True)
@@ -303,10 +307,15 @@ class Produccion(models.Model):
     observaciones= models.CharField(max_length=1000,blank=True, null=True)
     usuario=models.ForeignKey(User,help_text='Usuarios',max_length=1000,blank=True, null=True,related_name='_modelo')
     cierre= models.BooleanField(default=0)
-    agente= models.ForeignKey(Agente,max_length=1000,blank=True, null=True,related_name='_agente')
-
+    
     def __unicode__(self):
         return str(self.id)
+
+    @property
+    def nombre_completo(self):
+        return ''.join(
+            [self.cliente,' ,', self.apellido_p, ' ', self.apellido_m])
+
         
 
 

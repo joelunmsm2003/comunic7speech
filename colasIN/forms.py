@@ -23,7 +23,7 @@ class ProduccionForm(ModelForm):
     class Meta:
         model = Produccion
         fields = '__all__'
-        exclude =('venta','usuario','agente')
+        exclude =('venta','usuario','direccion_rs','m_apellido_p','m_apellido_m','dni_c','boleta','factura','misma_direccion','mismo_cliente')
         widgets = {
             'nombre':TextInput(attrs={'class':'form-control'}),
             'fecha':TextInput(attrs={'class':'form-control'}),
@@ -40,6 +40,7 @@ class ProduccionForm(ModelForm):
             'anio':Select(attrs={'class':'form-control'}),
             'cilindrada':TextInput(attrs={'class':'form-control'}),
             'color':Select(attrs={'class':'form-control'}),
+            'agente':Select(attrs={'class':'form-control'}),
             'kilometraje':TextInput(attrs={'class':'form-control'}),
             'placa':TextInput(attrs={'class':'form-control'}),
             'cantidad':TextInput(attrs={'class':'form-control'}),
@@ -51,20 +52,12 @@ class ProduccionForm(ModelForm):
             'precio_total':TextInput(attrs={'class':'form-control'}),
             'fecha_atencion':TextInput(attrs={'class':'form-control','type':'date'}),
             'hora_instalacion':TextInput(attrs={'class':'form-control','type':'time'}),
-            'misma_direccion':TextInput(attrs={'class':'form-control'}),
             'direccion_atencion':TextInput(attrs={'class':'form-control'}),
             'distrito':Select(attrs={'class':'form-control'}),
             'referencia':TextInput(attrs={'class':'form-control'}),
-            'boleta':TextInput(attrs={'class':'form-control'}),
-            'mismo_cliente':TextInput(attrs={'class':'form-control'}),
             'nombre_boleta':TextInput(attrs={'class':'form-control'}),
-            'm_apellido_p':TextInput(attrs={'class':'form-control'}),
-            'm_apellido_m':TextInput(attrs={'class':'form-control'}),
-            'dni_c':TextInput(attrs={'class':'form-control'}),
-            'factura':TextInput(attrs={'class':'form-control'}),
             'ruc':TextInput(attrs={'class':'form-control'}),
             'razon_social':TextInput(attrs={'class':'form-control'}),
-            'direccion_rs':TextInput(attrs={'class':'form-control'}),
             'pago':Select(attrs={'class':'form-control'}),
             'correo':TextInput(attrs={'class':'form-control'}),
             'atiende':Select(attrs={'class':'form-control'}),
@@ -76,8 +69,33 @@ class ProduccionForm(ModelForm):
         }
         labels = {
             'anio':u'Año',
+            'apellido_p':'Apellido Paterno',
+            'apellido_m':'Apellido Materno',
+            'cliente':'Nombres'
         }
 
+
+
+class BusquedaForm(ModelForm):
+
+    class Meta:
+        model = Produccion
+        fields =('telefono_1','cliente','apellido_p','apellido_m','razon_social')
+        widgets = {
+
+            'telefono_1':TextInput(attrs={'class':'form-control'}),
+            'cliente':TextInput(attrs={'class':'form-control'}),
+            'apellido_p':TextInput(attrs={'class':'form-control'}),
+            'apellido_m':TextInput(attrs={'class':'form-control'}),
+            'razon_social':TextInput(attrs={'class':'form-control'})
+            
+        }
+        labels = {
+            'telefono_1':u'Telefono',
+            'apellido_p':'Apellido Paterno',
+            'apellido_m':'Apellido Materno',
+            'cliente':'Nombres'
+        }
 
 
 
