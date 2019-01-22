@@ -57,7 +57,9 @@
 
   {% if ventas %}
 
-  <h5>Historial de Ventas con el numero 
+
+
+  <h5>
 
     <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/480px-WhatsApp.svg.png' style='width: 30px;'>
     <a style='color:#67da75;' target="_blank" href='https://wa.me/51{{telefono}}?text=Hola'>{{telefono}}</a>
@@ -67,11 +69,15 @@
   </h5>
 
 
+  <h6>Numero de registros encontrados: {{ventas | length}} </h6>
+
+
 <table class="table table-default responsive">
     <thead>
       <tr>
       
         <th scope="col">Fecha</th>
+
        
         <th scope="col">Nombre</th>
 
@@ -106,10 +112,13 @@
         {% endif %}
        
        <td>{{c.fecha_atencion}}</td>
-       <!-- <td>{{c.agente.nombre}}</td> -->
 
-        <td>{{c.cliente }}</td>
-        <!-- <td>{{c.dni }}</td> -->
+       <!--<td>{{c.agente.nombre}}</td>-->
+        <td>{{c.nombre_completo }}</td>
+        <!--<td>{{c.dni }}</td>-->
+        <td>{{c.razon_social}}</td>
+        <td>{{c.status}}</td>
+
         <td>{{c.marca_vehiculo}}</td>
         <td>{{c.modelo}}</td>
 
@@ -117,7 +126,7 @@
         <td>{{c.status}}</td>
         
         <td>{{c.anio}}</td>
-        <!-- <td>{{c.placa}}</td> -->
+
         <td>{{c.marca_producto}}</td>
         <td>{{c.modelo_bateria}}</td>
         <td>{{c.precio}}</td>
@@ -147,7 +156,9 @@
 
   {% else %}
 
-<h5>No hay registros para este numero</h5>
+<h6>No se encontraron registros con estos parametros</h6>
+
+<br>
   {% endif %}
 
       

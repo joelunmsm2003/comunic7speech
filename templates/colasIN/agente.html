@@ -14,6 +14,7 @@
   <a class="navbar-brand" href="#">Baterias Al Toque</a>
    <a class="navbar-brand" href="http://call.comunica7.com:8000/comunica7/dashboard/">Inicio</a>
    <button type="button" class="btn btn-outline-danger"href="/colasIN/reporte"><a href="/colasIN/reporte">Reporte</a></button>
+  
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -421,37 +422,47 @@
                 <div class="modal-content">
                     <form method='GET' action='/colasIN/monitor_agente/0/0'>
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Ingrese Numero</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Buscar Registro</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
 
-                    <div class="modal-body">
-                      <input class='form-control' placeholder='Telefono' name='numero'>
-                    </div>
 
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Nombre</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
+                    <form method="GET">
+
 
                     <div class="modal-body">
-                      <input class='form-control' placeholder='Telefono' name='numero'>
+                      <!--<input class='form-control' placeholder='Telefono' name='numero'>-->
+
+                        
+
+   
+                          <div class='row'>
+
+                          {% for field in busqueda.visible_fields %}
+
+                          
+                          <div class="col-md-12">
+                                
+                                    {{ field.errors }}
+                                    {{ field.label_tag }} {{ field }}
+                            </div>
+                          
+                          {% endfor %}
+                         
+                          </div>
+                          
+
+                            
+
+                      
+
+
+
                     </div>
 
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Razon Social</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-
-                    <div class="modal-body">
-                      <input class='form-control' placeholder='Telefono' name='numero'>
-                    </div>
+                   
 
                     
                     <div class="modal-footer">
@@ -479,14 +490,18 @@
                       <th scope="col">Fecha</th>
                       <th scope="col">Nombre</th>
                       <th scope="col">Telefono</th>
-                      <th scope="col">DNI</th>
+                      <!--<th scope="col">DNI</th>-->
+                      <th scope="col">Razon Social</th>
+                      <th scope="col">Status</th>
                       <th scope="col">Marca</th>
                       <th scope="col">Modelo</th>
 
                       <th scope="col">Anio</th>
-                      <th scope="col">Placa</th>
+                      <!--<th scope="col">Placa</th>-->
                       <th scope="col">Marca Bat.</th>
                       <th scope="col">Modelo Bat.</th>
+
+
                       <th scope="col">Precio</th>
                       <th scope="col">Descuento</th>
                       <th scope="col">Direccion</th>
@@ -510,16 +525,19 @@
                           {% endif %}
 
                         <td>{{c.fecha_atencion}}</td>
-                        <td>{{c.cliente }}</td>
+                        <td>{{c.nombre_completo }}</td>
                         <td><a style='color:#67da75;' target="_blank" href='https://wa.me/51{{c.telefono_1}}?text=Hola'>{{c.telefono_1 }}</a></td>
-                        <td>{{c.dni }}</td>
+                        <!--<td>{{c.dni }}</td>-->
+                        <td>{{c.razon_social}}</td>
+                        <td>{{c.status}}</td>
                         <td>{{c.marca_vehiculo}}</td>
                         <td>{{c.modelo}}</td>
 
                         <td>{{c.anio}}</td>
-                        <td>{{c.placa}}</td>
+                        <!--<td>{{c.placa}}</td>-->
                         <td>{{c.marca_producto}}</td>
                         <td>{{c.modelo_bateria}}</td>
+                        
                         <td>{{c.precio}}</td>
                         <td>{{c.descuento}}</td>
 

@@ -1211,7 +1211,29 @@ def m_agente(request,cliente,id_incidencia):
 
 		telefono=cliente
 
+		filtro = {}
+
 		for r in request.GET:
+
+			if r=='telefono_1' and request.GET['telefono_1']!= '':
+
+				filtro['telefono_1__contains']=request.GET['telefono_1']
+
+			if r=='cliente' and request.GET['cliente']!= '':
+
+				filtro['cliente__contains']=request.GET['cliente']
+
+			if r=='apellido_p__contains' and request.GET['apellido_p']!= '':
+
+				filtro['apellido_p__contains']=request.GET['apellido_p']
+
+			if r=='apellido_m' and request.GET['apellido_m']!= '':
+
+				filtro['apellido_m__contains']=request.GET['apellido_m']
+
+			if r=='razon_social' and request.GET['razon_social']!= '':
+
+				filtro['razon_social']=request.GET['razon_social']
 
 
 			if r=='audio':
@@ -1230,7 +1252,9 @@ def m_agente(request,cliente,id_incidencia):
 
 				_agente.save()
 
-		ven = Produccion.objects.filter(telefono_1__contains=telefono).order_by('-id')
+		print 'FILTRO...',filtro
+
+		ven = Produccion.objects.filter(**filtro).order_by('-id')
 
 		total_llamadas = Produccion.objects.all().order_by('-id')
 
@@ -1285,5 +1309,7 @@ def m_agente(request,cliente,id_incidencia):
 
 			incidenciaform = ProduccionForm(instance=incidencia)
 
-		return render(request, 'colasIN/agente.html',{'total_llamadas':total_llamadas,'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven,'audio':audio})
+		busqueda = BusquedaForm()
+
+		return render(request, 'colasIN/agente.html',{'busqueda':busqueda,'total_llamadas':total_llamadas,'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven,'audio':audio})
 
