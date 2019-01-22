@@ -134,17 +134,17 @@ console.log('dataaa')
 
     <select name='marca_vehiculo' id="marca" class="form-control" onchange='traemodelos()' >
 
-        <option >Seleccionar</option>
+        <option  class='option' >Seleccionar</option>
 
         {% for m in marcas %}
 
             {% if marca == m.nombre %}
 
-              <option value='{{m.nombre}}' selected>{{m.nombre}}</option>
+              <option value='{{m.nombre}}' selected  class='option'>{{m.nombre}}</option>
 
             {% else %}
 
-              <option  value='{{m.nombre}}'>{{m.nombre}}</option>
+              <option  value='{{m.nombre}}'  class='option'>{{m.nombre}}</option>
 
             {% endif %}
 
@@ -165,7 +165,7 @@ console.log('dataaa')
     <div class="input-group-prepend">
 
      <select name='modelo' class="form-control" id='modelo'>
-      <option >Seleccionar</option>
+      <option class='option'>Seleccionar</option>
 
         {% for m in modelos %}
 
@@ -275,14 +275,14 @@ console.log('dataaa')
 
     
 
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-1">
       <label for="inputkilo" class="text-dark">Kilometraje</label>
       <input type="text" class="form-control rounded" id="inputkilo"  name="kilometraje" placeholder="kilometraje" value="{{kilometraje}}">
     </div>
 
 
   
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-1">
       <label for="inputZip" class="text-dark">Placa</label>
       <input type="text" class="form-control rounded" id="inputZip" name="placa" placeholder="Placa" value="{{placa}}">
     </div>
@@ -335,7 +335,7 @@ console.log('dataaa')
     <select name='modelo_b' id="modelo_b" class="form-control"  onchange='traemodelos()'>
 
         
-        <option >Seleccionar</option>
+        <option class='opt' >Seleccionar</option>
 
               {% for b in modelos_baterias %}
 
@@ -345,11 +345,11 @@ console.log('dataaa')
 
                   {{b_modelo}}
 
-                    <option value='{{b.modelo}}' selected>{{b.modelo}}</option>
+                    <option value='{{b.modelo}}' selected  class='opt'>{{b.modelo}}</option>
 
                   {% else %}
 
-                    <option  value='{{b.modelo}}'>{{b.modelo}}</option>
+                    <option  value='{{b.modelo}}' class='opt'>{{b.modelo}}</option>
 
                   {% endif %}
 
@@ -393,6 +393,12 @@ console.log('dataaa')
   </div>
 </div>
 
+
+<div class="form-group col-md-2">
+  <label for="inputP" class="text-dark">Cantidad</label>
+  <input type="number" class="form-control rounded" id="inputP" name="cantidad"  value="{{cant_ba}}" onchange="cal()" placeholder="0" >
+</div>
+
   </div>
 
 
@@ -402,13 +408,9 @@ console.log('dataaa')
   <div class="form-row  m-1">
 
  
+
+
   <div class="form-group col-md-2">
-      <label for="inputP" class="text-dark">Cantidad</label>
-      <input type="number" class="form-control rounded" id="inputP" name="cantidad"  value="{{cant_ba}}" onchange="cal()" placeholder="0" >
-    </div>
-
-
-  <div class="form-group col-md-3">
 
         <label for="inputTotal" class="text-dark">Total</label>
       <div class="input-group">
@@ -448,12 +450,7 @@ console.log('dataaa')
   </div>
 
 
-
-
-
-
-
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
     <label for="inputRF" class="text-dark">Direccion de Atencion </label>
     <input type="text" class="form-control"  name="direccion_atencion" id="inpuguardatRF" onchange='guardadireccion()'  placeholder="Direccion">
 
@@ -462,7 +459,7 @@ console.log('dataaa')
 
 
 
-  <div class="form-group col-md-3">
+  <div class="form-group col-md-2">
     <label for="inputMarca" class="text-dark">Distrito</label>
 
     <select name='distrito' id="distrito" class="form-control" >
@@ -487,12 +484,12 @@ console.log('dataaa')
 
 
 
-  <div class="form-group col-md-5">
+  <div class="form-group col-md-3">
     <label for="inputRef" class="text-dark">Referencia</label>
     <input type="text" class="form-control"  name="referencia" id="inputRef" placeholder="Referencia">
   </div>
 
-  <div class="form-group col-md-12">
+  <div class="form-group col-md-4">
       <label for="inputRef" class="text-dark">Gmaps</label>
       <div class="input-group-prepend">
 
@@ -504,6 +501,11 @@ console.log('dataaa')
 </div>
 
 
+<button type="button" class="btn btn-success m-1" id="bboleta" style="max-height: 37px;
+margin-top: 32px !important;" >Boleta</button>
+<button type="button" class="btn btn-danger m-1" id="ffactura" style="max-height: 37px;
+margin-top: 32px !important;">Factura</button>
+
 
 
   </div>
@@ -512,8 +514,6 @@ console.log('dataaa')
 
 
 
-<button type="button" class="btn btn-success m-1" id="bboleta" >Boleta</button>
-<button type="button" class="btn btn-danger m-1" id="ffactura">Factura</button>
 
   <div class="form-row m-1" id="bboleta1" style="display: none">
 

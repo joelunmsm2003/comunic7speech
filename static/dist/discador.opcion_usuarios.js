@@ -41764,7 +41764,7 @@ var Header = function Header() {
     href: "/discador/opcion_proveedor"
   }, "Panel General del Cliente"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
-    href: "/discador/agentes"
+    href: "/discador/opcion_cuenta"
   }, "Procesos Masivos de cuenta"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("a", {
     class: "dropdown-item",
     href: "#"

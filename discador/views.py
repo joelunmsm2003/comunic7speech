@@ -17,6 +17,7 @@ from django.dispatch import receiver
 from discador.admin import *
 from django.db.models import Count
 from discador.forms import *
+
 @csrf_exempt
 def subetelefonos(request):
 
@@ -814,27 +815,156 @@ def editar_cliente(request,cliente_id):
 		return render(request, 'discador.editar_cliente.html',{'editarcliente':editarcliente})
 
 @csrf_exempt
-def opcion_provedor(request):
+def provedor_carteras(request):
 
-	_data = Proveedor.objects.all()
+	_data = ProveedorCarteras.objects.all()
+	nv_provedor_cartera =  ProveedorCarteraForm()
+	if request.POST:
+		form = ProveedorCarteraForm(request.POST)	
+		if form.is_valid():
+			form.save()
+		return render(request, 'discador.exito.html',{})
+	
+	
 
 	#serializer =  ScoreSerializer(_data,many=True)
 	#return JsonResponse(serializer.data, safe=False)
 
-	return render(request, 'opcion_provedor.html',{'provedor':_data})
+	return render(request, 'provedor_cartera.html',{'provedor_cartera':_data,'nv_provedor_cartera':nv_provedor_cartera})
+
+
+
+
+@csrf_exempt
+def opcion_provedor(request):
+
+	_data = Proveedor.objects.all()
+	nuevoprovedor =  ProveedorForm()
+	if request.POST:
+		form = ProveedorForm(request.POST)	
+		if form.is_valid():
+			form.save()
+	
+	if request.GET:
+		filtro = {}
+		for r in request.GET:
+			if r=='nombre' and request.GET['nombre']!= '':
+				filtro['nombre'] = request.GET['nombre']
+			
+		print 'me-funcion este filtro',filtro
+		_data=Proveedor.objects.filter(**filtro)
+
+		
+		return render(request, 'opcion_provedor.html',{'provedor':_data,'nuevoprovedor':nuevoprovedor})
+
+	#serializer =  ScoreSerializer(_data,many=True)
+	#return JsonResponse(serializer.data, safe=False)
+
+	return render(request, 'opcion_provedor.html',{'provedor':_data,'nuevoprovedor':nuevoprovedor})
+
+@csrf_exempt
+def editar_provedor(request,provedor_id):
+	
+	if request.method == 'POST':
+		provedor_id = Proveedor.objects.get(id=provedor_id)
+		form = ProveedorForm(request.POST,instance=provedor_id)
+		if form.is_valid():
+			form.save()
+		return render(request, 'discador.exito.html',{})
+	if request.method == 'GET':
+		pro = Proveedor.objects.get(id=provedor_id)
+		editarprovedor = ProveedorForm(instance=pro)
+		return render(request, 'discador.editar_provedor.html',{'editarprovedor':editarprovedor})
+	
 
 
 @csrf_exempt
 def opcion_usuarios(request):
 
-	_data = User.objects.all()
+	_data = Agente.objects.all()
+
+	nuevoagente =  AgenteForm()
+	if request.POST:
+		form = AgenteForm(request.POST)	
+		if form.is_valid():
+			form.save()
+	
+	if request.GET:
+		filtro = {}
+		for r in request.GET:
+			if r=='nombre' and request.GET['nombre']!= '':
+				filtro['nombre'] = request.GET['nombre']
+			
+		print 'me-funcion este filtro',filtro
+		_data=Agente.objects.filter(**filtro)
+
+		
+		return render(request, 'opcion_usuarios.html',{'agentes':_data,'nuevoagente':nuevoagente})
 
 	#serializer =  ScoreSerializer(_data,many=True)
 	#return JsonResponse(serializer.data, safe=False)
 
-	return render(request, 'opcion_usuarios.html',{'usuarios':_data})
+	return render(request, 'opcion_usuarios.html',{'agentes':_data,'nuevoagente':nuevoagente})
+
 
 @csrf_exempt
+def editar_usuarios(request,usuario_id):
+	
+	if request.method == 'POST':
+		usuario_id = Agente.objects.get(id=usuario_id)
+		form = AgenteForm(request.POST,instance=usuario_id)
+		if form.is_valid():
+			form.save()
+		return render(request, 'discador.exito.html',{})
+	if request.method == 'GET':
+		age = Agente.objects.get(id=usuario_id)
+		print '???? que usuarios trae....xd',age
+		editarusuarios = AgenteForm(instance=age)
+		return render(request, 'discador.editar_usuarios.html',{'editarusuarios':editarusuarios})
+
+@csrf_exempt
+
+@csrf_exempt
+def opcion_cuenta(request):
+
+	_data = Cuentas.objects.all()
+
+	nuevocliente =  ClientesForm()
+
+	if request.POST:
+
+		form = ClientesForm(request.POST)
+	
+		if form.is_valid():
+
+			form.save()
+
+	if request.GET:
+
+		filtro = {}
+
+		for r in request.GET:
+
+			if r=='nombres' and request.GET['nombres']!= '':
+				filtro['nombres'] = request.GET['nombres']
+			if r=='dni' and request.GET['dni']!= '' :
+				filtro['dni'] = request.GET['dni']
+			if r=='telefono' and request.GET['telefono']!= '':
+				filtro['telefono'] = request.GET['telefono']
+			if r=='numero_documento' and request.GET['numero_documento']!= '':
+				filtro['numero_documento'] = request.GET['numero_documento']
+
+		print filtro
+
+		_data=Cliente.objects.filter(**filtro)
+
+		
+		return render(request, 'opcion_cuenta.html',{'cuenta':_data,'nuevocliente':nuevocliente})
+
+	return render(request, 'opcion_cuenta.html',{'cuenta':_data,'nuevocliente':nuevocliente})
+
+
+
 def proseso_masivo(request):
 
 	_data = Cuentas.objects.all()

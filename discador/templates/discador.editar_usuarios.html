@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <title>Editar Cliente</title>
+  <link href="https://fonts.googleapis.com/css?family=Exo+2:100|Kanit:200" rel="stylesheet">
+<body>
+  
+   <div class='container'>
+
+    <h2>Editar Cliente</h2>
+        <form method="POST" class="post-form">
+
+                {% csrf_token %}
+              
+                
+              
+              
+                {% for hidden in editarusuarios.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                <div class='row'>
+              
+                {% for field in editarusuarios.visible_fields %}
+              
+                
+                <div class="col-md-2">
+                      
+                          {{ field.errors }}
+                          {{ field.label_tag }} {{ field }}
+                  </div>
+                
+                {% endfor %}
+               
+                </div>
+                
+              
+                  <div style='height:20px;'></div>
+              
+                  
+              
+                  {% if incidencia.cierre %}
+              
+              
+                   {% else %}
+              
+              
+                  <button type="submit" class="save btn btn-primary">Guardar</button>
+              
+                  {% endif %}
+              
+              
+                </form>
+
+            </div>
+    
+ 
+   
+</body>
+
+<link rel="stylesheet" href="/static/dist/style.bundle.css">
+    
+<script src="/static/dist/discador.comunica7.js"></script>
+</html>
