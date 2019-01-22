@@ -46,6 +46,7 @@ function traeinfomoto(){
      }
    }
    
+
    
    function traemodelos() {
    
@@ -76,10 +77,33 @@ function traeinfomoto(){
    
         
    
-       window.location.href = "/colasIN/dashboard/?marca="+x+'&modelo_v='+modelo_v+'&cliente='+cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+'&marca_b='+marca_b+'&version='+version+'&anio='+anio+'&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+'&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+'&mapa='+mapa+'&audio='+audio
-   
+       window.location.href = "/colasIN/dashboard/?marca="+x+'&modelo_v='+modelo_v+'&cliente='+
+       cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+
+       dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+
+       '&marca_b='+marca_b+'&version='+version+'&anio='+anio+
+       '&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+
+       '&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+
+       '&mapa='+mapa+'&audio='+audio;
+       $("#modelo").focus();
    
        }
+
+      
+       $(document).ready(function(){
+        $("#modelo").click(function(){
+    
+          $("#inputVersion").focus();
+        });
+      });
+   
+
+  
+      $(document).ready(function(){
+        $(".opt").click(function(){
+    
+          $("cantidad").focus();
+        });
+      });
    
    
    
@@ -108,8 +132,9 @@ function traeinfomoto(){
      }
    }
    
+  
    
-   
+
    
    
      $(document).ready(function(){

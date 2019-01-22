@@ -7,6 +7,18 @@
   <title>Provedor</title>
   <link href="https://fonts.googleapis.com/css?family=Exo+2:100|Kanit:200" rel="stylesheet">
  
+  <script>
+  
+    function abrirmodal(url){
+  
+  var strWindowFeatures = "location=yes,right=20,height=500,width=500,scrollbars=yes,status=yes";
+  var URL = url ;
+  var win = window.open(URL, "_blank", strWindowFeatures);
+  
+  
+  }
+      
+    </script>
 
 </head>
 <body>
@@ -18,25 +30,166 @@
     <div id='app'></div>
 
     <div class=container>
-    <h1>Provedor</h1>
+    <h1>Proveedor</h1>
 
     <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#añadir">Añadir</button>
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#buscar">Buscar</button>
-        <a  class="btn btn-secondary" href='/discador/opcion_clientes'>Todos</a>
+        <a  class="btn btn-secondary" href='/discador/opcion_provedor'>Todos</a>
         
       </div>
 
-    {% for c in clientes %}
+      <table class='table'>
 
-
-        {{ c.id }}
-
-    {% endfor %}
+        <thead>
+          
+          <th>ID</th>
+          <th>Nombres</th>
+          <th>DNI</th>
+          <th>Telefono</th>
+          <th>Direccion</th>
+          
+          <th>Industria</th>
+        
+        
+        </thead>
+    
+        <tbody>
+        {% for p in provedor %}
+        <tr>
+          
+        <td>{{p.id}}</td>
+        <td>{{p.nombre}}</td>
+        <td>{{p.dni}}</td>
+        <td>{{p.telefono}}</td> 
+        <td>{{p.direccion}}</td>
+        
+        <td>{{p.industria}}</td>
+        <td><button type="button" class="btn btn-info btn-sm" onclick="abrirmodal('/discador/editar_provedor/{{p.id}}')" >Editar</button></td>
+        <td><button type="button" class="btn btn-info btn-sm" onclick="abrirmodal('/discador/provedor_carteras')" >Cartera</button></td>
+    
+    
+    
+        </tr>
+    
+        {% endfor %}
+      </tbody>
+    
+    
+        </table>
 
 
 
   </div>
+   <!-- Modal -->
+   <div class="modal fade" id="añadir" tabindex="-1" role="dialog" aria-labelledby="añadir" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Añadir Proveedor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form method="POST" class="post-form" >
+        <div class="modal-body">
+            
+
+                {% csrf_token %}
+              
+
+                {% for hidden in nuevoprovedor.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                <div class='row'>
+              
+                {% for field in nuevoprovedor.visible_fields %}
+              
+                
+                <div class="col-md-6">
+                      
+                          {{ field.errors }}
+                          {{ field.label_tag }} {{ field }}
+                  </div>
+                
+                {% endfor %}
+               
+                </div>
+                
+              
+                  <div style='height:20px;'></div>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+      </form>
+      </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+   <div class="modal fade" id="buscar" tabindex="-1" role="dialog" aria-labelledby="buscar" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Buscar Proveedor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form method="GET" class="post-form" >
+        <div class="modal-body">
+            
+
+              
+
+                {% for hidden in nuevoprovedor.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                <div class='row'>
+              
+                {% for field in nuevoprovedor.visible_fields %}
+              
+                
+                <div class="col-md-6">
+                      
+                          {{ field.errors }}
+                          {{ field.label_tag }} {{ field }}
+                  </div>
+                
+                {% endfor %}
+               
+                </div>
+                
+              
+                  <div style='height:20px;'></div>
+              
+                  
+              
+              
+              
+                
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+
+      </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+
+  
    
 
     
