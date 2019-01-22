@@ -28,8 +28,40 @@ class ProveedorForm(ModelForm):
             'dni':TextInput(attrs={'class':'form-control'}),
             'telefono':TextInput(attrs={'class':'form-control'}),
             'direccion':TextInput(attrs={'class':'form-control'}),
-            'industria':TextInput(attrs={'class':'form-control'})
+            'industria':TextInput(attrs={'class':'form-control'}),
+            'email':TextInput(attrs={'class':'form-control'}),
+            'contacto':TextInput(attrs={'class':'form-control'}),
+            'obserbaciones':TextInput(attrs={'class':'form-control'}),
+            'etado':TextInput(attrs={'class':'form-control'}),
+
         }
+
+
+class AgenteForm(ModelForm):
+    class Meta:
+        model = Agente
+        fields = ('nombre','direccion','telefono','grupo','user')
+        widgets = {
+            'nombre':TextInput(attrs={'class':'form-control'}),
+            'direccion':TextInput(attrs={'class':'form-control'}),
+            'telefono':TextInput(attrs={'class':'form-control'}),
+            'grupo':TextInput(attrs={'class':'form-control'}),
+            'user':Select(attrs={'class': 'form-control '}),
+        }
+
+class ProveedorCarteraForm(ModelForm):
+    class Meta:
+        model = ProveedorCarteras
+        fields = ('__all__')
+        widgets = {
+            
+            'proveedor': Select(attrs={'class': 'form-control '}),
+            'cartera': Select(attrs={'class': 'form-control '}),
+            'negocio': Select(attrs={'class': 'form-control '}),
+           
+        }
+
+
 
 
 

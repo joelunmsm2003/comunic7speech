@@ -45,7 +45,7 @@ const Header = ()=> {
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/discador/opcion_proveedor">Panel General del Cliente</a>
                         
-                        <a class="dropdown-item" href="/discador/agentes">Procesos Masivos de cuenta</a>
+                        <a class="dropdown-item" href="/discador/opcion_cuenta">Procesos Masivos de cuenta</a>
                         <a class="dropdown-item" href="#">Usuarios</a>
                         
                         

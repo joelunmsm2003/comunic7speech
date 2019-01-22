@@ -322,7 +322,7 @@ class Agente(models.Model):
 	distrito= models.ForeignKey(Distrito, blank=True, null=True)
 	direccion=models.CharField(max_length=100,blank=True,null=True)
 	telefono=models.CharField(max_length=100,blank=True,null=True)
-	grupor=models.CharField(max_length=100,blank=True,null=True)
+	grupo=models.CharField(max_length=100,blank=True,null=True)
 	user= models.ForeignKey(User, blank=True, null=True,related_name="user_agente")
 	sexo=models.CharField(max_length=100,blank=True,null=True)
 	fecha_ingreso=models.CharField(max_length=100,blank=True,null=True)

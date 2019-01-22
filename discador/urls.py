@@ -57,10 +57,19 @@ urlpatterns = [
     url(r'^agentes/',agentes),
     url(r'^opcion_score/',opcion_score),
     url(r'^opcion_clientes/',opcion_clientes),
+    url(r'^opcion_cuenta/',opcion_cuenta),
 
     url(r'^editar_cliente/(\d+)',editar_cliente),
     url(r'^opcion_provedor/',opcion_provedor),
+    url(r'^editar_provedor/(\d+)',editar_provedor),
     url(r'^opcion_usuarios/',opcion_usuarios),
+    url(r'^editar_usuarios/(\d+)',editar_usuarios),
+    url(r'^provedor_carteras/',provedor_carteras),
+    
+
+
+    
+
 
     url(r'^proseso_masivo/',proseso_masivo),
     url(r'^gestion_telefonia/',gestion_telefonia),

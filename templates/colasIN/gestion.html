@@ -72,12 +72,14 @@
       <tr>
       
         <th scope="col">Fecha</th>
-        <th scope="col">Agente</th>
+       
         <th scope="col">Nombre</th>
-        <th scope="col">DNI</th>
+
         <th scope="col">Marca</th>
         <th scope="col">Modelo</th>
-       
+        <th scope="col">Razon Social</th>
+        <th scope="col">Status</th>
+
         <th scope="col">Anio</th>
         <th scope="col">Placa</th>
         <th scope="col">Marca Bat.</th>
@@ -104,14 +106,18 @@
         {% endif %}
        
        <td>{{c.fecha_atencion}}</td>
-       <td>{{c.agente.nombre}}</td>
+       <!-- <td>{{c.agente.nombre}}</td> -->
+
         <td>{{c.cliente }}</td>
-        <td>{{c.dni }}</td>
+        <!-- <td>{{c.dni }}</td> -->
         <td>{{c.marca_vehiculo}}</td>
         <td>{{c.modelo}}</td>
+
+        <td>{{c.razon_social}}</td>
+        <td>{{c.status}}</td>
         
         <td>{{c.anio}}</td>
-        <td>{{c.placa}}</td>
+        <!-- <td>{{c.placa}}</td> -->
         <td>{{c.marca_producto}}</td>
         <td>{{c.modelo_bateria}}</td>
         <td>{{c.precio}}</td>
