@@ -88,13 +88,13 @@ console.log('dataaa')
   
   <div class="form-row  m-1">
     
-    <div class="form-group col-md-2">
-      <label for="inputPassword4" class="text-dark" >Nombre del Cliente</label>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4" class="text-dark" >Nombre Completo del Cliente</label>
       
       <input type="text" class="form-control rounded text-dark"  required="True"name="cliente" id="cliente" placeholder="Ingrese Nombre"  value='{{cliente}}'>
     </div>
 
-    <div class="form-group col-md-2 ">
+    <!-- <div class="form-group col-md-2 ">
       <label for="apellido_p" class="text-dark" >Primer Apellido </label>
       
       <input type="text" class="form-control rounded text-dark"  value='{{apellido_p}}' name="apellido_p" id="apellido_p" placeholder="Ingrese Nombre">
@@ -106,7 +106,7 @@ console.log('dataaa')
       </label>
       
       <input type="text" class="form-control rounded text-dark"  value='{{apellido_m}}' name="apellido_m" id="apellido_m" placeholder="Ingrese Nombre">
-    </div>
+    </div> -->
 
     <div class="form-group col-md-2">
       <label for="dni" class="text-dark">DNI-Cliente</label>
@@ -535,7 +535,7 @@ margin-top: 32px !important;">Factura</button>
       <label for="inputNombre" class="text-dark" >Nombre</label>
       <input type="text" class="form-control rounded" id="inputNombre" name="nombre_boleta" placeholder="Nombre del Cliente" value=''>
     </div>
-     <div class="form-group col-md-3">
+     <!-- <div class="form-group col-md-3">
       <label for="inputApellido_p" class="text-dark" >Primer Apellido</label>
       <input type="text" class="form-control rounded" id="inputApellido_p" name="m_apellido_p" placeholder="Nombre del Cliente" value=''>
     </div>
@@ -543,17 +543,29 @@ margin-top: 32px !important;">Factura</button>
      <div class="form-group col-md-3">
       <label for="inputApellido_m" class="text-dark" >Segundo Apellido</label>
       <input type="text" class="form-control rounded" id="inputApellido_m" name="m_apellido_m" value=''>
-    </div>
+    </div> -->
 
 
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-2">
       <label for="inputDNI" class="text-dark" >DNI del Cliente</label>
 
       <input type="text" class="form-control rounded" id="inputDNI" name="dni_c" placeholder="Ingrese DNI" value=''>
     </div>
 
+    <div class="form-group col-md-2">
+      <label for="inputRUC" class="text-dark">RUC Cliente</label>
+      <input type="text" class="form-control rounded rounded" name="ruc" id="inputRUC" placeholder="Ruc">
+    </div>  
     
 
+    <div class="form-group col-md-2">
+      <label for="inputRazon" class="text-dark">Razon social</label>
+      <input type="text" class="form-control rounded" name="razon_social" id="inputRazon" placeholder="Razon Social">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputDrs" class="text-dark">Direccion R.S.</label>
+      <input type="text" class="form-control rounded" name="direccion_rs" id="inputDrs" placeholder="Direccion de R.S">
+    </div>
 
 
   </div>
@@ -565,18 +577,8 @@ margin-top: 32px !important;">Factura</button>
  
 
   <div class="form-row m-1" id="ffactura1" style="display:none;">
-            <div class="form-group col-md-4">
-      <label for="inputRUC" class="text-dark">RUC Cliente</label>
-      <input type="text" class="form-control rounded rounded" name="ruc" id="inputRUC" placeholder="Ruc">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputRazon" class="text-dark">Razon social</label>
-      <input type="text" class="form-control rounded" name="razon_social" id="inputRazon" placeholder="Razon Social">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputDrs" class="text-dark">Direccion R.S.</label>
-      <input type="text" class="form-control rounded" name="direccion_rs" id="inputDrs" placeholder="Direccion de R.S">
-    </div>
+      
+    
 
   </div>
 

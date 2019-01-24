@@ -198,7 +198,7 @@ class VehiculoAdmin(ImportExportModelAdmin):
 @admin.register(Produccion)
 class ProduccionAdmin(admin.ModelAdmin):
 
-    list_display = ('id','fecha','atiende','fecha_atencion','cliente','apellido_p','ruc','marca_vehiculo','modelo')
+    list_display = ('id','fecha','atiende','fecha_atencion','cliente','ruc','marca_vehiculo','modelo')
     search_fields=('id','cliente','dni')
     #a= User=request.user
     list_editable =('atiende',)

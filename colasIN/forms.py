@@ -65,6 +65,7 @@ class ProduccionForm(ModelForm):
             'gmail':TextInput(attrs={'class':'form-control'}),
             'status':Select(attrs={'class':'form-control'}),
             'observaciones':TextInput(attrs={'class':'form-control'}),
+            'cierre':CheckboxInput(attrs={'class':'btn btn-default' }),
             
         }
         labels = {
