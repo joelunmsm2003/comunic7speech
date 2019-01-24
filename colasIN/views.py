@@ -1223,7 +1223,7 @@ def m_agente(request,cliente,id_incidencia):
 
 				filtro['cliente__contains']=request.GET['cliente']
 
-			if r=='apellido_p__contains' and request.GET['apellido_p']!= '':
+			if r=='apellido_p' and request.GET['apellido_p']!= '':
 
 				filtro['apellido_p__contains']=request.GET['apellido_p']
 
@@ -1233,7 +1233,7 @@ def m_agente(request,cliente,id_incidencia):
 
 			if r=='razon_social' and request.GET['razon_social']!= '':
 
-				filtro['razon_social']=request.GET['razon_social']
+				filtro['razon_social__contains']=request.GET['razon_social']
 
 
 			if r=='audio':

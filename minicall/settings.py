@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-
+import raven
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'import_export',
     'rest_framework',
     'ws4redis',
-    'django_admin_listfilter_dropdown'
+    'django_admin_listfilter_dropdown',
+    'raven.contrib.django.raven_compat',
     
 ]
 
@@ -75,6 +76,17 @@ WS4REDIS_PREFIX = 'demo'
 SESSION_ENGINE = 'redis_sessions.session' # for djcelery
 
 SESSION_REDIS_PREFIX = 'session'
+
+
+RAVEN_CONFIG = {
+    'dsn': 'https://8ce4ee7463a7401d96f3fad48c63b355@sentry.io/1259515',
+
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(BASE_DIR),
+}
+
+
 
 
 
@@ -125,26 +137,26 @@ TEMPLATES = [
 # }
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql', 
-    #     'NAME': 'comunica7',
-    #     'USER': 'root',
-    #     'PASSWORD': 'app01c7c0m2019',
-    #     'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
-    #     'PORT': '3306',
-    # },
-    # 'cdr': {
-    #     'ENGINE': 'django.db.backends.mysql', 
-    #     'NAME': 'cdr',
-    #     'USER': 'root',
-    #     'PASSWORD': 'd4t4B4$3*',
-    #     'HOST': 'xiencias.com',   # Or an IP Address that your DB is hosted on
-    #     'PORT': '3306',
-    # },
     'default': {
-      'ENGINE': 'django.db.backends.sqlite3',
-      'NAME': os.path.join(BASE_DIR, 'db.datos'),
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'comunica7',
+        'USER': 'root',
+        'PASSWORD': 'app01c7c0m2019',
+        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     },
+    'cdr': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'cdr',
+        'USER': 'root',
+        'PASSWORD': 'd4t4B4$3*',
+        'HOST': 'xiencias.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+    },
+    # 'default': {
+    #   'ENGINE': 'django.db.backends.sqlite3',
+    #   'NAME': os.path.join(BASE_DIR, 'db.datos'),
+    # },
     'discador': {
       'ENGINE': 'django.db.backends.sqlite3',
       'NAME': os.path.join(BASE_DIR, 'db.datos'),
