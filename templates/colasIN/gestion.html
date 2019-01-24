@@ -80,13 +80,15 @@
 
        
         <th scope="col">Nombre</th>
+        <th scope="col">Telefono</th>
 
+         <th scope="col">Razon Social</th>
+         <th scope="col">Status</th>  
         <th scope="col">Marca</th>
         <th scope="col">Modelo</th>
-        <th scope="col">Razon Social</th>
-        <th scope="col">Status</th>
+        
 
-        <th scope="col">Anio</th>
+        <th scope="col">Año</th>
         <th scope="col">Placa</th>
         <th scope="col">Marca Bat.</th>
         <th scope="col">Modelo Bat.</th>
@@ -116,20 +118,22 @@
        <!--<td>{{c.agente.nombre}}</td>-->
         <td>{{c.nombre_completo }}</td>
         <!--<td>{{c.dni }}</td>-->
+        <td><a style='color:#67da75;' target="_blank" href='https://wa.me/51{{c.telefono_1}}?text=Hola'>{{c.telefono_1 }}</a></td>
+
         <td>{{c.razon_social}}</td>
         <td>{{c.status}}</td>
 
         <td>{{c.marca_vehiculo}}</td>
         <td>{{c.modelo}}</td>
 
-        <td>{{c.razon_social}}</td>
-        <td>{{c.status}}</td>
+       
         
         <td>{{c.anio}}</td>
 
         <td>{{c.marca_producto}}</td>
         <td>{{c.modelo_bateria}}</td>
         <td>{{c.precio}}</td>
+        <td>{{c.descuento}}</td>
        
         <td><a class='btn btn-sm btn-dark' href='https://www.google.com/maps/search/{{c.direccion_atencion}}' target="_blank">Ir</a></td>
 
