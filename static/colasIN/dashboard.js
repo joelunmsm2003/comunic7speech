@@ -54,8 +54,8 @@ function traeinfomoto(){
          var x = document.getElementById("marca").value;
          var modelo_v = document.getElementById("modelo").value;      
          var cliente = document.getElementById("cliente").value;
-        //  var apellido_p = document.getElementById("apellido_p").value;
-        //  var apellido_m = document.getElementById("apellido_m").value;
+         var apellido_p = document.getElementById("apellido_p").value;
+         var apellido_m = document.getElementById("apellido_m").value;
          var dni = document.getElementById("dni").value;
          var telefono_1 = document.getElementById("telefono_1").value;
          var telefono_2 = document.getElementById("telefono_2").value;
@@ -78,7 +78,7 @@ function traeinfomoto(){
         
    
        window.location.href = "/colasIN/dashboard/?marca="+x+'&modelo_v='+modelo_v+'&cliente='+
-       cliente+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+
+       cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+
        '&marca_b='+marca_b+'&version='+version+'&anio='+anio+
        '&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+
        '&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+
@@ -315,7 +315,7 @@ $(document).ready(function(){
    $( "#gridCheck" ).click(function() {
    
      
-     var nombre=document.getElementById("cliente").value;
+     var nombre=document.getElementById("cliente").value+' '+document.getElementById("apellido_p").value+' '+document.getElementById("apellido_m").value;
     //  var apellido_1=document.getElementById("apellido_p").value;
     //  var apellido_2=document.getElementById("apellido_m").value;
      var dni_1=document.getElementById("dni").value;
