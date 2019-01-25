@@ -54,8 +54,8 @@ function traeinfomoto(){
          var x = document.getElementById("marca").value;
          var modelo_v = document.getElementById("modelo").value;      
          var cliente = document.getElementById("cliente").value;
-         var apellido_p = document.getElementById("apellido_p").value;
-         var apellido_m = document.getElementById("apellido_m").value;
+        //  var apellido_p = document.getElementById("apellido_p").value;
+        //  var apellido_m = document.getElementById("apellido_m").value;
          var dni = document.getElementById("dni").value;
          var telefono_1 = document.getElementById("telefono_1").value;
          var telefono_2 = document.getElementById("telefono_2").value;
@@ -78,15 +78,15 @@ function traeinfomoto(){
         
    
        window.location.href = "/colasIN/dashboard/?marca="+x+'&modelo_v='+modelo_v+'&cliente='+
-       cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+
-       dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+
+       cliente+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+
        '&marca_b='+marca_b+'&version='+version+'&anio='+anio+
        '&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+
        '&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+
        '&mapa='+mapa+'&audio='+audio;
-       $("#modelo").focus();
+       $("#modelo").focus(); 
    
        }
+
 
       
        $(document).ready(function(){
@@ -316,19 +316,19 @@ $(document).ready(function(){
    
      
      var nombre=document.getElementById("cliente").value;
-     var apellido_1=document.getElementById("apellido_p").value;
-     var apellido_2=document.getElementById("apellido_m").value;
+    //  var apellido_1=document.getElementById("apellido_p").value;
+    //  var apellido_2=document.getElementById("apellido_m").value;
      var dni_1=document.getElementById("dni").value;
      //var text = $('#cliente').text();
      //var text = $('#dni').text();
      
      $( "#inputNombre" ).val(nombre);
      //$( "#inputApellido_p" ).val("{{apellido_p}}");
-     $( "#inputApellido_p" ).val(apellido_1);
+    //  $( "#inputApellido_p" ).val(apellido_1);
    
      //$( "#inputNombre" ).val(nombre);
      //$( "#inputApellido_m" ).val("{{apellido_m}}");
-     $( "#inputApellido_m" ).val(apellido_2);
+    //  $( "#inputApellido_m" ).val(apellido_2);
      //$( "#inputDNI" ).val("{{dni}}");
      $( "#inputDNI" ).val(dni_1);
    console.log('patitos',nombre)
@@ -395,8 +395,8 @@ $(document).ready(function(){
      modelo1 = $("#modelo_b").val();
      precio = $("#inputTotal").val();
      cliente = $("#cliente").val();
-     apellido_p =$("#apellido_p").val();
-     apellido_m =$("#apellido_m").val();
+    //  apellido_p =$("#apellido_p").val();
+    //  apellido_m =$("#apellido_m").val();
      dni = $("#dni").val();
      telefono_1= $("#telefono_1").val();
      telefono_2= $("#telefono_2").val();
@@ -455,7 +455,7 @@ $(document).ready(function(){
        '%20BATERIA++++++++:++++++++'+bateria+'%0D%0A'+
        '%20MODELO++++++++:++++++++'+modelo1+'%0D%0A'+
        '%20PRECIO++++++++:++++++++'+precio+'%0D%0A'+
-       '%20CLIENTE++++++++:++++++++'+cliente+'%20  %20'+apellido_p+'%20  %20'+apellido_m+'%0D%0A'+
+       '%20CLIENTE++++++++:++++++++'+cliente+'%0D%0A'+
        '%20DNI++++++++:++++++++'+dni+'%0D%0A'+
        '%20TELEFONOS++++++++:++++++++'+telefono_1+'%20  %20'+telefono_2+'%0D%0A'+
        '%20DIRECCION++++++++:++++++++'+direccion+'%0D%0A'+

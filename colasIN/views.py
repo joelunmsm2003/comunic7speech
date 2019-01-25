@@ -468,8 +468,8 @@ def guardar(request):
 		telefono_1= request.POST['telefono_1']
 		telefono_2= request.POST['telefono_2']
 		cliente= request.POST['cliente']
-		apellido_p= request.POST['apellido_p']
-		apellido_m= request.POST['apellido_m']
+		# apellido_p= request.POST['apellido_p']
+		# apellido_m= request.POST['apellido_m']
 		dni= request.POST['dni']
 		marca_vehiculo= request.POST['marca_vehiculo']
 		modelo= request.POST['modelo']
@@ -520,8 +520,8 @@ def guardar(request):
 		observaciones= request.POST['observaciones']
 		#boleta
 		nombre_boleta= request.POST['nombre_boleta']
-		m_apellido_p= request.POST['m_apellido_p']
-		m_apellido_m= request.POST['m_apellido_m']
+		# m_apellido_p= request.POST['m_apellido_p']
+		# m_apellido_m= request.POST['m_apellido_m']
 		dni_c= request.POST['dni_c']
 
 		
@@ -570,7 +570,7 @@ def guardar(request):
 
 		id_agente=Agente.objects.get(user_id=request.user.id).id
 
-		Produccion(agente_id=id_agente,hora_instalacion=hora_instalacion,usuario_id=user,modelo_bateria=modelo_bateria,telefono_1=telefono_1,telefono_2=telefono_2,cliente=cliente,apellido_p=apellido_p,apellido_m=apellido_m,dni=dni,marca_vehiculo=marca_vehiculo,modelo=modelo,version=version,anio_id=anio,cilindrada=cilindrada,color_id=color,kilometraje=kilometraje,placa=placa,cantidad=cantidad,marca_producto=marca_producto,precio=precio,descuento=descuento,precio_total=precio_total,cantidad_bu=cantidad_bu,fecha_atencion=fecha_atencion,direccion_atencion=direccion_atencion,distrito_id=distrito,referencia=referencia,pago_id=pago,ruc=ruc,razon_social=razon_social,direccion_rs=direccion_rs,correo=correo,atiende_id=atiende,almacen_id=almacen,gmail=gmail,status_id=status,observaciones=observaciones,nombre_boleta=nombre_boleta,m_apellido_p=m_apellido_p,m_apellido_m=m_apellido_m,dni_c=dni_c).save()
+		Produccion(agente_id=id_agente,hora_instalacion=hora_instalacion,usuario_id=user,modelo_bateria=modelo_bateria,telefono_1=telefono_1,telefono_2=telefono_2,cliente=cliente,dni=dni,marca_vehiculo=marca_vehiculo,modelo=modelo,version=version,anio_id=anio,cilindrada=cilindrada,color_id=color,kilometraje=kilometraje,placa=placa,cantidad=cantidad,marca_producto=marca_producto,precio=precio,descuento=descuento,precio_total=precio_total,cantidad_bu=cantidad_bu,fecha_atencion=fecha_atencion,direccion_atencion=direccion_atencion,distrito_id=distrito,referencia=referencia,pago_id=pago,ruc=ruc,razon_social=razon_social,direccion_rs=direccion_rs,correo=correo,atiende_id=atiende,almacen_id=almacen,gmail=gmail,status_id=status,observaciones=observaciones,nombre_boleta=nombre_boleta,dni_c=dni_c).save()
 
 		id_produccion = Produccion.objects.all().order_by('-id')[0].id
 
@@ -701,13 +701,13 @@ def dashboard(request):
 
 				cliente =request.GET['cliente']
 
-			if r=='apellido_p':
+			# if r=='apellido_p':
 
-				apellido_p =request.GET['apellido_p']
+			# 	apellido_p =request.GET['apellido_p']
 
-			if r=='apellido_m':
+			# if r=='apellido_m':
 
-				apellido_m =request.GET['apellido_m']
+			# 	apellido_m =request.GET['apellido_m']
 
 			if r=='dni':
 
