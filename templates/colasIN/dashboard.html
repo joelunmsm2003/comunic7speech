@@ -5,18 +5,6 @@
   {% block content %}
 
 
-  <script type="text/javascript" src="/static/colasIN/dashboard.js"></script>
-
-<script>
-
-function cerrar(){
-
-console.log('dataaa')
-
-}
-
-
-</script>
 
 
 <body>
@@ -88,13 +76,13 @@ console.log('dataaa')
   
   <div class="form-row  m-1">
     
-    <div class="form-group col-md-6">
-      <label for="inputPassword4" class="text-dark" >Nombre Completo del Cliente</label>
+    <div class="form-group col-md-2">
+      <label for="inputPassword4" class="text-dark" >Nombre del Cliente</label>
       
       <input type="text" class="form-control rounded text-dark"  required="True"name="cliente" id="cliente" placeholder="Ingrese Nombre"  value='{{cliente}}'>
     </div>
 
-    <!-- <div class="form-group col-md-2 ">
+    <div class="form-group col-md-2 ">
       <label for="apellido_p" class="text-dark" >Primer Apellido </label>
       
       <input type="text" class="form-control rounded text-dark"  value='{{apellido_p}}' name="apellido_p" id="apellido_p" placeholder="Ingrese Nombre">
@@ -106,7 +94,7 @@ console.log('dataaa')
       </label>
       
       <input type="text" class="form-control rounded text-dark"  value='{{apellido_m}}' name="apellido_m" id="apellido_m" placeholder="Ingrese Nombre">
-    </div> -->
+    </div>
 
     <div class="form-group col-md-2">
       <label for="dni" class="text-dark">DNI-Cliente</label>
@@ -552,6 +540,18 @@ margin-top: 32px !important;">Factura</button>
       <input type="text" class="form-control rounded" id="inputDNI" name="dni_c" placeholder="Ingrese DNI" value=''>
     </div>
 
+ 
+
+
+  </div>
+
+
+
+
+
+ 
+
+  <div class="form-row m-1" id="ffactura1" style="display:none;">
     <div class="form-group col-md-2">
       <label for="inputRUC" class="text-dark">RUC Cliente</label>
       <input type="text" class="form-control rounded rounded" name="ruc" id="inputRUC" placeholder="Ruc">
@@ -566,18 +566,6 @@ margin-top: 32px !important;">Factura</button>
       <label for="inputDrs" class="text-dark">Direccion R.S.</label>
       <input type="text" class="form-control rounded" name="direccion_rs" id="inputDrs" placeholder="Direccion de R.S">
     </div>
-
-
-  </div>
-
-
-
-
-
- 
-
-  <div class="form-row m-1" id="ffactura1" style="display:none;">
-      
     
 
   </div>
@@ -869,5 +857,9 @@ margin-top: 32px !important;">Factura</button>
   </div>
 </div>
 
+
+  <script type="text/javascript" src="/static/colasIN/dashboard.js"></script>
+
+  
 
 {% endblock %}

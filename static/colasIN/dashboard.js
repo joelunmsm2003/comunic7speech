@@ -1,4 +1,27 @@
-$("#modelo").focus(); 
+
+$("#cliente").focus();
+
+__marca = document.getElementById("marca").value
+
+__modelo = $("#marca_b").val()
+
+
+
+
+if (__marca!='Seleccionar'){
+
+  $("#modelo").focus();
+
+}
+
+if (__modelo!='Seleccionar' && __marca!='Seleccionar' ){
+
+  $("#modelo_b").focus();
+
+}
+
+
+
 
 function closeSelf(){
   self.close();
@@ -54,8 +77,8 @@ function traeinfomoto(){
          var x = document.getElementById("marca").value;
          var modelo_v = document.getElementById("modelo").value;      
          var cliente = document.getElementById("cliente").value;
-        //  var apellido_p = document.getElementById("apellido_p").value;
-        //  var apellido_m = document.getElementById("apellido_m").value;
+         var apellido_p = document.getElementById("apellido_p").value;
+         var apellido_m = document.getElementById("apellido_m").value;
          var dni = document.getElementById("dni").value;
          var telefono_1 = document.getElementById("telefono_1").value;
          var telefono_2 = document.getElementById("telefono_2").value;
@@ -78,7 +101,7 @@ function traeinfomoto(){
         
    
        window.location.href = "/colasIN/dashboard/?marca="+x+'&modelo_v='+modelo_v+'&cliente='+
-       cliente+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+
+       cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+
        '&marca_b='+marca_b+'&version='+version+'&anio='+anio+
        '&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+
        '&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+
@@ -89,22 +112,9 @@ function traeinfomoto(){
 
 
       
-       $(document).ready(function(){
-        $("#modelo").click(function(){
-    
-          $("#inputVersion").focus();
-        });
-      });
    
 
   
-      $(document).ready(function(){
-        $(".opt").click(function(){
-    
-          $("cantidad").focus();
-        });
-      });
-   
    
    
    function guardadireccion(){
@@ -315,7 +325,7 @@ $(document).ready(function(){
    $( "#gridCheck" ).click(function() {
    
      
-     var nombre=document.getElementById("cliente").value;
+     var nombre=document.getElementById("cliente").value+' '+document.getElementById("apellido_p").value+' '+document.getElementById("apellido_m").value;
     //  var apellido_1=document.getElementById("apellido_p").value;
     //  var apellido_2=document.getElementById("apellido_m").value;
      var dni_1=document.getElementById("dni").value;
@@ -358,6 +368,9 @@ $(document).ready(function(){
          
           $('#fact').show()
        });
+
+
+
       
    
    
@@ -481,146 +494,5 @@ $(document).ready(function(){
    
    }
    
-   
-   // $( "button" ).click(function() {
-   //   var text = $( this ).text();
-   //   $( "#input" ).val( text );
-   // });
-   
-   
-   
-   // var today = new Date();
-   
-   // var day = today.getDate();
-   // var month = today.getMonth() + 1;
-   // var year = today.getFullYear();
-   
-   // if (day < 10) {
-   //   day = '0' + day
-   // }
-   // if (month < 10) {
-   //   month = '0' + month
-   // }
-   
-   // var out = document.getElementById("output");
-   
-   // out.innerHTML = day + "/" + month + "/" + year;
-   
-   
-   
-   
-   
-   
-   
-   // //FECHA
-   
-   
-   
-   
-   
-   
-   
-   // $( ".rr" ).click(function() {
-   //   var text = $('#inputRF').text();
-   //   console.log(text) 
-   // $( "#inputDirec" ).val(text);
-     
-   // });
-   
-   
-   // function guardadireccion(data){
-   
-   
-   //  console.log(data)
-   
-   //  var direccion=data
-   
-   //   $( "#gridCheckdireccion" ).click(function() {
-   
-   
-   //   console.log('entre putitas')
-   
-   
-   //   $( "#inputDirec" ).val(direccion);
-   
-   
-   // }
-   
-   
-   
-   
-   
-   
-   //   function cal() {
-   
-   
-   //   try {
-   
-   //     console.log('entre oibches.......')
-     
-   
-   //     var a = parseInt(document.getElementById("inputPrecio").value),
-   //         b = parseInt(document.getElementById("inputDesc").value),
-   
-   //         c = parseInt(document.getElementById("inputP").value);
-           
-       
-   //     console.log(a,b,c)      
-   //     document.getElementById("inputTotal").value =(a-b)*c;
-   //   } catch (e) {
-   //   }
-   // }
-   
-   
-   
-   
-   //     function traemodelos() {
-   
-   
-   //       var x = document.getElementById("marca").value;
-   //       var cliente = document.getElementById("cliente").value;
-   //       var apellido_p = document.getElementById("apellido_p").value;
-   //       var apellido_m = document.getElementById("apellido_m").value;
-   //       var dni = document.getElementById("dni").value;
-   //       var telefono_1 = document.getElementById("telefono_1").value;
-   //       var telefono_2 = document.getElementById("telefono_2").value;
-   //       var direccion = document.getElementById("telefono_2").value;
-        
-   
-   //     window.location.href = "/dashboard/?marca="+x+'&cliente='+cliente+'&apellido_p='+apellido_p+'&apellido_m='+apellido_m+'&dni='+dni+'&telefono_1='+telefono_1+'&telefono_2='+telefono_2+'&direcccion='+direccion
-   
-   
-   
-   //     }
-   
-   
-   
-   
-   //   $(document).ready(function(){
-   //     $("#bboleta").click(function(){
-   
-   //       $('#ffactura1').hide()
-   //       $('#descripcion').hide()
-   //        $('#bboleta1').show()
-   //        $('#descripcion').show()
-   
-   //     });
-      
-   
-   
-   //   });
-   
-   //   $(document).ready(function(){
-   //     $("#ffactura").click(function(){
-   
-   //         $('#bboleta1').hide()
-   //         $('#ffactura1').hide()
-   //        $('#descripcion').show()
-   //        $('#ffactura1').show()
-   //        $('#descripcion').show()
-   //     });
-      
-   
-   
-   //   });
+
    
