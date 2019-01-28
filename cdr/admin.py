@@ -40,7 +40,6 @@ class CdrAdmin(admin.ModelAdmin):
 
 		my_filter={}
 
-		print queryset.count()
 
 		for a in request.GET:
 
@@ -54,13 +53,11 @@ class CdrAdmin(admin.ModelAdmin):
 			
 			if a=='drf__calldate__gte':
 
-				print request.GET['drf__calldate__gte']
+
 
 				my_filter['calldate__gte']=request.GET['drf__calldate__gte']
 
 			if a=='drf__calldate__lte':
-
-				print request.GET['drf__calldate__lte']
 
 				my_filter['calldate__lte']=request.GET['drf__calldate__lte']
 

@@ -119,7 +119,6 @@ def export_books(modeladmin, request, queryset):
         )
     for book in books:
 
-        print 'csv....',book
         writer.writerow(book)
     return response
 export_books.short_description = 'Export to excel'
@@ -212,10 +211,6 @@ class ProduccionAdmin(admin.ModelAdmin):
     #queryset.update(status='p')
         for q in queryset:
 
-            print q.cliente
-            ## representacion del tiempo
-            print "Fecha FORMAO "  + time.strftime("%x")
-            print "LA HORAAA.....",(time.strftime("%d/%m/%y"))
 
             return redirect('https://wa.me/'+str(q.atiende.celular)+'?text=FECHA INSTALACION++++++++:++++++++'+str(q.fecha_atencion.strftime("%d/%m/%y"))+'%0D%0A'+
             '%20HORA++++++++:++++++++'+str(q.hora_instalacion.strftime("%I :%M %p"))+'%0D%0A'+
@@ -341,7 +336,6 @@ def bulksms(audience):
 		params = {'usr' : username,'pas' : password,'msg' : message ,'num' : phone_number}
 
 
-		print 'params...',params
 
 		reply = requests.get(url, params=params)
 

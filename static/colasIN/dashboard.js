@@ -1,4 +1,4 @@
-
+$("#modelo").focus(); 
 
 function closeSelf(){
   self.close();
@@ -83,7 +83,7 @@ function traeinfomoto(){
        '&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+
        '&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+
        '&mapa='+mapa+'&audio='+audio;
-       $("#modelo").focus(); 
+       //$("#modelo").focus(); 
    
        }
 

@@ -19,7 +19,6 @@ from django.conf.urls import include
 
 admin.site.site_header = 'Comunica7'
 
-
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),

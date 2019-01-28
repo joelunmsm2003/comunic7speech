@@ -14,7 +14,7 @@ import os.path
 import json
 import requests
 from django.contrib.admin.filters import DateFieldListFilter
-import pandas as pd
+#import pandas as pd
 from django.utils.html import format_html
 from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe

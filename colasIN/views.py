@@ -21,7 +21,7 @@ from app.serializers import *
 from django.db.models import Count,Sum
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.renderers import JSONRenderer
+#from rest_framework.renderers import JSONRenderer
 from colasIN.forms import *
 from django.contrib.auth import authenticate
 import time
@@ -38,10 +38,10 @@ import random
 from django.db.models import Count,Sum
 from PIL import Image
 from resizeimage import resizeimage
-import pandas as pd
+
 from .models import Album
 from django.views import generic
-import pandas as pd
+#import pandas as pd
 from django.contrib.auth.models import User
 import datetime
 from datetime import datetime,timedelta

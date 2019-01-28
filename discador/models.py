@@ -266,6 +266,7 @@ class Cliente(models.Model):
 	cargo_laboral =models.CharField(max_length=100,blank=True,null=True)
 	fecha_nacimiento =models.CharField(max_length=100,blank=True,null=True)
 	deuda_empresa =models.CharField(max_length=100,blank=True,null=True)
+	estado =models.CharField(max_length=100,blank=True,null=True)
 	#fecha = models.DateTimeField(db_column='fecha', default=datetime.datetime.today()) 
 	def __unicode__(self):
 		return self.numero_documento

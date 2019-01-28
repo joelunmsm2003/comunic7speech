@@ -13,7 +13,7 @@ import os.path
 import json
 import requests
 from django.contrib.admin.filters import DateFieldListFilter
-import pandas as pd
+#import pandas as pd
 
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
