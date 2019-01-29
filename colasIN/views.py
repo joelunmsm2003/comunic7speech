@@ -1190,8 +1190,6 @@ def m_agente(request,cliente,id_incidencia):
 
 	_agente=Agente.objects.get(user=request.user.id)
 
-	
-
 	if request.method=='POST':
 
 		instance = Produccion.objects.get(id=id_incidencia)
@@ -1204,7 +1202,6 @@ def m_agente(request,cliente,id_incidencia):
 
 		return HttpResponseRedirect("/colasIN/monitor_agente/"+cliente+"/"+id_incidencia)
 
-
 	audio=''
 
 	if request.method=='GET':
@@ -1215,6 +1212,22 @@ def m_agente(request,cliente,id_incidencia):
 
 		for r in request.GET:
 
+			if r=='fecha_inicio' and request.GET['fecha_inicio']!= '':
+
+				filtro['fecha__gte']=request.GET['fecha_inicio']
+
+			if r=='fecha_fin' and request.GET['fecha_fin']!= '':
+
+				filtro['fecha__lte']=request.GET['fecha_fin']
+
+			if r=='status' and request.GET['status']!= '':
+
+				filtro['status_id']=request.GET['status']
+
+			if r=='atiende' and request.GET['atiende']!= '':
+
+				filtro['atiende_id']=request.GET['atiende']
+					
 			if r=='telefono_1' and request.GET['telefono_1']!= '':
 
 				filtro['telefono_1__contains']=request.GET['telefono_1']
@@ -1252,9 +1265,18 @@ def m_agente(request,cliente,id_incidencia):
 
 				_agente.save()
 
-		print 'FILTRO...',filtro
 
-		ven = Produccion.objects.filter(**filtro).order_by('-id')
+		if len(filtro)>0:
+
+			ven = Produccion.objects.filter(**filtro).order_by('-id')
+
+			contador_filtro= True
+
+		else:
+
+			ven = False
+
+			contador_filtro= False
 
 		total_llamadas = Produccion.objects.all().order_by('-id')
 
@@ -1311,5 +1333,5 @@ def m_agente(request,cliente,id_incidencia):
 
 		busqueda = BusquedaForm()
 
-		return render(request, 'colasIN/agente.html',{'busqueda':busqueda,'total_llamadas':total_llamadas,'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven,'audio':audio})
+		return render(request, 'colasIN/agente.html',{'contador_filtro':contador_filtro,'busqueda':busqueda,'total_llamadas':total_llamadas,'telefono':telefono,'incidenciaform':incidenciaform,'incidencia':incidencia,'agenteform':agenteform,'agente':_agente,'estados':_estado,'ventas':ven,'audio':audio})
 

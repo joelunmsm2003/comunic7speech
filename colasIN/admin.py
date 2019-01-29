@@ -198,12 +198,12 @@ class VehiculoAdmin(ImportExportModelAdmin):
 class ProduccionAdmin(admin.ModelAdmin):
 
 
-    list_display = ('id','fecha','atiende','fecha_atencion','cliente','apellido_p','apellido_m','ruc','marca_vehiculo','modelo')
+    list_display = ('id','fecha','atiende','fecha_atencion','cliente','apellido_p','apellido_m','telefono_1','marca_vehiculo','modelo')
 
     search_fields=('id','cliente','dni')
     #a= User=request.user
     list_editable =('atiende',)
-    #list_filter = (('fecha', DateRangeFilter),'usuario','marca_vehiculo','modelo')
+    list_filter = ('telefono_1',)
     
     actions = [export_books,'enviar_whatssap' ]
 

@@ -306,6 +306,8 @@
                 </button>
                 <a onclick="nuevaventa('/colasIN/dashboard')" target="_blank"  class="btn btn-primary" style='color:#fff;'>Crear Nueva Venta</a>
 
+                <a href='/colasIN/monitor_agente/0/0/'  class="btn btn-warning" style='color:#fff;'>Todas las Ventas</a>
+
 
             </div>
 
@@ -422,7 +424,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
+              <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <form method='GET' action='/colasIN/monitor_agente/0/0'>
                     <div class="modal-header">
@@ -444,10 +446,24 @@
    
                           <div class='row'>
 
+
+                                  <div class="col-md-6">
+
+                                  <label>Inicio</label>
+                                  <input type='date' class='form-control' name='fecha_inicio'>
+
+                                  </div>
+
+                                  <div class="col-md-6">
+                                  <label>Fin</label>
+                                  <input type='date' class='form-control' name='fecha_fin'>
+
+                                  </div>
+
                           {% for field in busqueda.visible_fields %}
 
                           
-                          <div class="col-md-12">
+                          <div class="col-md-6">
                                 
                                     {{ field.errors }}
                                     {{ field.label_tag }} {{ field }}

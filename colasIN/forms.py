@@ -79,23 +79,27 @@ class ProduccionForm(ModelForm):
 
 class BusquedaForm(ModelForm):
 
+
     class Meta:
         model = Produccion
-        fields =('telefono_1','cliente','apellido_p','apellido_m','razon_social')
+        fields =('telefono_1','cliente','apellido_p','apellido_m','razon_social','atiende','status')
         widgets = {
 
             'telefono_1':TextInput(attrs={'class':'form-control'}),
             'cliente':TextInput(attrs={'class':'form-control'}),
             'apellido_p':TextInput(attrs={'class':'form-control'}),
             'apellido_m':TextInput(attrs={'class':'form-control'}),
-            'razon_social':TextInput(attrs={'class':'form-control'})
+            'razon_social':TextInput(attrs={'class':'form-control'}),
+            'atiende':Select(attrs={'class':'form-control'}),
+            'status':Select(attrs={'class':'form-control'}),
             
         }
         labels = {
             'telefono_1':u'Telefono',
             'apellido_p':'Apellido Paterno',
             'apellido_m':'Apellido Materno',
-            'cliente':'Nombres'
+            'cliente':'Nombres',
+            'atiende': 'Atiende'
         }
 
 

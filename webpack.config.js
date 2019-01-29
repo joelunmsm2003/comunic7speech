@@ -3,12 +3,12 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
 
   entry: {
-    'discador.index.js': './discador/react/components/App.js',
+    /*'discador.index.js': './discador/react/components/App.js',
     'discador.cartera.js': './discador/react/components/Cartera.js', 
     'discador.score.js':'./discador/react/components/Scoreproveedor.js',
-    'discador.traeAgentes.js': './discador/react/components/traeAgentes.js', 
+    'discador.traeAgentes.js': './discador/react/components/traeAgentes.js',*/
     'discador.proveedorscore.js':'./discador/react/components/ProveedorScore.js',
-    'discador.agentes.js':'./discador/react/components/Agentes.js',
+    /*'discador.agentes.js':'./discador/react/components/Agentes.js',
     'discador.marcador.js':'./discador/react/components/Agentes.js',
     'discador.asignascore.js':'./discador/react/components/AsignaScoreProveedor.js',
     'discador.opcion_clientes.js':'./discador/react/components/opcion_clientes.js',
@@ -16,7 +16,7 @@ module.exports = {
     'discador.opcion_usuarios.js':'./discador/react/components/opcion_usuarios.js',
     'discador.proseso_masivo.js':'./discador/react/components/proseso_masivo.js',
     'discador.gestion_telefonia.js':'./discador/react/components/gestion_telefonia.js',
-    'discador.gestion_campo.js':'./discador/react/components/gestion_campo.js',
+    'discador.gestion_campo.js':'./discador/react/components/gestion_campo.js',*/
     /*'style':'./scss/main.scss' */
   },
   output: {

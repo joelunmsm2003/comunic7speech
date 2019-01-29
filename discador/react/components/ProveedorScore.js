@@ -1,11 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Proveedores from "./Proveedores";
-import Header from "./Header";
-import Gestion from "./Gestion";
-import Cuentas from "./Cuentas";
-import Alerta from "./Alerta";
-import AsignaScore from "./AsignaScore"
+
 import store from "../store";
 import { Provider } from "react-redux";
 import axios from 'axios';
@@ -407,7 +402,7 @@ class ProveedorScore extends React.Component {
 
              
 
-            <Header/>
+           
 
             
 

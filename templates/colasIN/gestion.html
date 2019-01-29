@@ -10,7 +10,6 @@
 
 <h3></h3>
 
-<h6>{{telefono}}</h6>
 
 {% if incidenciaform %}
 
@@ -53,12 +52,12 @@
 
 
  
- <div style='height:20px'></div>
+ <div style='height:5px'></div>
 
   {% if ventas %}
 
 
-
+<!--
   <h5>
 
     <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/480px-WhatsApp.svg.png' style='width: 30px;'>
@@ -67,6 +66,7 @@
 
 
   </h5>
+-->
 
 
   <h6>Numero de registros encontrados: {{ventas | length}} </h6>
@@ -175,7 +175,11 @@
 
   {% else %}
 
+
+ {% if contador_filtro %}
 <h6>No se encontraron registros con estos parametros</h6>
+  {% endif %}
+
 
 <br>
   {% endif %}
