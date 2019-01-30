@@ -49,6 +49,13 @@ class GestionAdmin(ImportExportModelAdmin):
 	list_display = ('id','nombre')
 	pass
 
+
+
+@admin.register(Gestiones_externas)
+class Gestiones_externasAdmin(ImportExportModelAdmin):
+	list_display = ('id','proveedor','cartera','tipo_gestion','excel')
+	pass
+
 # Register your models here.
 @admin.register(Sexo)
 class SexoAdmin(admin.ModelAdmin):

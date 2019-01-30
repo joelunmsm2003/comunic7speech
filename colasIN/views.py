@@ -150,6 +150,9 @@ def reporte(request):
 	'ruc','razon_social','direccion_rs','pago__nombre','correo','atiende__nombre','almacen__nombre','gmail','status__nombre','observaciones','usuario__username')
     for d in datos: 
 
+	
+		 	
+
 
 
         writer.writerow(d)

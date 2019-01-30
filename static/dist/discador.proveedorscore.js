@@ -2503,14 +2503,11 @@ function (_React$Component) {
 
       if (muestraproveedor) {
         todo = proveedores.map(function (item) {
-          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {
-            className: item.contar_carteras > 0 ? sinestilo : conestilo,
-            onClick: function onClick(e) {
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("select", {
+            onChange: function onChange(e) {
               return _this5.seleccionaproveedor(e, item);
             }
-          }, item.nombre, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", {
-            class: "badge badge-primary badge-pill"
-          }, item.contar_carteras));
+          }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("option", null, item.nombre));
         });
       } else {
         todo = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", {

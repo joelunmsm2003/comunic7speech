@@ -298,15 +298,19 @@ class ProveedorScore extends React.Component {
 
       if(muestraproveedor){
 
+
+  
+
+
+
         todo=proveedores.map(item=>
             
-          <li className= {item.contar_carteras>0 ? sinestilo : conestilo} onClick={(e) => this.seleccionaproveedor(e,item)}>
+          <select  onChange={(e) => this.seleccionaproveedor(e,item)}>
             
             
-            {item.nombre}
+            <option>{item.nombre}</option>
             
-            <span class="badge badge-primary badge-pill">{item.contar_carteras}</span>
-            </li>
+            </select>
 
           )
 
