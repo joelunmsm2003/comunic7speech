@@ -16,8 +16,8 @@ module.exports = {
     'discador.opcion_usuarios.js':'./discador/react/components/opcion_usuarios.js',
     'discador.proseso_masivo.js':'./discador/react/components/proseso_masivo.js',
     'discador.gestion_telefonia.js':'./discador/react/components/gestion_telefonia.js',
-    'discador.gestion_campo.js':'./discador/react/components/gestion_campo.js',*/
-    /*'style':'./scss/main.scss' */
+    'discador.gestion_campo.js':'./discador/react/components/gestion_campo.js',
+    'style':'./static/scss/main.scss' */
   },
   output: {
     filename: './static/dist/[name]'
@@ -44,7 +44,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({ // define where to save the file
-      filename: 'dist/[name].bundle.css',
+      filename: './static/dist/[name].bundle.css',
       allChunks: true,
     }),
   ],

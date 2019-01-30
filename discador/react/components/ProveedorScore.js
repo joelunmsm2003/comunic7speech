@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
+import Header from "./Header";
 import store from "../store";
 import { Provider } from "react-redux";
 import axios from 'axios';
@@ -9,6 +9,7 @@ var $ = require ('jquery')
 
 const espacio = {
   height: '12px',
+
 
 };
 
@@ -402,7 +403,7 @@ class ProveedorScore extends React.Component {
 
              
 
-           
+             <Header/>
 
             
 
