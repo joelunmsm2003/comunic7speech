@@ -61,18 +61,15 @@ class Proveedor(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
-
-class Tipo_cartera(models.Model):
-	cod_dpto=models.CharField(max_length=100,blank=True,null=True)
-	cod_prov=models.CharField(max_length=100,blank=True,null=True)
-	cod_dist=models.CharField(max_length=100,blank=True,null=True)
+class Cartera(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
-	dpto=models.CharField(max_length=100,blank=True,null=True)
-	provincia=models.CharField(max_length=100,blank=True,null=True)
-
-	distrito=models.CharField(max_length=100,blank=True,null=True)
+	estado=models.CharField(max_length=100,blank=True,null=True)
+	acw=models.CharField(max_length=100,blank=True,null=True)
 
 
+
+	def __unicode__(self):
+		return self.nombre
 
 class Gestion(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
@@ -83,6 +80,34 @@ class Gestion(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
+
+class Gestiones_externas(models.Model):
+	
+	proveedor=models.ForeignKey(Proveedor, blank=True, null=True)
+	cartera=models.ForeignKey(Cartera, blank=True, null=True)
+	tipo_gestion=models.ForeignKey(Gestion, blank=True, null=True)
+	excel = models.FileField()
+	mes=models.CharField(max_length=100,blank=True,null=True)
+	anio=models.CharField(max_length=100,blank=True,null=True)
+	
+
+	class Meta:
+		verbose_name_plural='Gestiones externas'
+
+	def __unicode__(self):
+		return self.proveedor
+
+
+
+class Tipo_cartera(models.Model):
+	cod_dpto=models.CharField(max_length=100,blank=True,null=True)
+	cod_prov=models.CharField(max_length=100,blank=True,null=True)
+	cod_dist=models.CharField(max_length=100,blank=True,null=True)
+	nombre=models.CharField(max_length=100,blank=True,null=True)
+	dpto=models.CharField(max_length=100,blank=True,null=True)
+	provincia=models.CharField(max_length=100,blank=True,null=True)
+
+	distrito=models.CharField(max_length=100,blank=True,null=True)
 
 class Ubigeo(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
@@ -142,18 +167,6 @@ class Subresultado(models.Model):
 #     estado =models.CharField(max_length=100,blank=True,null=True)
 
     #fecha = models.DateTimeField(db_column='fecha', default=datetime.datetime.today()) 
-
-
-class Cartera(models.Model):
-	nombre=models.CharField(max_length=100,blank=True,null=True)
-	estado=models.CharField(max_length=100,blank=True,null=True)
-	acw=models.CharField(max_length=100,blank=True,null=True)
-
-
-
-	def __unicode__(self):
-		return self.nombre
-
 
 class EstadoScore(models.Model):
 	nombre=models.CharField(max_length=100,blank=True,null=True)
@@ -345,6 +358,12 @@ class Agente(models.Model):
 	t_inicio_espera=models.CharField(max_length=100,blank=True,null=True)
 	t_fin_espera=models.CharField(max_length=100,blank=True,null=True)
 	contactadas=models.CharField(max_length=100,blank=True,null=True)
+
+	class Meta:
+		verbose_name_plural='Agentes'
+
+	def __unicode__(self):
+		return self.nombre
 
 class Cuentas(models.Model):
 	cliente= models.ForeignKey(Cliente, blank=True, null=True)

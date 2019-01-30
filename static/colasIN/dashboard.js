@@ -50,7 +50,7 @@ function traeinfomoto(){
    
    function traemodelos() {
    
-   
+        
          var x = document.getElementById("marca").value;
          var modelo_v = document.getElementById("modelo").value;      
          var cliente = document.getElementById("cliente").value;
@@ -72,6 +72,8 @@ function traeinfomoto(){
          var marca_b = document.getElementById("marca_b").value;
          var status = document.getElementById("status").value;
          var mapa = document.getElementById("Map").value;
+
+        
         
          // var direccion = document.getElementById("direccion").value;
    
@@ -83,27 +85,15 @@ function traeinfomoto(){
        '&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+
        '&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+
        '&mapa='+mapa+'&audio='+audio;
-       $("#modelo").focus(); 
-   
        }
 
 
-      
-       $(document).ready(function(){
-        $("#modelo").click(function(){
+      // $(document).ready(function(){
+      //   $(".opt").click(function(){
     
-          $("#inputVersion").focus();
-        });
-      });
-   
-
-  
-      $(document).ready(function(){
-        $(".opt").click(function(){
-    
-          $("cantidad").focus();
-        });
-      });
+      //     $("cantidad").focus();
+      //   });
+      // });
    
    
    
