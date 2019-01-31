@@ -68,7 +68,7 @@ function traeinfomoto(){
      } catch (e) {
      }
    }
-   
+  
 
    
    function traemodelos() {
@@ -108,28 +108,7 @@ function traeinfomoto(){
        '&color='+color+'&cilindrada='+cilindrada+'&kilometraje='+kilom+
        '&placa='+placa+'&cant_ba='+cant_ba+'&modelo='+modelo+'&status='+status+
        '&mapa='+mapa+'&audio='+audio;
-<<<<<<< HEAD
-       //$("#modelo").focus(); 
-   
-       }
 
-
-      
-   
-
-  
-=======
-       }
-
-
-      // $(document).ready(function(){
-      //   $(".opt").click(function(){
-    
-      //     $("cantidad").focus();
-      //   });
-      // });
-   
->>>>>>> 75fc52100306dcdfaa47e8acbed1ad51cf8b60b4
    
    
    function guardadireccion(){

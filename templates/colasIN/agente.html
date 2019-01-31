@@ -5,6 +5,22 @@
   {% block content %}
 
 
+<script type="text/javascript">
+  
+
+    function trae_fecha() {
+   
+    console.log('entressssssaasasasasas')
+    var fecha_inicio = document.getElementById("fecha_inicio").value;
+    var fecha_fin = document.getElementById("fecha_fin").value;      
+    
+
+    window.location.href = "/colasIN/reporte/?fecha_inicio="+fecha_inicio+'&fecha_fin='+fecha_fin
+      }
+
+</script>
+
+
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -14,16 +30,17 @@
   <a class="navbar-brand" href="#">Baterias Al Toque</a>
 
    <a class="navbar-brand" href="http://call.comunica7.com:8000/comunica7/dashboard/">Inicio</a>
-   <button type="button" class="btn btn-outline-danger"href="/colasIN/reporte"><a href="/colasIN/reporte">Generar Reporte</a></button>
+   <!-- <button type="button" class="btn btn-outline-danger"href="/colasIN/reporte"><a href="/colasIN/reporte">Generar Reporte</a></button> -->
   
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  GENERAR REPORTES
+<form method="get">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" >
+  Generar reportes
 </button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Generando Reportes</h5>
@@ -38,12 +55,12 @@
         <form>
           <div class="form-group">
             <label for="exampleFormControlInput1">Fecha Inicio</label>
-            <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="name@example.com">
           </div>
 
           <div class="form-group">
             <label for="exampleFormControlInput1">Fecha fin</label>
-            <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="name@example.com">
           </div>
          
          
@@ -52,12 +69,14 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-secondary"><a href="/colasIN/reporte">Generar Reporte</a></button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" onclick='trae_fecha()'>Generar Reporte</button>
       </div>
     </div>
   </div>
 </div>
+
+</form>
 
 
 
