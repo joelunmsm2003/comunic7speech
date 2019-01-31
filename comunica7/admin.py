@@ -1,11 +1,28 @@
 from django.contrib import admin
 from comunica7.models import *
 from django.db.models import Sum
+from django.contrib.auth.models import Group, User
+from django.contrib.auth.admin import UserAdmin
 # Register your models here.
+
+
+
+User.add_to_class('gender', models.BooleanField(default=False))
 
 @admin.register(Usuarios)
 class UsuariosAdmin(admin.ModelAdmin):
  	list_display = ('id','nombre','telefono','direccion','empresa','distrito','ruc')
+
+
+class CustomUserAdmin(UserAdmin):
+    list_display = UserAdmin.list_display + ('gender',)
+
+
+
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
+
+
 
 @admin.register(Productos)
 class ProductosAdmin(admin.ModelAdmin):

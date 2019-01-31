@@ -8,12 +8,12 @@ module.exports = {
     'discador.score.js':'./discador/react/components/Scoreproveedor.js',
     'discador.traeAgentes.js': './discador/react/components/traeAgentes.js',*/
     'discador.proveedorscore.js':'./discador/react/components/ProveedorScore.js',
+    'discador.opcion_clientes.js':'./discador/react/components/opcion_clientes.js',
+    'discador.opcion_proveedor.js':'./discador/react/components/opcion_proveedor.js',
+    'discador.opcion_usuarios.js':'./discador/react/components/opcion_usuarios.js'
     /*'discador.agentes.js':'./discador/react/components/Agentes.js',
     'discador.marcador.js':'./discador/react/components/Agentes.js',
     'discador.asignascore.js':'./discador/react/components/AsignaScoreProveedor.js',
-    'discador.opcion_clientes.js':'./discador/react/components/opcion_clientes.js',
-    'discador.opcion_provedor.js':'./discador/react/components/opcion_provedor.js',
-    'discador.opcion_usuarios.js':'./discador/react/components/opcion_usuarios.js',
     'discador.proseso_masivo.js':'./discador/react/components/proseso_masivo.js',
     'discador.gestion_telefonia.js':'./discador/react/components/gestion_telefonia.js',
     'discador.gestion_campo.js':'./discador/react/components/gestion_campo.js',
