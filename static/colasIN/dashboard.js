@@ -45,7 +45,16 @@ function traeinfomoto(){
      } catch (e) {
      }
    }
+  
+   function trae_fecha() {
    
+    console.log('entressssssaasasasasas')
+    var fecha_inicio = document.getElementById("fecha_inicio").value;
+    var fecha_fin = document.getElementById("fecha_fin").value;      
+    
+
+    window.location.href = "/colasIN/dashboard/?fecha_inicio="+fecha_inicio+'&fecha_fin='+fecha_fin
+      }
 
    
    function traemodelos() {

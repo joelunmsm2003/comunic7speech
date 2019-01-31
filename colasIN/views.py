@@ -132,36 +132,47 @@ def api_motorisado(request):
 
 
 def reporte(request):
-
-    response = HttpResponse(content_type='text/.xls')
-    response['Content-Disposition'] = 'attachment; filename="reporte.xls"'
-
-    writer = csv.writer(response)
-    writer.writerow(['Id','Fecha','cliente','apellido_p','apellido_m','DNI','telefono_1','telefono_2','Marca del Vehiculo','Modelo','Version','Anio','Color','Motor', 'placa','Kilometraje','cantidad','marca_producto','modelo_bateria',
-	'distrito','referencia','nombre_boleta','m_apellido_p','m_apellido_m','dni_c',
-    'ruc','razon_social','direccion_rs','pago','correo',' atiende','almacen','gmail','status',
-    'observaciones','usuario' ])
-
-    a= User=request.user
+	fecha_inicio=''
+	fecha_fin=''
 	
-
-    datos =Produccion.objects.filter(usuario_id=a).values_list('id','fecha','cliente','apellido_p','apellido_m','dni','telefono_1','telefono_2','marca_vehiculo','modelo','version','anio__nombre','color__nombre','cilindrada', 'placa','kilometraje','cantidad','marca_producto','modelo_bateria',
-	'distrito__nombre','referencia','nombre_boleta','m_apellido_p','m_apellido_m','dni_c',
-	'ruc','razon_social','direccion_rs','pago__nombre','correo','atiende__nombre','almacen__nombre','gmail','status__nombre','observaciones','usuario__username')
-    for d in datos: 
-
+		
 	
-		 	
+	for r in request.GET:
+
+			if r=='fecha_inicio':
+
+				fecha_inicio= request.GET['fecha_inicio']
+
+			if r=='fecha_fin':
+
+				fecha_fin= request.GET['fecha_fin']
+
+				print('loliiiiiii',fecha_fin)
+
+			response = HttpResponse(content_type='text/.xls')
+			response['Content-Disposition'] = 'attachment; filename="reporte.xls"'
+
+			writer = csv.writer(response)
+			writer.writerow(['Id','Fecha','cliente','apellido_p','apellido_m','DNI','telefono_1','telefono_2','Marca del Vehiculo','Modelo','Version','Anio','Color','Motor', 'placa','Kilometraje','cantidad','marca_producto','modelo_bateria',
+			'distrito','referencia','nombre_boleta','m_apellido_p','m_apellido_m','dni_c',
+			'ruc','razon_social','direccion_rs','pago','correo',' atiende','almacen','gmail','status',
+			'observaciones','usuario' ])
+
+			a= User=request.user
+
+			datos =Produccion.objects.filter(usuario_id=a).values_list('id','fecha','cliente','apellido_p','apellido_m','dni','telefono_1','telefono_2','marca_vehiculo','modelo','version','anio__nombre','color__nombre','cilindrada', 'placa','kilometraje','cantidad','marca_producto','modelo_bateria',
+			'distrito__nombre','referencia','nombre_boleta','m_apellido_p','m_apellido_m','dni_c',
+			'ruc','razon_social','direccion_rs','pago__nombre','correo','atiende__nombre','almacen__nombre','gmail','status__nombre','observaciones','usuario__username').filter(fecha__range=[fecha_inicio, fecha_fin])
+			for d in datos: 
+				writer.writerow(d)
+
+		# users = User.objects.all().values_list('username', 'first_name')
+		# for user in users:
+		#     writer.writerow(user)
+	return render(request, 'templates/colasIN/agente.html',{'fecha_inicio':fecha_inicio,'fecha_fin':fecha_fin})
 
 
-
-        writer.writerow(d)
-
-    # users = User.objects.all().values_list('username', 'first_name')
-    # for user in users:
-    #     writer.writerow(user)
-
-    return response
+	return response
 
 def usuarios(request):
 	usuarios = User.objects.all()
